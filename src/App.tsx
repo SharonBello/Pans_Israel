@@ -1,16 +1,20 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AppRoutes from './routes';
 import { useState } from 'react';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 import rtlPlugin from 'stylis-plugin-rtl';
 import { prefixer } from 'stylis';
-import { BrowserRouter as Router } from 'react-router-dom';
 
 // Components
-import { Header } from './components/layout';
+import Header from './components/Header';
+// import { Hero } from './components/sections';
 
 // Styles
 import './styles/main.scss';
 import './App.scss';
+// import HomeSections from './components/sections/HomeSections/HomeSections';
 
 // Create RTL cache for MUI components
 const cacheRtl = createCache({
@@ -30,18 +34,24 @@ function App() {
       <Router>
         <div dir="rtl" lang="he" className="app">
           <Header onMenuToggle={handleMenuToggle} isMenuOpen={isMenuOpen} />
-          
-          <main className="main-content">
-            {/* Temporary placeholder content */}
-            <div className="placeholder-content">
-              <h1>🧠 PANS/PANDAS Israel</h1>
-              <p className="subtitle">
-                קהילת הורים לילדים עם PANDAS/PANS בישראל
+
+          {/* <main className="main-content">
+            <Hero />
+            <HomeSections /> */}
+
+          {/* Placeholder for more sections */}
+          {/* <section style={{ padding: '4rem 2rem', textAlign: 'center' }}>
+              <p style={{ color: '#6CA6D9' }}>
+                Step 3 Complete ✓ - Hero with Neural Network Particles
               </p>
-              <p className="status">
-                Step 2 Complete ✓ - Header with responsive layout
-              </p>
-            </div>
+            </section>
+          </main> */}
+          <main style={{ flex: '1 0 auto' }}>
+            <Routes>
+              {AppRoutes.map((route) => (
+                <Route key={route.path} element={route.component} path={route.path} />
+              ))}
+            </Routes>
           </main>
         </div>
       </Router>
