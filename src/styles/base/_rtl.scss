@@ -1,0 +1,308 @@
+// ==========================================================================
+// RTL (Right-to-Left) Styles for Hebrew
+// ==========================================================================
+
+@use '../abstracts' as *;
+
+// --------------------------------------------------------------------------
+// Base RTL Setup
+// --------------------------------------------------------------------------
+
+// Set document direction
+html[dir='rtl'] {
+  direction: rtl;
+}
+
+html[dir='ltr'] {
+  direction: ltr;
+}
+
+// Default to RTL for Hebrew site
+html:lang(he) {
+  direction: rtl;
+}
+
+// --------------------------------------------------------------------------
+// RTL Body Styles
+// --------------------------------------------------------------------------
+
+[dir='rtl'] {
+  body {
+    text-align: right;
+  }
+  
+  // Lists
+  ul,
+  ol {
+    padding-inline-start: $spacing-6;
+    padding-inline-end: 0;
+  }
+  
+  // Blockquotes
+  blockquote {
+    border-inline-start: 4px solid $color-primary;
+    border-inline-end: none;
+  }
+}
+
+// --------------------------------------------------------------------------
+// RTL Component Adjustments
+// --------------------------------------------------------------------------
+
+[dir='rtl'] {
+  // Icons in buttons - flip order
+  .btn-icon-start {
+    flex-direction: row-reverse;
+    
+    svg {
+      margin-inline-start: $spacing-2;
+      margin-inline-end: 0;
+    }
+  }
+  
+  .btn-icon-end {
+    flex-direction: row;
+    
+    svg {
+      margin-inline-end: $spacing-2;
+      margin-inline-start: 0;
+    }
+  }
+  
+  // Navigation arrows
+  .nav-arrow-back {
+    transform: rotate(180deg);
+  }
+  
+  .nav-arrow-forward {
+    transform: rotate(0deg);
+  }
+  
+  // Form labels
+  .form-label {
+    text-align: right;
+  }
+  
+  // Checkbox/Radio alignment
+  .form-check {
+    padding-inline-start: 0;
+    padding-inline-end: $spacing-6;
+    
+    input {
+      float: right;
+      margin-inline-start: $spacing-2;
+      margin-inline-end: 0;
+    }
+  }
+  
+  // Progress bars
+  .progress-bar {
+    transform-origin: right center;
+  }
+  
+  // Tooltips
+  .tooltip-start {
+    inset-inline-start: auto;
+    inset-inline-end: 100%;
+  }
+  
+  .tooltip-end {
+    inset-inline-end: auto;
+    inset-inline-start: 100%;
+  }
+  
+  // Dropdowns
+  .dropdown-menu {
+    text-align: right;
+    inset-inline-start: auto;
+    inset-inline-end: 0;
+  }
+  
+  // Cards with actions
+  .card-actions {
+    justify-content: flex-start;
+  }
+  
+  // Sidebar
+  .sidebar {
+    inset-inline-start: auto;
+    inset-inline-end: 0;
+    border-inline-start: 1px solid $border-color;
+    border-inline-end: none;
+  }
+  
+  .sidebar-collapsed {
+    transform: translateX(100%);
+  }
+  
+  // Tables
+  table {
+    text-align: right;
+    
+    th,
+    td {
+      text-align: inherit;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// RTL Utility Classes
+// --------------------------------------------------------------------------
+
+// Flip elements horizontally for RTL
+.rtl-flip {
+  [dir='rtl'] & {
+    transform: scaleX(-1);
+  }
+}
+
+// Don't flip (for icons/images that should stay the same)
+.rtl-no-flip {
+  [dir='rtl'] & {
+    transform: none !important;
+  }
+}
+
+// Force LTR for specific content (like code, numbers)
+.ltr-content {
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
+// Force RTL
+.rtl-content {
+  direction: rtl;
+  unicode-bidi: embed;
+}
+
+// Isolate bidirectional text
+.bidi-isolate {
+  unicode-bidi: isolate;
+}
+
+// --------------------------------------------------------------------------
+// RTL Spacing Helpers
+// --------------------------------------------------------------------------
+
+// Margin utilities that respect RTL
+.ms-auto {
+  margin-inline-start: auto !important;
+}
+
+.me-auto {
+  margin-inline-end: auto !important;
+}
+
+@each $size, $value in (
+  0: 0,
+  1: $spacing-1,
+  2: $spacing-2,
+  3: $spacing-3,
+  4: $spacing-4,
+  5: $spacing-5,
+  6: $spacing-6,
+  8: $spacing-8
+) {
+  .ms-#{$size} {
+    margin-inline-start: $value !important;
+  }
+  
+  .me-#{$size} {
+    margin-inline-end: $value !important;
+  }
+  
+  .ps-#{$size} {
+    padding-inline-start: $value !important;
+  }
+  
+  .pe-#{$size} {
+    padding-inline-end: $value !important;
+  }
+}
+
+// --------------------------------------------------------------------------
+// RTL Animation Adjustments
+// --------------------------------------------------------------------------
+
+[dir='rtl'] {
+  // Slide in from right becomes slide in from left
+  @keyframes slideInStart {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideInEnd {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  .slide-in-start {
+    animation: slideInStart 0.3s ease-out;
+  }
+  
+  .slide-in-end {
+    animation: slideInEnd 0.3s ease-out;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Hebrew-Specific Typography Adjustments
+// --------------------------------------------------------------------------
+
+[dir='rtl']:lang(he) {
+  // Hebrew text looks better with slightly more line height
+  body {
+    line-height: $line-height-relaxed;
+  }
+  
+  // Headings might need adjustment
+  h1, h2, h3, h4, h5, h6 {
+    line-height: $line-height-snug;
+  }
+  
+  // Better word spacing for Hebrew
+  p {
+    word-spacing: 0.05em;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Mixed Content (Hebrew + English/Numbers)
+// --------------------------------------------------------------------------
+
+// Phone numbers, dates, etc. should be LTR
+.phone-number,
+.date,
+.time,
+.price,
+.number {
+  direction: ltr;
+  unicode-bidi: embed;
+  display: inline-block;
+}
+
+// Email addresses
+.email {
+  direction: ltr;
+  unicode-bidi: embed;
+}
+
+// URLs
+.url {
+  direction: ltr;
+  unicode-bidi: embed;
+  word-break: break-all;
+}

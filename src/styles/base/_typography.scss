@@ -1,0 +1,298 @@
+// ==========================================================================
+// Typography Styles
+// ==========================================================================
+
+@use '../abstracts' as *;
+
+// --------------------------------------------------------------------------
+// Google Fonts Import (Rubik & Heebo for Hebrew support)
+// --------------------------------------------------------------------------
+
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500&display=swap');
+
+// --------------------------------------------------------------------------
+// Base Typography
+// --------------------------------------------------------------------------
+
+html {
+  font-size: 16px;
+  
+  @include max-sm {
+    font-size: 14px;
+  }
+  
+  @include xxxl {
+    font-size: 18px;
+  }
+}
+
+body {
+  font-family: $font-primary;
+  font-size: $font-size-base;
+  font-weight: $font-weight-regular;
+  line-height: $line-height-relaxed;
+  color: $text-primary;
+}
+
+// --------------------------------------------------------------------------
+// Headings
+// --------------------------------------------------------------------------
+
+h1,
+.h1 {
+  @include heading-1;
+  margin-bottom: $spacing-6;
+}
+
+h2,
+.h2 {
+  @include heading-2;
+  margin-bottom: $spacing-5;
+}
+
+h3,
+.h3 {
+  @include heading-3;
+  margin-bottom: $spacing-4;
+}
+
+h4,
+.h4 {
+  @include heading-4;
+  margin-bottom: $spacing-3;
+}
+
+h5,
+.h5 {
+  font-family: $font-heading;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-snug;
+  color: $text-primary;
+  margin-bottom: $spacing-3;
+}
+
+h6,
+.h6 {
+  font-family: $font-heading;
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-snug;
+  color: $text-primary;
+  margin-bottom: $spacing-2;
+}
+
+// --------------------------------------------------------------------------
+// Paragraphs
+// --------------------------------------------------------------------------
+
+p {
+  @include body-text;
+  margin-bottom: $spacing-4;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.lead {
+  font-size: $font-size-lg;
+  line-height: $line-height-relaxed;
+  color: $text-secondary;
+}
+
+.small {
+  @include small-text;
+}
+
+// --------------------------------------------------------------------------
+// Links
+// --------------------------------------------------------------------------
+
+a {
+  color: $color-primary;
+  text-decoration: none;
+  transition: color $transition-fast;
+  
+  &:hover {
+    color: $color-medium;
+    text-decoration: underline;
+  }
+  
+  &:focus-visible {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+    border-radius: $radius-sm;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Lists
+// --------------------------------------------------------------------------
+
+ul,
+ol {
+  padding-inline-start: $spacing-6;
+  margin-bottom: $spacing-4;
+  
+  li {
+    margin-bottom: $spacing-2;
+  }
+}
+
+ul {
+  list-style-type: disc;
+  
+  ul {
+    list-style-type: circle;
+  }
+}
+
+ol {
+  list-style-type: decimal;
+}
+
+// --------------------------------------------------------------------------
+// Blockquotes
+// --------------------------------------------------------------------------
+
+blockquote {
+  @include padding-inline-start($spacing-6);
+  border-inline-start: 4px solid $color-primary;
+  margin: $spacing-6 0;
+  font-style: italic;
+  color: $text-secondary;
+  
+  cite {
+    display: block;
+    margin-top: $spacing-3;
+    font-size: $font-size-sm;
+    color: $text-muted;
+    font-style: normal;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Code
+// --------------------------------------------------------------------------
+
+code,
+kbd,
+samp,
+pre {
+  font-family: $font-mono;
+  font-size: $font-size-sm;
+}
+
+code {
+  background: $color-bg-light;
+  padding: $spacing-1 $spacing-2;
+  border-radius: $radius-sm;
+  color: $color-primary;
+}
+
+pre {
+  background: $color-bg-white;
+  padding: $spacing-4;
+  border-radius: $radius-md;
+  overflow-x: auto;
+  margin: $spacing-4 0;
+  border: 1px solid $border-light;
+  
+  code {
+    background: transparent;
+    padding: 0;
+    border-radius: 0;
+  }
+}
+
+kbd {
+  background: $color-bg-light;
+  padding: $spacing-1 $spacing-2;
+  border-radius: $radius-sm;
+  border: 1px solid $border-light;
+  box-shadow: 0 2px 0 $border-light;
+}
+
+// --------------------------------------------------------------------------
+// Horizontal Rule
+// --------------------------------------------------------------------------
+
+hr {
+  border: none;
+  height: 1px;
+  background: $divider;
+  margin: $spacing-8 0;
+}
+
+// --------------------------------------------------------------------------
+// Text Utilities
+// --------------------------------------------------------------------------
+
+.text-gradient {
+  @include gradient-text;
+}
+
+.text-primary-color {
+  color: $text-primary !important;
+}
+
+.text-secondary-color {
+  color: $text-secondary !important;
+}
+
+.text-muted {
+  color: $text-muted !important;
+}
+
+.text-accent {
+  color: $color-accent !important;
+}
+
+.text-success {
+  color: $success !important;
+}
+
+.text-warning {
+  color: $warning !important;
+}
+
+.text-error {
+  color: $error !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-start {
+  text-align: start !important;
+}
+
+.text-end {
+  text-align: end !important;
+}
+
+// --------------------------------------------------------------------------
+// Font Weight Utilities
+// --------------------------------------------------------------------------
+
+.font-light {
+  font-weight: $font-weight-light !important;
+}
+
+.font-regular {
+  font-weight: $font-weight-regular !important;
+}
+
+.font-medium {
+  font-weight: $font-weight-medium !important;
+}
+
+.font-semibold {
+  font-weight: $font-weight-semibold !important;
+}
+
+.font-bold {
+  font-weight: $font-weight-bold !important;
+}

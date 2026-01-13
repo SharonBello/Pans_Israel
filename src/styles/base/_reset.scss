@@ -1,0 +1,200 @@
+// ==========================================================================
+// CSS Reset and Base Styles
+// ==========================================================================
+
+@use '../abstracts' as *;
+
+// --------------------------------------------------------------------------
+// CSS Reset (Modern Normalize)
+// --------------------------------------------------------------------------
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  // Prevent font size inflation
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  
+  // Smooth scrolling
+  scroll-behavior: smooth;
+  
+  // Reduced motion preference
+  @include reduced-motion {
+    scroll-behavior: auto;
+  }
+}
+
+// Remove default margin in favour of better control in authored CSS
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+// Remove list styles on ul, ol elements with a list role
+ul[role='list'],
+ol[role='list'] {
+  list-style: none;
+}
+
+// Set core body defaults
+body {
+  min-height: 100vh;
+  line-height: $line-height-normal;
+  font-family: $font-primary;
+  background-color: $color-background;
+  color: $text-primary;
+  
+  @include custom-scrollbar;
+}
+
+// Set shorter line heights on headings and interactive elements
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+label {
+  line-height: $line-height-tight;
+}
+
+// Balance text wrapping on headings
+h1,
+h2,
+h3,
+h4 {
+  text-wrap: balance;
+}
+
+// A elements that don't have a class get default styles
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+  color: $color-primary;
+}
+
+// Make images easier to work with
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+// Inherit fonts for inputs and buttons
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+// Make sure textareas without a rows attribute are not tiny
+textarea:not([rows]) {
+  min-height: 10em;
+}
+
+// Anything that has been anchored to should have extra scroll margin
+:target {
+  scroll-margin-block: 5ex;
+}
+
+// Remove all animations and transitions for people that prefer not to see them
+@include reduced-motion {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Root Variables (CSS Custom Properties)
+// --------------------------------------------------------------------------
+
+:root {
+  // Colors
+  --color-darkest: #{$color-darkest};
+  --color-primary: #{$color-primary};
+  --color-medium: #{$color-medium};
+  --color-light: #{$color-light};
+  --color-background: #{$color-background};
+  --color-accent: #{$color-accent};
+  
+  --color-bg-white: #{$color-bg-white};
+  --color-bg-card: #{$color-bg-card};
+  --color-bg-light: #{$color-bg-light};
+  
+  --color-text-primary: #{$text-primary};
+  --color-text-secondary: #{$text-secondary};
+  --color-text-muted: #{$text-muted};
+  --color-text-on-dark: #{$text-on-dark};
+  
+  --color-border: #{$border-color};
+  --color-border-light: #{$border-light};
+  --color-divider: #{$divider};
+  
+  // Spacing
+  --header-height: #{$header-height};
+  --sidebar-width: #{$sidebar-width};
+  
+  // Transitions
+  --transition-fast: #{$transition-fast};
+  --transition-base: #{$transition-base};
+  --transition-slow: #{$transition-slow};
+  
+  @include max-md {
+    --header-height: #{$header-height-mobile};
+  }
+}
+
+// --------------------------------------------------------------------------
+// Selection
+// --------------------------------------------------------------------------
+
+::selection {
+  background-color: rgba($color-primary, 0.2);
+  color: $text-primary;
+}
+
+// --------------------------------------------------------------------------
+// Focus Styles
+// --------------------------------------------------------------------------
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid $color-primary;
+  outline-offset: 2px;
+}
+
+// --------------------------------------------------------------------------
+// Scrollbar
+// --------------------------------------------------------------------------
+
+* {
+  @include custom-scrollbar;
+}

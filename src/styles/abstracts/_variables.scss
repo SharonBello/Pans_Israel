@@ -1,0 +1,219 @@
+// ==========================================================================
+// PANS/PANDAS Israel - Design System Variables
+// ==========================================================================
+
+// --------------------------------------------------------------------------
+// Color Palette - Light Medical Theme
+// --------------------------------------------------------------------------
+
+// Core Medical Colors
+$color-darkest:           #0E0D26; // Deep navy - Primary text, darkest elements
+$color-primary:           #023373; // Medical blue - Primary actions, headers  
+$color-medium:            #6CA6D9; // Professional blue - Secondary elements
+$color-light:             #A7D5F2; // Light blue - Highlights, hover states
+$color-background:        #F2F2F2; // Clean background - Main background
+$color-accent:            #E67E22; // Warm orange - Accent, alerts, current states
+
+// Severity Color Scale (for symptoms tracking)
+$severity-0: #4CAF50;  // Green - No symptoms
+$severity-1: #8BC34A;  // Light green - Minimal
+$severity-2: #FFC107;  // Yellow - Mild
+$severity-3: #FF9800;  // Orange - Moderate
+$severity-4: #FF5722;  // Deep orange - Severe
+$severity-5: #F44336;  // Red - Extreme
+
+// Blue Scale
+$color-blue-primary:      #023373;
+$color-blue-primary-dark: #0E0D26;
+$color-blue-primary-light:#6CA6D9;
+$color-blue-accent:       #A7D5F2;
+
+// Gray Scale
+$color-gray-light:        #F2F2F2;
+$color-gray-medium:       #A7D5F2;
+$color-gray:              #6CA6D9;
+$color-dark-gray:         #0E0D26;
+
+// Background Colors
+$color-bg-cream:          #F2F2F2;
+$color-bg-light:          #F2F2F2;
+$color-bg-white:          #FFFFFF;
+$color-bg-card:           #FFFFFF;
+
+// Text Colors
+$text-primary:            #0E0D26;
+$text-secondary:          #023373;
+$text-muted:              #6CA6D9;
+$text-light:              #A7D5F2;
+$text-on-dark:            #FFFFFF;
+
+// Border Colors
+$border-color:            #A7D5F2;
+$border-light:            #E8E8E8;
+$divider:                 rgba(2, 51, 115, 0.1);
+
+// State Colors
+$success:                 #4CAF50;
+$warning:                 #FFC107;
+$error:                   #F44336;
+$info:                    #6CA6D9;
+
+// Gradients
+$gradient-primary: linear-gradient(135deg, $color-primary 0%, $color-medium 100%);
+$gradient-light: linear-gradient(180deg, $color-bg-white 0%, $color-bg-light 100%);
+$gradient-accent: linear-gradient(135deg, $color-accent 0%, #F39C12 100%);
+$gradient-neural: linear-gradient(90deg, $color-primary 0%, $color-medium 50%, $color-light 100%);
+
+// --------------------------------------------------------------------------
+// Typography
+// --------------------------------------------------------------------------
+
+// Font Families
+$font-primary: 'Rubik', 'Segoe UI', sans-serif;
+$font-heading: 'Heebo', 'Arial Hebrew', sans-serif;
+$font-mono: 'Fira Code', 'Courier New', monospace;
+
+// Font Sizes (using clamp for fluid typography)
+$font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+$font-size-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+$font-size-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+$font-size-lg: clamp(1.125rem, 1rem + 0.6vw, 1.25rem);
+$font-size-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+$font-size-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+$font-size-3xl: clamp(2rem, 1.7rem + 1.5vw, 2.75rem);
+$font-size-4xl: clamp(2.5rem, 2rem + 2.5vw, 4rem);
+$font-size-5xl: clamp(3rem, 2.5rem + 3vw, 5rem);
+
+// Font Weights
+$font-weight-light: 300;
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-black: 900;
+
+// Line Heights
+$line-height-tight: 1.2;
+$line-height-snug: 1.375;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.625;
+$line-height-loose: 2;
+
+// Letter Spacing
+$letter-spacing-tight: -0.025em;
+$letter-spacing-normal: 0;
+$letter-spacing-wide: 0.025em;
+$letter-spacing-wider: 0.05em;
+
+// --------------------------------------------------------------------------
+// Spacing Scale
+// --------------------------------------------------------------------------
+
+$spacing-0: 0;
+$spacing-1: 0.25rem;   // 4px
+$spacing-2: 0.5rem;    // 8px
+$spacing-3: 0.75rem;   // 12px
+$spacing-4: 1rem;      // 16px
+$spacing-5: 1.25rem;   // 20px
+$spacing-6: 1.5rem;    // 24px
+$spacing-8: 2rem;      // 32px
+$spacing-10: 2.5rem;   // 40px
+$spacing-12: 3rem;     // 48px
+$spacing-16: 4rem;     // 64px
+$spacing-20: 5rem;     // 80px
+$spacing-24: 6rem;     // 96px
+$spacing-32: 8rem;     // 128px
+
+// --------------------------------------------------------------------------
+// Breakpoints (350px - 1800px)
+// --------------------------------------------------------------------------
+
+$breakpoint-xs: 350px;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-2xl: 1400px;
+$breakpoint-3xl: 1800px;
+
+// Container widths
+$container-xs: 100%;
+$container-sm: 540px;
+$container-md: 720px;
+$container-lg: 960px;
+$container-xl: 1140px;
+$container-2xl: 1320px;
+$container-3xl: 1600px;
+
+// --------------------------------------------------------------------------
+// Layout
+// --------------------------------------------------------------------------
+
+$header-height: 72px;
+$header-height-mobile: 64px;
+$sidebar-width: 280px;
+$sidebar-width-collapsed: 72px;
+$footer-height: 200px;
+
+// --------------------------------------------------------------------------
+// Borders & Radius
+// --------------------------------------------------------------------------
+
+$border-width: 1px;
+$border-width-thick: 2px;
+
+$radius-sm: 4px;
+$radius-md: 8px;
+$radius-lg: 12px;
+$radius-xl: 16px;
+$radius-2xl: 24px;
+$radius-full: 9999px;
+
+// --------------------------------------------------------------------------
+// Shadows (Light theme optimized)
+// --------------------------------------------------------------------------
+
+$shadow-sm: 0 1px 2px rgba(14, 13, 38, 0.08);
+$shadow-md: 0 4px 6px rgba(14, 13, 38, 0.1);
+$shadow-lg: 0 10px 15px rgba(14, 13, 38, 0.12);
+$shadow-xl: 0 20px 25px rgba(14, 13, 38, 0.15);
+$shadow-2xl: 0 25px 50px rgba(14, 13, 38, 0.2);
+$shadow-inner: inset 0 2px 4px rgba(14, 13, 38, 0.06);
+
+// Glow effects
+$shadow-glow-primary: 0 0 20px rgba(2, 51, 115, 0.2);
+$shadow-glow-accent: 0 0 20px rgba(230, 126, 34, 0.25);
+$shadow-glow-light: 0 0 30px rgba(108, 166, 217, 0.3);
+
+// --------------------------------------------------------------------------
+// Transitions
+// --------------------------------------------------------------------------
+
+$transition-fast: 150ms ease;
+$transition-base: 250ms ease;
+$transition-slow: 400ms ease;
+$transition-slower: 600ms ease;
+
+// Specific transitions
+$transition-color: color $transition-fast;
+$transition-bg: background-color $transition-base;
+$transition-transform: transform $transition-base;
+$transition-opacity: opacity $transition-base;
+$transition-all: all $transition-base;
+
+// --------------------------------------------------------------------------
+// Z-Index Scale
+// --------------------------------------------------------------------------
+
+$z-below: -1;
+$z-base: 0;
+$z-dropdown: 100;
+$z-sticky: 200;
+$z-fixed: 300;
+$z-sidebar: 400;
+$z-modal-backdrop: 500;
+$z-modal: 600;
+$z-popover: 700;
+$z-tooltip: 800;
+$z-notification: 900;
+$z-top: 1000;

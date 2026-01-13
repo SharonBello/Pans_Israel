@@ -1,0 +1,127 @@
+@use '../../../styles/abstracts' as *;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-height);
+  background: rgba($color-bg-white, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid $border-light;
+  z-index: $z-fixed;
+  
+  &__container {
+    @include container;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  // Logo
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: $spacing-3;
+    text-decoration: none;
+    color: $text-primary;
+    
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  
+  &__logo-icon {
+    font-size: 2rem;
+    line-height: 1;
+  }
+  
+  &__logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  
+  &__logo-title {
+    font-family: $font-heading;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $color-primary;
+    line-height: 1.2;
+  }
+  
+  &__logo-subtitle {
+    font-size: $font-size-sm;
+    color: $text-muted;
+    line-height: 1;
+  }
+  
+  // Navigation
+  &__nav {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    
+    @include max-md {
+      display: none;
+    }
+  }
+  
+  &__nav-link {
+    padding: $spacing-2 $spacing-4;
+    font-size: $font-size-base;
+    font-weight: $font-weight-medium;
+    color: $text-secondary;
+    text-decoration: none;
+    border-radius: $radius-md;
+    transition: all $transition-fast;
+    
+    &:hover {
+      color: $color-primary;
+      background: rgba($color-primary, 0.05);
+      text-decoration: none;
+    }
+    
+    &--cta {
+      background: $gradient-primary;
+      color: $text-on-dark;
+      
+      &:hover {
+        box-shadow: $shadow-glow-primary;
+        transform: translateY(-1px);
+        color: $text-on-dark;
+      }
+    }
+  }
+  
+  // Mobile Menu Button
+  &__menu-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background: transparent;
+    border: none;
+    border-radius: $radius-md;
+    color: $text-primary;
+    cursor: pointer;
+    transition: all $transition-fast;
+    
+    @include max-md {
+      display: flex;
+    }
+    
+    &:hover {
+      background: rgba($color-primary, 0.05);
+      color: $color-primary;
+    }
+    
+    &:focus-visible {
+      outline: 2px solid $color-primary;
+      outline-offset: 2px;
+    }
+  }
+}
