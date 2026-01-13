@@ -2,9 +2,9 @@ import React from 'react';
 
 import HomePage from './pages/HomePage/HomePage.tsx';
 import SymptomsPage from './pages/SymptomsPage/SymptomsPage.tsx';
-import MedicalHelpPage from './pages/MedicalHelpPage/MedicalHelpPage.tsx';
 import ResourcesPage from './pages/ResourcesPage/ResourcesPage.tsx';
 import TestimonialsPage from './pages/TestimonialsPage/TestimonialsPage.tsx';
+import ProfessionalsHelpPage from './pages/MedicalHelpPage/ProfessionalsHelpPage.tsx';
 
 type AppRoute = {
   path: string;
@@ -21,8 +21,8 @@ const AppRoutes: AppRoute[] = [
     component: <SymptomsPage />,
   },
   {
-    path: '/medical-help',
-    component: <MedicalHelpPage />,
+    path: '/Professionals-help',
+    component: <ProfessionalsHelpPage />,
   },
   {
     path: '/resources',

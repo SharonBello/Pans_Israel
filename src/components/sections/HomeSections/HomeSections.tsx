@@ -25,7 +25,7 @@ const HomeSections: React.FC = (): React.JSX.Element => {
                 id: 'medical',
                 title: 'רופאים וסיוע רפואי',
                 description: 'רשימת מומחים, מרפאות, גורמי טיפול ותמיכה. (נוסיף/נעדכן בהתאם למידע מאומת.)',
-                to: '/medical-help',
+                to: '/Professionals-help',
                 Icon: FaUserDoctor,
             },
             {

@@ -1,0 +1,314 @@
+// pages/ProfessionalsHelpPage.scss
+// Styling for the Professionals Help Page
+
+.professionals-page {
+  min-height: 100vh;
+  background: #f8fafc;
+  direction: rtl;
+
+  // Page Header
+  &__header {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+    padding: 3rem 1.5rem 4rem;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+
+    // Decorative elements
+    &::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -20%;
+      width: 80%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      right: -10%;
+      width: 60%;
+      height: 150%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+  }
+
+  &__header-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+
+    h1 {
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      font-weight: 800;
+      margin: 0 0 1rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    p {
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      margin: 0 0 1.5rem;
+      opacity: 0.95;
+    }
+  }
+
+  &__recommend-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.875rem 1.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    color: #ffffff;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.6);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  // Tabs Navigation
+  &__tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    margin-top: -1.5rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  &__tab {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    background: #ffffff;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-family: inherit;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    &:hover:not(.active) {
+      border-color: #cbd5e1;
+      color: #475569;
+      background: #f8fafc;
+    }
+
+    &.active {
+      background: #6366f1;
+      border-color: #6366f1;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+  }
+
+  // Main Content Area
+  &__content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  // Section Header
+  &__section-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin: 0 0 0.5rem;
+    }
+
+    p {
+      font-size: 0.9375rem;
+      color: #64748b;
+      margin: 0;
+    }
+  }
+
+  // Professionals Grid
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  // Empty State
+  &__empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    background: #ffffff;
+    border-radius: 16px;
+    border: 2px dashed #e2e8f0;
+    margin-top: 1rem;
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin: 1rem 0 0.5rem;
+    }
+
+    p {
+      font-size: 0.9375rem;
+      color: #64748b;
+      margin: 0 0 1.5rem;
+    }
+  }
+
+  &__empty-icon {
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  &__empty-btn {
+    padding: 0.75rem 1.5rem;
+    background: #f1f5f9;
+    color: #475569;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-family: inherit;
+
+    &:hover {
+      background: #e2e8f0;
+    }
+  }
+
+  // Disclaimer
+  &__disclaimer {
+    margin-top: 2rem;
+    padding: 1rem 1.25rem;
+    background: #fffbeb;
+    border: 1px solid #fcd34d;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: #92400e;
+
+    strong {
+      color: #78350f;
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .professionals-page {
+    &__header {
+      padding: 2rem 1rem 3.5rem;
+    }
+
+    &__tabs {
+      gap: 0.375rem;
+      flex-wrap: wrap;
+    }
+
+    &__tab {
+      padding: 0.75rem 1rem;
+      font-size: 0.875rem;
+      flex: 1;
+      min-width: 100px;
+      justify-content: center;
+
+      svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+
+    &__content {
+      padding: 1.5rem 1rem 3rem;
+    }
+
+    &__grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .professionals-page {
+    &__tabs {
+      flex-direction: column;
+      margin-top: -1.25rem;
+      max-width: 280px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    &__tab {
+      flex: unset;
+      width: 100%;
+    }
+
+    &__header-content {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      p {
+        font-size: 0.9375rem;
+      }
+    }
+
+    &__recommend-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+
+// Wide screens
+@media (min-width: 1400px) {
+  .professionals-page {
+    &__content {
+      max-width: 1400px;
+    }
+
+    &__grid {
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    }
+  }
+}
