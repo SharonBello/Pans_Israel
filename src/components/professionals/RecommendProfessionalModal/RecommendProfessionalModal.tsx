@@ -138,7 +138,6 @@ const RecommendProfessionalModal: React.FC<RecommendProfessionalModalProps> = ({
         // Simulate API call - replace with actual submission logic
         try {
             await new Promise((resolve) => setTimeout(resolve, 1500));
-            console.log('Form submitted:', formData);
             setIsSubmitted(true);
         } catch (error) {
             console.error('Error submitting form:', error);

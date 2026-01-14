@@ -4,9 +4,9 @@ export interface Professional {
     id: string;
     name: string;
     field: string;
-    fieldKey: string; // For filtering
+    fieldKey: string;
     location: string;
-    locationKey: string; // For filtering
+    locationKey: string;
     phone?: string;
     email?: string;
     website?: string;
@@ -29,14 +29,12 @@ export interface Location {
     region?: string;
 }
 
-// Filter state interface
 export interface ProfessionalFilters {
     field: string;
     location: string;
     searchQuery: string;
 }
 
-// Form data for recommending a professional
 export interface RecommendProfessionalFormData {
     professionalName: string;
     field: string;
