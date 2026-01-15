@@ -1,0 +1,16 @@
+.footer-container {
+    display: flex;
+    justify-content: center !important;
+    gap: 2vw;
+    align-items: center;
+    padding-inline: 5%;
+    padding-block: 10px;
+    background-color: transparent;
+
+    .footer-contact-rights-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5vh;
+        direction: ltr;
+    }
+}

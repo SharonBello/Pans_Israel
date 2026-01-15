@@ -1,0 +1,234 @@
+{
+  "home": {
+    "title": "PANS/PANDAS Calculator",
+    "subtitle": "Compute your score quickly and easily",
+    "startButton": "Start Scale",
+    "infoAria": "Info",
+    "howItWorks": "How is the scale calculated?",
+    "step1": "1. Rate OCD symptoms (0–5).",
+    "step2": "2. Rate associated symptoms (14 items), take the 5 worst and sum ⇒ 0–25.",
+    "step3": "3. Rate functional impairment (0–5) and multiply ×10 ⇒ 0–50.",
+    "step4": "4. When done, click “Calculate Score” to see results.",
+    "clinicalCredit": "Based on the clinical experience of Dr. Susan Swedo, Dr. Miroslav Kovacevich, Dr. Beth Latimer and Dr. James Leckman, with contributions from Diana Pohlemann, Keith Mohr, and many parents."
+  },
+  "footer": {
+    "copy": "© Sharon Bello",
+    "contactEmail": "Gmail"
+  },
+  "dir": "ltr",
+  "common": {
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "finishReview": "Finish review",
+    "continueNextSection": "Continue to next section",
+    "edit": "Edit",
+    "questionOf": "Question {{current}} of {{total}}",
+    "completedPercent": "{{percent}}% completed",
+    "reviewPrompt": "Review your answers before calculating the score"
+  },
+  "timelines": {
+    "beforeFirstWeek": "Week before onset",
+    "afterFirstWeek": "Week after onset",
+    "last7Days": "Last 7 days"
+  },
+  "questions": {
+    "ocd_contamination": {
+      "label": "Obsessive and persistent worries about contamination and germs; washing/cleaning compulsions."
+    },
+    "ocd_harm": {
+      "label": "Obsessive and persistent fears of harming oneself or others, including urges to confess; may include separation worries."
+    },
+    "ocd_sex_religion": {
+      "label": "Obsessive and persistent worries about sexual or religious thoughts/behaviors; related compulsive rituals."
+    },
+    "ocd_symmetry": {
+      "label": "Obsessive concerns about symmetry; ordering, counting, organizing compulsions; need for things to feel, look or sound \"just right.\" "
+    },
+    "ocd_hoarding": {
+      "label": "Obsessive and persistent worries about hoarding and collecting items."
+    },
+    "ocd_eating": {
+      "label": "Avoidant/restrictive eating: lack of interest in food, sensory sensitivities, or fear of eating consequences, leading to refusal or sharp reduction of intake."
+    },
+    "ocd_misc": {
+      "label": "Miscellaneous: needs to know/remember, fear of saying or not saying something, intrusive non-violent images, mental rituals, repetitive behaviors, excessive list-making, etc."
+    }
+  },
+  "associatedSection": {
+    "title": "II. Associated neuropsychiatric symptoms (0–5 per timeframe)",
+    "column": {
+      "topic": "Domain"
+    }
+  },
+  "associated": {
+    "assoc_separation": {
+      "label": "Separation anxiety – need to stay close to a person, familiar place or object."
+    },
+    "assoc_general_anxiety": {
+      "label": "General anxiety."
+    },
+    "assoc_phobias": {
+      "label": "Unfounded irrational fears and/or phobias."
+    },
+    "assoc_panic": {
+      "label": "Panic episodes."
+    },
+    "assoc_mood_changes": {
+      "label": "Sharp mood swings & depression."
+    },
+    "assoc_depression": {
+      "label": "Depression, with or without suicidal thoughts or self-harm behaviors."
+    },
+    "assoc_irritability": {
+      "label": "Irritability or aggressive behavior – unreasonable demands, anger outbursts, tantrums or reactive aggression."
+    },
+    "assoc_withdrawal1": {
+      "label": "Behavioral regression – “baby talk” or age-inappropriate behavior."
+    },
+    "assoc_withdrawal2": {
+      "label": "Personality change."
+    },
+    "assoc_school_function1": {
+      "label": "Academic/concentration impairment – difficulty focusing, short-term memory problems."
+    },
+    "assoc_school_function2": {
+      "label": "Loss of academic skills (especially math, reading or writing)."
+    },
+    "assoc_school_function3": {
+      "label": "Confusion."
+    },
+    "assoc_sensory": {
+      "label": "Sensory symptoms – sensitivity to light, touch, sounds, odors or tastes; need to touch in certain ways; visual/spatial distortions."
+    },
+    "assoc_hallucinations": {
+      "label": "Hallucinations – seeing or hearing things that aren’t there."
+    },
+    "assoc_motor1": {
+      "label": "Dysgraphia – loss of ability to draw, copy figures or write."
+    },
+    "assoc_motor2": {
+      "label": "Motor hyperactivity or sudden movements – kicking, flailing, pacing; inability to stay physically still."
+    },
+    "assoc_motor3": {
+      "label": "Finger movements like playing the piano."
+    },
+    "assoc_motor4": {
+      "label": "Simple motor/vocal tics – grunts, sniffing, squeaks, squeals, etc."
+    },
+    "assoc_motor5": {
+      "label": "Complex motor/vocal tics – spitting, obscene gestures, echolalia, changes in pitch or speech rhythm, etc."
+    },
+    "assoc_urinary": {
+      "label": "Urinary symptoms – frequency, urgency or difficulty urinating (day or night)."
+    },
+    "assoc_sleep2": {
+      "label": "Insomnia or hypersomnia – difficulty falling asleep, excessive sleep, nightmares, long bedtime rituals."
+    },
+    "assoc_sleep1": {
+      "label": "Extreme fatigue."
+    },
+    "assoc_pupil": {
+      "label": "Dilated pupils – “extreme fear” or “startled look.”"
+    }
+  },
+  "ocdSection": {
+    "title": "I. OCD symptoms (0–5 per timeframe)",
+    "column": {
+      "topic": "Symptom"
+    }
+  },
+  "functionalSection": {
+    "column": {
+      "description": "Level description",
+      "level": "Level",
+      "select": "Select"
+    },
+    "caption": "* Select one row corresponding to functional impairment (0–5).",
+    "levelDescriptions": {
+      "0": "No impairment: normal functioning (school, home, social).",
+      "1": "Minimal (10): minimal interference in daily life; independent.",
+      "2": "Mild (20): mild learning difficulty or slight behavioral change.",
+      "3": "Moderate (30): significant school difficulty, social withdrawal.",
+      "4": "Severe (40): unable to return to school, avoids daily tasks entirely.",
+      "5": "Extreme (50): almost total inability to perform daily activities; severe distress; needs constant help."
+    }
+  },
+  "survey": {
+    "ocdTitle": "I. OCD symptoms",
+    "associatedTitle": "II. Associated NP symptoms",
+    "finishFunctionalButton": "Finish functional section",
+    "allSectionsComplete": "All sections complete!",
+    "calculateScoreButton": "Calculate final score"
+  },
+  "resultsPage": {
+    "title": "PANS/PANDAS Scale Results",
+    "column": {
+      "topic": "Domain / Symptom"
+    },
+    "row": {
+      "ocdSummary": "OCD symptoms (0–25) — 5 × worst symptom",
+      "npHeader": "Associated NP symptoms (0–25) — sum of five worst domains",
+      "npSummary": "Total NP (five worst domains)",
+      "totalSymptoms": "Total symptoms (0–50)",
+      "functional": "Functional impairment (0–50)",
+      "totalScore": "PANS/PANDAS Score (0–100)"
+    },
+    "backButton": "Back to start",
+    "printButton": "Print results"
+  },
+  "scalePage": {
+    "title": "PANS/PANDAS Scale",
+    "explanation": "Rate each item (0–5) and click “Calculate Score” at the end."
+  },
+  "npDomains": {
+    "anxiety": "Anxiety symptoms (0–5)",
+    "moodiness": "Extreme mood swings &/or depression (0–5)",
+    "irritability": "Irritability or aggressive behavior (0–5)",
+    "cognitive": "Cognitive/learning symptoms, confusion (0–5)",
+    "regression": "Behavioral regression (0–5)",
+    "sensory": "6.a. Sensory symptoms (0–5)",
+    "hallucinations": "6.b. Hallucinations (0–5)",
+    "motor": "6.c. Motor symptoms (0–5)",
+    "urinary": "7.a. Urinary symptoms (0–5)",
+    "sleep": "7.b. Sleep disturbances, fatigue (0–5)",
+    "pupil": "7.c. Dilated pupils (0–5)"
+  },
+  "ratingDescriptions": {
+    "0": "0 – no evidence of symptom; none.",
+    "1": "1 – minimal (10): very mild symptom/behavior.",
+    "2": "2 – mild (20): more noticeable symptom/behavior.",
+    "3": "3 – moderate (30): significant symptom/behavior.",
+    "4": "4 – severe (40): very severe symptom/behavior.",
+    "5": "5 – extreme (50): extreme symptom/behavior."
+  },
+  "calculateScore": "Calculate Score",
+  "results": {
+    "ocdSymptoms": "OCD Symptoms",
+    "associatedSymptoms": "Associated Neuropsychiatric Symptoms",
+    "functionalImpairment": "Functional Impairment",
+    "totalScore": "Total Score",
+    "ocdScore": "OCD Score (0–25)",
+    "npScore": "NP Score (0–25)",
+    "functionalScore": "Functional Score (0–50)",
+    "totalPansPandasScore": "Total PANS/PANDAS Score (0–100)"
+  },
+  "printButton": "Print Results",
+  "printAria": "Print results",
+  "printTitle": "PANS/PANDAS Scale Results",
+  "printSubtitle": "Print or save your results",
+  "printDescription": "You can print or save your results for future reference.",
+  "printButtonAria": "Print results",
+  "printHeader": "PANS/PANDAS Scale Results",
+  "printOcdSymptoms": "OCD Symptoms",
+  "printAssociatedSymptoms": "Associated Neuropsychiatric Symptoms",
+  "printFunctionalImpairment": "Functional Impairment",
+  "printTotalScore": "Total Score",
+  "print": {
+    "title": "PANS/PANDAS Scale Results",
+    "ocdSymptoms": "OCD Symptoms",
+    "associatedSymptoms": "Associated Neuropsychiatric Symptoms",
+    "functionalImpairment": "Functional Impairment",
+    "totalScore": "Total Score"
+  }
+}

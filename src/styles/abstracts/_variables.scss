@@ -217,3 +217,46 @@ $z-popover: 700;
 $z-tooltip: 800;
 $z-notification: 900;
 $z-top: 1000;
+
+
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300&display=swap');
+
+$main-font: 'Heebo', sans-serif;
+
+// Medical Theme Color Palette - Light and Airy
+$color-darkest:           #0E0D26; // Deep navy - Primary text, darkest elements
+$primary-color:           #023373; // Medical blue - Primary actions, headers  
+$color-medium:            #6CA6D9; // Professional blue - Secondary elements
+$color-light:             #A7D5F2; // Light blue - Highlights, hover states
+$color-background:        #F2F2F2; // Clean background - Main background
+$color-accent:            #E67E22; // Warm orange - Accent, alerts, current states
+
+// Severity Color Scale
+$severity-0: #4CAF50;  // Green - No symptoms
+$severity-1: #8BC34A;  // Light green - Minimal
+$severity-2: #FFC107;  // Yellow - Mild
+$severity-3: #FF9800;  // Orange - Moderate
+$severity-4: #FF5722;  // Deep orange - Severe
+$severity-5: #F44336;  // Red - Extreme
+
+// Main Color Variables
+$color-blue-primary:      #023373;
+$color-blue-primary-dark: #0E0D26;
+$color-blue-primary-light:#6CA6D9;
+$color-blue-accent:       #A7D5F2;
+
+$color-gray-light:        #F2F2F2;
+$color-gray-medium:       #A7D5F2;
+$color-gray:              #6CA6D9;
+$color-dark-gray:         #0E0D26;
+
+$color-bg-cream:          #F2F2F2;
+$color-bg-light:          #F2F2F2;
+
+// // PANDAS Scale Colors
+// $color-primary: #023373;
+// $color-accent: #6CA6D9;
+// $color-background: #FFFFFF;
+// $color-bg-light: #F2F2F2;
+// $color-darkest: #0E0D26;
+// $main-font: 'Heebo', sans-serif;

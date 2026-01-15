@@ -1,0 +1,139 @@
+{
+  "home": {
+    "title": "Calculadora PANS/PANDAS",
+    "subtitle": "Calcula tu puntuación rápida y fácilmente",
+    "startButton": "Comenzar escala",
+    "infoAria": "Información",
+    "howItWorks": "¿Cómo se calcula la escala?",
+    "step1": "1. Califica los síntomas de TOC (0–5).",
+    "step2": "2. Califica los síntomas asociados (14 ítems), toma los 5 peores y suma ⇒ 0–25.",
+    "step3": "3. Califica el deterioro funcional (0–5) y multiplica ×10 ⇒ 0–50.",
+    "step4": "4. Cuando termines, haz clic en “Calcular puntuación” para ver resultados.",
+    "clinicalCredit": "Basado en la experiencia clínica de la Dra. Susan Swedo, el Dr. Miroslav Kovacevich, la Dra. Beth Latimer y el Dr. James Leckman, con contribuciones de Diana Pohlemann, Keith Mohr y muchos padres."
+  },
+  "footer": {
+    "copy": "© Sharon Bello",
+    "contactEmail": "Gmail"
+  },
+  "dir": "ltr",
+  "common": {
+    "close": "Cerrar",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "finishReview": "Terminar revisión",
+    "continueNextSection": "Continuar a la siguiente sección",
+    "edit": "Editar",
+    "questionOf": "Pregunta {{current}} de {{total}}",
+    "completedPercent": "{{percent}}% completado",
+    "reviewPrompt": "Revisa tus respuestas antes de calcular la puntuación"
+  },
+  "timelines": {
+    "beforeFirstWeek": "Semana antes del inicio",
+    "afterFirstWeek": "Semana después del inicio",
+    "last7Days": "Últimos 7 días"
+  },
+  "questions": {
+    "ocd_contamination": { "label": "Preocupaciones obsesivas y persistentes sobre contaminación y gérmenes; compulsiones de lavado/limpieza." },
+    "ocd_harm": { "label": "Miedos obsesivos a hacerse daño a sí mismo o a otros, incluyendo impulsos de confesar; puede incluir ansiedad de separación." },
+    "ocd_sex_religion": { "label": "Preocupaciones obsesivas y persistentes sobre pensamientos/conductas sexuales o religiosas; rituales compulsivos relacionados." },
+    "ocd_symmetry": { "label": "Preocupaciones obsesivas sobre simetría; compulsiones de ordenar, contar u organizar; necesidad de que todo esté “perfecto.”" },
+    "ocd_hoarding": { "label": "Preocupaciones obsesivas y persistentes sobre acumular objetos." },
+    "ocd_eating": { "label": "Evitación/restricción alimentaria: falta de interés en la comida, sensibilidades sensoriales o miedo a las consecuencias de comer, llevando a rechazo o gran reducción de ingesta." },
+    "ocd_misc": { "label": "Misceláneos: necesidad de saber/recordar, miedo a decir o no decir algo, imágenes intrusivas no violentas, rituales mentales, conductas repetitivas, listas excesivas, etc." }
+  },
+  "associatedSection": {
+    "title": "II. Síntomas neuropsiquiátricos asociados (0–5 por periodo)",
+    "column": { "topic": "Dominio" }
+  },
+  "associated": {
+    "assoc_separation": { "label": "Ansiedad por separación: necesidad de permanecer cerca de una persona, lugar familiar u objeto." },
+    "assoc_general_anxiety": { "label": "Ansiedad general." },
+    "assoc_phobias": { "label": "Miedos irracionales y/o fobias sin fundamento." },
+    "assoc_panic": { "label": "Episodios de pánico." },
+    "assoc_mood_changes": { "label": "Cambios bruscos de humor y depresión." },
+    "assoc_depression": { "label": "Depresión, con o sin pensamientos suicidas o autolesiones." },
+    "assoc_irritability": { "label": "Irritabilidad o conducta agresiva: demandas irracionales, estallidos de ira, rabietas." },
+    "assoc_withdrawal1": { "label": "Regresión conductual: “hablar como bebé” o comportamiento inadecuado para la edad." },
+    "assoc_withdrawal2": { "label": "Cambio de personalidad." },
+    "assoc_school_function1": { "label": "Dificultad académica y de concentración: problemas para enfocarse, memoria a corto plazo." },
+    "assoc_school_function2": { "label": "Pérdida de habilidades académicas (especialmente matemáticas, lectura o escritura)." },
+    "assoc_school_function3": { "label": "Confusión." },
+    "assoc_sensory": { "label": "Síntomas sensoriales: sensibilidad a la luz, el tacto, sonidos, olores o sabores; necesidad de tocar ciertas formas; distorsiones visuales/espaciales." },
+    "assoc_hallucinations": { "label": "Alucinaciones: ver o escuchar cosas que no están presentes." },
+    "assoc_motor1": { "label": "Disgrafía: pérdida de la capacidad de dibujar, copiar figuras o escribir." },
+    "assoc_motor2": { "label": "Hiperactividad motora o movimientos súbitos: patadas, agitaciones, deambular; incapacidad para mantenerse quieto." },
+    "assoc_motor3": { "label": "Movimientos de dedos como tocar el piano." },
+    "assoc_motor4": { "label": "Tics motores o vocales simples: gruñidos, sniffing, chirridos, chillidos, etc." },
+    "assoc_motor5": { "label": "Tics motores o vocales complejos: escupir, gestos obscenos, ecolalia, cambios de tono o ritmo del habla, etc." },
+    "assoc_urinary": { "label": "Síntomas urinarios: frecuencia, urgencia o dificultad para orinar (día o noche)." },
+    "assoc_sleep2": { "label": "Insomnio o hipersomnia: dificultad para conciliar el sueño, sueño excesivo, pesadillas, rituales largos antes de dormir." },
+    "assoc_sleep1": { "label": "Fatiga extrema." },
+    "assoc_pupil": { "label": "Pupilas dilatadas: “miedo extremo” o “mirada de susto.”" }
+  },
+  "ocdSection": {
+    "title": "I. Síntomas de TOC (0–5 por periodo)",
+    "column": { "topic": "Síntoma" }
+  },
+  "functionalSection": {
+    "column": {
+      "description": "Descripción del nivel",
+      "level": "Nivel",
+      "select": "Seleccionar"
+    },
+    "caption": "* Seleccione una fila correspondiente al deterioro funcional (0–5).",
+    "levelDescriptions": {
+      "0": "Sin deterioro: funcionamiento normal (escuela, hogar, social).",
+      "1": "Mínimo (10): interferencia mínima en la vida diaria; independiente.",
+      "2": "Leve (20): dificultad leve en el aprendizaje o cambio leve en conducta.",
+      "3": "Moderado (30): dificultad significativa en la escuela, retirada social.",
+      "4": "Severo (40): incapacidad para volver a la escuela, evita tareas diarias.",
+      "5": "Extremo (50): casi total incapacidad para realizar actividades diarias; mucha angustia; necesita ayuda constante."
+    }
+  },
+  "survey": {
+    "ocdTitle": "I. Síntomas de TOC",
+    "associatedTitle": "II. Síntomas NP asociados",
+    "finishFunctionalButton": "Terminar sección funcional",
+    "allSectionsComplete": "¡Todas las secciones completadas!",
+    "calculateScoreButton": "Calcular puntuación final"
+  },
+  "resultsPage": {
+    "title": "Resultados de la escala PANS/PANDAS",
+    "column": { "topic": "Dominio / Síntoma" },
+    "row": {
+      "ocdSummary": "Síntomas TOC (0–25) — 5 × peor síntoma",
+      "npHeader": "Síntomas NP asociados (0–25) — suma de cinco dominios más graves",
+      "npSummary": "Total NP (cinco dominios más graves)",
+      "totalSymptoms": "Síntomas totales (0–50)",
+      "functional": "Deterioro funcional (0–50)",
+      "totalScore": "Puntuación PANS/PANDAS (0–100)"
+    },
+    "backButton": "Volver al inicio",
+    "printButton": "Imprimir resultados"
+  },
+  "scalePage": {
+    "title": "Escala PANS/PANDAS",
+    "explanation": "Califique cada ítem (0–5) y haga clic en “Calcular puntuación” al final."
+  },
+  "npDomains": {
+    "anxiety": "Ansiedad (0–5)",
+    "moodiness": "Altibajos emocionales/depresión (0–5)",
+    "irritability": "Irritabilidad/agresión (0–5)",
+    "cognitive": "Síntomas cognitivos/aprendizaje, confusión (0–5)",
+    "regression": "Regresión conductual (0–5)",
+    "sensory": "6.a. Síntomas sensoriales (0–5)",
+    "hallucinations": "6.b. Alucinaciones (0–5)",
+    "motor": "6.c. Síntomas motores (0–5)",
+    "urinary": "7.a. Síntomas urinarios (0–5)",
+    "sleep": "7.b. Trastornos del sueño/fatiga (0–5)",
+    "pupil": "7.c. Pupilas dilatadas (0–5)"
+  },
+  "ratingDescriptions": {
+    "0": "0 – no evidencia de síntoma; ninguno.",
+    "1": "1 – mínimo (10): síntoma muy leve.",
+    "2": "2 – leve (20): síntoma más notable.",
+    "3": "3 – moderado (30): síntoma significativo.",
+    "4": "4 – grave (40): síntoma muy grave.",
+    "5": "5 – extremo (50): síntoma extremo."
+  }
+}

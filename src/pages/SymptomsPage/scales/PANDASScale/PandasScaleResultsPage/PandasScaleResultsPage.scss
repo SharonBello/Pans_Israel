@@ -1,0 +1,165 @@
+@use '../../.././../../styles/abstracts' as *;
+
+.results-container {
+    // background-color: $color-bg-light !important;
+    // background-color: $color-gray-medium !important;
+}
+
+.results-table {
+    width: 100%;
+    background-color: $color-gray-light !important;
+    border-collapse: collapse;
+    border: 1px solid $color-gray-medium !important;
+    direction: rtl;
+
+    .MuiTableCell-root {
+        padding: 12px 8px;
+        border-bottom: 1px solid $color-gray-medium;
+        font-family: $main-font;
+        color: $color-dark-gray;
+        font-size: 0.95rem;
+        white-space: pre-line;
+
+        &:first-child {
+            text-align: right !important;
+        }
+    }
+
+    .MuiTableHead-root {
+        background-color: $color-blue-primary-dark;
+
+        .MuiTableCell-root {
+            font-weight: bold;
+            color: #fff;
+            text-align: center;
+        }
+    }
+
+    .worst-ocd-symptoms,
+    .results-table__summary-associated {
+        td {
+            border-bottom: 1px solid #1b1b1b;
+        }
+    }
+
+    /* רקע שורות סיכום ראשיות */
+    .results-table__summary-associated td,
+    .results-table__summary-ocd td,
+    .results-table__summary-totalsymptoms td,
+    .results-table__summary-functional td,
+    .results-table__summary-functional-values td,
+    .results-table__summary-totalscore td {
+        background-color: $color-gray-light;
+    }
+
+    .results-table__summary-totalscore td {
+        background-color: $color-blue-primary-light;
+        color: #fff;
+        font-size: 1.2rem;
+    }
+
+    /* פסים חלופיים לשורות רגילות */
+    // tbody {
+    //   tr:nth-of-type(2n + 1) {
+    //     background-color: $color-bg-cream;
+    //   }
+    //   tr:nth-of-type(2n) {
+    //     background-color: $color-bg-light;
+    //   }
+    // }
+
+    .domain-container {
+        td {
+            padding-block: 5px !important;
+        }
+
+        td:first-child {
+            padding-inline-start: 30px !important;
+        }
+    }
+
+    /* התאמות מובייל */
+    @media (max-width: 600px) {
+        .MuiTableCell-root {
+            padding: 8px 6px;
+            font-size: 0.85rem;
+        }
+    }
+
+    @media (min-width: 601px) and (max-width: 900px) {
+        .MuiTableCell-root {
+            padding: 10px 8px;
+            font-size: 0.9rem;
+        }
+    }
+}
+
+/* כפתורים */
+.return-to-start-btn {
+    border-color: $color-blue-primary !important;
+    color: $color-blue-primary !important;
+}
+
+.print-results-btn {
+    background-color: $color-blue-primary !important;
+}
+
+/* -----------------------------------
+   MEDIA PRINT – כללי הדפסה
+   ----------------------------------- */
+@media print {
+    @page {
+        size: A4;
+        margin: 1.5cm; /* Adjust this value as needed */
+    }
+    /* 1. נסמן שמה שנמצא מחוץ ל-printable-area יוסתר */
+    body * {
+        visibility: hidden !important;
+    }
+
+    /* 2. אך כל מה שנמצא בתוך .printable-area יוצג */
+    .printable-area,
+    .printable-area * {
+        visibility: visible !important;
+    }
+
+    /* 3. וידוא שה־printable-area יתמקם בפינה השמאלית־עליונה של העמוד */
+    .printable-area {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%; /* כך יתפרש על כל רוחב הדף */
+        box-sizing: border-box;
+    }
+
+    /* 4. נסתיר במפורש את כפתורי הפעולה */
+    .print-results-btn,
+    .return-to-start-btn {
+        display: none !important;
+    }
+
+    /* 5. ״איפוס״ של כל הרקע לצבע לבן בטקסט */
+    body,
+    html {
+        background: #fff !important;
+        color: #000 !important;
+    }
+
+    /* 6. וידוא גבולות שחורים וטקסט קריא בתאים */
+    .results-table th,
+    .results-table td {
+        border: 1px solid #000 !important;
+        padding: 6px !important;
+        color: #000 !important;
+        font-size: 10pt !important;
+        background-color: transparent !important;
+        -webkit-print-color-adjust: exact;
+    }
+
+    /* 7. שימור צבע רקע הכותרת הכהה מעל התאים */
+    .results-table th {
+        background-color: $color-blue-primary-dark !important;
+        color: #fff !important;
+        -webkit-print-color-adjust: exact;
+    }
+}

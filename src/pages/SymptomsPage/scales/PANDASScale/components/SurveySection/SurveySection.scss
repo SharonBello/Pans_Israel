@@ -1,0 +1,25 @@
+@use '../../../../../../styles/abstracts' as *;
+
+.progress-bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.section-title-container {
+    padding-inline: 12px;
+
+    .section-title {
+        color: $color-accent !important;
+    }
+}
+
+.next-btn {
+    background-color: $color-medium !important;
+    
+    &:hover {
+        background-color: $color-primary !important;
+    }
+}

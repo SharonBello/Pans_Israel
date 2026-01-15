@@ -6,6 +6,9 @@
 
     &__container {
         @include container;
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 1.25rem;
     }
 
     &__header {
@@ -106,4 +109,36 @@
         color: $color-primary;
         font-size: $font-size-sm;
     }
+}
+
+.home-sections__divider {
+    margin: 2.75rem 0 2.25rem;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        rgba(15, 23, 42, 0) 0%,
+        rgba(15, 23, 42, 0.12) 20%,
+        rgba(15, 23, 42, 0.12) 80%,
+        rgba(15, 23, 42, 0) 100%
+    );
+}
+
+.home-sections__faq {
+    margin-top: 0.25rem;
+    padding: 1.5rem 0 0.5rem;
+
+    /* create a “band” feel without changing the accordion */
+    background: #f8fafc;
+    border: 1px solid #eef2ff;
+    border-radius: 18px;
+}
+
+/* Make FAQ inner section align nicely */
+.home-sections__faq .faq {
+    background: transparent; /* override faq white background */
+    padding: 1.25rem 0;
+}
+
+.home-sections__faq .faq__container {
+    padding: 0 1.25rem;
 }

@@ -2,6 +2,8 @@ import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { FaClipboardList, FaUserDoctor, FaNewspaper, FaQuoteRight } from 'react-icons/fa6';
 import './HomeSections.scss';
+import FAQAccordion from '@/components/faq/FAQAccordion/FAQAccordion';
+import { FAQ_ITEMS } from '@/data/faqData';
 
 type SectionLink = {
     id: string;
@@ -65,6 +67,13 @@ const HomeSections: React.FC = (): React.JSX.Element => {
                             </Link>
                         );
                     })}
+                </div>
+
+                {/* Visual separation */}
+                <div className="home-sections__divider" aria-hidden="true" />
+
+                <div className="home-sections__faq">
+                    <FAQAccordion items={FAQ_ITEMS} />
                 </div>
             </div>
         </section>

@@ -1,0 +1,123 @@
+@use '../../../../../../styles/abstracts' as *;
+
+.question-card {
+  max-width: 800px;
+  margin: 16px auto;
+  border-radius: 12px;
+  background-color: $color-background;
+  box-shadow: 0 2px 8px rgba(14, 13, 38, 0.08);
+  border: 1px solid $color-light;
+
+  .question-card__label {
+    font-family: $main-font;
+    color: $color-primary;
+    font-size: 1rem;
+    margin-bottom: 16px;
+    text-align: right;
+    padding-inline: 40px;
+  }
+
+  .question-card__rating-container {
+    padding: 0 16px 24px 16px;
+    // direction: rtl;
+
+    // Light and airy medical theme backgrounds
+    .rating-grid-item:nth-of-type(3n + 1) {
+      background-color: $color-background;
+      border: 1px solid $color-light;
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .rating-grid-item:nth-of-type(3n + 2) {
+      background-color: $color-light;
+      border: 1px solid $color-medium;
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .rating-grid-item:nth-of-type(3n + 3) {
+      background-color: $color-medium;
+      border: 1px solid $color-primary;
+      border-radius: 8px;
+      padding: 12px;
+    }
+
+    // Light and airy slider styling
+    .MuiSlider-rail {
+      color: $color-light;
+      opacity: 1;
+    }
+
+    .MuiSlider-track {
+      color: $color-medium;
+    }
+
+    .MuiSlider-thumb {
+      background-color: $color-background;
+      border: 2px solid $color-primary;
+      box-shadow: 0 2px 4px rgba(14, 13, 38, 0.15);
+    }
+
+    .MuiSlider-mark {
+      background-color: $color-primary;
+    }
+
+    .MuiSlider-markLabel {
+      color: $color-primary;
+      font-family: $main-font;
+      font-size: 0.85rem;
+    }
+
+    .MuiTypography-subtitle2 {
+      font-family: $main-font;
+      color: $color-primary;
+    }
+
+    .MuiTypography-caption {
+      font-family: $main-font;
+      color: $color-medium;
+      font-size: 0.85rem;
+    }
+  }
+
+  @media (max-width: 600px) {
+    margin: 12px 8px;
+
+    .question-card__label {
+      font-size: 1.1rem;
+      margin-bottom: 12px;
+    }
+
+    .question-card__rating-container {
+      padding: 0 8px 16px 8px;
+
+      .rating-grid-item {
+        padding: 8px; // מקטינים padding במובייל
+      }
+    }
+
+    .MuiTypography-caption {
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (min-width: 601px) and (max-width: 900px) {
+    margin: 16px;
+
+    .question-card__label {
+      font-size: 1.2rem;
+      margin-bottom: 14px;
+    }
+
+    .question-card__rating-container {
+      padding: 0 12px 20px 12px;
+
+      .rating-grid-item {
+        padding: 10px; // ביניים לטאבלט קטן
+      }
+    }
+
+    .MuiTypography-caption {
+      font-size: 0.83rem;
+    }
+  }
+}
