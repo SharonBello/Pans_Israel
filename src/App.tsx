@@ -46,7 +46,7 @@ function App() {
               </p>
             </section>
           </main> */}
-          <main style={{ flex: '1 0 auto' }}>
+          <main style={{ flex: '1 0 auto' }} className="main-content">
             <Routes>
               {AppRoutes.map((route) => (
                 <Route key={route.path} element={route.component} path={route.path} />

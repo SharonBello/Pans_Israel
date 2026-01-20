@@ -89,7 +89,7 @@ const SurveySection: React.FC<SurveySectionProps> = ({ title, items, onComplete,
                     </Box>
 
                     <Box sx={{ mb: 2 }}>
-                        <Typography sx={{ mb: 1, mt:2, textAlign: 'center', fontWeight: 'bold', fontFamily: 'Heebo' }}>
+                        <Typography sx={{ mb: 1, mt: 2, textAlign: 'center', fontWeight: 'bold', fontFamily: 'Heebo' }}>
                             {/* כאן נציג label (OCD) או sublabel (SubSymptom) */}
                             {(answers[currentIndex] as SymptomGroup).label ||
                                 (answers[currentIndex] as SubSymptom).sublabel}
@@ -108,7 +108,7 @@ const SurveySection: React.FC<SurveySectionProps> = ({ title, items, onComplete,
                     </Box>
 
                     <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                        <Button variant="text"   onClick={goBack}>חזור</Button>
+                        <Button variant="text" onClick={goBack}>חזור</Button>
                         <Button variant="contained" onClick={goNext} className='next-btn'>
                             {currentIndex < total - 1 ? 'הבא' : 'סיים סקירה'}
                         </Button>
@@ -119,10 +119,10 @@ const SurveySection: React.FC<SurveySectionProps> = ({ title, items, onComplete,
                     <Typography variant="h5" sx={{ fontWeight: 'bold' }} gutterBottom>
                         {title}
                     </Typography>
-                    <Typography variant="body2" sx={{ mb: 2, textAlign: 'right' }}>
+                    <Typography variant="body2" sx={{ mb: 2 }}>
                         {t('common.reviewPrompt')}
                     </Typography>
-                    <Box component="div">
+                    <Box component="div" style={{textAlign: 'right' }} className='answer-desc'>
                         {answers.map((item, idx) => (
                             <Box key={item.id}
                                 sx={{
@@ -135,17 +135,17 @@ const SurveySection: React.FC<SurveySectionProps> = ({ title, items, onComplete,
                                     borderRadius: 1,
                                 }}
                             >
-                                <Button size="small" onClick={() => handleEdit(idx)} sx={{ minWidth: 32, mr: 1 }}>ערוך</Button>
                                 <Typography variant="body2" sx={{ flex: 1, textAlign: 'right' }}>
                                     {('label' in item)
                                         ? t(`questions.${item.id}.label`)
                                         : t(`associated.${item.id}.label`)}
                                 </Typography>
-                                <Box sx={{ display: 'flex', gap: 1, width: 120, justifyContent: 'space-between' }}>
+                                <Box sx={{ display: 'flex', gap: 1, width: 120, justifyContent: 'space-evenly' }}>
                                     <Typography variant="caption">{(item as any).ratingBefore}</Typography>
                                     <Typography variant="caption">{(item as any).ratingAfter}</Typography>
                                     <Typography variant="caption">{(item as any).ratingCurrent}</Typography>
                                 </Box>
+                                <Button size="small" onClick={() => handleEdit(idx)} sx={{ minWidth: 32, mr: 1 }}>ערוך</Button>
                             </Box>
                         ))}
                     </Box>

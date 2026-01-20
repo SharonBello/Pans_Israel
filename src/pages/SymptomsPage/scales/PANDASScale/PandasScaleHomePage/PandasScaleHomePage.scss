@@ -15,13 +15,14 @@
     background-image: url("../../../../../styles//assets/hero-bg.jpg");
     background-size: cover;
     background-position: center;
-    min-height: 80vh;
+    // min-height: 80vh;
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     color: $color-gray-light;
     height: 100%;
-
+    
     &::before {
         content: "";
         position: absolute;
@@ -32,28 +33,30 @@
         background-color: rgba($color-blue-primary-dark, 0.6);
         z-index: 1;
     }
-
+    
     .hero-content {
         position: relative;
         z-index: 2;
         text-align: center;
         padding: 0 1rem;
     }
-
+    
     .hero-title {
         font-family: $main-font;
         font-size: 2.75rem;
         margin-bottom: 1rem;
-
+        color: $color-gray-light;
+        
         @media (min-width: 600px) {
             font-size: 3.5rem;
         }
     }
-
+    
     .hero-subtitle {
         font-family: $main-font;
         font-size: 1.25rem;
         margin-bottom: 2rem;
+        color: $color-gray-light;
 
         @media (min-width: 600px) {
             font-size: 1.5rem;

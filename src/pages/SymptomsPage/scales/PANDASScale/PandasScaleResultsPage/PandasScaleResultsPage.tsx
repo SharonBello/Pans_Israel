@@ -20,9 +20,10 @@ import './PandasScaleResultsPage.scss';
 
 interface ResultsState {
   formData: PansFormData;
+  savedDocId?: string;
 }
 
-// פונקציה עזר לחישוב סכום ה־5 התחומים החמורים ביותר מתוך מערך מספרים
+// Helper function to sum top 5 domain ratings
 const sumTop5 = (arr: number[]) =>
   [...arr].sort((a, b) => b - a).slice(0, 5).reduce((sum, v) => sum + v, 0);
 
@@ -32,14 +33,14 @@ const PandasScaleResultsPage: React.FC = () => {
   const state = location.state as ResultsState | undefined;
 
   if (!state) {
-    navigate('/');
+    navigate('/scales/pandas');
     return null;
   }
 
-  const { formData } = state;
+  const { formData, savedDocId } = state;
   const { ocdSymptoms, associatedSymptoms, functionalImpairment } = formData;
 
-  // ===== 1. חישובי OCD לכל טווח =====
+  // ===== 1. OCD Calculations for each timeframe =====
   const maxOCD_before = Math.max(...ocdSymptoms.map((s) => s.ratingBefore));
   const maxOCD_after = Math.max(...ocdSymptoms.map((s) => s.ratingAfter));
   const maxOCD_current = Math.max(...ocdSymptoms.map((s) => s.ratingCurrent));
@@ -48,8 +49,7 @@ const PandasScaleResultsPage: React.FC = () => {
   const scoreOCD_after = maxOCD_after * 5;
   const scoreOCD_current = maxOCD_current * 5;
 
-  // ===== 2. חישובי NP domains מתוך SubSymptom =====
-  // כל מפתחות התחומים
+  // ===== 2. NP Domain Calculations =====
   const allDomains: NPDomainKey[] = [
     'anxiety',
     'moodiness',
@@ -64,7 +64,7 @@ const PandasScaleResultsPage: React.FC = () => {
     'pupil',
   ];
 
-  // מושכים את הדירוג המקסימלי לכל תחום ולכל טווח
+  // Get max rating for each domain and timeframe
   const domainRatingsBefore: Record<NPDomainKey, number> = {} as any;
   const domainRatingsAfter: Record<NPDomainKey, number> = {} as any;
   const domainRatingsCurrent: Record<NPDomainKey, number> = {} as any;
@@ -83,49 +83,92 @@ const PandasScaleResultsPage: React.FC = () => {
   const scoreAssoc_after = sumTop5(Object.values(domainRatingsAfter));
   const scoreAssoc_current = sumTop5(Object.values(domainRatingsCurrent));
 
-  // ===== 3. חישובי פגיעה תפקודית לכל טווח =====
+  // ===== 3. Functional Impairment Calculations =====
   const func = functionalImpairment[0];
   const func_before = func.ratingBefore * 10;
   const func_after = func.ratingAfter * 10;
   const func_current = func.ratingCurrent * 10;
 
-  // ===== 4. TOTAL SYMPTOMS (OCD + Associated) לכל טווח =====
+  // ===== 4. Total Symptoms (OCD + Associated) =====
   const totalSymp_before = scoreOCD_before + scoreAssoc_before;
   const totalSymp_after = scoreOCD_after + scoreAssoc_after;
   const totalSymp_current = scoreOCD_current + scoreAssoc_current;
 
-  // ===== 5. TOTAL SCORE (TOTAL SYMPTOMS + Functional) לכל טווח =====
+  // ===== 5. Total Score (Total Symptoms + Functional) =====
   const totalScore_before = totalSymp_before + func_before;
   const totalScore_after = totalSymp_after + func_after;
   const totalScore_current = totalSymp_current + func_current;
 
   return (
-    <Container maxWidth="lg" sx={{ py: 4, direction: 'rtl' }} className='results-container'>
+    <Container maxWidth="lg" sx={{ py: 4, direction: 'rtl' }} className="results-container">
       <Typography variant="h4" gutterBottom align="center">
         תוצאות מדד פאנס/פאנדס
+      </Typography>
+
+      {savedDocId && (
+        <Typography
+          variant="caption"
+          color="success.main"
+          sx={{ display: 'block', textAlign: 'center', mb: 2 }}
+        >
+          ✓ התוצאות נשמרו בהצלחה
+        </Typography>
+      )}
+
+      {/* ===== Personal Results ===== */}
+      <Typography variant="h6" sx={{ mt: 4, mb: 2, fontWeight: 'bold' }} className="results-title">
+        התוצאות שלך:
       </Typography>
 
       <Table className="results-table printable-area" sx={{ mb: 4 }}>
         <TableHead>
           <TableRow>
-            <TableCell sx={{ backgroundColor: '#717DBC', color: '#FFF', fontWeight: 'bold', fontSize: '1rem' }}>
+            <TableCell
+              sx={{
+                backgroundColor: '#717DBC',
+                color: '#FFF',
+                fontWeight: 'bold',
+                fontSize: '1rem',
+              }}
+            >
               תחום / סימפטום
             </TableCell>
-            <TableCell sx={{ backgroundColor: '#717DBC', color: '#FFF', fontWeight: 'bold', fontSize: '1rem' }}>
+            <TableCell
+              sx={{
+                backgroundColor: '#717DBC',
+                color: '#FFF',
+                fontWeight: 'bold',
+                fontSize: '1rem',
+              }}
+            >
               שבוע לפני הופעה ראשונה
             </TableCell>
-            <TableCell sx={{ backgroundColor: '#717DBC', color: '#FFF', fontWeight: 'bold', fontSize: '1rem' }}>
+            <TableCell
+              sx={{
+                backgroundColor: '#717DBC',
+                color: '#FFF',
+                fontWeight: 'bold',
+                fontSize: '1rem',
+              }}
+            >
               שבוע אחרי הופעה ראשונה
             </TableCell>
-            <TableCell sx={{ backgroundColor: '#717DBC', color: '#FFF', fontWeight: 'bold', fontSize: '1rem' }}>
+            <TableCell
+              sx={{
+                backgroundColor: '#717DBC',
+                color: '#FFF',
+                fontWeight: 'bold',
+                fontSize: '1rem',
+              }}
+            >
               7 ימים אחרונים
             </TableCell>
           </TableRow>
         </TableHead>
 
         <TableBody>
-          {/** ===== שורה 1: OCD (סיכום) ===== */}
-          <TableRow className='worst-ocd-symptoms'>
+          {/* Row 1: OCD Summary */}
+          <TableRow className="worst-ocd-symptoms">
             <TableCell sx={{ textAlign: 'right', fontWeight: 'bold' }}>
               תסמיני OCD (0–25) <br />
               (5 × החמור ביותר של תסמיני ה-OCD)
@@ -135,15 +178,18 @@ const PandasScaleResultsPage: React.FC = () => {
             <TableCell align="center">{scoreOCD_current}</TableCell>
           </TableRow>
 
-          {/** ===== שורה 2: NP (כותרת ראשית) ===== */}
+          {/* Row 2: NP Header */}
           <TableRow>
-            <TableCell colSpan={4} sx={{ fontWeight: 'bold', fontSize: '0.95rem', textAlign: 'right' }} >
+            <TableCell
+              colSpan={4}
+              sx={{ fontWeight: 'bold', fontSize: '0.95rem', textAlign: 'right' }}
+            >
               תסמינים נוירו-פסיכיאטריים נלווים (0–25) <br />
               (סכום חמשת התחומים החמורים מתוך 7 תחומי ה-NP)
             </TableCell>
           </TableRow>
 
-          {/** ===== שורות 3–13: כל אחד מ־11 התחומים הראשיים ושיעורו בכל טווח ===== */}
+          {/* Rows 3-13: Domain Details */}
           {allDomains.map((domainKey) => {
             const labelHeb = NP_DOMAIN_LABELS[domainKey];
             const rb = domainRatingsBefore[domainKey];
@@ -151,7 +197,7 @@ const PandasScaleResultsPage: React.FC = () => {
             const rc = domainRatingsCurrent[domainKey];
 
             return (
-              <TableRow key={domainKey} className='domain-container'>
+              <TableRow key={domainKey} className="domain-container">
                 <TableCell sx={{ textAlign: 'right' }}>{labelHeb}</TableCell>
                 <TableCell align="center">{rb}</TableCell>
                 <TableCell align="center">{ra}</TableCell>
@@ -160,22 +206,17 @@ const PandasScaleResultsPage: React.FC = () => {
             );
           })}
 
-          {/** ===== שורת סיכום NP: סכום 5 התחומים החמורים ביותר ===== */}
+          {/* NP Summary Row */}
           <TableRow className="results-table__summary-associated">
             <TableCell sx={{ textAlign: 'right' }}>
               סך תסמינים NP (חמשת התחומים החמורים ביותר)
             </TableCell>
-            <TableCell align="center">
-              {scoreAssoc_before}
-            </TableCell>
-            <TableCell align="center">
-              {scoreAssoc_after}
-            </TableCell>
-            <TableCell align="center">
-              {scoreAssoc_current}
-            </TableCell>
+            <TableCell align="center">{scoreAssoc_before}</TableCell>
+            <TableCell align="center">{scoreAssoc_after}</TableCell>
+            <TableCell align="center">{scoreAssoc_current}</TableCell>
           </TableRow>
 
+          {/* Total Symptoms Row */}
           <TableRow className="results-table__summary-totalsymptoms">
             <TableCell sx={{ textAlign: 'right', fontWeight: 'bold' }}>
               סך כל הסימפטומים (0–50)
@@ -191,15 +232,23 @@ const PandasScaleResultsPage: React.FC = () => {
             </TableCell>
           </TableRow>
 
+          {/* Functional Impairment Row */}
           <TableRow>
             <TableCell sx={{ textAlign: 'right', fontWeight: 'bold' }}>
               פגיעה תפקודית (0–50)
             </TableCell>
-            <TableCell align="center" sx={{ fontWeight: 'bold' }}>{func_before}</TableCell>
-            <TableCell align="center" sx={{ fontWeight: 'bold' }}>{func_after}</TableCell>
-            <TableCell align="center" sx={{ fontWeight: 'bold' }}>{func_current}</TableCell>
+            <TableCell align="center" sx={{ fontWeight: 'bold' }}>
+              {func_before}
+            </TableCell>
+            <TableCell align="center" sx={{ fontWeight: 'bold' }}>
+              {func_after}
+            </TableCell>
+            <TableCell align="center" sx={{ fontWeight: 'bold' }}>
+              {func_current}
+            </TableCell>
           </TableRow>
 
+          {/* Final Total Score Row */}
           <TableRow className="results-table__summary-totalscore">
             <TableCell
               sx={{
@@ -207,7 +256,8 @@ const PandasScaleResultsPage: React.FC = () => {
                 fontWeight: 'bold',
                 fontSize: '0.95rem',
                 textAlign: 'right',
-              }}>
+              }}
+            >
               מדד פאנס/פאנדס (0–100)
             </TableCell>
             <TableCell align="center" sx={{ fontWeight: 'bold' }}>
@@ -223,15 +273,25 @@ const PandasScaleResultsPage: React.FC = () => {
         </TableBody>
       </Table>
 
-      {/** ===== לחצני פעולה ===== */}
-      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 2 }}>
-        <Button variant="outlined" onClick={() => navigate('/')} className='return-to-start-btn'>
+      {/* Action Buttons */}
+      <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 2, mb: 4 }}>
+        <Button
+          variant="outlined"
+          onClick={() => navigate('/scales/pandas')}
+          className="return-to-start-btn"
+        >
           חזרה להתחלה
         </Button>
-        <Button variant="contained" onClick={() => window.print()} className='print-results-btn'>
+        <Button
+          variant="contained"
+          onClick={() => window.print()}
+          className="print-results-btn"
+        >
           הדפס תוצאות
         </Button>
       </Box>
+
+      {/* Note: Community Chart has been moved to the Scales Page */}
     </Container>
   );
 };

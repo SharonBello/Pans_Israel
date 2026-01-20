@@ -4,6 +4,7 @@
     padding: 2rem 1rem;
     // background-color: $color-bg-light;
     min-height: 100vh;
+    direction: rtl !important;
 }
 
 .scale-title {
@@ -23,10 +24,13 @@
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba($color-gray, 0.1);
     padding: 2rem;
-
+    direction: rtl !important;
+    
     .MuiBox-root {
         .MuiPaper-root {
             .MuiBox-root {
+                direction: rtl !important;
+
                 .category-title {
                     color: $color-accent;
                     align-self: center;

@@ -18,6 +18,8 @@ export const HOLISTIC_FIELDS: ProfessionalField[] = [
     { key: 'acupuncture', label: 'דיקור סיני', category: 'holistic' },
     { key: 'chinese-medicine', label: 'רפואה סינית', category: 'holistic' },
     { key: 'reflexology', label: 'רפלקסולוגיה', category: 'holistic' },
+    { key: 'herbalist', label: 'הרבליסט/צמחי מרפא', category: 'holistic' },
+    { key: 'bach-flowers', label: 'פרחי באך', category: 'holistic' },
 ];
 
 export const THERAPY_FIELDS: ProfessionalField[] = [
@@ -39,8 +41,15 @@ export const ALL_FIELDS: ProfessionalField[] = [
 
 export const LOCATIONS: Location[] = [
     { key: 'tel-aviv', label: 'תל אביב', region: 'מרכז' },
+    { key: 'bet-shemesh', label: 'בית שמש', region: 'ירושלים' },
+    { key: 'hod-hasharon', label: 'הוד השרון', region: 'מרכז' },
+    { key: 'ramat-hasharon', label: 'רמת השרון', region: 'מרכז' },
+    { key: 'zur-yigal', label: 'צור יגאל', region: 'מרכז' },
     { key: 'jerusalem', label: 'ירושלים', region: 'ירושלים' },
     { key: 'haifa', label: 'חיפה', region: 'צפון' },
+    { key: 'pardes-hana-karkur', label: 'פרדס-חנה כרכור', region: 'שרון' },
+    { key: 'kiryat-tivon', label: 'קרית טבעון', region: 'צפון' },
+    { key: 'megadim', label: 'מגדים', region: 'חיפה' },
     { key: 'beer-sheva', label: 'באר שבע', region: 'דרום' },
     { key: 'ramat-gan', label: 'רמת גן', region: 'מרכז' },
     { key: 'petah-tikva', label: 'פתח תקווה', region: 'מרכז' },
@@ -53,7 +62,9 @@ export const LOCATIONS: Location[] = [
     { key: 'modiin', label: 'מודיעין', region: 'מרכז' },
     { key: 'rehovot', label: 'רחובות', region: 'מרכז' },
     { key: 'nazareth', label: 'נצרת', region: 'צפון' },
+    { key: 'yagur', label: 'יגור', region: 'חיפה' },
     { key: 'online', label: 'מקוון (אונליין)', region: 'כל הארץ' },
+    { key: 'n/a', label: 'יישוב לא ברשימה', region: 'לא ידוע' },
 ];
 
 export const getFieldsByCategory = (category: 'medical' | 'holistic' | 'therapy'): ProfessionalField[] => {

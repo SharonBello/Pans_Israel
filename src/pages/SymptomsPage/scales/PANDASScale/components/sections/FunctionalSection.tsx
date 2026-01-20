@@ -76,7 +76,7 @@ const FunctionalSection: React.FC<FunctionalSectionProps> = ({ items, onItemChan
         </Table>
       </RadioGroup>
 
-      <Typography variant="caption" color="textSecondary" display="block" sx={{ mt: 1, textAlign: 'right' }}>
+      <Typography variant="caption" color="textSecondary" display="block" sx={{ mt: 1 }}>
         {t('functionalSection.caption')}
       </Typography>
     </Box>

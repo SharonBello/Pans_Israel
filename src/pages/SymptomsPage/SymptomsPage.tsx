@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import { Assessment, Lock } from '@mui/icons-material';
 import './SymptomsPage.scss';
+import ScaleResultsChart from './scales/ScaleResultsChart/Scaleresultschart'
 
 interface ScaleCard {
   id: string;
@@ -141,6 +142,9 @@ const SymptomsPage: React.FC = () => {
             </CardActions>
           </Card>
         ))}
+      </Box>
+      <Box sx={{ my: 4 }} className="community-results">
+        <ScaleResultsChart />
       </Box>
     </Container>
   );

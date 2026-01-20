@@ -1,192 +1,127 @@
-// @use "../../styles/abstracts" as *;
+@use "../../styles/abstracts" as *;
 
-// .symptoms-page {
-//     padding: 0;
-//     min-height: 100vh;
+.symptoms-page {
+    padding: 0;
+    min-height: 100vh;
 
-//     // Header Section
-//     &__header {
-//         text-align: center;
-//         margin-bottom: $spacing-8;
+    // Header Section
+    &__header {
+        text-align: center;
 
-//         h1 {
-//             color: $primary-color;
-//             font-weight: 700;
-//             font-size: clamp(1.75rem, 4vw, 3rem);
-//         }
-//     }
+        h1 {
+            font-weight: 700;
+            font-size: clamp(1.75rem, 4vw, 3rem);
+        }
+    }
 
-//     // Disclaimer Alert
-//     &__disclaimer {
-//         margin-bottom: $spacing-8;
-//         border-radius: $border-radius-lg;
-//         font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    // Disclaimer Alert
+    &__disclaimer {
+        font-size: clamp(0.9rem, 1.5vw, 1.1rem);
 
-//         .MuiAlert-message {
-//             width: 100%;
-//         }
-//     }
+        .MuiAlert-message {
+            width: 100%;
+        }
+    }
 
-//     // Cards Grid
-//     &__grid {
-//         display: grid;
-//         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-//         gap: $spacing-lg;
-//         margin-top: $spacing-8;
+    // Cards Grid
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 
-//         @media (min-width: 768px) {
-//             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-//         }
+        @media (min-width: 768px) {
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        }
 
-//         @media (min-width: 1200px) {
-//             grid-template-columns: repeat(3, 1fr);
-//             gap: $spacing-8;
-//         }
-//     }
-// }
+        @media (min-width: 1200px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+}
 
-// // Scale Card Styles
-// .scale-card {
-//     display: flex;
-//     flex-direction: column;
-//     height: 100%;
-//     transition: all 0.3s ease;
-//     border-radius: $border-radius-lg;
-//     overflow: hidden;
+// Scale Card Styles
+.scale-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: all 0.3s ease;
+    overflow: hidden;
 
-//     &:hover:not(&--disabled) {
-//         transform: translateY(-8px);
-//         box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-//     }
+    &:hover:not(&--disabled) {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    }
 
-//     // Disabled state
-//     &--disabled {
-//         opacity: 0.6;
-//         cursor: not-allowed;
+    // Disabled state
+    &--disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
 
-//         .scale-card__content {
-//             background-color: rgba(0, 0, 0, 0.02);
-//         }
-//     }
+        .scale-card__content {
+            background-color: rgba(0, 0, 0, 0.02);
+        }
+    }
 
-//     // Card Content
-//     &__content {
-//         flex: 1;
-//         padding: $spacing-lg;
-//         display: flex;
-//         flex-direction: column;
-//         gap: $spacing-md;
-//     }
+    // Card Content
+    &__content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
 
-//     // Header with icon and status
-//     &__header {
-//         display: flex;
-//         justify-content: space-between;
-//         align-items: center;
-//         margin-bottom: $spacing-sm;
-//     }
+    // Header with icon and status
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-//     // Icon
-//     &__icon {
-//         font-size: 2.5rem;
+    // Icon
+    &__icon {
+        font-size: 2.5rem;
+    }
 
-//         &--active {
-//             color: $primary-color;
-//         }
+    // Status chip
+    &__status {
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
 
-//         &--locked {
-//             color: $gray-color;
-//         }
-//     }
+    // Title
+    &__title {
+        font-weight: 600;
+        font-size: clamp(1.25rem, 2vw, 1.5rem);
+    }
 
-//     // Status chip
-//     &__status {
-//         font-size: 0.75rem;
-//         font-weight: 600;
-//     }
+    // Description
+    &__description {
+        flex: 1;
+        line-height: 1.6;
+        font-size: clamp(0.9rem, 1.5vw, 1rem);
+    }
 
-//     // Title
-//     &__title {
-//         color: $text-primary;
-//         font-weight: 600;
-//         font-size: clamp(1.25rem, 2vw, 1.5rem);
-//         margin-top: $spacing-sm;
-//     }
+    // Actions
+    &__actions {
+        background-color: rgba(0, 0, 0, 0.01);
+    }
 
-//     // Description
-//     &__description {
-//         flex: 1;
-//         color: $text-secondary;
-//         line-height: 1.6;
-//         font-size: clamp(0.9rem, 1.5vw, 1rem);
-//     }
+    // Button
+    &__button {
+        font-weight: 600;
+        text-transform: none;
+        font-size: clamp(0.9rem, 1.5vw, 1rem);
 
-//     // Actions
-//     &__actions {
-//         padding: $spacing-md $spacing-lg $spacing-lg;
-//         background-color: rgba(0, 0, 0, 0.01);
-//     }
+        &:not(:disabled) {
+            &:hover {
+                transform: scale(1.02);
+            }
+        }
+    }
+}
 
-//     // Button
-//     &__button {
-//         padding: $spacing-sm $spacing-md;
-//         font-weight: 600;
-//         text-transform: none;
-//         font-size: clamp(0.9rem, 1.5vw, 1rem);
-//         border-radius: $border-radius-md;
 
-//         &:not(:disabled) {
-//             &:hover {
-//                 transform: scale(1.02);
-//             }
-//         }
-//     }
-// }
-
-// // Responsive adjustments
-// @media (max-width: 350px) {
-//     .symptoms-page {
-//         padding: $spacing-md 0;
-
-//         &__grid {
-//             gap: $spacing-md;
-//         }
-//     }
-
-//     .scale-card {
-//         &__content {
-//             padding: $spacing-md;
-//         }
-
-//         &__icon {
-//             font-size: 2rem;
-//         }
-//     }
-// }
-
-// @media (min-width: 1800px) {
-//     .symptoms-page {
-//         max-width: 1600px;
-
-//         &__grid {
-//             gap: $spacing-xxl;
-//         }
-//     }
-
-//     .scale-card {
-//         &__content {
-//             padding: $spacing-8;
-//         }
-
-//         &__icon {
-//             font-size: 3rem;
-//         }
-//     }
-// }
-
-// // RTL Support
-// [dir="rtl"] {
-//     .scale-card__header {
-//         flex-direction: row-reverse;
-//     }
-// }
+// RTL Support
+[dir="rtl"] {
+    .scale-card__header {
+        flex-direction: row-reverse;
+    }
+}

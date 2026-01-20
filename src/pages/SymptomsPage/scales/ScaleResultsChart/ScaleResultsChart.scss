@@ -1,0 +1,46 @@
+.scale-results-chart {
+    direction: rtl;
+    margin: 1.5rem 0;
+    overflow: hidden;
+    border-radius: 12px;
+
+    // Ensure recharts text is visible in RTL
+    .recharts-wrapper {
+        direction: ltr; // Charts work better in LTR
+    }
+
+    // Legend styling
+    .recharts-legend-wrapper {
+        direction: rtl !important;
+
+        .recharts-legend-item {
+            margin-left: 16px !important;
+            margin-right: 0 !important;
+        }
+    }
+
+    // Tooltip styling
+    .recharts-tooltip-wrapper {
+        direction: rtl;
+    }
+
+    // Responsive adjustments
+    @media (max-width: 600px) {
+        .recharts-wrapper {
+            font-size: 0.75rem;
+        }
+
+        .recharts-legend-wrapper {
+            font-size: 0.75rem;
+        }
+    }
+
+    // Print styles
+    @media print {
+        break-inside: avoid;
+        page-break-inside: avoid;
+
+        box-shadow: none;
+        border: 1px solid #e0e0e0;
+    }
+}

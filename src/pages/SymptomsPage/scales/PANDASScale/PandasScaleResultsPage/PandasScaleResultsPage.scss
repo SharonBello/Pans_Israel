@@ -3,7 +3,12 @@
 .results-container {
     // background-color: $color-bg-light !important;
     // background-color: $color-gray-medium !important;
+
+    .results-title {
+        direction: rtl;
+    }
 }
+
 
 .results-table {
     width: 100%;
@@ -31,7 +36,7 @@
         .MuiTableCell-root {
             font-weight: bold;
             color: #fff;
-            text-align: center;
+            text-align: center !important;
         }
     }
 
@@ -71,6 +76,7 @@
     .domain-container {
         td {
             padding-block: 5px !important;
+            text-align: center;
         }
 
         td:first-child {
@@ -162,4 +168,10 @@
         color: #fff !important;
         -webkit-print-color-adjust: exact;
     }
+}
+
+.results-table .worst-ocd-symptoms td, .results-table .results-table__summary-associated td,
+.results-table .results-table__summary-associated td, .results-table .results-table__summary-ocd td, .results-table .results-table__summary-totalsymptoms td, .results-table .results-table__summary-functional td, .results-table .results-table__summary-functional-values td, .results-table .results-table__summary-totalscore td,
+.results-table .MuiTableCell-root {
+    text-align: center;
 }

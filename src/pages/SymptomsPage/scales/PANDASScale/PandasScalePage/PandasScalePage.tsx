@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container, Typography, Divider } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import './PandasScalePage.scss';
 import CalculatorForm from '../components/CalculatorForm';
@@ -15,6 +15,10 @@ const PandasScalePage: React.FC = () => {
       <Typography variant="body1" align="center" gutterBottom>
         {t('scalePage.explanation')}
       </Typography>
+
+      <Divider sx={{ my: 4 }} />
+
+      {/* Survey Form */}
       <Box className="scale-form-box">
         <CalculatorForm />
       </Box>

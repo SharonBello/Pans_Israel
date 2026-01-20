@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Button, Paper, Typography } from '@mui/material';
+import { Box, Button, Paper, Typography, CircularProgress, Alert } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import './sections/Sections.scss';
@@ -7,10 +7,15 @@ import type { PansFormData, RatingValue, SubSymptom, SurveyItem, SymptomGroup } 
 import SurveySection from './SurveySection/SurveySection';
 import FunctionalSection from './sections/FunctionalSection';
 import { computeScores } from '../../../../../utils/pandasScoreUtils';
+import { saveScaleResult } from '@/services/scalesService.ts';
 
 const CalculatorForm: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+
+  // Saving state
+  const [isSaving, setIsSaving] = useState(false);
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   // 1. הגדרת הנתונים ההתחלתיים לכל קבוצה
   const ocdInitial: SymptomGroup[] = [
@@ -335,15 +340,15 @@ const CalculatorForm: React.FC = () => {
   };
 
   // 8. חישוב סופי
-  const handleCalculate = () => {
-    const formData: PansFormData = {
-      ocdSymptoms: ocdAnswers,
-      associatedSymptoms: assocAnswers,
-      functionalImpairment: funcAnswers,
-    };
-    const scores = computeScores(formData);
-    navigate('/scales/pandas/results', { state: { formData, scores } });
-  };
+  // const handleCalculate = () => {
+  //   const formData: PansFormData = {
+  //     ocdSymptoms: ocdAnswers,
+  //     associatedSymptoms: assocAnswers,
+  //     functionalImpairment: funcAnswers,
+  //   };
+  //   const scores = computeScores(formData);
+  //   navigate('/scales/pandas/results', { state: { formData, scores } });
+  // };
 
   // 9. פונקציות חזרה למדור הקודם
   const goBackToOCD = () => {
@@ -352,6 +357,42 @@ const CalculatorForm: React.FC = () => {
 
   const goBackToAssociated = () => {
     setSectionIndex(1);
+  };
+
+  const handleCalculate = async () => {
+    setIsSaving(true);
+    setSaveError(null);
+
+    const formData: PansFormData = {
+      ocdSymptoms: ocdAnswers,
+      associatedSymptoms: assocAnswers,
+      functionalImpairment: funcAnswers,
+    };
+
+    try {
+      // Save to Firestore
+      const docId = await saveScaleResult(formData);
+      console.log('✅ Results saved with ID:', docId);
+
+      // Compute scores for navigation
+      const scores = computeScores(formData);
+
+      // Navigate to results page
+      navigate('/scales/pandas/results', {
+        state: { formData, scores, savedDocId: docId }
+      });
+    } catch (error) {
+      console.error('❌ Error saving results:', error);
+      setSaveError('שגיאה בשמירת התוצאות. התוצאות יוצגו אך לא נשמרו.');
+
+      // Still navigate to results even if save failed
+      const scores = computeScores(formData);
+      setTimeout(() => {
+        navigate('/scales/pandas/results', { state: { formData, scores } });
+      }, 2000);
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   return (
@@ -408,9 +449,26 @@ const CalculatorForm: React.FC = () => {
             <Typography variant="h6" gutterBottom>
               כל החלקים הושלמו!
             </Typography>
-            <Button variant="contained" size="large" onClick={handleCalculate}>
+            {/* <Button variant="contained" size="large" onClick={handleCalculate}>
               {t('survey.calculateScoreButton')}
-            </Button>
+            </Button> */}
+            {isSaving ? (
+              <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+                <CircularProgress />
+                <Typography variant="body2" color="text.secondary">
+                  שומר תוצאות...
+                </Typography>
+              </Box>
+            ) : (
+              <Button
+                variant="contained"
+                size="large"
+                onClick={handleCalculate}
+                disabled={isSaving}
+              >
+                {t('survey.calculateScoreButton')}
+              </Button>
+            )}
           </Box>
         )}
       </Paper>
