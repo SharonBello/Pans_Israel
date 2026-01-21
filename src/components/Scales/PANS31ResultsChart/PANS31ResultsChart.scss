@@ -1,0 +1,60 @@
+// PANS31ResultsChart.scss
+// Styles for PANS 31 community statistics chart
+
+.pans31-results-chart {
+  direction: rtl;
+  margin: 1.5rem 0;
+  border-radius: 16px;
+  overflow: hidden;
+
+  // Ensure recharts works in RTL
+  .recharts-wrapper {
+    direction: ltr;
+  }
+
+  .recharts-legend-wrapper {
+    direction: rtl !important;
+  }
+
+  .stat-card {
+    text-align: center;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 2px solid;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    h4 {
+      font-weight: 700;
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 600px) {
+  .pans31-results-chart {
+    .recharts-wrapper {
+      font-size: 0.75rem;
+    }
+
+    .stat-card {
+      padding: 1rem;
+
+      h4 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
+
+// Print styles
+@media print {
+  .pans31-results-chart {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #e0e0e0;
+  }
+}

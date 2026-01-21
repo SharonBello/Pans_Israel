@@ -8,6 +8,15 @@ import ProfessionalsHelpPage from './pages/MedicalHelpPage/ProfessionalsHelpPage
 import PandasScalePage from './pages/SymptomsPage/scales/PANDASScale/PandasScalePage/PandasScalePage.tsx';
 import PandasScaleResultsPage from './pages/SymptomsPage/scales/PANDASScale/PandasScaleResultsPage/PandasScaleResultsPage.tsx';
 import PandasScaleHomePage from './pages/SymptomsPage/scales/PANDASScale/PandasScaleHomePage/PandasScaleHomePage.tsx';
+import KovacevicHomePage from './pages/SymptomsPage/scales/KovacevicScale/KovacevicHomePage/KovacevicHomePage.tsx';
+import KovacevicScalePage from './pages/SymptomsPage/scales/KovacevicScale/KovacevicScalePage/KovacevicScalePage.tsx';
+import KovacevicResultsPage from './pages/SymptomsPage/scales/KovacevicScale/KovacevicResultsPage/KovacevicResultsPage.tsx';
+import PTECHomePage from './pages/SymptomsPage/scales/PTECScale/PTECHomePage/PTECHomePage.tsx';
+import PTECScalePage from './pages/SymptomsPage/scales/PTECScale/PTECScalePage/PTECScalePage.tsx';
+import PTECResultsPage from './pages/SymptomsPage/scales/PTECScale/PTECResultsPage/PTECResultsPage.tsx';
+import PANS31HomePage from './pages/SymptomsPage/scales/PANS31Scale/PANS31HomePage/PANS31HomePage.tsx';
+import PANS31ScalePage from './pages/SymptomsPage/scales/PANS31Scale/PANS31ScalePage/PANS31ScalePage.tsx';
+import PANS31ResultsPage from './pages/SymptomsPage/scales/PANS31Scale/PANS31ResultsPage/PANS31ResultsPage.tsx';
 
 type AppRoute = {
   path: string;
@@ -46,6 +55,42 @@ const AppRoutes: AppRoute[] = [
   {
     path: '/scales/pandas/results',
     component: <PandasScaleResultsPage />,
+  },
+  {
+    path: '/scales/kovacevic',
+    component: <KovacevicHomePage />,
+  },
+  {
+    path: '/scales/kovacevic/form',
+    component: <KovacevicScalePage />,
+  },
+  {
+    path: '/scales/kovacevic/results',
+    component: <KovacevicResultsPage />,
+  },
+  {
+    path: '/scales/ptec',
+    component: <PTECHomePage />,
+  },
+  {
+    path: '/scales/ptec/form',
+    component: <PTECScalePage />,
+  },
+  {
+    path: '/scales/ptec/results',
+    component: <PTECResultsPage />,
+  },
+  {
+    path: '/scales/pans31',
+    component: <PANS31HomePage />,
+  },
+  {
+    path: '/scales/pans31/form',
+    component: <PANS31ScalePage />,
+  },
+  {
+    path: '/scales/pans31/results',
+    component: <PANS31ResultsPage />,
   },
 ];
 

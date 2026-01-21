@@ -1,0 +1,196 @@
+// PANS31ResultsPage.scss
+// Styles for PANS 31 results display
+
+.pans31-results-page {
+  padding: 2rem 1rem;
+  min-height: 100vh;
+  direction: rtl;
+
+  .total-score-card {
+    padding: 2rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+    text-align: center;
+
+    .score-display {
+      margin-bottom: 1rem;
+
+      h1 {
+        font-size: 5rem;
+        line-height: 1;
+
+        @media (max-width: 600px) {
+          font-size: 3.5rem;
+        }
+      }
+    }
+
+    .severity-badge {
+      display: inline-block;
+      padding: 0.5rem 2rem;
+      border-radius: 24px;
+      margin-bottom: 0.5rem;
+    }
+
+    .score-meter {
+      max-width: 400px;
+      margin: 1rem auto 0;
+
+      .meter-labels {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.25rem;
+      }
+    }
+  }
+
+  .high-severity-alert {
+    margin-bottom: 2rem;
+    border-radius: 12px;
+  }
+
+  .category-breakdown {
+    padding: 1.5rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+
+    .categories-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .category-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      @media (max-width: 600px) {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .category-info {
+        min-width: 160px;
+        display: flex;
+        justify-content: space-between;
+
+        @media (max-width: 600px) {
+          margin-bottom: 0.25rem;
+        }
+      }
+
+      .category-bar-container {
+        flex: 1;
+        position: relative;
+
+        .percent-label {
+          position: absolute;
+          left: 8px;
+          top: 50%;
+          transform: translateY(-50%);
+          color: white;
+          font-weight: bold;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        }
+      }
+    }
+  }
+
+  .detailed-breakdown {
+    padding: 1.5rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+
+    .category-header-row {
+      background: rgba(113, 125, 188, 0.1);
+
+      td {
+        padding: 0.5rem 1rem;
+      }
+    }
+
+    .high-severity-row {
+      background: rgba(255, 152, 0, 0.1);
+    }
+  }
+
+  .additional-data {
+    padding: 1.5rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+
+    .data-item {
+      text-align: center;
+      padding: 1rem;
+      background: rgba(113, 125, 188, 0.05);
+      border-radius: 8px;
+    }
+  }
+
+  .disclaimer {
+    margin-bottom: 1rem;
+    border-radius: 12px;
+  }
+
+  .attribution {
+    padding: 1rem;
+    border-radius: 8px;
+    background: rgba(113, 125, 188, 0.05);
+    text-align: center;
+    margin-bottom: 2rem;
+
+    a {
+      color: #717DBC;
+    }
+  }
+
+  .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+
+    button {
+      min-width: 150px;
+    }
+  }
+}
+
+// Print styles
+@media print {
+  .pans31-results-page {
+    .action-buttons {
+      display: none;
+    }
+
+    .total-score-card,
+    .category-breakdown,
+    .detailed-breakdown,
+    .additional-data {
+      box-shadow: none;
+      border: 1px solid #e0e0e0;
+      break-inside: avoid;
+    }
+
+    .attribution {
+      border: 1px solid #e0e0e0;
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 600px) {
+  .pans31-results-page {
+    .total-score-card {
+      padding: 1.5rem;
+    }
+
+    .detailed-breakdown {
+      .MuiTableCell-root {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,198 @@
+// PANS31HomePage.scss
+// Styles for PANS 31-Item Scale landing page
+
+.pans31-homepage {
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #f5f7ff 0%, #e8ebf7 100%);
+  direction: rtl;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__hero {
+    padding: 3rem 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, #ffffff 0%, #f9faff 100%);
+    border-radius: 16px;
+    position: relative;
+
+    .hero-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      align-items: center;
+      background: rgba(76, 175, 80, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+    }
+
+    .hero-icon {
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      color: #2d3436;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+
+      @media (max-width: 600px) {
+        font-size: 1.75rem;
+      }
+    }
+
+    .hero-subtitle {
+      color: #636e72;
+      margin-bottom: 1.5rem;
+
+      @media (max-width: 600px) {
+        font-size: 1rem;
+      }
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-bottom: 2rem;
+
+      @media (max-width: 600px) {
+        gap: 1.5rem;
+      }
+
+      .stat {
+        text-align: center;
+
+        h4 {
+          color: #717DBC;
+          font-weight: 700;
+          margin-bottom: 0.25rem;
+        }
+
+        span {
+          color: #636e72;
+          font-size: 0.75rem;
+        }
+      }
+    }
+
+    .start-button {
+      background: linear-gradient(135deg, #717DBC 0%, #8a94cc 100%);
+      padding: 1rem 3rem;
+      font-size: 1.1rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(113, 125, 188, 0.3);
+
+      &:hover {
+        background: linear-gradient(135deg, #5a6499 0%, #717DBC 100%);
+        box-shadow: 0 6px 20px rgba(113, 125, 188, 0.4);
+      }
+    }
+  }
+
+  &__validation {
+    border-radius: 12px;
+    border-right: 4px solid #4CAF50;
+  }
+
+  &__info {
+    padding: 2rem;
+    border-radius: 16px;
+    background: #ffffff;
+
+    .category-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+
+      .MuiChip-root {
+        background: rgba(113, 125, 188, 0.1);
+        color: #717DBC;
+      }
+    }
+
+    .rating-scale {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+
+      .rating-item {
+        flex: 1;
+        min-width: 100px;
+        padding: 0.75rem;
+        text-align: center;
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.02);
+
+        @media (max-width: 600px) {
+          min-width: 45%;
+        }
+      }
+    }
+  }
+
+  &__attribution {
+    padding: 1.5rem;
+    border-radius: 12px;
+    background: rgba(113, 125, 188, 0.05);
+    border: 1px solid rgba(113, 125, 188, 0.2);
+
+    a {
+      color: #717DBC;
+    }
+  }
+}
+
+// Disclaimer Modal
+.disclaimer-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 2rem);
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  direction: rtl;
+
+  .modal-title {
+    color: #2d3436;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .modal-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+
+    button {
+      min-width: 150px;
+    }
+  }
+}
+
+// Print styles
+@media print {
+  .pans31-homepage {
+    background: white;
+
+    &__hero {
+      box-shadow: none;
+      border: 1px solid #e0e0e0;
+    }
+  }
+}

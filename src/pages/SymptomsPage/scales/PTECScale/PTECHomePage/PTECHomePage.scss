@@ -1,0 +1,163 @@
+// PTECHomePage.scss
+// Styles for PTEC Scale landing page
+
+.ptec-homepage {
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #f0ffff 0%, #e0f7fa 100%);
+  direction: rtl;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__hero {
+    padding: 3rem 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, #ffffff 0%, #f5ffff 100%);
+    border-radius: 16px;
+
+    .hero-icon {
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      color: #2d3436;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+
+      @media (max-width: 600px) {
+        font-size: 1.75rem;
+      }
+    }
+
+    .hero-subtitle {
+      color: #636e72;
+      margin-bottom: 1rem;
+
+      @media (max-width: 600px) {
+        font-size: 1rem;
+      }
+    }
+
+    .hero-features {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+
+      .feature {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background: rgba(0, 206, 201, 0.1);
+        border-radius: 8px;
+      }
+    }
+
+    .start-button {
+      background: linear-gradient(135deg, #00CEC9 0%, #55eee8 100%);
+      padding: 1rem 3rem;
+      font-size: 1.1rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 206, 201, 0.3);
+
+      &:hover {
+        background: linear-gradient(135deg, #00b3ae 0%, #00CEC9 100%);
+        box-shadow: 0 6px 20px rgba(0, 206, 201, 0.4);
+      }
+    }
+  }
+
+  &__critical-disclaimer {
+    border-radius: 12px;
+    border-right: 4px solid #ff9800;
+  }
+
+  &__info {
+    padding: 2rem;
+    border-radius: 16px;
+    background: #ffffff;
+
+    .category-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+
+      .MuiChip-root {
+        background: rgba(0, 206, 201, 0.1);
+        color: #00807c;
+      }
+    }
+
+    .score-ranges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1rem;
+
+      .score-range {
+        flex: 1;
+        min-width: 80px;
+        padding: 0.75rem;
+        text-align: center;
+        border-radius: 8px;
+        border: 2px solid;
+        background: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
+}
+
+// Explanation Modal
+.explanation-modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(100% - 2rem);
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  direction: rtl;
+
+  .modal-title {
+    color: #2d3436;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .modal-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+
+    button {
+      min-width: 150px;
+    }
+  }
+}
+
+// Print styles
+@media print {
+  .ptec-homepage {
+    background: white;
+
+    &__hero {
+      box-shadow: none;
+      border: 1px solid #e0e0e0;
+    }
+  }
+}

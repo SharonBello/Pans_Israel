@@ -1,0 +1,219 @@
+// PTECScalePage.scss
+// Styles for PTEC Scale questionnaire
+
+.ptec-scale-page {
+  padding: 2rem 1rem;
+  min-height: 100vh;
+  direction: rtl;
+
+  .ptec-stepper {
+    margin: 1.5rem 0;
+
+    .MuiStepLabel-label {
+      font-size: 0.7rem;
+
+      @media (max-width: 600px) {
+        font-size: 0.6rem;
+      }
+    }
+  }
+
+  .ptec-form {
+    padding: 2rem;
+    border-radius: 16px;
+    margin-bottom: 2rem;
+
+    @media (max-width: 600px) {
+      padding: 1rem;
+    }
+
+    .step-title {
+      color: #00CEC9;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid rgba(0, 206, 201, 0.2);
+    }
+
+    .step-content {
+      min-height: 400px;
+    }
+
+    // Patient Info styles
+    .patient-info {
+      .MuiFormControl-root {
+        margin-bottom: 0.5rem;
+      }
+
+      .MuiFormLabel-root {
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+      }
+    }
+
+    // Symptoms styles
+    .symptoms-step {
+      .category-section {
+        margin-bottom: 2rem;
+
+        .category-title {
+          color: #2d3436;
+          font-weight: 600;
+          margin-bottom: 1rem;
+          padding: 0.5rem 1rem;
+          background: linear-gradient(135deg, rgba(0, 206, 201, 0.1) 0%, rgba(0, 206, 201, 0.05) 100%);
+          border-radius: 8px;
+          border-right: 3px solid #00CEC9;
+        }
+
+        .symptoms-list {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+      }
+
+      .symptom-item {
+        display: flex;
+        flex-direction: column;
+        padding: 0.75rem 1rem;
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.02);
+        transition: background 0.2s ease;
+
+        &:hover {
+          background: rgba(0, 206, 201, 0.05);
+        }
+
+        @media (min-width: 768px) {
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .symptom-label {
+          flex: 1;
+          margin-bottom: 0.5rem;
+          font-weight: 500;
+
+          @media (min-width: 768px) {
+            margin-bottom: 0;
+            margin-left: 1rem;
+          }
+        }
+
+        .symptom-rating {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 0.25rem;
+
+          .MuiFormControlLabel-root {
+            margin: 0;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            transition: background 0.2s ease;
+
+            .MuiFormControlLabel-label {
+              font-size: 0.75rem;
+            }
+
+            &:hover {
+              background: rgba(0, 206, 201, 0.1);
+            }
+          }
+
+          // Rating colors
+          .rating-0 {
+            .Mui-checked + .MuiFormControlLabel-label {
+              color: #4CAF50;
+            }
+          }
+
+          .rating-1 {
+            .Mui-checked + .MuiFormControlLabel-label {
+              color: #8BC34A;
+            }
+          }
+
+          .rating-2 {
+            .Mui-checked + .MuiFormControlLabel-label {
+              color: #FFC107;
+            }
+          }
+
+          .rating-3 {
+            .Mui-checked + .MuiFormControlLabel-label {
+              color: #F44336;
+            }
+          }
+        }
+      }
+    }
+
+    .navigation-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+      button {
+        min-width: 120px;
+      }
+    }
+  }
+}
+
+// RTL adjustments
+[dir='rtl'] {
+  .ptec-scale-page {
+    .MuiStepper-root {
+      direction: ltr;
+
+      .MuiStepConnector-line {
+        border-color: rgba(0, 206, 201, 0.3);
+      }
+    }
+
+    .navigation-buttons {
+      flex-direction: row-reverse;
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 600px) {
+  .ptec-scale-page {
+    .ptec-form {
+      .symptom-item {
+        .symptom-rating {
+          .MuiFormControlLabel-root {
+            flex: 1 1 45%;
+
+            .MuiFormControlLabel-label {
+              font-size: 0.65rem;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// Print styles
+@media print {
+  .ptec-scale-page {
+    .ptec-stepper {
+      display: none;
+    }
+
+    .ptec-form {
+      box-shadow: none;
+      border: 1px solid #e0e0e0;
+
+      .navigation-buttons {
+        display: none;
+      }
+    }
+  }
+}

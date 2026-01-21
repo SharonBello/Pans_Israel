@@ -1,0 +1,189 @@
+// KovacevicResultsPage.scss
+// Styles for Kovacevic diagnosis results
+
+.kovacevic-results-page {
+    padding: 2rem 1rem;
+    min-height: 100vh;
+    direction: rtl;
+
+    .diagnosis-card {
+        padding: 2rem;
+        border-radius: 16px;
+        margin-bottom: 2rem;
+        text-align: center;
+
+        .diagnosis-header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .confidence-breakdown {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 1.5rem;
+            border-radius: 12px;
+
+            .confidence-bar {
+                display: flex;
+                height: 40px;
+                border-radius: 8px;
+                overflow: hidden;
+                margin-bottom: 1rem;
+
+                .bar-section {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    font-weight: bold;
+                    font-size: 0.875rem;
+                    transition: width 0.5s ease;
+
+                    &.symptoms {
+                        background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+                    }
+
+                    &.treatment {
+                        background: linear-gradient(135deg, #00cec9 0%, #55eee8 100%);
+                    }
+
+                    &.labs {
+                        background: linear-gradient(135deg, #fdcb6e 0%, #f9e79f 100%);
+                        color: #2d3436;
+                    }
+
+                    &.margin {
+                        background: linear-gradient(135deg, #b2bec3 0%, #dfe6e9 100%);
+                        color: #2d3436;
+                    }
+                }
+            }
+
+            .confidence-legend {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.5rem;
+
+                .chip {
+                    &.symptoms {
+                        background: #6c5ce7;
+                        color: white;
+                    }
+
+                    &.treatment {
+                        background: #00cec9;
+                        color: white;
+                    }
+
+                    &.labs {
+                        background: #fdcb6e;
+                        color: #2d3436;
+                    }
+
+                    &.margin {
+                        background: #b2bec3;
+                        color: #2d3436;
+                    }
+                }
+            }
+        }
+    }
+
+    .criteria-summary {
+        padding: 1.5rem;
+        border-radius: 16px;
+        margin-bottom: 2rem;
+
+        .criteria-box {
+            text-align: center;
+            padding: 1rem;
+            background: rgba(108, 92, 231, 0.05);
+            border-radius: 12px;
+        }
+    }
+
+    .detailed-breakdown {
+        padding: 1.5rem;
+        border-radius: 16px;
+        margin-bottom: 2rem;
+
+        .section {
+            margin-bottom: 1rem;
+        }
+
+        .MuiTable-root {
+            .MuiTableCell-root {
+                padding: 0.75rem 1rem;
+                text-align: right;
+
+                &:last-child {
+                    text-align: center;
+                }
+            }
+
+            .MuiTableRow-root:nth-child(even) {
+                background-color: rgba(108, 92, 231, 0.03);
+            }
+        }
+    }
+
+    .disclaimer {
+        margin-bottom: 2rem;
+        border-radius: 12px;
+    }
+
+    .action-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+
+        button {
+            min-width: 150px;
+        }
+    }
+}
+
+// Print styles
+@media print {
+    .kovacevic-results-page {
+        .action-buttons {
+            display: none;
+        }
+
+        .diagnosis-card,
+        .criteria-summary,
+        .detailed-breakdown {
+            box-shadow: none;
+            border: 1px solid #e0e0e0;
+            break-inside: avoid;
+        }
+    }
+}
+
+// Responsive
+@media (max-width: 600px) {
+    .kovacevic-results-page {
+        .diagnosis-card {
+            padding: 1rem;
+
+            .confidence-bar {
+                height: 30px;
+                font-size: 0.75rem;
+            }
+        }
+
+        .criteria-summary {
+            .criteria-box {
+                padding: 0.75rem;
+
+                h4 {
+                    font-size: 1.5rem;
+                }
+            }
+        }
+    }
+}

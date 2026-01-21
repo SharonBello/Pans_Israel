@@ -1,0 +1,156 @@
+// ============================================================================
+// Criterion Item Component Styles
+// ============================================================================
+
+.criterion-item {
+  padding: 1.25rem;
+  margin-bottom: 1rem;
+  background: #fafbfc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #cbd5e0;
+    background: #fff;
+  }
+
+  &__label {
+    display: block;
+    font-weight: 500;
+    color: #2d3748;
+    margin-bottom: 0.75rem;
+    line-height: 1.6;
+    font-size: 0.95rem;
+
+    .required-mark {
+      color: #e53e3e;
+      margin-right: 0.25rem;
+    }
+  }
+
+  &__note {
+    display: block;
+    color: #718096;
+    margin-bottom: 0.75rem;
+    font-style: italic;
+  }
+
+  &__response {
+    margin-bottom: 0.5rem;
+
+    .response-buttons {
+      width: 100%;
+      display: flex;
+      gap: 0.5rem;
+
+      .response-btn {
+        flex: 1;
+        padding: 0.5rem 1rem;
+        font-weight: 500;
+        border-radius: 6px !important;
+        border: 1px solid #e2e8f0 !important;
+        transition: all 0.2s ease;
+
+        &--yes {
+          &.Mui-selected {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            border-color: #38a169 !important;
+          }
+        }
+
+        &--no {
+          &.Mui-selected {
+            background: linear-gradient(135deg, #fc8181 0%, #f56565 100%);
+            color: white;
+            border-color: #f56565 !important;
+          }
+        }
+
+        &--unknown {
+          &.Mui-selected {
+            background: linear-gradient(135deg, #a0aec0 0%, #718096 100%);
+            color: white;
+            border-color: #718096 !important;
+          }
+        }
+      }
+    }
+  }
+
+  &__severity {
+    margin-top: 1rem;
+    padding: 1rem;
+    background: rgba(102, 126, 234, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+
+    .severity-label {
+      margin-bottom: 0.75rem;
+      color: #4a5568;
+
+      strong {
+        color: #667eea;
+      }
+    }
+
+    .severity-slider {
+      color: #667eea;
+      padding: 0 0.5rem;
+
+      .MuiSlider-markLabel {
+        font-size: 0.75rem;
+        color: #718096;
+      }
+
+      .MuiSlider-thumb {
+        width: 20px;
+        height: 20px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+
+        &:hover,
+        &.Mui-focusVisible {
+          box-shadow: 0 0 0 8px rgba(102, 126, 234, 0.16);
+        }
+      }
+
+      .MuiSlider-track {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+      }
+
+      .MuiSlider-rail {
+        background: #e2e8f0;
+      }
+
+      .MuiSlider-mark {
+        background: #cbd5e0;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+      }
+
+      .MuiSlider-markActive {
+        background: white;
+      }
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 480px) {
+  .criterion-item {
+    padding: 1rem;
+
+    &__response {
+      .response-buttons {
+        flex-direction: column;
+
+        .response-btn {
+          padding: 0.75rem;
+        }
+      }
+    }
+  }
+}
