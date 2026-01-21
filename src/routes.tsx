@@ -17,6 +17,9 @@ import PTECResultsPage from './pages/SymptomsPage/scales/PTECScale/PTECResultsPa
 import PANS31HomePage from './pages/SymptomsPage/scales/PANS31Scale/PANS31HomePage/PANS31HomePage.tsx';
 import PANS31ScalePage from './pages/SymptomsPage/scales/PANS31Scale/PANS31ScalePage/PANS31ScalePage.tsx';
 import PANS31ResultsPage from './pages/SymptomsPage/scales/PANS31Scale/PANS31ResultsPage/PANS31ResultsPage.tsx';
+import CBIHomePage from './pages/SymptomsPage/scales/CbiScale/CBIHomePage/CBIHomePage.tsx';
+import CBIScalePage from './pages/SymptomsPage/scales/CbiScale/CBIScalePage/CBIScalePage.tsx';
+import CBIResultsPage from './pages/SymptomsPage/scales/CbiScale/CBIResultsPage/CBIResultsPage.tsx';
 
 type AppRoute = {
   path: string;
@@ -91,6 +94,18 @@ const AppRoutes: AppRoute[] = [
   {
     path: '/scales/pans31/results',
     component: <PANS31ResultsPage />,
+  },
+  {
+    path: '/scales/cbi', 
+    component: < CBIHomePage />,
+  },
+  {
+    path: '/scales/cbi/form', 
+    component: <CBIScalePage />,
+    },
+  {
+    path: '/scales/cbi/results', 
+    component: <CBIResultsPage />,
   },
 ];
 

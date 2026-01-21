@@ -1,39 +1,37 @@
-@use "../../styles/abstracts" as *;
+// SymptomsPage.scss
+// Styles for Symptoms page with scales and tabbed community charts
 
 .symptoms-page {
-    padding: 0;
+    padding: 2rem 1rem;
     min-height: 100vh;
+    direction: rtl;
 
-    // Header Section
+    // Header
     &__header {
         text-align: center;
+        margin-bottom: 2rem;
 
         h1 {
+            color: #2d3436;
             font-weight: 700;
-            font-size: clamp(1.75rem, 4vw, 3rem);
         }
     }
 
-    // Disclaimer Alert
+    // Disclaimer
     &__disclaimer {
-        font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-
-        .MuiAlert-message {
-            width: 100%;
-        }
+        margin-bottom: 2rem;
+        border-radius: 12px;
     }
 
-    // Cards Grid
+    // Scale Cards Grid
     &__grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
 
-        @media (min-width: 768px) {
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        }
-
-        @media (min-width: 1200px) {
-            grid-template-columns: repeat(3, 1fr);
+        @media (max-width: 600px) {
+            grid-template-columns: 1fr;
         }
     }
 }
@@ -42,86 +40,176 @@
 .scale-card {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    border-radius: 12px;
     transition: all 0.3s ease;
-    overflow: hidden;
 
-    &:hover:not(&--disabled) {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
 
-    // Disabled state
     &--disabled {
-        opacity: 0.6;
-        cursor: not-allowed;
+        opacity: 0.7;
 
-        .scale-card__content {
-            background-color: rgba(0, 0, 0, 0.02);
+        &:hover {
+            transform: none;
+            box-shadow: none;
         }
     }
 
-    // Card Content
-    &__content {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-    }
-
-    // Header with icon and status
     &__header {
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-start;
+        margin-bottom: 1rem;
     }
 
-    // Icon
     &__icon {
         font-size: 2.5rem;
+
+        &--locked {
+            color: #bdc3c7;
+        }
+
+        &--active {
+            // Color set inline
+        }
     }
 
-    // Status chip
     &__status {
-        font-size: 0.75rem;
-        font-weight: 600;
+        font-size: 0.7rem;
     }
 
-    // Title
+    &__content {
+        flex: 1;
+    }
+
     &__title {
         font-weight: 600;
-        font-size: clamp(1.25rem, 2vw, 1.5rem);
+        margin-bottom: 0.5rem;
+        color: #2d3436;
     }
 
-    // Description
     &__description {
-        flex: 1;
         line-height: 1.6;
-        font-size: clamp(0.9rem, 1.5vw, 1rem);
     }
 
-    // Actions
     &__actions {
-        background-color: rgba(0, 0, 0, 0.01);
+        padding: 1rem;
+        padding-top: 0;
     }
 
-    // Button
     &__button {
+        border-radius: 8px;
         font-weight: 600;
         text-transform: none;
-        font-size: clamp(0.9rem, 1.5vw, 1rem);
+    }
+}
 
-        &:not(:disabled) {
-            &:hover {
-                transform: scale(1.02);
+// Chart Tabs Section
+.chart-tab-content {
+    min-height: 400px;
+    background: #fafafa;
+    border-radius: 0 0 16px 16px;
+    padding: 1rem;
+
+    @media (max-width: 600px) {
+        padding: 0.5rem;
+    }
+}
+
+// MUI Tabs RTL adjustments
+.MuiTabs-root {
+    direction: rtl;
+
+    .MuiTabs-scroller {
+        direction: rtl;
+    }
+
+    .MuiTabs-flexContainer {
+        direction: rtl;
+    }
+
+    .MuiTab-root {
+        direction: rtl;
+
+        .MuiTab-iconWrapper {
+            margin-left: 8px;
+            margin-right: 0;
+        }
+    }
+}
+
+// Scrollable tabs on mobile
+@media (max-width: 600px) {
+    .MuiTabs-root {
+        .MuiTab-root {
+            min-width: auto;
+            padding: 12px 12px;
+            font-size: 0.8rem;
+
+            .MuiTab-iconWrapper {
+                margin-left: 4px;
             }
         }
     }
 }
 
+// Community Results (legacy support)
+.community-results {
+    margin-bottom: 2rem;
+}
 
-// RTL Support
-[dir="rtl"] {
-    .scale-card__header {
-        flex-direction: row-reverse;
+// Responsive adjustments
+@media (max-width: 900px) {
+    .symptoms-page {
+        &__grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .symptoms-page {
+        padding: 1rem 0.5rem;
+
+        &__grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+    }
+
+    .scale-card {
+        &__icon {
+            font-size: 2rem;
+        }
+
+        &__title {
+            font-size: 1.1rem;
+        }
+    }
+}
+
+// Print styles
+@media print {
+    .symptoms-page {
+        &__grid {
+            display: block;
+
+            .scale-card {
+                break-inside: avoid;
+                margin-bottom: 1rem;
+                box-shadow: none;
+                border: 1px solid #e0e0e0;
+            }
+        }
+    }
+
+    .MuiTabs-root {
+        display: none;
+    }
+
+    .chart-tab-content {
+        display: none;
     }
 }

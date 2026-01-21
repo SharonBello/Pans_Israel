@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, lazy, Suspense } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import {
@@ -12,6 +12,9 @@ import {
   Alert,
   Chip,
   Divider,
+  Tabs,
+  Tab,
+  CircularProgress,
 } from '@mui/material';
 import {
   Assessment,
@@ -19,14 +22,16 @@ import {
   Science,
   Timeline,
   Verified as VerifiedIcon,
+  Favorite as HeartIcon,
 } from '@mui/icons-material';
 import './SymptomsPage.scss';
 
-// Import all chart components
-import ScaleResultsChart from './scales/ScaleResultsChart/ScaleResultsChart';
-import KovacevicResultsChart from '@/components/Scales/KovacevicResultsChart/KovacevicResultsChart';
-import PTECResultsChart from '@/components/Scales/PTECResultsChart/PTECResultsChart';
-import PANS31ResultsChart from '@/components/Scales/PANS31ResultsChart/PANS31ResultsChart';
+// Lazy load chart components for better performance
+const ScaleResultsChart = lazy(() => import('./scales/ScaleResultsChart/ScaleResultsChart'));
+const KovacevicResultsChart = lazy(() => import('../../components/Scales/KovacevicResultsChart/KovacevicResultsChart'));
+const PTECResultsChart = lazy(() => import('../../components/Scales/PTECResultsChart/PTECResultsChart'));
+const PANS31ResultsChart = lazy(() => import('../../components/Scales/PANS31ResultsChart/PANS31ResultsChart'));
+const CBIResultsChart = lazy(() => import('../../components/Scales/CBIResultsChart/CBIResultsChart'));
 
 interface ScaleCard {
   id: string;
@@ -35,14 +40,16 @@ interface ScaleCard {
   route: string;
   available: boolean;
   status: 'available' | 'coming-soon';
-  icon?: 'assessment' | 'science' | 'timeline' | 'verified' | 'lock';
+  icon?: 'assessment' | 'science' | 'timeline' | 'verified' | 'heart' | 'lock';
   color?: string;
   validated?: boolean;
+  forParents?: boolean;
 }
 
 const SymptomsPage: React.FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [activeChartTab, setActiveChartTab] = useState(0);
 
   const scales: ScaleCard[] = [
     {
@@ -55,6 +62,18 @@ const SymptomsPage: React.FC = () => {
       icon: 'verified',
       color: '#717DBC',
       validated: true,
+    },
+    {
+      id: 'cbi',
+      title: 'שאלון עומס המטפל (CBI)',
+      description: 'הערכת העומס הרגשי, הפיזי והחברתי של הורים - מאומת ל-PANS (Farmer et al., 2018)',
+      route: '/scales/cbi',
+      available: true,
+      status: 'available',
+      icon: 'heart',
+      color: '#9B59B6',
+      validated: true,
+      forParents: true,
     },
     {
       id: 'pandas',
@@ -89,14 +108,6 @@ const SymptomsPage: React.FC = () => {
       icon: 'timeline',
       color: '#00CEC9',
     },
-    {
-      id: 'cunningham',
-      title: t('symptoms.cunninghamScale.title', 'פאנל קנינגהאם'),
-      description: 'בדיקת דם לנוגדנים עצמיים - מידע בלבד (לא שאלון)',
-      route: '/scales/cunningham',
-      available: false,
-      status: 'coming-soon',
-    },
   ];
 
   const handleStartScale = (scale: ScaleCard) => {
@@ -118,6 +129,8 @@ const SymptomsPage: React.FC = () => {
         return <Science className="scale-card__icon scale-card__icon--active" sx={iconStyle} />;
       case 'timeline':
         return <Timeline className="scale-card__icon scale-card__icon--active" sx={iconStyle} />;
+      case 'heart':
+        return <HeartIcon className="scale-card__icon scale-card__icon--active" sx={iconStyle} />;
       case 'assessment':
       default:
         return <Assessment className="scale-card__icon scale-card__icon--active" sx={iconStyle} />;
@@ -166,6 +179,17 @@ const SymptomsPage: React.FC = () => {
                       sx={{
                         backgroundColor: 'rgba(76, 175, 80, 0.1)',
                         color: '#4CAF50',
+                        fontWeight: 'bold',
+                      }}
+                    />
+                  )}
+                  {scale.forParents && (
+                    <Chip
+                      label="להורים"
+                      size="small"
+                      sx={{
+                        backgroundColor: 'rgba(155, 89, 182, 0.1)',
+                        color: '#9B59B6',
                         fontWeight: 'bold',
                       }}
                     />
@@ -228,30 +252,82 @@ const SymptomsPage: React.FC = () => {
         ))}
       </Box>
 
-      {/* Community Statistics Section */}
+      {/* Community Statistics Section - Tabbed Layout */}
       <Box sx={{ mt: 6 }}>
         <Divider sx={{ mb: 4 }}>
           <Chip label="סטטיסטיקות קהילתיות" />
         </Divider>
 
-        {/* PANS 31 Scale Community Results - Featured first as validated */}
-        <Box sx={{ mb: 4 }} className="community-results">
-          <PANS31ResultsChart />
+        {/* Chart Tabs */}
+        <Box sx={{ borderBottom: 1, borderColor: 'divider', mb: 3 }}>
+          <Tabs
+            value={activeChartTab}
+            onChange={(_, newValue) => setActiveChartTab(newValue)}
+            variant="scrollable"
+            scrollButtons="auto"
+            allowScrollButtonsMobile
+            sx={{
+              '& .MuiTab-root': {
+                fontWeight: 600,
+                minHeight: 56,
+              },
+              '& .Mui-selected': {
+                color: '#717DBC',
+              },
+              '& .MuiTabs-indicator': {
+                backgroundColor: '#717DBC',
+                height: 3,
+              },
+            }}
+          >
+            <Tab
+              label="PANS 31"
+              icon={<VerifiedIcon sx={{ fontSize: 18 }} />}
+              iconPosition="start"
+              sx={{ color: '#717DBC' }}
+            />
+            <Tab
+              label="עומס המטפל (CBI)"
+              icon={<HeartIcon sx={{ fontSize: 18 }} />}
+              iconPosition="start"
+              sx={{ color: '#9B59B6' }}
+            />
+            <Tab
+              label="PANDAS"
+              icon={<Assessment sx={{ fontSize: 18 }} />}
+              iconPosition="start"
+              sx={{ color: '#6C5CE7' }}
+            />
+            <Tab
+              label="קובאצ'ביץ'"
+              icon={<Science sx={{ fontSize: 18 }} />}
+              iconPosition="start"
+              sx={{ color: '#E17055' }}
+            />
+            <Tab
+              label="PTEC"
+              icon={<Timeline sx={{ fontSize: 18 }} />}
+              iconPosition="start"
+              sx={{ color: '#00CEC9' }}
+            />
+          </Tabs>
         </Box>
 
-        {/* PANDAS Scale Community Results */}
-        <Box sx={{ mb: 4 }} className="community-results">
-          <ScaleResultsChart />
-        </Box>
-
-        {/* Kovacevic Scale Community Results */}
-        <Box sx={{ mb: 4 }} className="community-results">
-          <KovacevicResultsChart />
-        </Box>
-
-        {/* PTEC Scale Community Results */}
-        <Box sx={{ mb: 4 }} className="community-results">
-          <PTECResultsChart />
+        {/* Chart Content */}
+        <Box className="chart-tab-content">
+          <Suspense
+            fallback={
+              <Box sx={{ display: 'flex', justifyContent: 'center', py: 8 }}>
+                <CircularProgress sx={{ color: '#717DBC' }} />
+              </Box>
+            }
+          >
+            {activeChartTab === 0 && <PANS31ResultsChart />}
+            {activeChartTab === 1 && <CBIResultsChart />}
+            {activeChartTab === 2 && <ScaleResultsChart />}
+            {activeChartTab === 3 && <KovacevicResultsChart />}
+            {activeChartTab === 4 && <PTECResultsChart />}
+          </Suspense>
         </Box>
       </Box>
     </Container>
