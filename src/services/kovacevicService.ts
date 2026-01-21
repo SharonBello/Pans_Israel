@@ -337,7 +337,13 @@ export interface KovacevicAggregatedData {
 export function aggregateKovacevicResults(
     results: KovacevicResultDocument[]
 ): KovacevicAggregatedData {
-    if (results.length === 0) {
+    // Filter/normalize: skip docs that don't have the minimum structure we need
+    const validResults: KovacevicResultDocument[] = results.filter(
+        (r: KovacevicResultDocument): boolean =>
+            Boolean(r?.diagnosis?.formula) && Boolean(r?.formData)
+    );
+
+    if (validResults.length === 0) {
         return {
             count: 0,
             formulaCounts: { formula1: 0, formula2: 0, partial: 0, not_met: 0, inconclusive: 0 },
@@ -347,38 +353,58 @@ export function aggregateKovacevicResults(
         };
     }
 
-    const count = results.length;
+    const count: number = validResults.length;
 
-    // Count formulas
+    // Count formulas safely
     const formulaCounts: Record<DiagnosisFormula, number> = {
         formula1: 0,
         formula2: 0,
         partial: 0,
         not_met: 0,
-        inconclusive: 0, // include only if DiagnosisFormula includes it
+        inconclusive: 0,
     };
-    results.forEach((r) => {
-        formulaCounts[r.diagnosis.formula as keyof typeof formulaCounts]++;
+
+    validResults.forEach((r: KovacevicResultDocument) => {
+        const formula: DiagnosisFormula = r.diagnosis.formula;
+        formulaCounts[formula] += 1;
     });
 
-    // Sum criteria met
-    const criteriaSums = { mandatory: 0, core: 0, secondaryGroup1: 0, secondaryGroup2: 0 };
-    results.forEach((r) => {
-        criteriaSums.mandatory += r.diagnosis.criteriaMet.mandatory ? 1 : 0;
-        criteriaSums.core += r.diagnosis.criteriaMet.coreCount;
-        criteriaSums.secondaryGroup1 += r.diagnosis.criteriaMet.secondaryGroup1Count;
-        criteriaSums.secondaryGroup2 += r.diagnosis.criteriaMet.secondaryGroup2Count;
+    // Sum criteria met safely (handle older docs missing criteriaMet)
+    const criteriaSums: { mandatory: number; core: number; secondaryGroup1: number; secondaryGroup2: number } = {
+        mandatory: 0,
+        core: 0,
+        secondaryGroup1: 0,
+        secondaryGroup2: 0,
+    };
+
+    validResults.forEach((r: KovacevicResultDocument) => {
+        const criteriaMet = r.diagnosis?.criteriaMet;
+
+        // If criteriaMet is missing (older docs), treat as zeroes instead of crashing
+        const mandatoryVal: number = criteriaMet?.mandatory ? 1 : 0;
+        const coreVal: number = typeof criteriaMet?.coreCount === 'number' ? criteriaMet.coreCount : 0;
+        const g1Val: number =
+            typeof criteriaMet?.secondaryGroup1Count === 'number' ? criteriaMet.secondaryGroup1Count : 0;
+        const g2Val: number =
+            typeof criteriaMet?.secondaryGroup2Count === 'number' ? criteriaMet.secondaryGroup2Count : 0;
+
+        criteriaSums.mandatory += mandatoryVal;
+        criteriaSums.core += coreVal;
+        criteriaSums.secondaryGroup1 += g1Val;
+        criteriaSums.secondaryGroup2 += g2Val;
     });
 
-    // Treatment responses
-    let antibioticsYes = 0;
-    let steroidsYes = 0;
-    results.forEach((r) => {
-        if (r.formData.additional.treatmentResponse.antibioticsResponse === 'yes') antibioticsYes++;
-        if (r.formData.additional.treatmentResponse.steroidsResponse === 'yes') steroidsYes++;
+    // Treatment responses safely
+    let antibioticsYes: number = 0;
+    let steroidsYes: number = 0;
+
+    validResults.forEach((r: KovacevicResultDocument) => {
+        const tr = r.formData?.additional?.treatmentResponse;
+        if (tr?.antibioticsResponse === 'yes') antibioticsYes += 1;
+        if (tr?.steroidsResponse === 'yes') steroidsYes += 1;
     });
 
-    // Lab results distribution
+    // Lab results distribution safely
     type LabOverall = KovacevicFormData['additional']['labResults']['overallResult'];
 
     const labDist: Record<LabOverall, number> = {
@@ -388,8 +414,9 @@ export function aggregateKovacevicResults(
         not_tested: 0,
     };
 
-    results.forEach((r) => {
-        const key: LabOverall = r.formData.additional.labResults.overallResult;
+    validResults.forEach((r: KovacevicResultDocument) => {
+        const overall: LabOverall | undefined = r.formData?.additional?.labResults?.overallResult;
+        const key: LabOverall = overall ?? 'not_tested';
         labDist[key] += 1;
     });
 
