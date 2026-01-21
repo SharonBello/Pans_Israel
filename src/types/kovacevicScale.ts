@@ -7,6 +7,8 @@
  * Rating values for symptom presence
  */
 export type SymptomPresence = 'yes' | 'no' | 'unknown';
+export type CriterionResponse = 'yes' | 'no' | 'unknown';
+export type SeverityRating = 0 | 1 | 2 | 3 | 4 | 5;
 
 /**
  * Mandatory Criterion - Sudden Onset
@@ -216,6 +218,20 @@ export const KOVACEVIC_LABELS = {
             title: 'עומד באופן חלקי',
             description: 'חלק מהקריטריונים התמלאו - מומלץ להתייעץ עם מומחה',
         },
+    },
+    responses: {
+        yes: 'כן',
+        no: 'לא',
+        unknown: 'לא בטוח/ה',
+    },
+
+    severity: {
+        0: '0',
+        1: '1',
+        2: '2',
+        3: '3',
+        4: '4',
+        5: '5',
     },
 } as const;
 

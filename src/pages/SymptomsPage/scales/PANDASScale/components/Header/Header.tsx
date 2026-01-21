@@ -2,7 +2,6 @@ import React from 'react';
 import { AppBar, Toolbar, Typography, Box, IconButton } from '@mui/material';
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 import './Header.scss';
-import { ReactComponent as Logo } from '../../styles/icons/pandas_logo.svg';
 
 const Header: React.FC = () => {
   return (
@@ -15,7 +14,7 @@ const Header: React.FC = () => {
         <Box className="header-left">
         
           <IconButton edge="start" color="inherit" aria-label="logo" className="header-logo-button">
-            <Logo className="header-logo" width={32} height={32} />
+            🧠
           </IconButton>
          
         <Typography variant="h6" component="div" className="header-title">
