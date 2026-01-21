@@ -61,9 +61,14 @@ const CBIScalePage: React.FC = () => {
 
   // Calculate progress
   const totalItems = 24;
-  const answeredItems = Object.values(formData.items).reduce((count, subscale) => {
-    return count + Object.values(subscale).filter((v) => v > 0).length;
-  }, 0);
+  const answeredItems: number = Object.values(formData.items).reduce(
+    (count: number, subscale: Record<string, FrequencyRating>) => {
+      const values: FrequencyRating[] = Object.values(subscale) as FrequencyRating[];
+      return count + values.filter((v: FrequencyRating) => v > 0).length;
+    },
+    0
+  );
+
   const progress = (answeredItems / totalItems) * 100;
 
   // Handle item rating change
@@ -275,7 +280,8 @@ const CBIScalePage: React.FC = () => {
         <LinearProgress
           variant="determinate"
           value={(activeStep / totalSteps) * 100}
-          sx={{ height: 8, borderRadius: 4, backgroundColor: 'rgba(155, 89, 182, 0.2)',
+          sx={{
+            height: 8, borderRadius: 4, backgroundColor: 'rgba(155, 89, 182, 0.2)',
             '& .MuiLinearProgress-bar': { backgroundColor: '#9B59B6' }
           }}
         />

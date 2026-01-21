@@ -12,7 +12,7 @@ import {
   type DocumentData,
 } from 'firebase/firestore';
 import { db } from '../config/firebase';
-import { CATEGORY_LABELS, MAX_SCORES, type PTECFormData, type PTECScores, type PTECSymptomData } from '@/types/ptecScale';
+import { CATEGORY_LABELS, MAX_SCORES, type PTECFormData, type PTECScores, type PTECSymptomData, type PtecSymptomRating } from '@/types/ptecScale';
 
 // ============================================================================
 // Firestore Document Structure
@@ -33,8 +33,9 @@ export interface PTECResultDocument {
 /**
  * Sum all symptom ratings in an object
  */
-function sumRatings(symptoms: Record<string, SymptomRating>): number {
-  return Object.values(symptoms).reduce((sum, rating) => sum + rating, 0);
+function sumRatings<T extends object>(symptoms: T): number {
+  const ratings: PtecSymptomRating[] = Object.values(symptoms) as PtecSymptomRating[];
+  return ratings.reduce((sum: number, rating: PtecSymptomRating) => sum + rating, 0);
 }
 
 /**
@@ -108,11 +109,12 @@ export function comparePTECScores(
   const categories = Object.keys(CATEGORY_LABELS) as (keyof typeof CATEGORY_LABELS)[];
 
   return categories.map((cat) => {
-    const beforeScore = before[cat];
-    const afterScore = after[cat];
-    const change = afterScore - beforeScore;
-    const maxScore = MAX_SCORES[cat];
-    const percentChange = maxScore > 0 ? Math.round((change / maxScore) * 100) : 0;
+    const beforeScore: number = before[cat] ?? 0;
+    const afterScore: number = after[cat] ?? 0;
+    const change: number = afterScore - beforeScore;
+
+    const maxScore: number = MAX_SCORES[cat] ?? 0;
+    const percentChange: number = maxScore > 0 ? Math.round((change / maxScore) * 100) : 0;
 
     return {
       category: CATEGORY_LABELS[cat],
@@ -255,9 +257,23 @@ export interface PTECAggregatedData {
 
 export function aggregatePTECResults(results: PTECResultDocument[]): PTECAggregatedData {
   if (results.length === 0) {
+    const averageScores: PTECScores = {
+      behaviorMood: 0,
+      ocd: 0,
+      anxiety: 0,
+      foodIntake: 0,
+      tics: 0,
+      cognitive: 0,
+      sensory: 0,
+      other: 0,
+      sleep: 0,
+      health: 0,
+      total: 0,
+    };
+
     return {
       count: 0,
-      averageScores: { ...MAX_SCORES, total: 0 },
+      averageScores,
       scoreDistribution: { minimal: 0, mild: 0, moderate: 0, severe: 0, extreme: 0 },
       flareStatusDistribution: { ongoing_flare: 0, new_flare: 0, no_flare: 0 },
       diagnosisDistribution: { pans: 0, pandas: 0, other: 0, undiagnosed: 0 },
@@ -297,10 +313,10 @@ export function aggregatePTECResults(results: PTECResultDocument[]): PTECAggrega
     scoreDistribution[severity.level]++;
 
     // Flare status
-    flareStatusDistribution[r.formData.patientInfo.flareStatus]++;
+    flareStatusDistribution[r.formData.patientInfo.flareStatus]++
 
     // Diagnosis
-    diagnosisDistribution[r.formData.patientInfo.diagnosis]++;
+    diagnosisDistribution[r.formData.patientInfo.diagnosis]++
   });
 
   // Calculate averages

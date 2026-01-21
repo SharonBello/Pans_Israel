@@ -10,99 +10,67 @@ export type SymptomPresence = 'yes' | 'no' | 'unknown';
 export type CriterionResponse = 'yes' | 'no' | 'unknown';
 export type SeverityRating = 0 | 1 | 2 | 3 | 4 | 5;
 
+export interface CriterionWithSeverity {
+    present: CriterionResponse;
+    severity: SeverityRating; // keep always present for simplicity
+}
 /**
  * Mandatory Criterion - Sudden Onset
  * Required for Formula 1 diagnosis
  */
 export interface MandatoryCriterion {
-    /** Sudden development of symptoms from healthy state within hours (rarely 1-2 days) */
-    suddenOnset: boolean;
-    /** Parents can recall exact day/hour when symptoms appeared */
-    canRecallExactOnset: boolean;
-    /** Dynamic evolution of symptoms over 2-6 weeks */
-    dynamicEvolution: boolean;
+    suddenOnset: CriterionResponse;
+    canRecallExactOnset: CriterionResponse;
+    dynamicEvolution: CriterionResponse;
 }
+
 
 /**
  * Core Criteria - Main symptoms
  */
 export interface CoreCriteria {
-    /** At least one OCD symptom - observed in 100% of patients */
-    ocdSymptoms: boolean;
-    /** Separation anxiety - observed in nearly 100% of patients */
-    separationAnxiety: boolean;
-    /** Tics and/or involuntary movements - observed in 79% of patients */
-    ticsOrMovements: boolean;
-    /** Anorexia/eating disorder with >5% weight loss - observed in 17% of patients */
-    eatingDisorder: boolean;
+    ocdSymptoms: CriterionWithSeverity;
+    separationAnxiety: CriterionWithSeverity;
+    ticsOrMovements: CriterionWithSeverity;
+    eatingDisorder: CriterionWithSeverity;
 }
 
-/**
- * Secondary Criteria - Group 1
- */
 export interface SecondaryCriteriaGroup1 {
-    /** Sleep disturbances: insomnia, nightmares, refusal to sleep alone */
-    sleepDisturbances: boolean;
-    /** Mydriasis: dilated pupils, especially in acute phase */
-    mydriasis: boolean;
-    /** Behavioral regression: baby talk, tantrums, age-inappropriate behavior */
-    behavioralRegression: boolean;
-    /** Frightened appearance or doll-like mannerisms */
-    frightenedAppearance: boolean;
-    /** Aggression toward others and/or suicidal behavior */
-    aggressionOrSuicidal: boolean;
+    sleepDisturbances: CriterionWithSeverity;
+    mydriasis: CriterionWithSeverity;
+    behavioralRegression: CriterionWithSeverity;
+    frightenedAppearance: CriterionWithSeverity;
+    aggressionOrSuicidalBehavior: CriterionWithSeverity; // keep the name your utils expect
 }
 
-/**
- * Secondary Criteria - Group 2
- */
 export interface SecondaryCriteriaGroup2 {
-    /** Fine motor skills impairment */
-    fineMotorImpairment: boolean;
-    /** Hyperactivity, lack of concentration, inattention (ADD/ADHD-like) */
-    hyperactivityAttention: boolean;
-    /** Short-term memory loss */
-    memoryLoss: boolean;
-    /** Learning disabilities, especially in math (new onset) */
-    learningDisabilities: boolean;
-    /** Urinary symptoms: frequency, enuresis, daytime incontinence */
-    urinarySymptoms: boolean;
-    /** Hallucinations */
-    hallucinations: boolean;
-    /** Sensory hypersensitivity: smells, sounds, light, touch */
-    sensoryHypersensitivity: boolean;
-    /** Emotional lability / depression */
-    emotionalLability: boolean;
-    /** Dysgraphia: difficulty with handwriting */
-    dysgraphia: boolean;
-    /** Selective mutism */
-    selectiveMutism: boolean;
-    /** Hypotonia: reduced muscle tone */
-    hypotonia: boolean;
-    /** Intermittent dystonia: muscle contractions */
-    dystonia: boolean;
-    /** Non-specific abdominal complaints */
-    abdominalComplaints: boolean;
+    fineMotorImpairment: CriterionWithSeverity;
+    hyperactivityAttention: CriterionWithSeverity;
+    memoryLoss: CriterionWithSeverity;
+    learningDisabilities: CriterionWithSeverity;
+    urinarySymptoms: CriterionWithSeverity;
+    hallucinations: CriterionWithSeverity;
+    sensoryHypersensitivity: CriterionWithSeverity;
+    emotionalLabilityDepression: CriterionWithSeverity; // keep the name your utils expect
+    dysgraphia: CriterionWithSeverity;
+    selectiveMutism: CriterionWithSeverity;
+    hypotonia: CriterionWithSeverity;
+    intermittentDystonia: CriterionWithSeverity; // keep the name your utils expect
+    abdominalComplaints: CriterionWithSeverity;
 }
 
 /**
  * Treatment Response (10% of diagnosis)
  */
 export interface TreatmentResponse {
-    /** Positive response to antibiotics */
-    antibioticsResponse: SymptomPresence;
-    /** Positive response to high-dose steroids */
-    steroidsResponse: SymptomPresence;
+    antibioticsResponse: CriterionResponse;
+    steroidsResponse: CriterionResponse;
 }
 
-/**
- * Lab Results (5% of diagnosis)
- */
 export interface LabResults {
-    /** Overall lab results status */
-    status: 'positive' | 'negative' | 'inconclusive' | 'not_tested';
-    /** Notes about specific findings (optional, anonymous) */
-    notes?: string;
+    overallResult: 'positive' | 'negative' | 'inconclusive' | 'not_tested';
+    elevatedASO: CriterionResponse;
+    positiveThroatCulture: CriterionResponse;
 }
 
 /**
@@ -113,36 +81,34 @@ export interface KovacevicFormData {
     core: CoreCriteria;
     secondaryGroup1: SecondaryCriteriaGroup1;
     secondaryGroup2: SecondaryCriteriaGroup2;
-    treatment: TreatmentResponse;
-    labs: LabResults;
+    additional: {
+        treatmentResponse: TreatmentResponse;
+        labResults: LabResults;
+    };
 }
 
 /**
  * Diagnosis Result
  */
-export type DiagnosisFormula = 'formula1' | 'formula2' | 'not_met' | 'partial';
+export type DiagnosisFormula = 'formula1' | 'formula2' | 'not_met' | 'partial' | 'inconclusive';
 
 export interface KovacevicDiagnosisResult {
-    /** Which formula was met, if any */
     formula: DiagnosisFormula;
-    /** Breakdown of criteria met */
-    criteriaMetCount: {
-        mandatory: number; // 0-3
-        core: number; // 0-4
-        secondaryGroup1: number; // 0-5
-        secondaryGroup2: number; // 0-13
+    criteriaMet: {
+        mandatory: boolean;
+        coreCount: number;
+        secondaryGroup1Count: number;
+        secondaryGroup2Count: number;
+        totalSecondary: number;
     };
-    /** Treatment response factor (0-10%) */
-    treatmentScore: number;
-    /** Lab results factor (0-5%) */
-    labScore: number;
-    /** Confidence percentage (80% symptoms + 10% treatment + 5% labs + 5% margin) */
-    confidenceBreakdown: {
-        symptoms: number; // Up to 80%
-        treatment: number; // Up to 10%
-        labs: number; // Up to 5%
-        margin: number; // 5% error margin
+    confidence: {
+        clinicalSymptoms: number;
+        treatmentResponse: number;
+        labResults: number;
+        margin: number;
+        total: number;
     };
+    summaryHebrew: string;
 }
 
 /**
@@ -222,9 +188,8 @@ export const KOVACEVIC_LABELS = {
     responses: {
         yes: 'כן',
         no: 'לא',
-        unknown: 'לא בטוח/ה',
+        unknown: 'לא יודע/ת',
     },
-
     severity: {
         0: '0',
         1: '1',
@@ -238,45 +203,55 @@ export const KOVACEVIC_LABELS = {
 /**
  * Initial form state
  */
+const C = (present: CriterionResponse = 'unknown', severity: SeverityRating = 0): CriterionWithSeverity => ({
+    present,
+    severity,
+});
+
 export const KOVACEVIC_INITIAL_STATE: KovacevicFormData = {
     mandatory: {
-        suddenOnset: false,
-        canRecallExactOnset: false,
-        dynamicEvolution: false,
+        suddenOnset: 'unknown',
+        canRecallExactOnset: 'unknown',
+        dynamicEvolution: 'unknown',
     },
     core: {
-        ocdSymptoms: false,
-        separationAnxiety: false,
-        ticsOrMovements: false,
-        eatingDisorder: false,
+        ocdSymptoms: C(),
+        separationAnxiety: C(),
+        ticsOrMovements: C(),
+        eatingDisorder: C(),
     },
     secondaryGroup1: {
-        sleepDisturbances: false,
-        mydriasis: false,
-        behavioralRegression: false,
-        frightenedAppearance: false,
-        aggressionOrSuicidal: false,
+        sleepDisturbances: C(),
+        mydriasis: C(),
+        behavioralRegression: C(),
+        frightenedAppearance: C(),
+        aggressionOrSuicidalBehavior: C(),
     },
     secondaryGroup2: {
-        fineMotorImpairment: false,
-        hyperactivityAttention: false,
-        memoryLoss: false,
-        learningDisabilities: false,
-        urinarySymptoms: false,
-        hallucinations: false,
-        sensoryHypersensitivity: false,
-        emotionalLability: false,
-        dysgraphia: false,
-        selectiveMutism: false,
-        hypotonia: false,
-        dystonia: false,
-        abdominalComplaints: false,
+        fineMotorImpairment: C(),
+        hyperactivityAttention: C(),
+        memoryLoss: C(),
+        learningDisabilities: C(),
+        urinarySymptoms: C(),
+        hallucinations: C(),
+        sensoryHypersensitivity: C(),
+        emotionalLabilityDepression: C(),
+        dysgraphia: C(),
+        selectiveMutism: C(),
+        hypotonia: C(),
+        intermittentDystonia: C(),
+        abdominalComplaints: C(),
     },
-    treatment: {
-        antibioticsResponse: 'unknown',
-        steroidsResponse: 'unknown',
-    },
-    labs: {
-        status: 'not_tested',
+    additional: {
+        treatmentResponse: {
+            antibioticsResponse: 'unknown',
+            steroidsResponse: 'unknown',
+        },
+        labResults: {
+            overallResult: 'not_tested',
+            elevatedASO: 'unknown',
+            positiveThroatCulture: 'unknown',
+        },
     },
 };
+
