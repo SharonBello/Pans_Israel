@@ -160,7 +160,7 @@ const PANS31ResultsChart: React.FC = () => {
 
       <Grid container spacing={3} sx={{ px: 3, pb: 3 }}>
         {/* Average Score */}
-        <Grid xs={12} md={6}>
+        <Grid sx={{ xs: 12, md: 6 }}>
           <Paper elevation={1} sx={{ p: 2, height: '100%' }}>
             <Typography variant="h6" gutterBottom align="center">
               ציון ממוצע
@@ -185,7 +185,7 @@ const PANS31ResultsChart: React.FC = () => {
         </Grid>
 
         {/* Severity Distribution */}
-        <Grid xs={12} md={6}>
+        <Grid sx={{ xs: 12, md: 6 }}>
           <Paper elevation={1} sx={{ p: 2, height: '100%' }}>
             <Typography variant="h6" gutterBottom align="center">
               התפלגות חומרה
@@ -200,7 +200,7 @@ const PANS31ResultsChart: React.FC = () => {
                   outerRadius={80}
                   paddingAngle={5}
                   dataKey="value"
-                  label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
+                  label={({ name, percent }) => `${name} (${((percent ?? 0) * 100).toFixed(0)}%)`}
                   labelLine={false}
                 >
                   {severityData.map((entry, index) => (
@@ -214,7 +214,7 @@ const PANS31ResultsChart: React.FC = () => {
         </Grid>
 
         {/* Category Radar Chart */}
-        <Grid item xs={12}>
+        <Grid sx={{ xs: 12 }}>
           <Paper elevation={1} sx={{ p: 2 }}>
             <Typography variant="h6" gutterBottom align="center">
               ממוצע לפי קטגוריה (%)
@@ -239,7 +239,7 @@ const PANS31ResultsChart: React.FC = () => {
 
         {/* Most Common High Severity Symptoms */}
         {highSeverityData.length > 0 && (
-          <Grid item xs={12}>
+          <Grid sx={{ xs: 12 }}>
             <Paper elevation={1} sx={{ p: 2 }}>
               <Typography variant="h6" gutterBottom align="center">
                 תסמינים נפוצים בחומרה גבוהה (3-4)
@@ -258,7 +258,7 @@ const PANS31ResultsChart: React.FC = () => {
         )}
 
         {/* Summary Stats */}
-        <Grid item xs={12}>
+        <Grid sx={{ xs: 12 }}>
           <Box
             sx={{
               display: 'grid',

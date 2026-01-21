@@ -158,7 +158,7 @@ const PTECResultsPage: React.FC = () => {
         </Typography>
 
         <Grid container spacing={2}>
-          <Grid item xs={6} sm={4}>
+          <Grid sx={{ xs: 6, sm: 4 }}>
             <Box className="info-item">
               <Typography variant="caption" color="text.secondary">
                 גיל
@@ -169,7 +169,7 @@ const PTECResultsPage: React.FC = () => {
             </Box>
           </Grid>
 
-          <Grid item xs={6} sm={4}>
+          <Grid sx={{ xs: 6, sm: 4 }}>
             <Box className="info-item">
               <Typography variant="caption" color="text.secondary">
                 מין
@@ -180,7 +180,7 @@ const PTECResultsPage: React.FC = () => {
             </Box>
           </Grid>
 
-          <Grid item xs={6} sm={4}>
+          <Grid sx={{ xs: 6, sm: 4 }}>
             <Box className="info-item">
               <Typography variant="caption" color="text.secondary">
                 אבחנה
@@ -191,7 +191,7 @@ const PTECResultsPage: React.FC = () => {
             </Box>
           </Grid>
 
-          <Grid item xs={6} sm={4}>
+          <Grid sx={{ xs: 6, sm: 4 }}>
             <Box className="info-item">
               <Typography variant="caption" color="text.secondary">
                 מצב נוכחי
@@ -202,7 +202,7 @@ const PTECResultsPage: React.FC = () => {
             </Box>
           </Grid>
 
-          <Grid item xs={6} sm={4}>
+          <Grid sx={{ xs: 6, sm: 4 }}>
             <Box className="info-item">
               <Typography variant="caption" color="text.secondary">
                 טיפול חדש לאחרונה
@@ -244,7 +244,7 @@ const PTECResultsPage: React.FC = () => {
 
         <Alert severity="info" sx={{ mt: 2 }}>
           <Typography variant="body2">
-            <strong>שימו לב:</strong> הציון מיועד להשוואה בין הערכות שונות באותו מטופל. 
+            <strong>שימו לב:</strong> הציון מיועד להשוואה בין הערכות שונות באותו מטופל.
             ציון נמוך יותר מצביע על שיפור, ציון גבוה יותר על החמרה.
           </Typography>
         </Alert>

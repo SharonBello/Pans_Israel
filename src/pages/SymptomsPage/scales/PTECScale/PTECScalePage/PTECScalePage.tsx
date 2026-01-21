@@ -31,7 +31,7 @@ import {
 } from '@mui/icons-material';
 import {
   type PTECFormData,
-  type SymptomRating,
+  type PtecSymptomRating,
   type FlareStatus,
   type EvaluationType,
   type DiagnosisType,
@@ -130,7 +130,7 @@ const PTECScalePage: React.FC = () => {
   const handleSymptomChange = (
     category: keyof typeof formData.symptoms,
     symptom: string,
-    rating: SymptomRating
+    rating: PtecSymptomRating
   ) => {
     setFormData((prev) => ({
       ...prev,
@@ -197,16 +197,16 @@ const PTECScalePage: React.FC = () => {
         row
         value={formData.symptoms[category][symptomKey as keyof typeof formData.symptoms[typeof category]] || 0}
         onChange={(e) =>
-          handleSymptomChange(category, symptomKey, parseInt(e.target.value) as SymptomRating)
+          handleSymptomChange(category, symptomKey, parseInt(e.target.value) as PtecSymptomRating)
         }
         className="symptom-rating"
       >
-        {([0, 1, 2, 3] as SymptomRating[]).map((rating) => (
+        {([0, 1, 2, 3] as PtecSymptomRating[]).map((rating) => (
           <FormControlLabel
             key={rating}
             value={rating}
             control={<Radio size="small" />}
-            label={RATING_LABELS[rating]}
+            label={RATING_LABELS[rating as keyof typeof RATING_LABELS]}
             className={`rating-option rating-${rating}`}
           />
         ))}
@@ -245,7 +245,7 @@ const PTECScalePage: React.FC = () => {
         <Box className="step-content patient-info">
           <Grid container spacing={3}>
             {/* Age */}
-            <Grid sx={{ xs:12, sm:6 }}>
+            <Grid sx={{ xs: 12, sm: 6 }}>
               <TextField
                 fullWidth
                 label="גיל בשנים"
@@ -259,7 +259,7 @@ const PTECScalePage: React.FC = () => {
             </Grid>
 
             {/* Biological Sex */}
-            <Grid sx={{ xs:12, sm:6 }}>
+            <Grid sx={{ xs: 12, sm: 6 }}>
               <FormControl fullWidth>
                 <InputLabel>מין ביולוגי</InputLabel>
                 <Select
@@ -274,7 +274,7 @@ const PTECScalePage: React.FC = () => {
             </Grid>
 
             {/* Flare Status */}
-            <Grid sx={{ xs:12 }}>
+            <Grid sx={{ xs: 12 }}>
               <FormControl component="fieldset">
                 <FormLabel>מה מאפיין את התסמינים כרגע?</FormLabel>
                 <RadioGroup
@@ -291,7 +291,7 @@ const PTECScalePage: React.FC = () => {
             </Grid>
 
             {/* Evaluation Type */}
-            <Grid sx={{ xs:12 }}>
+            <Grid sx={{ xs: 12 }}>
               <FormControl component="fieldset">
                 <FormLabel>האם זו הפעם הראשונה שאתם ממלאים שאלון זה?</FormLabel>
                 <RadioGroup
@@ -308,7 +308,7 @@ const PTECScalePage: React.FC = () => {
             </Grid>
 
             {/* Recent Treatment */}
-            <Grid item xs={12} sm={6}>
+            <Grid sx={{ xs: 12, sm: 6 }}>
               <FormControl component="fieldset">
                 <FormLabel>האם התחלתם טיפול חדש לאחרונה?</FormLabel>
                 <RadioGroup
@@ -325,7 +325,7 @@ const PTECScalePage: React.FC = () => {
             </Grid>
 
             {/* Diagnosis */}
-            <Grid sx={{ xs:12, sm:6 }}>
+            <Grid sx={{ xs: 12, sm: 6 }}>
               <FormControl fullWidth>
                 <InputLabel>אבחנה</InputLabel>
                 <Select
@@ -345,7 +345,7 @@ const PTECScalePage: React.FC = () => {
             </Grid>
 
             {/* Recent Trigger */}
-            <Grid sx={{ xs:12 }}>
+            <Grid sx={{ xs: 12 }}>
               <FormControl fullWidth>
                 <InputLabel>האם הייתה מחלה או טריגר לאחרונה?</InputLabel>
                 <Select

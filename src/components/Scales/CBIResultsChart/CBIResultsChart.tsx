@@ -191,7 +191,8 @@ const CBIResultsChart: React.FC = () => {
 
       <Grid container spacing={3} sx={{ px: 3, pb: 3 }}>
         {/* Average Score vs PANS Norm */}
-        <Grid xs={12} md={6}>
+        <Grid sx={{ xs: 12, md: 6 }}>
+
           <Paper elevation={1} sx={{ p: 2, height: '100%' }}>
             <Typography variant="h6" gutterBottom align="center">
               ציון ממוצע
@@ -228,7 +229,8 @@ const CBIResultsChart: React.FC = () => {
         </Grid>
 
         {/* Burden Distribution */}
-        <Grid xs={12} md={6}>
+        <Grid sx={{ xs: 12, md: 6 }}>
+
           <Paper elevation={1} sx={{ p: 2, height: '100%' }}>
             <Typography variant="h6" gutterBottom align="center">
               התפלגות רמת עומס
@@ -243,7 +245,7 @@ const CBIResultsChart: React.FC = () => {
                   outerRadius={70}
                   paddingAngle={5}
                   dataKey="value"
-                  label={({ name, percent }) => `${name} (${(percent * 100).toFixed(0)}%)`}
+                  label={({ name, percent }) => `${name} (${((percent ?? 0) * 100).toFixed(0)}%)`}
                   labelLine={false}
                 >
                   {burdenData.map((entry, index) => (
@@ -257,7 +259,7 @@ const CBIResultsChart: React.FC = () => {
         </Grid>
 
         {/* Subscale Comparison Bar Chart */}
-        <Grid item xs={12}>
+        <Grid sx={{ xs: 12 }}>
           <Paper elevation={1} sx={{ p: 2 }}>
             <Typography variant="h6" gutterBottom align="center">
               השוואת תחומים - קהילה מול נורמה PANS
@@ -277,7 +279,7 @@ const CBIResultsChart: React.FC = () => {
         </Grid>
 
         {/* Radar Chart */}
-        <Grid xs={12} md={6}>
+        <Grid sx={{ xs: 12, md: 6 }}>
           <Paper elevation={1} sx={{ p: 2 }}>
             <Typography variant="h6" gutterBottom align="center">
               פרופיל עומס (%)
@@ -301,7 +303,7 @@ const CBIResultsChart: React.FC = () => {
         </Grid>
 
         {/* Respite Need Stats */}
-        <Grid xs={12} md={6}>
+        <Grid sx={{ xs: 12, md: 6 }}>
           <Paper elevation={1} sx={{ p: 2, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <Typography variant="h6" gutterBottom align="center">
               צורך בשירותי הקלה
@@ -323,7 +325,7 @@ const CBIResultsChart: React.FC = () => {
         </Grid>
 
         {/* Summary Stats */}
-        <Grid item xs={12}>
+        <Grid sx={{ xs: 12 }}>
           <Box
             sx={{
               display: 'grid',

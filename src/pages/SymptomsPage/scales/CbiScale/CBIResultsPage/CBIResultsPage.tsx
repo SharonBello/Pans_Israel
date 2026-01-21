@@ -140,13 +140,13 @@ const CBIResultsPage: React.FC = () => {
         </Typography>
 
         <Grid container spacing={3} alignItems="center">
-          <Grid item xs={6}>
+          <Grid sx={{ xs: 6 }}>
             <Box className="norm-stat">
               <Typography variant="body2" color="text.secondary">הציון שלך</Typography>
               <Typography variant="h4" sx={{ color: '#9B59B6' }}>{scores.total}</Typography>
             </Box>
           </Grid>
-          <Grid item xs={6}>
+          <Grid sx={{ xs: 6 }}>
             <Box className="norm-stat">
               <Typography variant="body2" color="text.secondary">ממוצע PANS</Typography>
               <Typography variant="h4">{PANS_NORMS.mean}</Typography>
@@ -248,28 +248,28 @@ const CBIResultsPage: React.FC = () => {
       {(formData.demographics.reducedWorkHours ||
         formData.demographics.changedSchooling ||
         formData.demographics.missedSchoolDays) && (
-        <Paper elevation={2} className="demographics-summary">
-          <Typography variant="h6" gutterBottom>
-            השפעות נוספות
-          </Typography>
+          <Paper elevation={2} className="demographics-summary">
+            <Typography variant="h6" gutterBottom>
+              השפעות נוספות
+            </Typography>
 
-          <Box component="ul" sx={{ pl: 2 }}>
-            {formData.demographics.reducedWorkHours && (
-              <li><Typography variant="body2">הפחתתם את שעות העבודה</Typography></li>
-            )}
-            {formData.demographics.changedSchooling && (
-              <li><Typography variant="body2">שיניתם את סידורי הלימודים של הילד</Typography></li>
-            )}
-            {formData.demographics.missedSchoolDays && (
-              <li><Typography variant="body2">הילד מפספס ימי לימודים</Typography></li>
-            )}
-          </Box>
+            <Box component="ul" sx={{ pl: 2 }}>
+              {formData.demographics.reducedWorkHours && (
+                <li><Typography variant="body2">הפחתתם את שעות העבודה</Typography></li>
+              )}
+              {formData.demographics.changedSchooling && (
+                <li><Typography variant="body2">שיניתם את סידורי הלימודים של הילד</Typography></li>
+              )}
+              {formData.demographics.missedSchoolDays && (
+                <li><Typography variant="body2">הילד מפספס ימי לימודים</Typography></li>
+              )}
+            </Box>
 
-          <Typography variant="caption" color="text.secondary" sx={{ mt: 1, display: 'block' }}>
-            מחקר מראה שגורמים אלה קשורים לעומס גבוה יותר בקרב הורים לילדי PANS.
-          </Typography>
-        </Paper>
-      )}
+            <Typography variant="caption" color="text.secondary" sx={{ mt: 1, display: 'block' }}>
+              מחקר מראה שגורמים אלה קשורים לעומס גבוה יותר בקרב הורים לילדי PANS.
+            </Typography>
+          </Paper>
+        )}
 
       {/* Attribution */}
       <Paper elevation={1} className="attribution">

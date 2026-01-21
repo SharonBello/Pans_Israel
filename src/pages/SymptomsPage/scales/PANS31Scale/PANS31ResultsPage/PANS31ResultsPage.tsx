@@ -268,7 +268,7 @@ const PANS31ResultsPage: React.FC = () => {
           </Typography>
           <Grid container spacing={2}>
             {formData.additional.hoursObsessions !== null && (
-              <Grid item xs={6}>
+              <Grid sx={{ xs: 6, }}>
                 <Box className="data-item">
                   <Typography variant="caption" color="text.secondary">
                     שעות אובססיות ביום
@@ -278,7 +278,7 @@ const PANS31ResultsPage: React.FC = () => {
               </Grid>
             )}
             {formData.additional.hoursCompulsions !== null && (
-              <Grid item xs={6}>
+              <Grid sx={{ xs: 6 }}>
                 <Box className="data-item">
                   <Typography variant="caption" color="text.secondary">
                     שעות כפייתיות ביום
