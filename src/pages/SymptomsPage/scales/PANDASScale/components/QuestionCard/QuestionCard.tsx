@@ -2,8 +2,8 @@ import React from 'react';
 import { Card, CardContent, Typography, Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import './QuestionCard.scss';
-import { RatingValue, SymptomGroup } from '../../types/pansTypes';
 import SymptomRating from '../SymptomRating/SymptomRating';
+import type { RatingValue, SymptomGroup } from '@/types/pandasScale';
 
 interface QuestionCardProps {
   question: SymptomGroup;

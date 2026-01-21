@@ -191,7 +191,7 @@ const CBIResultsChart: React.FC = () => {
 
       <Grid container spacing={3} sx={{ px: 3, pb: 3 }}>
         {/* Average Score vs PANS Norm */}
-        <Grid item xs={12} md={6}>
+        <Grid xs={12} md={6}>
           <Paper elevation={1} sx={{ p: 2, height: '100%' }}>
             <Typography variant="h6" gutterBottom align="center">
               ציון ממוצע
@@ -228,7 +228,7 @@ const CBIResultsChart: React.FC = () => {
         </Grid>
 
         {/* Burden Distribution */}
-        <Grid item xs={12} md={6}>
+        <Grid xs={12} md={6}>
           <Paper elevation={1} sx={{ p: 2, height: '100%' }}>
             <Typography variant="h6" gutterBottom align="center">
               התפלגות רמת עומס
@@ -277,7 +277,7 @@ const CBIResultsChart: React.FC = () => {
         </Grid>
 
         {/* Radar Chart */}
-        <Grid item xs={12} md={6}>
+        <Grid xs={12} md={6}>
           <Paper elevation={1} sx={{ p: 2 }}>
             <Typography variant="h6" gutterBottom align="center">
               פרופיל עומס (%)
@@ -301,7 +301,7 @@ const CBIResultsChart: React.FC = () => {
         </Grid>
 
         {/* Respite Need Stats */}
-        <Grid item xs={12} md={6}>
+        <Grid xs={12} md={6}>
           <Paper elevation={1} sx={{ p: 2, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
             <Typography variant="h6" gutterBottom align="center">
               צורך בשירותי הקלה

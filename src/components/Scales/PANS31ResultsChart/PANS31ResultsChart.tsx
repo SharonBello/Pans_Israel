@@ -160,7 +160,7 @@ const PANS31ResultsChart: React.FC = () => {
 
       <Grid container spacing={3} sx={{ px: 3, pb: 3 }}>
         {/* Average Score */}
-        <Grid item xs={12} md={6}>
+        <Grid xs={12} md={6}>
           <Paper elevation={1} sx={{ p: 2, height: '100%' }}>
             <Typography variant="h6" gutterBottom align="center">
               ציון ממוצע
@@ -185,7 +185,7 @@ const PANS31ResultsChart: React.FC = () => {
         </Grid>
 
         {/* Severity Distribution */}
-        <Grid item xs={12} md={6}>
+        <Grid xs={12} md={6}>
           <Paper elevation={1} sx={{ p: 2, height: '100%' }}>
             <Typography variant="h6" gutterBottom align="center">
               התפלגות חומרה

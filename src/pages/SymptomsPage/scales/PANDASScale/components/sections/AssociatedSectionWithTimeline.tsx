@@ -9,8 +9,8 @@ import {
   TableBody,
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { RatingValue, SymptomGroup } from '../../types/pansTypes';
 import SymptomRating from '../SymptomRating/SymptomRating';
+import type { RatingValue, SymptomGroup } from '@/types/pandasScale';
 
 interface AssociatedSectionProps {
   items: SymptomGroup[];

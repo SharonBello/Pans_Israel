@@ -1,8 +1,8 @@
 import React from 'react';
 import { Box, Typography, Table, TableHead, TableRow, TableCell, TableBody } from '@mui/material';
-import { RatingValue, SymptomGroup } from '../../types/pansTypes';
 import SymptomRating from '../SymptomRating/SymptomRating';
 import { useTranslation } from 'react-i18next';
+import type { RatingValue, SymptomGroup } from '@/types/pandasScale';
 
 interface OCDSectionProps {
     items: SymptomGroup[];

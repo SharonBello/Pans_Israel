@@ -1,6 +1,5 @@
-// src/hooks/useHtmlDirection.ts
+import i18n from "@/config/i18n";
 import { useEffect } from "react";
-import i18n from "../i18n";
 
 export function useHtmlDirection() {
   useEffect(() => {
