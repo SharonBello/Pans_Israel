@@ -35,15 +35,15 @@ const BURDEN_COLORS = {
   severe: '#F44336',
 };
 
-const SUBSCALE_COLORS = ['#9B59B6', '#8E44AD', '#E74C3C', '#3498DB', '#1ABC9C'];
+// const SUBSCALE_COLORS = ['#9B59B6', '#8E44AD', '#E74C3C', '#3498DB', '#1ABC9C'];
 
-const SUBSCALE_LABELS: Record<string, string> = {
-  timeDependency: 'זמן',
-  developmental: 'התפתחותי',
-  physical: 'גופני',
-  emotional: 'רגשי',
-  social: 'חברתי',
-};
+// const SUBSCALE_LABELS: Record<string, string> = {
+//   timeDependency: 'זמן',
+//   developmental: 'התפתחותי',
+//   physical: 'גופני',
+//   emotional: 'רגשי',
+//   social: 'חברתי',
+// };
 
 const CBIResultsChart: React.FC = () => {
   const [aggregated, setAggregated] = useState<CBIAggregatedData | null>(null);
@@ -192,7 +192,6 @@ const CBIResultsChart: React.FC = () => {
       <Grid container spacing={3} sx={{ px: 3, pb: 3 }}>
         {/* Average Score vs PANS Norm */}
         <Grid sx={{ xs: 12, md: 6 }}>
-
           <Paper elevation={1} sx={{ p: 2, height: '100%' }}>
             <Typography variant="h6" gutterBottom align="center">
               ציון ממוצע

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Typography, Paper, CircularProgress, Alert, Grid, Chip } from '@mui/material';
+import { Box, Typography, Paper, CircularProgress, Alert, Grid } from '@mui/material';
 import {
   BarChart,
   Bar,
@@ -35,14 +35,14 @@ const SEVERITY_COLORS = {
   extreme: '#F44336',
 };
 
-const CATEGORY_COLORS = [
-  '#717DBC',
-  '#6C5CE7',
-  '#00CEC9',
-  '#FDCB6E',
-  '#E17055',
-  '#A29BFE',
-];
+// const CATEGORY_COLORS = [
+//   '#717DBC',
+//   '#6C5CE7',
+//   '#00CEC9',
+//   '#FDCB6E',
+//   '#E17055',
+//   '#A29BFE',
+// ];
 
 const CATEGORY_LABELS: Record<string, string> = {
   ocdEating: 'OCD ואכילה',

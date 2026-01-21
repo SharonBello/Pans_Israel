@@ -6,16 +6,13 @@ import {
   Paper,
   Box,
   Button,
-  Divider,
   Alert,
   Grid,
   LinearProgress,
-  Chip,
 } from '@mui/material';
 import {
   Print as PrintIcon,
   Refresh as RefreshIcon,
-  TrendingUp as TrendingIcon,
 } from '@mui/icons-material';
 import type { PTECFormData, PTECScores } from '@/types/ptecScale';
 import { MAX_SCORES, CATEGORY_LABELS, FLARE_STATUS_LABELS, DIAGNOSIS_LABELS } from '@/types/ptecScale';
