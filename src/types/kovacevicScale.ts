@@ -135,7 +135,7 @@ export const KOVACEVIC_LABELS = {
         mydriasis: 'מידריאזיס: אישונים מורחבים, במיוחד בשלב החריף',
         behavioralRegression: 'נסיגה התנהגותית: שפת תינוק, התקפי זעם, התנהגות לא תואמת גיל',
         frightenedAppearance: 'מראה מבוהל או מנייריזם דמוי בובה',
-        aggressionOrSuicidal: 'תוקפנות כלפי אחרים ו/או התנהגות אובדנית',
+        aggressionOrSuicidalBehavior: 'תוקפנות כלפי אחרים ו/או התנהגות אובדנית',
     },
     secondaryGroup2: {
         title: 'קריטריונים משניים - קבוצה 2',
@@ -146,11 +146,11 @@ export const KOVACEVIC_LABELS = {
         urinarySymptoms: 'תסמיני שתן: תכיפות, בריחת שתן, אי-שליטה ביום',
         hallucinations: 'הלוצינציות (הזיות)',
         sensoryHypersensitivity: 'רגישות יתר חושית: ריחות, קולות, אור, מגע',
-        emotionalLability: 'תנודתיות רגשית / דיכאון',
+        emotionalLabilityDepression: 'תנודתיות רגשית / דיכאון',
         dysgraphia: 'דיסגרפיה: קושי בכתיבה ידנית',
         selectiveMutism: 'אילמות סלקטיבית',
         hypotonia: 'היפוטוניה: טונוס שרירים מופחת',
-        dystonia: 'דיסטוניה לסירוגין: התכווצויות שרירים',
+        intermittentDystonia: 'דיסטוניה לסירוגין: התכווצויות שרירים',
         abdominalComplaints: 'תלונות בטן לא ספציפיות',
     },
     treatment: {

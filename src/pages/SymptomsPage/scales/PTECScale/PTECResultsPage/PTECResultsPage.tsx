@@ -44,10 +44,11 @@ const PTECResultsPage: React.FC = () => {
 
   // Get color based on percentage
   const getBarColor = (percent: number) => {
-    if (percent <= 20) return '#4CAF50';
-    if (percent <= 40) return '#8BC34A';
-    if (percent <= 60) return '#FFC107';
-    if (percent <= 80) return '#FF9800';
+    const percentValue: number = percent ?? 0;
+    if (percentValue <= 20) return '#4CAF50';
+    if (percentValue <= 40) return '#8BC34A';
+    if (percentValue <= 60) return '#FFC107';
+    if (percentValue <= 80) return '#FF9800';
     return '#F44336';
   };
 

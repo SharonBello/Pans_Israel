@@ -8,7 +8,7 @@ import type {
   KovacevicDiagnosisResult,
   DiagnosisFormula,
   CriterionResponse,
-} from '../types/kovacevicScale';
+} from '@/types/kovacevicScale';
 
 /**
  * Check if a criterion response is "yes"
@@ -270,36 +270,18 @@ export function calculateKovacevicDiagnosis(
  */
 export function calculateSeverityScore(formData: KovacevicFormData): number {
   const { core, secondaryGroup1, secondaryGroup2 } = formData;
-  
-  let totalSeverity = 0;
-  let maxPossible = 0;
 
-  // Core criteria severities (max 5 each, 4 criteria = 20 max)
-  totalSeverity += core.ocdSymptoms.severity;
-  totalSeverity += core.separationAnxiety.severity;
-  totalSeverity += core.ticsOrMovements.severity;
-  totalSeverity += core.eatingDisorder.severity;
-  maxPossible += 20;
+  const coreList = Object.values(core);
+  const g1List = Object.values(secondaryGroup1);
+  const g2List = Object.values(secondaryGroup2);
 
-  // Secondary Group 1 (5 criteria with severity = 15 max, 2 without)
-  totalSeverity += secondaryGroup1.sleepDisturbances.severity;
-  totalSeverity += secondaryGroup1.behavioralRegression.severity;
-  totalSeverity += secondaryGroup1.aggressionOrSuicidalBehavior.severity;
-  maxPossible += 15;
+  const totalSeverity: number =
+    coreList.reduce((s, c) => s + c.severity, 0) +
+    g1List.reduce((s, c) => s + c.severity, 0) +
+    g2List.reduce((s, c) => s + c.severity, 0);
 
-  // Secondary Group 2 (10 criteria with severity = 50 max, 3 without)
-  totalSeverity += secondaryGroup2.fineMotorImpairment.severity;
-  totalSeverity += secondaryGroup2.hyperactivityAttention.severity;
-  totalSeverity += secondaryGroup2.memoryLoss.severity;
-  totalSeverity += secondaryGroup2.learningDisabilities.severity;
-  totalSeverity += secondaryGroup2.urinarySymptoms.severity;
-  totalSeverity += secondaryGroup2.hallucinations.severity;
-  totalSeverity += secondaryGroup2.sensoryHypersensitivity.severity;
-  totalSeverity += secondaryGroup2.emotionalLabilityDepression.severity;
-  totalSeverity += secondaryGroup2.dysgraphia.severity;
-  totalSeverity += secondaryGroup2.selectiveMutism.severity;
-  maxPossible += 50;
+  const maxPossible: number = (coreList.length + g1List.length + g2List.length) * 5;
 
-  // Normalize to 0-100
+  if (maxPossible <= 0) return 0;
   return Math.round((totalSeverity / maxPossible) * 100);
 }

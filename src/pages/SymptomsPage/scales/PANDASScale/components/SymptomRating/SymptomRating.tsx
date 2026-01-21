@@ -61,7 +61,7 @@ const SymptomRating: React.FC<SymptomRatingProps> = ({
     const rect = event.currentTarget.getBoundingClientRect();
     const clickX = event.clientX - rect.left;
     const percentage = clickX / rect.width;
-    const value = Math.round(percentage * 5) as RatingValue;
+    const value = Math.round((percentage) * 5) as RatingValue;
     const clampedValue = Math.max(0, Math.min(5, value)) as RatingValue;
     onChange(id, field, clampedValue);
   };

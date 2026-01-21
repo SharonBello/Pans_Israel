@@ -6,7 +6,6 @@ import {
   Paper,
   Box,
   Button,
-  Divider,
   Alert,
   Grid,
   LinearProgress,
@@ -18,7 +17,7 @@ import {
   Favorite as HeartIcon,
 } from '@mui/icons-material';
 import type { CBIFormData, CBIScores } from '@/types/cbiScale';
-import { CBI_ITEM_LABELS, MAX_SCORES, PANS_NORMS, CBI_CITATION } from '@/types/cbiScale';
+import { MAX_SCORES, PANS_NORMS, CBI_CITATION } from '@/types/cbiScale';
 import { getBurdenInfo, compareToNorms } from '@/services/cbiService';
 import './CBIResultsPage.scss';
 
@@ -40,24 +39,25 @@ const CBIResultsPage: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const state = location.state as ResultsState | undefined;
-
+  
   if (!state) {
     navigate('/scales/cbi');
     return null;
   }
-
+  
   const { formData, scores, savedDocId } = state;
   const burdenInfo = getBurdenInfo(scores.burdenLevel);
   const normComparison = compareToNorms(scores);
-
+  
   // Get percentage
   const getPercentage = (score: number, max: number) => Math.round((score / max) * 100);
-
+  
   // Get bar color
   const getBarColor = (percent: number) => {
-    if (percent <= 25) return '#4CAF50';
-    if (percent <= 50) return '#8BC34A';
-    if (percent <= 75) return '#FF9800';
+    const percentValue: number = percent ?? 0;
+    if (percentValue <= 25) return '#4CAF50';
+    if (percentValue <= 50) return '#8BC34A';
+    if (percentValue <= 75) return '#FF9800';
     return '#F44336';
   };
 
