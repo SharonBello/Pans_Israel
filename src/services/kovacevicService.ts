@@ -35,35 +35,36 @@ export interface KovacevicResultDocument {
 /**
  * Count how many criteria are met in each section
  */
-function countCriteriaMet(formData: KovacevicFormData) {
+function countCriteriaMet(formData: KovacevicFormData): {
+    mandatory: number;
+    core: number;
+    secondaryGroup1: number;
+    secondaryGroup2: number;
+} {
     const { mandatory, core, secondaryGroup1, secondaryGroup2 } = formData;
 
-    // Count mandatory criteria (3 total)
-    const mandatoryCount = [
+    const mandatoryCount: number = [
         mandatory.suddenOnset,
         mandatory.canRecallExactOnset,
         mandatory.dynamicEvolution,
-    ].filter(Boolean).length;
+    ].filter((v: string) => v === 'yes').length;
 
-    // Count core criteria (4 total)
-    const coreCount = [
+    const coreCount: number = [
         core.ocdSymptoms,
         core.separationAnxiety,
         core.ticsOrMovements,
         core.eatingDisorder,
-    ].filter(Boolean).length;
+    ].filter((c: { present: string }) => c.present === 'yes').length;
 
-    // Count secondary group 1 (5 total)
-    const group1Count = [
+    const group1Count: number = [
         secondaryGroup1.sleepDisturbances,
         secondaryGroup1.mydriasis,
         secondaryGroup1.behavioralRegression,
         secondaryGroup1.frightenedAppearance,
-        secondaryGroup1.aggressionOrSuicidal,
-    ].filter(Boolean).length;
+        secondaryGroup1.aggressionOrSuicidalBehavior,
+    ].filter((c: { present: string }) => c.present === 'yes').length;
 
-    // Count secondary group 2 (13 total)
-    const group2Count = [
+    const group2Count: number = [
         secondaryGroup2.fineMotorImpairment,
         secondaryGroup2.hyperactivityAttention,
         secondaryGroup2.memoryLoss,
@@ -71,13 +72,13 @@ function countCriteriaMet(formData: KovacevicFormData) {
         secondaryGroup2.urinarySymptoms,
         secondaryGroup2.hallucinations,
         secondaryGroup2.sensoryHypersensitivity,
-        secondaryGroup2.emotionalLability,
+        secondaryGroup2.emotionalLabilityDepression,
         secondaryGroup2.dysgraphia,
         secondaryGroup2.selectiveMutism,
         secondaryGroup2.hypotonia,
-        secondaryGroup2.dystonia,
+        secondaryGroup2.intermittentDystonia,
         secondaryGroup2.abdominalComplaints,
-    ].filter(Boolean).length;
+    ].filter((c: { present: string }) => c.present === 'yes').length;
 
     return {
         mandatory: mandatoryCount,
@@ -91,12 +92,12 @@ function countCriteriaMet(formData: KovacevicFormData) {
  * Calculate treatment response score (0-10%)
  */
 function calculateTreatmentScore(formData: KovacevicFormData): number {
-    const { treatment } = formData;
+    const { treatmentResponse } = formData.additional;
     let score = 0;
 
     // Each positive response adds 5%
-    if (treatment.antibioticsResponse === 'yes') score += 5;
-    if (treatment.steroidsResponse === 'yes') score += 5;
+    if (treatmentResponse.antibioticsResponse === 'yes') score += 5;
+    if (treatmentResponse.steroidsResponse === 'yes') score += 5;
 
     return score;
 }
@@ -105,9 +106,9 @@ function calculateTreatmentScore(formData: KovacevicFormData): number {
  * Calculate lab results score (0-5%)
  */
 function calculateLabScore(formData: KovacevicFormData): number {
-    const { labs } = formData;
+    const { labResults } = formData.additional;
 
-    switch (labs.status) {
+    switch (labResults.overallResult) {
         case 'positive':
             return 5;
         case 'inconclusive':
@@ -132,9 +133,9 @@ function determineFormula(
     const { mandatory } = formData;
 
     // Check Formula 1: Sudden onset + 2+ core criteria
-    const hasSuddenOnset = mandatory.suddenOnset;
-    const hasMandatoryMet = counts.mandatory >= 2; // At least 2 of 3 mandatory
-    const hasTwoCoreOrMore = counts.core >= 2;
+    const hasSuddenOnset: boolean = mandatory.suddenOnset === 'yes';
+    const hasMandatoryMet: boolean = counts.mandatory >= 2;
+    const hasTwoCoreOrMore: boolean = counts.core >= 2;
 
     if (hasSuddenOnset && hasMandatoryMet && hasTwoCoreOrMore) {
         return 'formula1';
@@ -202,17 +203,27 @@ export function calculateDiagnosis(formData: KovacevicFormData): KovacevicDiagno
     const labScore = calculateLabScore(formData);
     const symptomScore = calculateSymptomScore(formula, counts);
 
+    const confidence = {
+        clinicalSymptoms: symptomScore,
+        treatmentResponse: treatmentScore,
+        labResults: labScore,
+        margin: 5,
+        total: Math.min(symptomScore + treatmentScore + labScore + 5, 100),
+    };
+
+    const criteriaMet = {
+        mandatory: counts.mandatory >= 2,
+        coreCount: counts.core,
+        secondaryGroup1Count: counts.secondaryGroup1,
+        secondaryGroup2Count: counts.secondaryGroup2,
+        totalSecondary: counts.secondaryGroup1 + counts.secondaryGroup2,
+    };
+
     return {
         formula,
-        criteriaMetCount: counts,
-        treatmentScore,
-        labScore,
-        confidenceBreakdown: {
-            symptoms: symptomScore,
-            treatment: treatmentScore,
-            labs: labScore,
-            margin: 5, // Always 5% error margin
-        },
+        confidence,
+        criteriaMet,
+        summaryHebrew: '', // or generate a string if your type requires it
     };
 }
 
@@ -303,6 +314,7 @@ export interface KovacevicAggregatedData {
         formula2: number;
         partial: number;
         not_met: number;
+        inconclusive: number;
     };
     averageCriteriaMet: {
         mandatory: number;
@@ -328,7 +340,7 @@ export function aggregateKovacevicResults(
     if (results.length === 0) {
         return {
             count: 0,
-            formulaCounts: { formula1: 0, formula2: 0, partial: 0, not_met: 0 },
+            formulaCounts: { formula1: 0, formula2: 0, partial: 0, not_met: 0, inconclusive: 0 },
             averageCriteriaMet: { mandatory: 0, core: 0, secondaryGroup1: 0, secondaryGroup2: 0 },
             treatmentResponseRates: { antibiotics: 0, steroids: 0 },
             labResultsDistribution: { positive: 0, negative: 0, inconclusive: 0, not_tested: 0 },
@@ -338,32 +350,47 @@ export function aggregateKovacevicResults(
     const count = results.length;
 
     // Count formulas
-    const formulaCounts = { formula1: 0, formula2: 0, partial: 0, not_met: 0 };
+    const formulaCounts: Record<DiagnosisFormula, number> = {
+        formula1: 0,
+        formula2: 0,
+        partial: 0,
+        not_met: 0,
+        inconclusive: 0, // include only if DiagnosisFormula includes it
+    };
     results.forEach((r) => {
-        formulaCounts[r.diagnosis.formula]++;
+        formulaCounts[r.diagnosis.formula as keyof typeof formulaCounts]++;
     });
 
     // Sum criteria met
     const criteriaSums = { mandatory: 0, core: 0, secondaryGroup1: 0, secondaryGroup2: 0 };
     results.forEach((r) => {
-        criteriaSums.mandatory += r.diagnosis.criteriaMetCount.mandatory;
-        criteriaSums.core += r.diagnosis.criteriaMetCount.core;
-        criteriaSums.secondaryGroup1 += r.diagnosis.criteriaMetCount.secondaryGroup1;
-        criteriaSums.secondaryGroup2 += r.diagnosis.criteriaMetCount.secondaryGroup2;
+        criteriaSums.mandatory += r.diagnosis.criteriaMet.mandatory ? 1 : 0;
+        criteriaSums.core += r.diagnosis.criteriaMet.coreCount;
+        criteriaSums.secondaryGroup1 += r.diagnosis.criteriaMet.secondaryGroup1Count;
+        criteriaSums.secondaryGroup2 += r.diagnosis.criteriaMet.secondaryGroup2Count;
     });
 
     // Treatment responses
     let antibioticsYes = 0;
     let steroidsYes = 0;
     results.forEach((r) => {
-        if (r.formData.treatment.antibioticsResponse === 'yes') antibioticsYes++;
-        if (r.formData.treatment.steroidsResponse === 'yes') steroidsYes++;
+        if (r.formData.additional.treatmentResponse.antibioticsResponse === 'yes') antibioticsYes++;
+        if (r.formData.additional.treatmentResponse.steroidsResponse === 'yes') steroidsYes++;
     });
 
     // Lab results distribution
-    const labDist = { positive: 0, negative: 0, inconclusive: 0, not_tested: 0 };
+    type LabOverall = KovacevicFormData['additional']['labResults']['overallResult'];
+
+    const labDist: Record<LabOverall, number> = {
+        positive: 0,
+        negative: 0,
+        inconclusive: 0,
+        not_tested: 0,
+    };
+
     results.forEach((r) => {
-        labDist[r.formData.labs.status]++;
+        const key: LabOverall = r.formData.additional.labResults.overallResult;
+        labDist[key] += 1;
     });
 
     return {
