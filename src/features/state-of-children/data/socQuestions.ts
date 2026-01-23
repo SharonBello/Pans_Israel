@@ -1221,7 +1221,7 @@ export const socCategories: SOCCategory[] = [
 export const socSurveyDefinition: SOCSurveyDefinition = {
     id: SOC_SURVEY_ID,
     slug: SOC_SURVEY_SLUG,
-    title: 'סקר מצב ילדינו 2025',
+    title: 'סקר מצב ילדינו 2026',
     description: 'סקר מקיף למשפחות ילדים עם PANS/PANDAS בישראל. המידע יסייע להגביר את המודעות ולקדם מחקר בתחום.',
     version: SOC_SURVEY_VERSION,
     isActive: true,
