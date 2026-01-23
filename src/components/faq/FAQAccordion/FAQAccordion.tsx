@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import type { FAQItem } from '@/data/faqData';
 import './FAQAccordion.scss';
+import type { FAQItem } from '@/data/faqData';
 
 export type FAQAccordionProps = {
     items: FAQItem[];
@@ -48,7 +48,14 @@ const FAQAccordion: React.FC<FAQAccordionProps> = ({
                         className="faq-item__panel"
                         hidden={!isOpen}
                     >
-                        <div className="faq-item__a">{item.answer}</div>
+                        <div className="faq-item__a">
+                            {/* Support both string and JSX content */}
+                            {typeof item.answer === 'string' ? (
+                                <p>{item.answer}</p>
+                            ) : (
+                                item.answer
+                            )}
+                        </div>
                     </div>
                 </div>
             );

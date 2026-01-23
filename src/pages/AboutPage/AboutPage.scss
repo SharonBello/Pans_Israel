@@ -1,0 +1,576 @@
+// ==========================================================================
+// About Page - Styles
+// ==========================================================================
+
+@use "sass:color";
+@import '../../styles/abstracts/variables';
+@import '../../styles/abstracts/mixins';
+
+.about-page {
+    background: $color-background;
+}
+
+// ==========================================================================
+// Hero Section
+// ==========================================================================
+
+.about-hero {
+    background: linear-gradient(135deg, $color-primary 0%, color.adjust($color-primary, $lightness: -5%) 100%);
+    padding: 120px 24px 80px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        opacity: 0.5;
+    }
+
+    @media (max-width: 768px) {
+        padding: 100px 16px 60px;
+    }
+
+    &__container {
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 1;
+    }
+
+    &__title {
+        font-family: 'Heebo', sans-serif;
+        font-size: clamp(2.5rem, 6vw, 3.5rem);
+        font-weight: 800;
+        color: #ffffff;
+        margin-bottom: 16px;
+    }
+
+    &__subtitle {
+        font-family: 'Heebo', sans-serif;
+        font-size: clamp(1.125rem, 2.5vw, 1.375rem);
+        color: rgba(255, 255, 255, 0.9);
+        font-weight: 400;
+    }
+}
+
+// ==========================================================================
+// Section Base
+// ==========================================================================
+
+.about-section {
+    padding: 80px 24px;
+
+    @media (max-width: 768px) {
+        padding: 60px 16px;
+    }
+
+    &__container {
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    &__title {
+        font-family: 'Heebo', sans-serif;
+        font-size: clamp(1.75rem, 4vw, 2.25rem);
+        font-weight: 700;
+        color: $color-primary;
+        margin-bottom: 20px;
+        line-height: 1.3;
+
+        &--center {
+            text-align: center;
+        }
+    }
+
+    &__subtitle {
+        font-family: 'Heebo', sans-serif;
+        font-size: 1.125rem;
+        color: $text-secondary;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    &__text {
+        font-family: 'Heebo', sans-serif;
+        font-size: 1.0625rem;
+        line-height: 1.8;
+        color: $text-primary;
+        margin-bottom: 16px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}
+
+.section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Heebo', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: $color-accent;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+
+    svg {
+        font-size: 1rem;
+    }
+
+    &--center {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+// ==========================================================================
+// Mission Section
+// ==========================================================================
+
+.about-mission {
+    background: #ffffff;
+
+    &__content {
+        display: grid;
+        grid-template-columns: 1fr 300px;
+        gap: 60px;
+        align-items: center;
+
+        @media (max-width: 900px) {
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+    }
+
+    &__visual {
+        display: flex;
+        justify-content: center;
+
+        @media (max-width: 900px) {
+            order: -1;
+        }
+    }
+
+    &__card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 220px;
+        height: 220px;
+        background: linear-gradient(135deg, $color-primary 0%, $color-medium 100%);
+        border-radius: 50%;
+        color: #ffffff;
+        box-shadow: 0 20px 60px rgba($color-primary, 0.3);
+
+        @media (max-width: 900px) {
+            width: 180px;
+            height: 180px;
+        }
+    }
+
+    &__icon {
+        font-size: 2.5rem;
+        margin-bottom: 8px;
+        color: $color-accent;
+    }
+
+    &__stat {
+        font-family: 'Heebo', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 800;
+    }
+
+    &__stat-label {
+        font-family: 'Heebo', sans-serif;
+        font-size: 1rem;
+        opacity: 0.9;
+    }
+}
+
+// ==========================================================================
+// Our Story Section
+// ==========================================================================
+
+.about-story {
+    background: linear-gradient(180deg, $color-background 0%, #ffffff 100%);
+
+    &__content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    &__card {
+        background: #ffffff;
+        padding: 40px;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba($color-primary, 0.08);
+        border-right: 5px solid $color-accent;
+
+        @media (max-width: 600px) {
+            padding: 24px;
+        }
+
+        p {
+            font-family: 'Heebo', sans-serif;
+            font-size: 1.0625rem;
+            line-height: 1.9;
+            color: $text-primary;
+            margin-bottom: 20px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            strong {
+                color: $color-primary;
+                font-weight: 700;
+            }
+        }
+    }
+}
+
+// ==========================================================================
+// Values Section
+// ==========================================================================
+
+.about-values {
+    background: #ffffff;
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 24px;
+
+        @media (max-width: 1000px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media (max-width: 600px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__card {
+        background: $color-background;
+        padding: 32px 24px;
+        border-radius: 16px;
+        text-align: center;
+        transition: all 0.3s ease;
+        border: 1px solid transparent;
+
+        &:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba($color-primary, 0.1);
+            border-color: rgba($color-primary, 0.1);
+        }
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 64px;
+        height: 64px;
+        margin: 0 auto 20px;
+        background: linear-gradient(135deg, $color-primary 0%, $color-medium 100%);
+        border-radius: 16px;
+        color: #ffffff;
+        font-size: 1.75rem;
+    }
+
+    &__card-title {
+        font-family: 'Heebo', sans-serif;
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: $color-primary;
+        margin-bottom: 12px;
+    }
+
+    &__card-text {
+        font-family: 'Heebo', sans-serif;
+        font-size: 0.9375rem;
+        line-height: 1.7;
+        color: $text-secondary;
+    }
+}
+
+// ==========================================================================
+// Founders Section
+// ==========================================================================
+
+.about-founders {
+    background: linear-gradient(180deg, #ffffff 0%, $color-background 100%);
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 32px;
+        max-width: 900px;
+        margin: 0 auto;
+
+        @media (max-width: 800px) {
+            grid-template-columns: 1fr;
+            max-width: 400px;
+        }
+    }
+
+    &__card {
+        background: #ffffff;
+        padding: 40px 24px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 10px 40px rgba($color-primary, 0.08);
+        transition: all 0.3s ease;
+
+        &:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba($color-primary, 0.12);
+
+            .about-founders__avatar {
+                transform: scale(1.05);
+            }
+        }
+    }
+
+    &__avatar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 20px;
+        background: linear-gradient(135deg, $color-accent 0%, color.adjust($color-primary, $lightness: -10%) 100%);
+        border-radius: 50%;
+        font-family: 'Heebo', sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #ffffff;
+        transition: transform 0.3s ease;
+    }
+
+    &__name {
+        font-family: 'Heebo', sans-serif;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: $color-primary;
+        margin-bottom: 4px;
+    }
+
+    &__role {
+        display: block;
+        font-family: 'Heebo', sans-serif;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: $color-accent;
+        margin-bottom: 16px;
+    }
+
+    &__bio {
+        font-family: 'Heebo', sans-serif;
+        font-size: 0.9375rem;
+        line-height: 1.7;
+        color: $text-secondary;
+    }
+}
+
+// ==========================================================================
+// Vision Section
+// ==========================================================================
+
+.about-vision {
+    background: linear-gradient(135deg, $color-primary 0%, color.adjust($color-primary, $lightness: -10%) 100%);
+    color: #ffffff;
+
+    &__content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .section-label {
+        color: $color-accent;
+    }
+
+    .about-section__title {
+        color: #ffffff;
+    }
+
+    &__list {
+        list-style: none;
+        padding: 0;
+        margin: 32px 0 0;
+
+        li {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+            &:last-child {
+                border-bottom: none;
+            }
+
+            span:last-child {
+                font-family: 'Heebo', sans-serif;
+                font-size: 1.0625rem;
+                line-height: 1.6;
+            }
+        }
+    }
+
+    &__bullet {
+        flex-shrink: 0;
+        display: block;
+        width: 12px;
+        height: 12px;
+        margin-top: 6px;
+        background: $color-accent;
+        border-radius: 50%;
+    }
+}
+
+// ==========================================================================
+// CTA Section
+// ==========================================================================
+
+.about-cta {
+    background: #ffffff;
+
+    &__content {
+        max-width: 700px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 60px 40px;
+        background: linear-gradient(135deg, rgba($color-light, 0.3) 0%, rgba($color-medium, 0.1) 100%);
+        border-radius: 24px;
+        border: 1px solid rgba($color-primary, 0.1);
+
+        @media (max-width: 600px) {
+            padding: 40px 24px;
+        }
+    }
+
+    &__title {
+        font-family: 'Heebo', sans-serif;
+        font-size: clamp(1.5rem, 4vw, 2rem);
+        font-weight: 700;
+        color: $color-primary;
+        margin-bottom: 16px;
+    }
+
+    &__text {
+        font-family: 'Heebo', sans-serif;
+        font-size: 1.0625rem;
+        line-height: 1.7;
+        color: $text-secondary;
+        margin-bottom: 32px;
+    }
+
+    &__buttons {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    &__btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 28px;
+        border-radius: 50px;
+        font-family: 'Heebo', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+
+        svg {
+            font-size: 1.25rem;
+        }
+
+        &--primary {
+            background: linear-gradient(135deg, $color-accent 0%, color.adjust($color-primary, $lightness: -8%) 100%);
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba($color-accent, 0.3);
+
+            &:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba($color-accent, 0.4);
+            }
+        }
+
+        &--secondary {
+            background: #ffffff;
+            color: $color-primary;
+            border: 2px solid $color-primary;
+
+            &:hover {
+                background: $color-primary;
+                color: #ffffff;
+                transform: translateY(-2px);
+            }
+        }
+    }
+}
+
+// ==========================================================================
+// Partners Section
+// ==========================================================================
+
+.about-partners {
+    background: $color-background;
+    padding: 60px 24px;
+
+    &__title {
+        font-family: 'Heebo', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        color: $text-muted;
+        text-align: center;
+        margin-bottom: 24px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    &__logos {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 48px;
+        flex-wrap: wrap;
+
+        @media (max-width: 600px) {
+            gap: 24px;
+        }
+    }
+
+    &__logo {
+        font-family: 'Heebo', sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        color: $text-muted;
+        text-decoration: none;
+        padding: 16px 24px;
+        background: #ffffff;
+        border-radius: 12px;
+        border: 1px solid rgba($color-primary, 0.1);
+        transition: all 0.3s ease;
+
+        &:hover {
+            color: $color-primary;
+            border-color: $color-primary;
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba($color-primary, 0.1);
+        }
+    }
+}

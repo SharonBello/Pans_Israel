@@ -6,9 +6,11 @@ import { FiArrowLeft } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 
 import './Hero.scss';
+import WhatIsPansPandasModal from '@/components/WhatIsPansPandasModal';
 
 const Hero: React.FC = () => {
   const [init, setInit] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     initParticlesEngine(async (engine) => {
@@ -17,6 +19,14 @@ const Hero: React.FC = () => {
       setInit(true);
     });
   }, []);
+
+  const handleOpenModal = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
 
   const particlesOptions: ISourceOptions = {
     fullScreen: false,
@@ -112,76 +122,89 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section className="hero">
-      {/* Particle Background with Mask */}
-      <div className="hero__particles">
-        {init && (
-          <Particles
-            id="neural-particles"
-            options={particlesOptions}
-          />
-        )}
-      </div>
+    <>
+      <section className="hero">
+        {/* Particle Background with Mask */}
+        <div className="hero__particles">
+          {init && (
+            <Particles
+              id="neural-particles"
+              options={particlesOptions}
+            />
+          )}
+        </div>
 
-      {/* Overlay */}
-      <div className="hero__overlay" />
+        {/* Overlay */}
+        <div className="hero__overlay" />
 
-      {/* Content */}
-      <div className="hero__container">
-        <div className="hero__content">
+        {/* Content */}
+        <div className="hero__container">
+          <div className="hero__content">
 
-          <h1 className="hero__title">
-            PANS/PANDAS
-            <span className="hero__title-highlight">ישראל</span>
-          </h1>
+            <h1 className="hero__title">
+              PANS/PANDAS
+              <span className="hero__title-highlight">ישראל</span>
+            </h1>
 
-          <p className="hero__description">
-            אתם לא לבד. הצטרפו לקהילת הורים תומכת לילדים עם תסמונות
-            <strong> PANDAS </strong>
-            ו-
-            <strong>PANS </strong>
-            בישראל. מידע, משאבים ותמיכה הדדית.
-          </p>
+            <p className="hero__description">
+              אתם לא לבד. הצטרפו לקהילת הורים תומכת לילדים עם תסמונות
+              <strong> PANDAS </strong>
+              ו-
+              <strong>PANS </strong>
+              בישראל. מידע, משאבים ותמיכה הדדית.
+            </p>
 
-          <div className="hero__actions">
-            <a
-              href="https://wa.me/972544767146"
-              className="hero__btn hero__btn--primary"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="דברו איתנו בוואטסאפ"
-            >
-              <span>דברו איתנו</span>
-              <FaWhatsapp />
-            </a>
+            <div className="hero__actions">
+              <a
+                href="https://wa.me/972544767146"
+                className="hero__btn hero__btn--primary"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="דברו איתנו בוואטסאפ"
+              >
+                <span>דברו איתנו</span>
+                <FaWhatsapp />
+              </a>
 
-            <a href="#about" className="hero__btn hero__btn--secondary">
-              <span>מה זה PANS/PANDAS?</span>
-              <FiArrowLeft />
-            </a>
-          </div>
-
-
-          <div className="hero__stats">
-            <div className="hero__stat">
-              <span className="hero__stat-number">1000+</span>
-              <span className="hero__stat-label">משפחות בקהילה</span>
+              <button
+                onClick={handleOpenModal}
+                className="hero__btn hero__btn--secondary"
+                type="button"
+              >
+                <span>מה זה PANS/PANDAS?</span>
+                <FiArrowLeft />
+              </button>
             </div>
-            <div className="hero__stat-divider" />
-            <div className="hero__stat">
-              <span className="hero__stat-number">24/7</span>
-              <span className="hero__stat-label">תמיכה זמינה</span>
-            </div>
-            <div className="hero__stat-divider" />
-            <div className="hero__stat">
-              <span className="hero__stat-number">100%</span>
-              <span className="hero__stat-label">התנדבותי</span>
+
+
+            <div className="hero__stats">
+              <div className="hero__stat">
+                <span className="hero__stat-number">1000+</span>
+                <span className="hero__stat-label">משפחות בקהילה</span>
+              </div>
+              <div className="hero__stat-divider" />
+              <div className="hero__stat">
+                <span className="hero__stat-number">24/7</span>
+                <span className="hero__stat-label">תמיכה זמינה</span>
+              </div>
+              <div className="hero__stat-divider" />
+              <div className="hero__stat">
+                <span className="hero__stat-number">100%</span>
+                <span className="hero__stat-label">התנדבותי</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-    </section>
+      </section>
+
+      {/* What Is PANS/PANDAS Modal */}
+      <WhatIsPansPandasModal
+        open={modalOpen}
+        onClose={handleCloseModal}
+      />
+    </>
+
   );
 };
 

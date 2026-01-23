@@ -20,6 +20,7 @@ import PANS31ResultsPage from './pages/SymptomsPage/scales/PANS31Scale/PANS31Res
 import CBIHomePage from './pages/SymptomsPage/scales/CbiScale/CBIHomePage/CBIHomePage.tsx';
 import CBIScalePage from './pages/SymptomsPage/scales/CbiScale/CBIScalePage/CBIScalePage.tsx';
 import CBIResultsPage from './pages/SymptomsPage/scales/CbiScale/CBIResultsPage/CBIResultsPage.tsx';
+import AboutPage from './pages/AboutPage/AboutPage.tsx';
 
 type AppRoute = {
   path: string;
@@ -30,6 +31,10 @@ const AppRoutes: AppRoute[] = [
   {
     path: '/',
     component: <HomePage />,
+  },
+  {
+    path: '/about',
+    component: <AboutPage />,
   },
   {
     path: '/symptoms',
