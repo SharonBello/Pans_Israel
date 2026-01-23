@@ -22,6 +22,7 @@ import CBIScalePage from './pages/SymptomsPage/scales/CbiScale/CBIScalePage/CBIS
 import CBIResultsPage from './pages/SymptomsPage/scales/CbiScale/CBIResultsPage/CBIResultsPage.tsx';
 import AboutPage from './pages/AboutPage/AboutPage.tsx';
 import { SOCAdminPage, SOCResultsPage, SOCSurveyPage } from './features/index.ts';
+import SurveysPage from './pages/SurveysPage/SurveysPage.tsx';
 
 type AppRoute = {
   path: string;
@@ -114,11 +115,15 @@ const AppRoutes: AppRoute[] = [
     component: <CBIResultsPage />,
   },
   {
+    path: '/surveys',
+    component: <SurveysPage />,
+  },
+  {
     path: '/surveys/state-of-children',
     component: <SOCSurveyPage />,
   },
   {
-    path: 'surveys/state-of-children/results',
+    path: '/surveys/state-of-children/results',
     component: <SOCResultsPage />,
   },
   {

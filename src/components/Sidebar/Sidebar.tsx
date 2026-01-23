@@ -82,8 +82,8 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
       ],
     },
     {
-      title: 'סקר מצב ילדינו ',
-      path: '/surveys/state-of-children',
+      title: 'סקרים ',
+      path: '/surveys',
       icon: <FiClipboard />
     },
     {

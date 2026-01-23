@@ -145,6 +145,13 @@ const SOCResultsPage: React.FC = () => {
     const [familyCount, setFamilyCount] = useState(0);
     const [activeTab, setActiveTab] = useState(0);
 
+    useEffect(() => {
+    if (responses.length > 0) {
+        console.log('Sample response answers:', responses[0].answers);
+        console.log('diagnosed_by values:', responses.map(r => r.answers.diagnosed_by));
+    }
+}, [responses]);
+
     // --------------------------------------------------------------------------
     // Fetch Data
     // --------------------------------------------------------------------------
@@ -238,9 +245,12 @@ const SOCResultsPage: React.FC = () => {
     const diagnosedByData = useMemo(() =>
         calculatePercentages(responses, 'diagnosed_by', [
             { value: 'pediatrician', label: 'רופא ילדים' },
-            { value: 'neurologist', label: 'נוירולוג' },
+            { value: 'neurologist', label: 'נוירולוג' },    
             { value: 'psychiatrist', label: 'פסיכיאטר' },
             { value: 'immunologist', label: 'אימונולוג' },
+            { value: 'infectious', label: 'מומחה למחלות זיהומיות' },
+            { value: 'rheumatologist', label: 'ראומטולוג' },
+            { value: 'naturopath', label: 'רופא נטורופתי' },   
             { value: 'self', label: 'אבחון עצמי' },
             { value: 'other', label: 'אחר' },
         ]), [responses]);
