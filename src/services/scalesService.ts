@@ -107,7 +107,6 @@ export async function saveScaleResult(
         };
 
         const docRef = await addDoc(collection(db, 'scaleResults'), resultDoc);
-        console.log('✅ Scale result saved:', docRef.id);
         return docRef.id;
     } catch (error) {
         console.error('❌ Error saving scale result:', error);

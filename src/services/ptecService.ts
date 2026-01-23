@@ -164,7 +164,6 @@ export async function savePTECResult(formData: PTECFormData): Promise<string> {
     // Save to Firestore
     const docRef = await addDoc(collection(db, 'ptecResults'), resultDoc);
 
-    console.log('✅ PTEC result saved:', docRef.id);
     return docRef.id;
   } catch (error) {
     console.error('❌ Error saving PTEC result:', error);

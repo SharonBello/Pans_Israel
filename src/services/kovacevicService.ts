@@ -265,7 +265,6 @@ export async function saveKovacevicResult(formData: KovacevicFormData): Promise<
         // Save to Firestore
         const docRef = await addDoc(collection(db, 'kovacevicResults'), resultDoc);
 
-        console.log('✅ Kovacevic result saved:', docRef.id);
         return docRef.id;
     } catch (error) {
         console.error('❌ Error saving Kovacevic result:', error);

@@ -178,7 +178,6 @@ export async function saveCBIResult(formData: CBIFormData): Promise<string> {
     };
 
     const docRef = await addDoc(collection(db, 'cbiResults'), resultDoc);
-    console.log('✅ CBI result saved:', docRef.id);
     return docRef.id;
   } catch (error) {
     console.error('❌ Error saving CBI result:', error);

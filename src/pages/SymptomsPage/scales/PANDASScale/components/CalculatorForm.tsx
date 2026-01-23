@@ -372,7 +372,6 @@ const CalculatorForm: React.FC = () => {
     try {
       // Save to Firestore
       const docId = await saveScaleResult(formData);
-      console.log('✅ Results saved with ID:', docId);
 
       // Compute scores for navigation
       const scores = computeScores(formData);

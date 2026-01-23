@@ -171,7 +171,6 @@ export async function savePANS31Result(formData: PANS31FormData): Promise<string
     // Save to Firestore
     const docRef = await addDoc(collection(db, 'pans31Results'), resultDoc);
 
-    console.log('✅ PANS31 result saved:', docRef.id);
     return docRef.id;
   } catch (error) {
     console.error('❌ Error saving PANS31 result:', error);
