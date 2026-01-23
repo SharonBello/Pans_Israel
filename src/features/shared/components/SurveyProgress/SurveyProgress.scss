@@ -1,0 +1,180 @@
+// ==========================================================================
+// Survey Progress Component - Styles
+// ==========================================================================
+
+@use "sass:color";
+
+$color-primary: #023373;
+$color-accent: #E67E22;
+$color-medium: #6CA6D9;
+$color-light: #A7D5F2;
+$color-background: #F2F2F2;
+$text-primary: #0E0D26;
+$text-secondary: #023373;
+$success: #4CAF50;
+
+.survey-progress {
+    margin-bottom: 32px;
+
+    // Progress Bar
+    &__bar-container {
+        padding: 20px 24px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba($color-primary, 0.08);
+        margin-bottom: 24px;
+    }
+
+    &__bar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+
+    &__bar-label {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 0.9375rem !important;
+        font-weight: 600 !important;
+        color: $text-primary !important;
+    }
+
+    &__bar-percentage {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 1.25rem !important;
+        font-weight: 700 !important;
+        color: $color-primary !important;
+    }
+
+    &__bar {
+        height: 12px !important;
+        border-radius: 6px !important;
+        background-color: rgba($color-light, 0.5) !important;
+
+        .MuiLinearProgress-bar {
+            border-radius: 6px;
+            background: linear-gradient(90deg, $color-primary, $color-medium);
+        }
+    }
+
+    &__bar-stats {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 0.8125rem !important;
+        color: $text-secondary !important;
+        margin-top: 8px !important;
+        text-align: left;
+        opacity: 0.8;
+    }
+
+    // Stepper
+    &__stepper-container {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 24px 16px;
+        box-shadow: 0 2px 8px rgba($color-primary, 0.08);
+        overflow-x: auto;
+
+        @media (max-width: 900px) {
+            display: none;
+        }
+    }
+
+    &__stepper {
+        .MuiStepConnector-line {
+            border-color: $color-light;
+            border-top-width: 3px;
+        }
+
+        .MuiStepConnector-root.Mui-active .MuiStepConnector-line,
+        .MuiStepConnector-root.Mui-completed .MuiStepConnector-line {
+            border-color: $color-primary;
+        }
+    }
+
+    &__step {
+        cursor: pointer;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    &__step-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: $color-background;
+        border: 3px solid $color-light;
+        font-family: 'Heebo', sans-serif;
+        font-size: 1.125rem;
+        color: $text-secondary;
+        transition: all 0.3s ease;
+
+        &--current {
+            background: linear-gradient(135deg, $color-primary, $color-medium);
+            border-color: $color-primary;
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba($color-primary, 0.3);
+            transform: scale(1.1);
+        }
+
+        &--completed {
+            background: $success;
+            border-color: $success;
+            color: #ffffff;
+
+            svg {
+                stroke-width: 3px;
+            }
+        }
+    }
+
+    &__step-label {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 0.8125rem !important;
+        color: $text-secondary !important;
+        margin-top: 8px !important;
+        transition: all 0.3s ease;
+
+        &--current {
+            font-weight: 700 !important;
+            color: $color-primary !important;
+        }
+    }
+
+    // Mobile Indicator
+    &__mobile-indicator {
+        display: none;
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 16px 20px;
+        box-shadow: 0 2px 8px rgba($color-primary, 0.08);
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        @media (max-width: 900px) {
+            display: flex;
+        }
+    }
+
+    &__mobile-category {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 1rem !important;
+        font-weight: 600 !important;
+        color: $color-primary !important;
+    }
+
+    &__mobile-count {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 0.875rem !important;
+        color: $text-secondary !important;
+        background: $color-background;
+        padding: 4px 12px;
+        border-radius: 20px;
+    }
+}

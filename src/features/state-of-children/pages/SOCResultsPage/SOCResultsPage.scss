@@ -1,0 +1,323 @@
+// ==========================================================================
+// SOC Results Page - Styles
+// ==========================================================================
+
+@use "sass:color";
+
+$color-primary: #023373;
+$color-accent: #E67E22;
+$color-medium: #6CA6D9;
+$color-light: #A7D5F2;
+$color-background: #F2F2F2;
+$text-primary: #0E0D26;
+$text-secondary: #023373;
+$success: #4CAF50;
+
+.soc-results {
+    min-height: 100vh;
+    background: linear-gradient(180deg, $color-background 0%, #ffffff 100%);
+    padding: 100px 24px 60px;
+
+    @media (max-width: 768px) {
+        padding: 80px 16px 40px;
+    }
+
+    // ==========================================================================
+    // Loading State
+    // ==========================================================================
+
+    &--loading {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+
+        .MuiTypography-root {
+            font-family: 'Heebo', sans-serif;
+            color: $text-secondary;
+        }
+    }
+
+    // ==========================================================================
+    // Empty State
+    // ==========================================================================
+
+    &__empty {
+        text-align: center;
+        padding: 80px 40px;
+        background: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba($color-primary, 0.1);
+
+        h4 {
+            font-family: 'Heebo', sans-serif !important;
+            font-weight: 700 !important;
+            color: $color-primary !important;
+            margin-bottom: 12px !important;
+        }
+
+        p {
+            font-family: 'Heebo', sans-serif !important;
+            color: $text-secondary !important;
+        }
+    }
+
+    // ==========================================================================
+    // Header
+    // ==========================================================================
+
+    &__header {
+        text-align: center;
+        margin-bottom: 48px;
+    }
+
+    &__title {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: clamp(1.75rem, 5vw, 2.5rem) !important;
+        font-weight: 800 !important;
+        color: $color-primary !important;
+        margin-bottom: 12px !important;
+    }
+
+    &__subtitle {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 1.125rem !important;
+        color: $text-secondary !important;
+        opacity: 0.85;
+    }
+
+    // ==========================================================================
+    // Stats Cards
+    // ==========================================================================
+
+    &__stats {
+        margin-bottom: 40px !important;
+    }
+
+    &__stat-card {
+        background: #ffffff !important;
+        border-radius: 16px !important;
+        box-shadow: 0 4px 20px rgba($color-primary, 0.08) !important;
+        transition: all 0.3s ease;
+        height: 100%;
+
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba($color-primary, 0.12) !important;
+        }
+
+        .MuiCardContent-root {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 24px !important;
+        }
+    }
+
+    &__stat-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+
+        svg {
+            font-size: 1.75rem;
+        }
+    }
+
+    &__stat-value {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 2rem !important;
+        font-weight: 800 !important;
+        color: $text-primary !important;
+        margin-bottom: 4px !important;
+    }
+
+    &__stat-label {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 0.875rem !important;
+        color: $text-secondary !important;
+        opacity: 0.8;
+    }
+
+    // ==========================================================================
+    // Tabs
+    // ==========================================================================
+
+    &__tabs-container {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 8px;
+        margin-bottom: 32px;
+        box-shadow: 0 4px 20px rgba($color-primary, 0.08);
+    }
+
+    &__tabs {
+        .MuiTab-root {
+            font-family: 'Heebo', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: none;
+            min-height: 48px;
+            color: $text-secondary;
+
+            &.Mui-selected {
+                color: $color-primary;
+            }
+        }
+
+        .MuiTabs-indicator {
+            background: linear-gradient(90deg, $color-primary, $color-medium);
+            height: 4px;
+            border-radius: 2px;
+        }
+    }
+
+    // ==========================================================================
+    // Chart Cards
+    // ==========================================================================
+
+    &__content {
+        margin-bottom: 40px;
+    }
+
+    &__chart-card {
+        background: #ffffff !important;
+        border-radius: 16px !important;
+        box-shadow: 0 4px 20px rgba($color-primary, 0.08) !important;
+        height: 100%;
+
+        .MuiCardContent-root {
+            padding: 24px !important;
+        }
+
+        &--gauge {
+            position: relative;
+
+            .MuiCardContent-root {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    }
+
+    &__chart-title {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 1.125rem !important;
+        font-weight: 700 !important;
+        color: $color-primary !important;
+        margin-bottom: 20px !important;
+        text-align: center;
+    }
+
+    &__gauge-value {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 2.5rem !important;
+        font-weight: 800 !important;
+        color: $success !important;
+        text-align: center;
+        margin-top: -60px !important;
+    }
+
+    // ==========================================================================
+    // Recharts Customization
+    // ==========================================================================
+
+    .recharts-wrapper {
+        direction: ltr; // Charts work better in LTR
+
+        .recharts-text {
+            font-family: 'Heebo', sans-serif;
+        }
+
+        .recharts-cartesian-axis-tick-value {
+            font-family: 'Heebo', sans-serif;
+            font-size: 12px;
+            fill: $text-secondary;
+        }
+
+        .recharts-tooltip-wrapper {
+            .recharts-default-tooltip {
+                font-family: 'Heebo', sans-serif;
+                border-radius: 8px !important;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+            }
+        }
+
+        .recharts-legend-item-text {
+            font-family: 'Heebo', sans-serif;
+        }
+
+        .recharts-pie-label-text {
+            font-family: 'Heebo', sans-serif;
+            font-size: 11px;
+        }
+    }
+
+    // ==========================================================================
+    // Disclaimer
+    // ==========================================================================
+
+    &__disclaimer {
+        text-align: center;
+        padding: 20px;
+        background: rgba($color-light, 0.3);
+        border-radius: 12px;
+        border: 1px dashed rgba($color-primary, 0.2);
+
+        .MuiTypography-root {
+            font-family: 'Heebo', sans-serif !important;
+            font-size: 0.875rem !important;
+            color: $text-secondary !important;
+            opacity: 0.8;
+        }
+    }
+}
+
+// ==========================================================================
+// Responsive
+// ==========================================================================
+
+@media (max-width: 600px) {
+    .soc-results {
+        &__stat-card {
+            .MuiCardContent-root {
+                padding: 16px !important;
+            }
+        }
+
+        &__stat-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+
+            svg {
+                font-size: 1.5rem;
+            }
+        }
+
+        &__stat-value {
+            font-size: 1.5rem !important;
+        }
+
+        &__chart-card {
+            .MuiCardContent-root {
+                padding: 16px !important;
+            }
+        }
+
+        &__tabs {
+            .MuiTab-root {
+                font-size: 0.875rem;
+                min-width: auto;
+                padding: 8px 12px;
+            }
+        }
+    }
+}

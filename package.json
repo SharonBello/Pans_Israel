@@ -19,7 +19,7 @@
     "@tsparticles/engine": "^3.9.1",
     "@tsparticles/react": "^3.0.0",
     "@tsparticles/slim": "^3.9.1",
-    "firebase": "^12.7.0",
+    "firebase": "^12.8.0",
     "firebase-admin": "^13.6.0",
     "i18next": "^25.2.1",
     "i18next-browser-languagedetector": "^8.1.0",
@@ -29,10 +29,11 @@
     "react-i18next": "^15.5.2",
     "react-icons": "^5.5.0",
     "react-router-dom": "^7.12.0",
-    "recharts": "^3.6.0",
+    "recharts": "^3.7.0",
     "sass": "^1.97.2",
     "stylis": "^4.3.6",
-    "stylis-plugin-rtl": "^2.1.1"
+    "stylis-plugin-rtl": "^2.1.1",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

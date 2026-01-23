@@ -1,0 +1,454 @@
+// ==========================================================================
+// SOC Survey Page - Styles
+// ==========================================================================
+
+@use "sass:color";
+
+$color-primary: #023373;
+$color-accent: #E67E22;
+$color-medium: #6CA6D9;
+$color-light: #A7D5F2;
+$color-background: #F2F2F2;
+$text-primary: #0E0D26;
+$text-secondary: #023373;
+$success: #4CAF50;
+$error: #F44336;
+
+.soc-survey {
+    min-height: 100vh;
+    background: linear-gradient(180deg, $color-background 0%, #ffffff 100%);
+    padding: 100px 24px 60px;
+
+    @media (max-width: 768px) {
+        padding: 80px 16px 40px;
+    }
+
+    // ==========================================================================
+    // Intro Section (Email Registration)
+    // ==========================================================================
+
+    &__intro {
+        max-width: 700px;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    &__title {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: clamp(2rem, 5vw, 3rem) !important;
+        font-weight: 800 !important;
+        color: $color-primary !important;
+        margin-bottom: 16px !important;
+        line-height: 1.2 !important;
+    }
+
+    &__description {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 1.125rem !important;
+        color: $text-secondary !important;
+        line-height: 1.7 !important;
+        margin-bottom: 40px !important;
+        opacity: 0.9;
+    }
+
+    &__info-cards {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 48px;
+    }
+
+    &__info-card {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 20px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 2px 12px rgba($color-primary, 0.08);
+        border: 1px solid rgba($color-primary, 0.08);
+    }
+
+    &__info-icon {
+        font-size: 1.5rem;
+    }
+
+    &__info-text {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 0.9375rem !important;
+        color: $text-primary !important;
+        font-weight: 500 !important;
+    }
+
+    &__email-section {
+        background: #ffffff;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 10px 40px rgba($color-primary, 0.1);
+        border: 1px solid rgba($color-primary, 0.08);
+        margin-bottom: 32px;
+
+        @media (max-width: 600px) {
+            padding: 24px;
+        }
+    }
+
+    &__email-label {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 1.125rem !important;
+        font-weight: 600 !important;
+        color: $text-primary !important;
+        margin-bottom: 8px !important;
+    }
+
+    &__email-note {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 0.875rem !important;
+        color: $text-secondary !important;
+        opacity: 0.8;
+        margin-bottom: 20px !important;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+
+        svg {
+            font-size: 1rem;
+        }
+    }
+
+    &__email-input {
+        max-width: 400px;
+        margin: 0 auto 20px !important;
+
+        .MuiOutlinedInput-root {
+            font-family: 'Heebo', sans-serif;
+            border-radius: 12px;
+            font-size: 1.125rem;
+
+            fieldset {
+                border-color: rgba($color-primary, 0.2);
+                border-width: 2px;
+            }
+
+            &:hover fieldset {
+                border-color: $color-primary;
+            }
+
+            &.Mui-focused fieldset {
+                border-color: $color-primary;
+            }
+        }
+
+        .MuiInputBase-input {
+            padding: 16px;
+            text-align: center;
+        }
+    }
+
+    &__email-alert {
+        max-width: 500px;
+        margin: 0 auto 20px !important;
+        border-radius: 12px !important;
+        font-family: 'Heebo', sans-serif !important;
+    }
+
+    &__start-btn {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 1.125rem !important;
+        font-weight: 600 !important;
+        padding: 14px 48px !important;
+        border-radius: 50px !important;
+        background: linear-gradient(135deg, $color-accent, color.adjust($color-accent, $lightness: -8%)) !important;
+        box-shadow: 0 4px 20px rgba($color-accent, 0.35) !important;
+        text-transform: none !important;
+        transition: all 0.3s ease !important;
+
+        &:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 6px 25px rgba($color-accent, 0.45) !important;
+        }
+
+        svg {
+            font-size: 1.25rem;
+            margin-right: 8px;
+        }
+    }
+
+    &__disclaimer {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 0.8125rem !important;
+        color: $text-secondary !important;
+        opacity: 0.7;
+        max-width: 500px;
+        margin: 0 auto;
+        line-height: 1.6 !important;
+    }
+
+    // ==========================================================================
+    // Survey Form
+    // ==========================================================================
+
+    &__category-header {
+        text-align: center;
+        margin-bottom: 40px;
+        padding: 32px;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba($color-primary, 0.08);
+    }
+
+    &__category-icon {
+        font-size: 3rem !important;
+        margin-bottom: 12px;
+    }
+
+    &__category-title {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: clamp(1.5rem, 4vw, 2rem) !important;
+        font-weight: 700 !important;
+        color: $color-primary !important;
+        margin-bottom: 8px !important;
+    }
+
+    &__category-description {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 1rem !important;
+        color: $text-secondary !important;
+        opacity: 0.85;
+    }
+
+    &__questions {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    &__error-alert {
+        max-width: 800px;
+        margin: 0 auto 24px !important;
+        border-radius: 12px !important;
+        font-family: 'Heebo', sans-serif !important;
+    }
+
+    // ==========================================================================
+    // Navigation
+    // ==========================================================================
+
+    &__navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 800px;
+        margin: 40px auto 0;
+        padding: 24px;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba($color-primary, 0.08);
+
+        @media (max-width: 600px) {
+            padding: 16px;
+            gap: 12px;
+        }
+    }
+
+    &__nav-btn {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 1rem !important;
+        font-weight: 600 !important;
+        padding: 12px 28px !important;
+        border-radius: 50px !important;
+        text-transform: none !important;
+        transition: all 0.3s ease !important;
+
+        @media (max-width: 600px) {
+            padding: 10px 16px !important;
+            font-size: 0.875rem !important;
+        }
+
+        &--prev {
+            border-color: $color-medium !important;
+            color: $color-primary !important;
+
+            &:hover:not(:disabled) {
+                background: rgba($color-primary, 0.05) !important;
+                border-color: $color-primary !important;
+            }
+
+            &:disabled {
+                opacity: 0.4;
+            }
+        }
+
+        &--next {
+            background: linear-gradient(135deg, $color-primary, $color-medium) !important;
+            box-shadow: 0 4px 15px rgba($color-primary, 0.25) !important;
+
+            &:hover:not(:disabled) {
+                transform: translateY(-2px) !important;
+                box-shadow: 0 6px 20px rgba($color-primary, 0.35) !important;
+            }
+        }
+    }
+
+    &__nav-info {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 0.9375rem !important;
+        color: $text-secondary !important;
+        font-weight: 500 !important;
+
+        @media (max-width: 600px) {
+            display: none;
+        }
+    }
+
+    // ==========================================================================
+    // Success State
+    // ==========================================================================
+
+    &--complete {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__success {
+        text-align: center;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 60px 40px;
+        background: #ffffff;
+        border-radius: 24px;
+        box-shadow: 0 20px 60px rgba($color-primary, 0.12);
+
+        @media (max-width: 600px) {
+            padding: 40px 24px;
+        }
+    }
+
+    &__success-icon {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 24px;
+        background: linear-gradient(135deg, $success, color.adjust($success, $lightness: 10%));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 10px 30px rgba($success, 0.3);
+
+        svg {
+            font-size: 3rem;
+            color: #ffffff;
+            stroke-width: 3px;
+        }
+    }
+
+    &__success-title {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: clamp(1.75rem, 4vw, 2.25rem) !important;
+        font-weight: 700 !important;
+        color: $color-primary !important;
+        margin-bottom: 16px !important;
+    }
+
+    &__success-text {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 1.0625rem !important;
+        color: $text-secondary !important;
+        line-height: 1.7 !important;
+        margin-bottom: 32px !important;
+    }
+
+    &__success-actions {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    &__success-btn {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 1rem !important;
+        font-weight: 600 !important;
+        padding: 12px 32px !important;
+        border-radius: 50px !important;
+        text-transform: none !important;
+        transition: all 0.3s ease !important;
+
+        &:not(&--secondary) {
+            background: linear-gradient(135deg, $color-primary, $color-medium) !important;
+            box-shadow: 0 4px 15px rgba($color-primary, 0.25) !important;
+
+            &:hover {
+                transform: translateY(-2px) !important;
+                box-shadow: 0 6px 20px rgba($color-primary, 0.35) !important;
+            }
+        }
+
+        &--secondary {
+            border-color: $color-primary !important;
+            color: $color-primary !important;
+
+            &:hover {
+                background: rgba($color-primary, 0.05) !important;
+            }
+        }
+    }
+
+    // ==========================================================================
+    // Confirm Dialog
+    // ==========================================================================
+
+    &__dialog {
+        .MuiDialog-paper {
+            border-radius: 16px;
+            padding: 8px;
+        }
+    }
+
+    &__dialog-title {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 1.5rem !important;
+        font-weight: 700 !important;
+        color: $color-primary !important;
+        text-align: center;
+    }
+
+    &__dialog-text {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 1rem !important;
+        color: $text-primary !important;
+        line-height: 1.7 !important;
+        text-align: center;
+    }
+
+    &__dialog-stats {
+        font-family: 'Heebo', sans-serif !important;
+        font-size: 0.9375rem !important;
+        color: $text-secondary !important;
+        text-align: center;
+        margin-top: 12px !important;
+        padding: 12px;
+        background: $color-background;
+        border-radius: 8px;
+    }
+
+    &__dialog-actions {
+        justify-content: center !important;
+        gap: 12px;
+        padding: 16px 24px 24px !important;
+
+        .MuiButton-root {
+            font-family: 'Heebo', sans-serif !important;
+            font-weight: 600 !important;
+            text-transform: none !important;
+            border-radius: 50px !important;
+            padding: 10px 24px !important;
+        }
+
+        .MuiButton-contained {
+            background: linear-gradient(135deg, $color-primary, $color-medium) !important;
+        }
+    }
+}

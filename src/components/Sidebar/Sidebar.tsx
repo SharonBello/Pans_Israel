@@ -30,6 +30,7 @@ import {
 } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Sidebar.scss';
+import { FiClipboard } from 'react-icons/fi';
 
 interface SidebarProps {
   open: boolean;
@@ -48,7 +49,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
   const location = useLocation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  
+
   const [openSubmenu, setOpenSubmenu] = React.useState<string | null>(null);
 
   const menuItems: MenuItem[] = [
@@ -79,6 +80,11 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
         { title: 'תמיכה למשפחה', icon: <PeopleIcon />, path: '/support/family' },
         { title: 'סיפורי תקווה', icon: <FavoriteIcon />, path: '/support/hope' },
       ],
+    },
+    {
+      title: 'סקר מצב ילדינו ',
+      path: '/surveys/state-of-children',
+      icon: <FiClipboard />
     },
     {
       title: 'זכויות וסיוע',

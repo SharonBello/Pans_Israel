@@ -1,0 +1,367 @@
+@use "sass:color";
+
+// Import variables (adjust path as needed)
+$color-primary: #023373;
+$color-accent: #e67e22;
+$color-medium: #6ca6d9;
+$color-light: #a7d5f2;
+$color-background: #f2f2f2;
+$text-primary: #0e0d26;
+$text-secondary: #023373;
+$error: #f44336;
+$success: #4caf50;
+
+.survey-question {
+    margin-bottom: 32px;
+    padding: 24px !important;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid rgba($color-primary, 0.1);
+    transition: all 0.3s ease;
+    margin-block: 1rem !important;
+
+    &:hover {
+        border-color: rgba($color-primary, 0.2);
+        box-shadow: 0 4px 12px rgba($color-primary, 0.08);
+    }
+
+    &--error {
+        border-color: $error !important;
+        background: rgba($error, 0.02);
+    }
+
+    // Header
+    &__header {
+        margin-bottom: 20px;
+    }
+
+    &__text {
+        font-family: "Heebo", sans-serif !important;
+        font-size: 1.0625rem !important;
+        font-weight: 600 !important;
+        color: $text-primary !important;
+        line-height: 1.5 !important;
+        margin-bottom: 4px;
+    }
+
+    &__required {
+        color: $error;
+        margin-right: 4px;
+        font-weight: 700;
+    }
+
+    &__subtext {
+        font-family: "Heebo", sans-serif !important;
+        font-size: 0.875rem !important;
+        color: $text-secondary !important;
+        opacity: 0.8;
+        margin-top: 4px;
+    }
+
+    // Input container
+    &__input {
+        margin-top: 16px;
+    }
+
+    // Radio Group
+    &__radio-group {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    &__radio-option {
+        margin: 0 !important;
+        padding: 10px 16px;
+        border-radius: 8px;
+        transition: background 0.2s ease;
+
+        &:hover {
+            background: rgba($color-primary, 0.04);
+        }
+
+        .MuiRadio-root {
+            color: $color-medium;
+
+            &.Mui-checked {
+                color: $color-primary;
+            }
+        }
+
+        .MuiFormControlLabel-label {
+            font-family: "Heebo", sans-serif;
+            font-size: 0.9375rem;
+            color: $text-primary;
+        }
+    }
+
+    // Checkbox Group
+    &__checkbox-group {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    &__checkbox-option {
+        margin: 0 !important;
+        padding: 8px 16px;
+        border-radius: 8px;
+        transition: background 0.2s ease;
+
+        &:hover {
+            background: rgba($color-primary, 0.04);
+        }
+
+        .MuiCheckbox-root {
+            color: $color-medium;
+
+            &.Mui-checked {
+                color: $color-primary;
+            }
+        }
+
+        .MuiFormControlLabel-label {
+            font-family: "Heebo", sans-serif;
+            font-size: 0.9375rem;
+            color: $text-primary;
+        }
+    }
+
+    // Scale (Slider)
+    &__scale {
+        padding: 20px 42px 10px;
+    }
+
+    &__scale-labels {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+        margin-bottom: 24px;
+    }
+
+    &__scale-label {
+        font-family: "Heebo", sans-serif !important;
+        font-size: 0.8125rem !important;
+        color: $text-secondary !important;
+        font-weight: 500;
+    }
+
+    &__slider {
+        .MuiSlider-rail {
+            background: $color-light;
+            height: 8px;
+            border-radius: 4px;
+        }
+
+        .MuiSlider-track {
+            background: linear-gradient(90deg, $color-primary, $color-medium);
+            height: 8px;
+            border-radius: 4px;
+            border: none;
+        }
+
+        .MuiSlider-thumb {
+            width: 24px;
+            height: 24px;
+            background: $color-primary;
+            border: 3px solid #ffffff;
+            box-shadow: 0 2px 8px rgba($color-primary, 0.3);
+            transform: translate(-20%, -50%) !important;
+
+            &:hover,
+            &.Mui-focusVisible {
+                box-shadow: 0 4px 12px rgba($color-primary, 0.4);
+            }
+        }
+
+        .MuiSlider-mark {
+            background: rgba($color-primary, 0.3);
+            width: 2px;
+            height: 12px;
+        }
+
+        .MuiSlider-markLabel {
+            font-family: "Heebo", sans-serif;
+            font-size: 0.75rem;
+            color: $text-secondary;
+            display: none;
+        }
+
+        .MuiSlider-valueLabel {
+            background: $color-primary;
+            font-family: "Heebo", sans-serif;
+            font-size: 0.875rem;
+            border-radius: 6px;
+        }
+    }
+
+    // Toggle (Yes/No)
+    &__toggle-group {
+        display: flex !important;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    &__toggle-btn {
+        font-family: "Heebo", sans-serif !important;
+        font-size: 1rem !important;
+        font-weight: 600 !important;
+        padding: 12px 40px !important;
+        border-radius: 50px !important;
+        border: 2px solid $color-medium !important;
+        color: $color-primary !important;
+        text-transform: none !important;
+        transition: all 0.2s ease !important;
+
+        &:hover {
+            background: rgba($color-primary, 0.05) !important;
+            border-color: $color-primary !important;
+        }
+
+        &.Mui-selected {
+            background: linear-gradient(
+                135deg,
+                $color-primary,
+                color.adjust($color-primary, $lightness: 10%)
+            ) !important;
+            color: #ffffff !important;
+            border-color: $color-primary !important;
+
+            &:hover {
+                background: linear-gradient(
+                    135deg,
+                    color.adjust($color-primary, $lightness: -5%),
+                    $color-primary
+                ) !important;
+            }
+        }
+    }
+
+    // Text Field
+    &__text-field {
+        .MuiOutlinedInput-root {
+            font-family: "Heebo", sans-serif;
+            border-radius: 10px;
+
+            fieldset {
+                border-color: rgba($color-primary, 0.2);
+            }
+
+            &:hover fieldset {
+                border-color: $color-primary;
+            }
+
+            &.Mui-focused fieldset {
+                border-color: $color-primary;
+                border-width: 2px;
+            }
+        }
+
+        .MuiInputBase-input {
+            font-family: "Heebo", sans-serif;
+            font-size: 0.9375rem;
+            line-height: 1.6;
+        }
+    }
+
+    // Number Field
+    &__number-field {
+        max-width: 150px;
+
+        .MuiOutlinedInput-root {
+            font-family: "Heebo", sans-serif;
+            border-radius: 10px;
+
+            fieldset {
+                border-color: rgba($color-primary, 0.2);
+            }
+
+            &:hover fieldset {
+                border-color: $color-primary;
+            }
+
+            &.Mui-focused fieldset {
+                border-color: $color-primary;
+                border-width: 2px;
+            }
+        }
+
+        .MuiInputBase-input {
+            font-family: "Heebo", sans-serif;
+            font-size: 1.125rem;
+            text-align: center;
+            padding: 14px;
+        }
+    }
+
+    // Date Field
+    &__date-field {
+        max-width: 200px;
+
+        .MuiOutlinedInput-root {
+            font-family: "Heebo", sans-serif;
+            border-radius: 10px;
+        }
+    }
+
+    // Email Field
+    &__email-field {
+        max-width: 400px;
+
+        .MuiOutlinedInput-root {
+            font-family: "Heebo", sans-serif;
+            border-radius: 10px;
+
+            fieldset {
+                border-color: rgba($color-primary, 0.2);
+            }
+
+            &:hover fieldset {
+                border-color: $color-primary;
+            }
+
+            &.Mui-focused fieldset {
+                border-color: $color-primary;
+                border-width: 2px;
+            }
+        }
+
+        .MuiInputBase-input {
+            font-family: "Heebo", sans-serif;
+            font-size: 1rem;
+        }
+    }
+
+    // Error message
+    &__error {
+        font-family: "Heebo", sans-serif !important;
+        font-size: 0.8125rem !important;
+        color: $error !important;
+        margin-top: 8px !important;
+    }
+}
+
+// Responsive adjustments
+@media (max-width: 600px) {
+    .survey-question {
+        padding: 16px;
+        margin-bottom: 24px;
+
+        &__text {
+            font-size: 1rem !important;
+        }
+
+        &__toggle-group {
+            width: 100%;
+        }
+
+        &__toggle-btn {
+            flex: 1;
+            padding: 10px 20px !important;
+        }
+
+        &__scale {
+            padding: 16px 8px 10px;
+        }
+    }
+}

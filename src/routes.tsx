@@ -21,6 +21,7 @@ import CBIHomePage from './pages/SymptomsPage/scales/CbiScale/CBIHomePage/CBIHom
 import CBIScalePage from './pages/SymptomsPage/scales/CbiScale/CBIScalePage/CBIScalePage.tsx';
 import CBIResultsPage from './pages/SymptomsPage/scales/CbiScale/CBIResultsPage/CBIResultsPage.tsx';
 import AboutPage from './pages/AboutPage/AboutPage.tsx';
+import { SOCAdminPage, SOCResultsPage, SOCSurveyPage } from './features/index.ts';
 
 type AppRoute = {
   path: string;
@@ -101,16 +102,28 @@ const AppRoutes: AppRoute[] = [
     component: <PANS31ResultsPage />,
   },
   {
-    path: '/scales/cbi', 
+    path: '/scales/cbi',
     component: < CBIHomePage />,
   },
   {
-    path: '/scales/cbi/form', 
+    path: '/scales/cbi/form',
     component: <CBIScalePage />,
-    },
+  },
   {
-    path: '/scales/cbi/results', 
+    path: '/scales/cbi/results',
     component: <CBIResultsPage />,
+  },
+  {
+    path: '/surveys/state-of-children',
+    component: <SOCSurveyPage />,
+  },
+  {
+    path: 'surveys/state-of-children/results',
+    component: <SOCResultsPage />,
+  },
+  {
+    path: '/admin/surveys/state-of-children',
+    component: <SOCAdminPage />,
   },
 ];
 
