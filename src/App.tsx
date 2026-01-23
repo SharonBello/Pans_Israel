@@ -8,12 +8,11 @@ import { prefixer } from 'stylis';
 
 // Components
 import Header from './components/Header';
-// import { Hero } from './components/sections';
+import Sidebar from './components/Sidebar/Sidebar';
 
 // Styles
 import './styles/main.scss';
 import './App.scss';
-// import HomeSections from './components/sections/HomeSections/HomeSections';
 
 // Create RTL cache for MUI components
 const cacheRtl = createCache({
@@ -24,8 +23,16 @@ const cacheRtl = createCache({
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+   console.log('App render - isMenuOpen:', isMenuOpen);
+
   const handleMenuToggle = () => {
+    console.log('Toggle clicked! Current state:', isMenuOpen);
     setIsMenuOpen((prev) => !prev);
+  };
+
+  const handleSidebarClose = () => {
+    console.log('Close sidebar');
+    setIsMenuOpen(false);
   };
 
   return (
@@ -34,17 +41,9 @@ function App() {
         <div dir="rtl" lang="he" className="app">
           <Header onMenuToggle={handleMenuToggle} isMenuOpen={isMenuOpen} />
 
-          {/* <main className="main-content">
-            <Hero />
-            <HomeSections /> */}
+          {/* ADD THE SIDEBAR HERE */}
+          <Sidebar open={isMenuOpen} onClose={handleSidebarClose} />
 
-          {/* Placeholder for more sections */}
-          {/* <section style={{ padding: '4rem 2rem', textAlign: 'center' }}>
-              <p style={{ color: '#6CA6D9' }}>
-                Step 3 Complete ✓ - Hero with Neural Network Particles
-              </p>
-            </section>
-          </main> */}
           <main style={{ flex: '1 0 auto' }} className="main-content">
             <Routes>
               {AppRoutes.map((route) => (
