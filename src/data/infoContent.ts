@@ -1,4 +1,7 @@
 import type { InfoSection, AssessmentScale } from '../types/info.types';
+import relatedImage1 from '../styles/assets/related_image_1.jpg';
+import relatedImage2 from '../styles/assets/related_image_2.jpg';
+import relatedImage3 from '../styles/assets/related_image_3.jpg';
 
 export const infoSections: Record<string, InfoSection> = {
   overview: {
@@ -92,28 +95,34 @@ export const infoSections: Record<string, InfoSection> = {
         id: 'video-section',
         type: 'video',
         title: 'צפו בסרטון הסבר',
-        videoUrl: 'https://youtu.be/_rPTOuIXLwo',
+        videoUrl: 'https://www.youtube.com/watch?v=l55SX33ZQy0',
         content: 'להבנה טובה יותר של הספקטרום של PANDAS/PANS ודלקת מוח אוטואימונית, צפו בסרטון הקצר הזה.'
       }
     ],
     relatedPages: [
       {
-        id: 'symptoms',
-        title: 'סימנים ותסמינים',
-        description: 'למידע מפורט על התסמינים השונים וסולמות הערכה',
-        slug: 'symptoms'
-      },
-      {
         id: 'diagnosis',
-        title: 'אבחון',
-        description: 'קריטריונים לאבחון ובדיקות מומלצות',
-        slug: 'diagnosis'
+        slug: 'diagnosis',
+        title: 'אבחון PANDAS',
+        description: 'האבחון מבוסס על תסמינים, היסטוריה רפואית ובדיקות מעבדה.',
+        imageUrl: relatedImage1,
+        imageAlt: 'אבחון PANDAS'
       },
       {
         id: 'treatment',
-        title: 'טיפול',
-        description: 'אפשרויות הטיפול השונות ופרוגנוזה',
-        slug: 'treatment'
+        slug: 'treatment',
+        title: 'טיפול ב-PANDAS',
+        description: 'טיפול מוקדם יכול לצמצם משך וחומרה של תסמינים.',
+        imageUrl: relatedImage2,
+        imageAlt: 'טיפול ב-PANDAS'
+      },
+      {
+        id: 'faq',
+        slug: 'faq',
+        title: 'שאלות נפוצות',
+        description: 'תשובות לשאלות שכיחות של הורים, מטפלים ותומכים.',
+        imageUrl: relatedImage3,
+        imageAlt: 'שאלות נפוצות'
       }
     ]
   },
@@ -255,15 +264,19 @@ export const infoSections: Record<string, InfoSection> = {
     relatedPages: [
       {
         id: 'diagnosis',
-        title: 'אבחון PANDAS/PANS',
-        description: 'קריטריונים לאבחון ובדיקות נדרשות',
-        slug: 'diagnosis'
+        slug: 'diagnosis',
+        title: 'אבחון PANDAS',
+        description: 'האבחון מבוסס על תסמינים, היסטוריה רפואית ובדיקות מעבדה.',
+        imageUrl: relatedImage1,
+        imageAlt: 'אבחון PANDAS'
       },
       {
         id: 'treatment',
-        title: 'טיפול ב-PANDAS/PANS',
-        description: 'אפשרויות טיפול ופרוגנוזה',
-        slug: 'treatment'
+        slug: 'treatment',
+        title: 'טיפול ב-PANDAS',
+        description: 'טיפול מוקדם יכול לצמצם משך וחומרה של תסמינים.',
+        imageUrl: relatedImage2,
+        imageAlt: 'טיפול ב-PANDAS'
       },
     ]
   },
@@ -393,7 +406,7 @@ export const infoSections: Record<string, InfoSection> = {
         variant: 'warning',
         title: 'למעלה ממחצית מזיהומי הסטרפ מתפספסים בילדים צעירים',
         content: 'על פי מחקר Hysmith ושות\' (2017), 65% מזיהומי סטרפ חדשים מקבוצה A לא גרמו לתסמינים אך עדיין היו משמעותיים מבחינה אימונולוגית. לכן, כדאי לבצע בדיקת דם לחיפוש סטרפ או תרבית של 48 שעות.'
-        
+
       },
       {
         id: 'strep-locations',
@@ -443,22 +456,28 @@ export const infoSections: Record<string, InfoSection> = {
     ],
     relatedPages: [
       {
-        id: 'symptoms',
-        title: 'סימנים ותסמינים',
-        description: 'הכירו את כל התסמינים האפשריים',
-        slug: 'symptoms'
+        id: 'diagnosis',
+        slug: 'diagnosis',
+        title: 'אבחון PANDAS',
+        description: 'האבחון מבוסס על תסמינים, היסטוריה רפואית ובדיקות מעבדה.',
+        imageUrl: relatedImage1,
+        imageAlt: 'אבחון PANDAS'
       },
       {
         id: 'treatment',
-        title: 'טיפול',
-        description: 'אפשרויות טיפול ופרוגנוזה',
-        slug: 'treatment'
+        slug: 'treatment',
+        title: 'טיפול ב-PANDAS',
+        description: 'טיפול מוקדם יכול לצמצם משך וחומרה של תסמינים.',
+        imageUrl: relatedImage2,
+        imageAlt: 'טיפול ב-PANDAS'
       },
       {
-        id: 'overview',
-        title: 'מידע כללי',
-        description: 'חזרה לעמוד המידע הראשי',
-        slug: 'overview'
+        id: 'faq',
+        slug: 'faq',
+        title: 'שאלות נפוצות',
+        description: 'תשובות לשאלות שכיחות של הורים, מטפלים ותומכים.',
+        imageUrl: relatedImage3,
+        imageAlt: 'שאלות נפוצות'
       }
     ]
   },
@@ -638,15 +657,19 @@ export const infoSections: Record<string, InfoSection> = {
     relatedPages: [
       {
         id: 'diagnosis',
-        title: 'אבחון',
-        description: 'קריטריונים ובדיקות לאבחון',
-        slug: 'diagnosis'
+        slug: 'diagnosis',
+        title: 'אבחון PANDAS',
+        description: 'האבחון מבוסס על תסמינים, היסטוריה רפואית ובדיקות מעבדה.',
+        imageUrl: relatedImage1,
+        imageAlt: 'אבחון PANDAS'
       },
       {
-        id: 'symptoms',
-        title: 'סימנים ותסמינים',
-        description: 'הכירו את כל התסמינים האפשריים',
-        slug: 'symptoms'
+        id: 'treatment',
+        slug: 'treatment',
+        title: 'טיפול ב-PANDAS',
+        description: 'טיפול מוקדם יכול לצמצם משך וחומרה של תסמינים.',
+        imageUrl: relatedImage2,
+        imageAlt: 'טיפול ב-PANDAS'
       },
     ]
   },

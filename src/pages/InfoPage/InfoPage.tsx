@@ -28,7 +28,7 @@ const InfoPage: React.FC = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
-  
+
   const [sidebarOpen, setSidebarOpen] = useState(!isMobile);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -99,7 +99,7 @@ const InfoPage: React.FC = () => {
 
         {/* Main Content */}
         <Box className="info-page__main">
-          <Container maxWidth="md" className="info-page__content-container">
+          <Container maxWidth="lg" className="info-page__content-container">
             {/* Content Renderer */}
             <InfoContentRenderer content={currentSection.content} />
 
@@ -122,17 +122,28 @@ const InfoPage: React.FC = () => {
                       key={page.id}
                       className="info-page__related-card"
                     >
-                      <CardActionArea onClick={() => handleRelatedPageClick(page.slug)}>
-                        <CardContent>
-                          <Typography variant="h6" className="info-page__related-card-title">
+                      <CardActionArea
+                        onClick={() => handleRelatedPageClick(page.slug)}
+                        className="info-page__related-card-action"
+                      >
+                        <Box
+                          className="info-page__related-card-media"
+                          sx={{
+                            backgroundImage: `url(${page.imageUrl})`,
+                          }}
+                          role="img"
+                          aria-label={page.imageAlt || page.title}
+                        />
+
+                        <CardContent className="info-page__related-card-content">
+                          <Typography variant="h5" className="info-page__related-card-title">
                             {page.title}
                           </Typography>
+
                           <Typography variant="body2" className="info-page__related-card-description">
                             {page.description}
                           </Typography>
-                          <Box className="info-page__related-card-arrow">
-                            <ArrowIcon />
-                          </Box>
+
                         </CardContent>
                       </CardActionArea>
                     </Card>
@@ -150,12 +161,15 @@ const InfoPage: React.FC = () => {
                 הצטרפו לקהילה שלנו לתמיכה ומידע נוסף
               </Typography>
               <Box className="info-page__cta-buttons">
-                <button
+                <a
                   className="info-page__cta-button info-page__cta-button--primary"
-                  onClick={() => navigate('/community')}
+                  href="https://www.facebook.com/groups/PandasIsrael/?ref=share&mibextid=NSMWBT"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   הצטרפו לקהילה
-                </button>
+                </a>
+
                 <button
                   className="info-page__cta-button info-page__cta-button--secondary"
                   onClick={() => navigate('/resources')}
@@ -163,6 +177,7 @@ const InfoPage: React.FC = () => {
                   משאבים להורים
                 </button>
               </Box>
+
             </Box>
           </Container>
         </Box>

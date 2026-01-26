@@ -32,11 +32,13 @@ export interface ListItem {
 
 export interface RelatedPage {
   id: string;
+  slug: string;
   title: string;
   description: string;
-  image?: string;
-  slug: string;
+  imageUrl: string;
+  imageAlt?: string;
 }
+
 
 export interface AssessmentScale {
   id: string;

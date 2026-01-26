@@ -1,5 +1,5 @@
-@use '../../styles/abstracts/variables' as *;
-@use '../../styles/abstracts/mixins' as *;
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/mixins" as *;
 
 .info-page {
   min-height: 100vh;
@@ -12,7 +12,7 @@
     @include flex-center;
     overflow: hidden;
     background: $color-bg-white;
-    
+
     @include max-sm {
       min-height: 220px;
     }
@@ -44,7 +44,7 @@
     z-index: $z-base + 1;
     @include container;
     padding-block: $spacing-16 $spacing-10;
-    
+
     @include max-sm {
       padding-block: $spacing-10 $spacing-8;
     }
@@ -63,7 +63,7 @@
   &__hero-title {
     @include heading-1;
     margin-bottom: $spacing-4;
-    
+
     @include max-sm {
       font-size: $font-size-3xl;
     }
@@ -73,7 +73,7 @@
     @include body-text;
     font-size: $font-size-lg;
     max-width: 600px;
-    
+
     @include max-sm {
       font-size: $font-size-base;
     }
@@ -95,7 +95,7 @@
     position: sticky;
     top: calc($header-height + 56px); // Below tabs
     z-index: $z-sticky - 1;
-    
+
     .MuiTypography-root {
       @include small-text;
     }
@@ -104,7 +104,7 @@
   &__menu-button {
     background: rgba($color-primary, 0.1) !important;
     color: $color-primary !important;
-    
+
     &:hover {
       background: rgba($color-primary, 0.15) !important;
     }
@@ -114,7 +114,7 @@
     flex: 1;
     min-width: 0;
     padding: 0 $spacing-6 $spacing-16;
-    
+
     @include max-md {
       padding: 0 $spacing-4 $spacing-10;
     }
@@ -133,23 +133,23 @@
 
   // Related Pages
   &__related {
-    margin-top: $spacing-16;
-    padding-top: $spacing-12;
+    // margin-top: $spacing-16;
+    // padding-top: $spacing-12;
     border-top: 1px solid $border-light;
   }
 
   &__related-title {
-    @include heading-3;
-    margin-bottom: $spacing-6;
+    @include heading-2;
+    // margin-bottom: $spacing-7;
     position: relative;
-    padding-bottom: $spacing-3;
-    
+    // padding-bottom: $spacing-3;
+
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 0;
       inset-inline-end: 0;
-      width: 50px;
+      width: 54px;
       height: 3px;
       background: $gradient-primary;
       border-radius: $radius-sm;
@@ -158,9 +158,13 @@
 
   &__related-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: $spacing-5;
-    
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: $spacing-6;
+
+    @include max-md {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
     @include max-sm {
       grid-template-columns: 1fr;
     }
@@ -168,22 +172,79 @@
 
   &__related-card {
     @include card-base;
-    @include hover-lift;
     overflow: hidden;
-    
+    border-radius: $radius-2xl;
+
     &:hover {
-      border-color: rgba($color-primary, 0.2);
-      
+      border-color: rgba($color-primary, 0.18);
+
+      .info-page__related-card-media {
+        transform: scale(1.02);
+      }
+
       .info-page__related-card-arrow {
         opacity: 1;
         transform: translateX(-8px);
-        
+
         [dir="rtl"] & {
           transform: translateX(8px);
         }
       }
     }
-    
+  }
+
+  &__related-card-action {
+    display: block;
+  }
+
+  &__related-card-media {
+    width: 100%;
+    height: 170px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    @include safe-transition(transform $transition-base);
+
+    @include max-sm {
+      height: 160px;
+    }
+  }
+
+  &__related-card-content {
+    position: relative;
+    // padding: $spacing-7;
+  }
+
+  &__related-card-title {
+    font-family: $font-heading;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    line-height: 1.15;
+    margin-bottom: $spacing-3;
+  }
+
+  &__related-card-description {
+    @include body-text;
+    max-width: 52ch;
+  }
+
+  &__related-card-arrow {
+    position: absolute;
+    inset-inline-start: $spacing-5;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    @include safe-transition(all $transition-base);
+    color: $color-primary;
+
+    .MuiSvgIcon-root {
+      font-size: 1.6rem;
+
+      [dir="rtl"] & {
+        transform: rotate(180deg);
+      }
+    }
+
     .MuiCardContent-root {
       padding: $spacing-6;
       position: relative;
@@ -207,10 +268,10 @@
     opacity: 0;
     @include safe-transition(all $transition-base);
     color: $color-primary;
-    
+
     .MuiSvgIcon-root {
       font-size: 1.5rem;
-      
+
       [dir="rtl"] & {
         transform: rotate(180deg);
       }
@@ -220,7 +281,10 @@
   // Call to Action
   &__cta {
     margin-top: $spacing-16;
-    padding: $spacing-10;
+    padding: $spacing-8;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background: rgba($color-primary, 0.05);
     border-radius: $radius-2xl;
     text-align: center;
@@ -231,15 +295,17 @@
       margin-top: $spacing-12;
     }
   }
-
+  
   &__cta-title {
     @include heading-3;
     margin-bottom: $spacing-2;
+    padding-block-end: $spacing-4;
   }
-
+  
   &__cta-text {
     @include body-text;
     margin-bottom: $spacing-6;
+    padding-block-end: $spacing-4;
   }
 
   &__cta-buttons {
@@ -250,11 +316,11 @@
 
   &__cta-button {
     @include button-base;
-    
+
     &--primary {
       @include button-primary;
     }
-    
+
     &--secondary {
       @include button-secondary;
     }
@@ -272,18 +338,18 @@
     transform: translateY(20px);
     @include safe-transition(all $transition-base);
     box-shadow: $shadow-glow-primary !important;
-    
+
     &.visible {
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
     }
-    
+
     &:hover {
       transform: translateY(-4px);
       box-shadow: 0 6px 25px rgba($color-primary, 0.4) !important;
     }
-    
+
     @include max-sm {
       bottom: $spacing-5;
       inset-inline-start: $spacing-5;

@@ -52,6 +52,47 @@ const InfoContentRenderer: React.FC<InfoContentRendererProps> = ({ content }) =>
     }
   };
 
+  const getYouTubeEmbedUrl = (videoUrl?: string): string | null => {
+    if (!videoUrl) return null;
+
+    try {
+      const parsedUrl: URL = new URL(videoUrl);
+
+      // youtube.com/watch?v=VIDEO_ID
+      if (parsedUrl.hostname.includes('youtube.com')) {
+        const vParam: string | null = parsedUrl.searchParams.get('v');
+        if (vParam) return `https://www.youtube.com/embed/${vParam}`;
+      }
+
+      // youtu.be/VIDEO_ID
+      if (parsedUrl.hostname.includes('youtu.be')) {
+        const videoId: string = parsedUrl.pathname.replace('/', '');
+        if (videoId) return `https://www.youtube.com/embed/${videoId}`;
+      }
+
+      return null;
+    } catch {
+      return null;
+    }
+  };
+
+  const getYouTubeLinkUrl = (videoUrl?: string): string | null => {
+    if (!videoUrl) return null;
+
+    try {
+      const parsedUrl: URL = new URL(videoUrl);
+
+      if (parsedUrl.hostname.includes('youtube.com') || parsedUrl.hostname.includes('youtu.be')) {
+        return videoUrl;
+      }
+
+      return videoUrl;
+    } catch {
+      return null;
+    }
+  };
+
+
   const renderContent = (item: InfoContent) => {
     switch (item.type) {
       case 'heading':
@@ -199,34 +240,74 @@ const InfoContentRenderer: React.FC<InfoContentRendererProps> = ({ content }) =>
           </TableContainer>
         );
 
-      case 'video':
+      case 'video': {
+        const embedUrl: string | null = getYouTubeEmbedUrl(item.videoUrl);
+        const linkUrl: string | null = getYouTubeLinkUrl(item.videoUrl);
+
         return (
           <Box key={item.id} className="info-content__video">
             <Typography variant="h6" className="info-content__video-title">
               <PlayIcon />
               {item.title}
             </Typography>
+
             {item.content && (
               <Typography variant="body2" className="info-content__video-description">
                 {item.content}
               </Typography>
             )}
-            <Link
-              href={item.videoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="info-content__video-link"
-            >
-              <Button
-                variant="outlined"
-                startIcon={<PlayIcon />}
-                className="info-content__video-button"
+
+            {embedUrl && (
+              <Box
+                className="info-content__video-embed"
+                sx={{
+                  position: 'relative',
+                  width: '100%',
+                  paddingTop: '56.25%', // 16:9
+                  borderRadius: 2,
+                  overflow: 'hidden',
+                  mt: 1,
+                }}
               >
-                צפה בסרטון
-              </Button>
-            </Link>
+                <Box
+                  component="iframe"
+                  src={embedUrl}
+                  title={item.title || 'YouTube video'}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                  sx={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    border: 0,
+                  }}
+                />
+              </Box>
+            )}
+
+            {linkUrl && (
+              <Box sx={{ mt: 1 }}>
+                <Link
+                  href={linkUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="info-content__video-link"
+                >
+                  <Button
+                    variant="outlined"
+                    startIcon={<PlayIcon />}
+                    className="info-content__video-button"
+                  >
+                    צפה ביוטיוב
+                  </Button>
+                </Link>
+              </Box>
+            )}
           </Box>
         );
+      }
 
       case 'download':
         return (
