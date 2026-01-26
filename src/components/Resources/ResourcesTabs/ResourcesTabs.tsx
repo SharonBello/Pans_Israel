@@ -64,7 +64,7 @@ const ResourcesTabs: React.FC<ResourcesTabsProps> = ({ currentPage }) => {
           {resourceNavItems.map((item) => (
             <Tab
               key={item.id}
-              icon={iconMap[item.id]}
+              icon={iconMap[item.id] || <FolderIcon />}
               iconPosition="start"
               label={isMobile ? undefined : item.title}
               className="resources-tabs__tab"

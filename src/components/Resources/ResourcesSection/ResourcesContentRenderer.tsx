@@ -31,22 +31,17 @@ import {
 } from '@mui/icons-material';
 import './ResourcesContentRenderer.scss';
 
-// Types for content blocks - unified type supporting both Info and Resources content
+// Flexible content block type that accepts various content structures
 interface ContentBlock {
   id: string;
-  type: 'heading' | 'paragraph' | 'list' | 'accordion' | 'callout' | 'card' | 'table' | 'video' | 'download';
+  type: string;
   title?: string;
   content?: string;
-  items?: Array<{
-    title?: string;
-    description?: string;
-    url?: string;
-  } | string>;
-  variant?: 'info' | 'warning' | 'tip' | 'success';
+  items?: Array<any>;
+  variant?: string;
   columns?: string[];
   rows?: string[][];
   videoUrl?: string;
-  // Download properties (supports both naming conventions)
   url?: string;
   buttonText?: string;
   downloadUrl?: string;
@@ -54,7 +49,7 @@ interface ContentBlock {
 }
 
 interface ResourcesContentRendererProps {
-  content: ContentBlock[];
+  content: ContentBlock[] | any[];
 }
 
 const ResourcesContentRenderer: React.FC<ResourcesContentRendererProps> = ({ content }) => {
@@ -78,6 +73,9 @@ const ResourcesContentRenderer: React.FC<ResourcesContentRendererProps> = ({ con
   };
 
   const renderBlock = (block: ContentBlock) => {
+    // Debug logging
+    console.log('Rendering block:', block.type, block.id);
+    
     switch (block.type) {
       case 'heading':
         return (
@@ -110,7 +108,7 @@ const ResourcesContentRenderer: React.FC<ResourcesContentRendererProps> = ({ con
               </Typography>
             )}
             <List className="resources-content__list">
-              {block.items?.map((item, index) => (
+              {block.items?.map((item: any, index: number) => (
                 <ListItem key={index} className="resources-content__list-item">
                   <ListItemIcon className="resources-content__list-icon">
                     <BulletIcon />
@@ -129,7 +127,7 @@ const ResourcesContentRenderer: React.FC<ResourcesContentRendererProps> = ({ con
       case 'accordion':
         return (
           <Box key={block.id} className="resources-content__accordion-wrapper">
-            {block.items?.map((item, index) => {
+            {block.items?.map((item: any, index: number) => {
               if (typeof item === 'string') return null;
               const panelId = `${block.id}-${index}`;
               return (
@@ -210,7 +208,7 @@ const ResourcesContentRenderer: React.FC<ResourcesContentRendererProps> = ({ con
               {block.columns && (
                 <TableHead>
                   <TableRow>
-                    {block.columns.map((col, index) => (
+                    {block.columns.map((col: string, index: number) => (
                       <TableCell key={index} className="resources-content__table-header">
                         {col}
                       </TableCell>
@@ -219,9 +217,9 @@ const ResourcesContentRenderer: React.FC<ResourcesContentRendererProps> = ({ con
                 </TableHead>
               )}
               <TableBody>
-                {block.rows?.map((row, rowIndex) => (
+                {block.rows?.map((row: string[], rowIndex: number) => (
                   <TableRow key={rowIndex}>
-                    {row.map((cell, cellIndex) => (
+                    {row.map((cell: string, cellIndex: number) => (
                       <TableCell key={cellIndex} className="resources-content__table-cell">
                         {cell}
                       </TableCell>
@@ -254,7 +252,6 @@ const ResourcesContentRenderer: React.FC<ResourcesContentRendererProps> = ({ con
         );
 
       case 'download':
-        // Support both url/buttonText and downloadUrl/downloadLabel naming
         const downloadUrl = block.url || block.downloadUrl;
         const downloadLabel = block.buttonText || block.downloadLabel || 'הורד קובץ';
         
@@ -277,7 +274,7 @@ const ResourcesContentRenderer: React.FC<ResourcesContentRendererProps> = ({ con
                 )}
                 {block.items && block.items.length > 0 && (
                   <Box className="resources-content__download-list">
-                    {block.items.map((item, index) => {
+                    {block.items.map((item: any, index: number) => {
                       if (typeof item === 'string') {
                         return (
                           <Typography key={index} variant="body2">
@@ -331,13 +328,33 @@ const ResourcesContentRenderer: React.FC<ResourcesContentRendererProps> = ({ con
         );
 
       default:
-        return null;
+        console.warn('Unknown block type:', block.type);
+        return (
+          <Box key={block.id} sx={{ p: 2, bgcolor: '#fff3cd', borderRadius: 1, mb: 2 }}>
+            <Typography variant="caption">
+              סוג בלוק לא מוכר: {block.type}
+            </Typography>
+          </Box>
+        );
     }
   };
 
+  // Debug: log content
+  console.log('ResourcesContentRenderer - content:', content?.length, 'blocks');
+
+  if (!content || content.length === 0) {
+    return (
+      <Box className="resources-content" dir="rtl">
+        <Typography variant="body1" color="text.secondary">
+          אין תוכן להצגה
+        </Typography>
+      </Box>
+    );
+  }
+
   return (
     <Box className="resources-content" dir="rtl">
-      {content.map(renderBlock)}
+      {content.map((block) => renderBlock(block as ContentBlock))}
     </Box>
   );
 };

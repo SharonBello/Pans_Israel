@@ -29,16 +29,31 @@ const ResourcesDetailPage: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [pageId]);
 
-  // Validate pageId
+  // Debug logging
+  console.log('ResourcesDetailPage - pageId:', pageId);
+  console.log('ResourcesDetailPage - available sections:', Object.keys(resourceSections));
+
+  // Validate pageId - check if section exists
   const currentPageId = pageId && resourceSections[pageId] ? pageId : null;
   const currentSection = currentPageId ? resourceSections[currentPageId] : null;
 
+  console.log('ResourcesDetailPage - currentPageId:', currentPageId);
+  console.log('ResourcesDetailPage - currentSection:', currentSection);
+  console.log('ResourcesDetailPage - content length:', currentSection?.content?.length);
+
+  // Page not found
   if (!currentSection) {
     return (
       <Box className="resources-detail" dir="rtl">
         <Container maxWidth="lg" sx={{ py: 10, textAlign: 'center' }}>
           <Typography variant="h4" gutterBottom>
             העמוד לא נמצא
+          </Typography>
+          <Typography variant="body1" color="text.secondary" sx={{ mb: 2 }}>
+            מזהה עמוד: {pageId || 'לא צוין'}
+          </Typography>
+          <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+            עמודים זמינים: {Object.keys(resourceSections).join(', ')}
           </Typography>
           <Button 
             variant="contained" 
@@ -97,14 +112,29 @@ const ResourcesDetailPage: React.FC = () => {
       </section>
 
       {/* Tabs Navigation */}
-      {currentPageId && <ResourcesTabs currentPage={currentPageId} />}
+      <ResourcesTabs currentPage={currentPageId || ''} />
 
       {/* Main Content */}
       <section className="resources-detail__content">
         <Container maxWidth="lg">
           <div className="resources-detail__main">
+            {/* Debug info - remove in production */}
+            {process.env.NODE_ENV === 'development' && (
+              <Box sx={{ p: 2, mb: 2, bgcolor: '#f5f5f5', borderRadius: 1 }}>
+                <Typography variant="caption" display="block">
+                  Debug: pageId={currentPageId}, content blocks={currentSection.content?.length || 0}
+                </Typography>
+              </Box>
+            )}
+
             {/* Render dynamic content */}
-            <ResourcesContentRenderer content={currentSection.content} />
+            {currentSection.content && currentSection.content.length > 0 ? (
+              <ResourcesContentRenderer content={currentSection.content as any} />
+            ) : (
+              <Typography variant="body1" color="text.secondary">
+                אין תוכן להצגה בעמוד זה
+              </Typography>
+            )}
 
             {/* Downloadable Resources - Show on parents page */}
             {currentPageId === 'parents' && downloadableResources.length > 0 && (

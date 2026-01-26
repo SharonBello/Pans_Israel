@@ -24,6 +24,7 @@ import { SOCAdminPage, SOCResultsPage, SOCSurveyPage } from './features/index.ts
 import SurveysPage from './pages/SurveysPage/SurveysPage.tsx';
 import InfoPage from './pages/InfoPage/InfoPage.tsx';
 import ResourcesPage from './pages/ResourcesPage/ResourcesPage.tsx';
+import ResourcesDetailPage from './pages/ResourcesPage/ResourcesDetailPage/ResourcesDetailPage.tsx';
 
 type AppRoute = {
   path: string;
@@ -61,7 +62,7 @@ const AppRoutes: AppRoute[] = [
   },
   {
     path: '/resources/:pageId',
-    component: <ResourcesPage />
+    component: <ResourcesDetailPage />,
   },
   {
     path: '/testimonials',

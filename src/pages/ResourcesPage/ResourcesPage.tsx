@@ -27,14 +27,14 @@ const ResourcesPage: React.FC = () => {
   return (
     <Box className="resources-page" dir="rtl">
       {/* ===== HERO SECTION ===== */}
-      <section className="resources-page__hero">
+      {/* <section className="resources-page__hero">
         <div className="resources-page__hero-bg" />
         <div className="resources-page__hero-content">
           <Typography variant="h1" className="resources-page__hero-title">
             משאבי <span>PANDAS/PANS</span>
           </Typography>
         </div>
-      </section>
+      </section> */}
 
       {/* ===== TABS NAVIGATION ===== */}
       <ResourcesTabs currentPage="overview" />
