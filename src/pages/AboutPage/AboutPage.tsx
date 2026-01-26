@@ -90,13 +90,13 @@ const AboutPage: React.FC = () => {
                                 לתמוך, להנגיש ולחבר
                             </h2>
                             <p className="about-section__text">
-                                קהילת PANS/PANDAS ישראל הוקמה כדי לתת מענה להורים שמתמודדים עם אבחנה 
-                                מבלבלת ולעיתים מפחידה. אנחנו כאן כדי לספק מידע מהימן בעברית, 
-                                לחבר בין משפחות שעוברות חוויות דומות, ולהוות גשר בין ההורים 
+                                קהילת PANS/PANDAS ישראל הוקמה כדי לתת מענה להורים שמתמודדים עם אבחנה
+                                מבלבלת ולעיתים מפחידה. אנחנו כאן כדי לספק מידע מהימן בעברית,
+                                לחבר בין משפחות שעוברות חוויות דומות, ולהוות גשר בין ההורים
                                 לאנשי המקצוע בישראל.
                             </p>
                             <p className="about-section__text">
-                                המטרה שלנו היא שאף הורה לא ירגיש לבד במסע הזה, ושכל ילד יקבל 
+                                המטרה שלנו היא שאף הורה לא ירגיש לבד במסע הזה, ושכל ילד יקבל
                                 את האבחון והטיפול הנכונים בזמן.
                             </p>
                         </div>
@@ -121,25 +121,25 @@ const AboutPage: React.FC = () => {
                     <h2 className="about-section__title about-section__title--center">
                         איך הכל התחיל
                     </h2>
-                    
+
                     <div className="about-story__content">
                         <div className="about-story__card">
                             <p>
-                                כמו הורים רבים, גם אנחנו עברנו את המסע המתיש של חיפוש תשובות. 
-                                ילדינו השתנו בין לילה — התנהגויות מפחידות, חרדות קיצוניות, 
-                                טיקים ותסמינים שלא הצלחנו להסביר. עברנו מרופא לרופא, 
+                                כמו הורים רבים, גם אנחנו עברנו את המסע המתיש של חיפוש תשובות.
+                                ילדינו השתנו בין לילה — התנהגויות מפחידות, חרדות קיצוניות,
+                                טיקים ותסמינים שלא הצלחנו להסביר. עברנו מרופא לרופא,
                                 מאבחנה לאבחנה, עד שהגענו לתשובה: PANS/PANDAS.
                             </p>
                             <p>
-                                גילינו שאנחנו לא לבד. יש עוד משפחות בישראל שעוברות את אותו הדבר, 
+                                גילינו שאנחנו לא לבד. יש עוד משפחות בישראל שעוברות את אותו הדבר,
                                 אבל המידע בעברית היה דל, והקשר בין המשפחות — כמעט לא קיים.
                             </p>
                             <p>
                                 <strong>החלטנו לשנות את זה.</strong>
                             </p>
                             <p>
-                                הקמנו את הקהילה הזו כדי להיות המקום שהיינו צריכות כשהתחלנו. 
-                                מקום של מידע, תמיכה, והבנה. מקום שבו אפשר לשאול שאלות, 
+                                הקמנו את הקהילה הזו כדי להיות המקום שהיינו צריכות כשהתחלנו.
+                                מקום של מידע, תמיכה, והבנה. מקום שבו אפשר לשאול שאלות,
                                 לקבל חיבוק וירטואלי, ולדעת שמישהו מבין.
                             </p>
                         </div>
@@ -157,7 +157,7 @@ const AboutPage: React.FC = () => {
                     <h2 className="about-section__title about-section__title--center">
                         מה מנחה אותנו
                     </h2>
-                    
+
                     <div className="about-values__grid">
                         {values.map((value, index) => (
                             <div key={index} className="about-values__card">
@@ -185,7 +185,7 @@ const AboutPage: React.FC = () => {
                     <p className="about-section__subtitle">
                         אקבע אמהות שהחליטו לעשות שינוי
                     </p>
-                    
+
                     <div className="about-founders__grid">
                         {founders.map((founder, index) => (
                             <div key={index} className="about-founders__card">
@@ -210,7 +210,7 @@ const AboutPage: React.FC = () => {
                             <span>החזון שלנו</span>
                         </div>
                         <h2 className="about-section__title">לאן אנחנו שואפות</h2>
-                        
+
                         <ul className="about-vision__list">
                             <li>
                                 <span className="about-vision__bullet" />
@@ -243,11 +243,19 @@ const AboutPage: React.FC = () => {
                     <div className="about-cta__content">
                         <h2 className="about-cta__title">רוצים להצטרף אלינו?</h2>
                         <p className="about-cta__text">
-                            אנחנו תמיד שמחות לקבל הורים חדשים לקהילה, ומחפשות מתנדבים 
+                            אנחנו תמיד שמחות לקבל הורים חדשים לקהילה, ומחפשות מתנדבים
                             שרוצים לעזור להגדיל את ההשפעה שלנו.
                         </p>
-                        
+
                         <div className="about-cta__buttons">
+                            <a
+                                className="info-page__cta-button info-page__cta-button--primary"
+                                href="https://www.facebook.com/groups/PandasIsrael/?ref=share&mibextid=NSMWBT"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                הצטרפו לקהילה
+                            </a>
                             <a
                                 href="https://wa.me/972544767146"
                                 className="about-cta__btn about-cta__btn--primary"
@@ -255,15 +263,9 @@ const AboutPage: React.FC = () => {
                                 rel="noopener noreferrer"
                             >
                                 <FaWhatsapp />
-                                <span>הצטרפו לקהילה</span>
-                            </a>
-                            <a
-                                href="mailto:contact@panspandas.org.il"
-                                className="about-cta__btn about-cta__btn--secondary"
-                            >
-                                <FaEnvelope />
                                 <span>צרו קשר</span>
                             </a>
+
                         </div>
                     </div>
                 </div>
@@ -274,17 +276,17 @@ const AboutPage: React.FC = () => {
                 <div className="about-section__container">
                     <h3 className="about-partners__title">בשיתוף פעולה עם</h3>
                     <div className="about-partners__logos">
-                        <a 
-                            href="https://pandasnetwork.org" 
-                            target="_blank" 
+                        <a
+                            href="https://pandasnetwork.org"
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="about-partners__logo"
                         >
                             PANDAS Network
                         </a>
-                        <a 
-                            href="https://panspandasuk.org" 
-                            target="_blank" 
+                        <a
+                            href="https://panspandasuk.org"
+                            target="_blank"
                             rel="noopener noreferrer"
                             className="about-partners__logo"
                         >

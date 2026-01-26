@@ -29,7 +29,7 @@ const WhatIsPansPandasModal: React.FC<WhatIsPansPandasModalProps> = ({
 
   const handleNavigateToResources = () => {
     onClose();
-    navigate('/resources');
+    navigate('/info');
   };
 
   const symptoms = [

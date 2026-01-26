@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import Particles, { initParticlesEngine } from '@tsparticles/react';
+// import Particles, { initParticlesEngine } from '@tsparticles/react';
 import { loadSlim } from '@tsparticles/slim';
-import type { ISourceOptions } from '@tsparticles/engine';
+// import type { ISourceOptions } from '@tsparticles/engine';
 import { FiArrowLeft } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 
@@ -9,16 +9,16 @@ import './Hero.scss';
 import WhatIsPansPandasModal from '@/components/WhatIsPansPandasModal';
 
 const Hero: React.FC = () => {
-  const [init, setInit] = useState(false);
+  // const [init, setInit] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
-  useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadSlim(engine);
-    }).then(() => {
-      setInit(true);
-    });
-  }, []);
+  // useEffect(() => {
+  //   initParticlesEngine(async (engine) => {
+  //     await loadSlim(engine);
+  //   }).then(() => {
+  //     setInit(true);
+  //   });
+  // }, []);
 
   const handleOpenModal = () => {
     setModalOpen(true);
@@ -28,110 +28,111 @@ const Hero: React.FC = () => {
     setModalOpen(false);
   };
 
-  const particlesOptions: ISourceOptions = {
-    fullScreen: false,
-    fpsLimit: 60,
-    particles: {
-      number: {
-        value: 200,
-        density: {
-          enable: true,
-        },
-      },
-      color: {
-        value: "#ffffff",
-      },
-      shape: {
-        type: 'circle',
-      },
-      opacity: {
-        value: 0.5,
-      },
-      size: {
-        value: 30,
-      },
-      line_linked: {
-        enable: true,
-        distance: 100,
-        color: "#ffffff",
-        opacity: 1,
-        width: 1
-      },
-      move: {
-        enable: true,
-        speed: 2,
-        direction: "none",
-        random: false,
-        straight: false,
-        attract: {
-          enable: false,
-        }
-      }
-    },
-    interactivity: {
-      detect_on: "canvas",
-      events: {
-        onHover: {
-          enable: true,
-          mode: "bubble",
-          parallax: {
-            enable: false,
-            force: 60,
-            smooth: 10
-          }
-        },
-        onClick: {
-          enable: true,
-          mode: "push"
-        },
-      },
-      modes: {
-        grab: {
-          distance: 400,
-          lineLinked: {
-            opacity: 1
-          }
-        },
-        bubble: {
-          distance: 400,
-          size: 100,
-          duration: 2,
-          opacity: 1,
-          speed: 2
-        },
-        repulse: {
-          distance: 200
-        },
-        push: {
-          particles_nb: 4
-        },
-        remove: {
-          particles_nb: 2
-        }
-      }
-    },
-    backgroundMask: {
-      enable: true,
-      cover: {
-        color: { value: { r: 255, g: 255, b: 255 } },
-        opacity: 1,
-      }
-    },
-    retina_detect: true,
-    fps_limit: 30
-  };
+  // const particlesOptions: ISourceOptions = {
+  //   fullScreen: false,
+  //   fpsLimit: 60,
+  //   particles: {
+  //     number: {
+  //       value: 200,
+  //       density: {
+  //         enable: true,
+  //       },
+  //     },
+  //     color: {
+  //       value: "#ffffff",
+  //     },
+  //     shape: {
+  //       type: 'circle',
+  //     },
+  //     opacity: {
+  //       value: 0.5,
+  //     },
+  //     size: {
+  //       value: 30,
+  //     },
+  //     line_linked: {
+  //       enable: true,
+  //       distance: 100,
+  //       color: "#ffffff",
+  //       opacity: 1,
+  //       width: 1
+  //     },
+  //     move: {
+  //       enable: true,
+  //       speed: 2,
+  //       direction: "none",
+  //       random: false,
+  //       straight: false,
+  //       attract: {
+  //         enable: false,
+  //       }
+  //     }
+  //   },
+  //   interactivity: {
+  //     detect_on: "canvas",
+  //     events: {
+  //       onHover: {
+  //         enable: true,
+  //         mode: "bubble",
+  //         parallax: {
+  //           enable: false,
+  //           force: 60,
+  //           smooth: 10
+  //         }
+  //       },
+  //       onClick: {
+  //         enable: true,
+  //         mode: "push"
+  //       },
+  //     },
+  //     modes: {
+  //       grab: {
+  //         distance: 400,
+  //         lineLinked: {
+  //           opacity: 1
+  //         }
+  //       },
+  //       bubble: {
+  //         distance: 400,
+  //         size: 100,
+  //         duration: 2,
+  //         opacity: 1,
+  //         speed: 2
+  //       },
+  //       repulse: {
+  //         distance: 200
+  //       },
+  //       push: {
+  //         particles_nb: 4
+  //       },
+  //       remove: {
+  //         particles_nb: 2
+  //       }
+  //     }
+  //   },
+  //   backgroundMask: {
+  //     enable: true,
+  //     cover: {
+  //       color: { value: { r: 255, g: 255, b: 255 } },
+  //       opacity: 1,
+  //     }
+  //   },
+  //   retina_detect: true,
+  //   fps_limit: 30
+  // };
 
   return (
     <>
       <section className="hero">
         {/* Particle Background with Mask */}
         <div className="hero__particles">
-          {init && (
+          {/* {init && (
             <Particles
               id="neural-particles"
               options={particlesOptions}
             />
-          )}
+          )} */}
+          {/* <img src="../../../styles/assets/hero.png" alt="" /> */}
         </div>
 
         {/* Overlay */}

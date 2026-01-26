@@ -11,12 +11,17 @@
 
   // Particles Background
   &__particles {
-    background: url("https://particles.js.org/images/background3.jpg");
+    // background: url("https://particles.js.org/images/background3.jpg");
+    background: url("../../../styles/assets/hero.png");
     background-position: cover;
     position: absolute;
     inset: 0;
     z-index: 1;
 
+    @media (max-width: 600px) {
+      background: url("https://particles.js.org/images/background3.jpg");
+    }
+    
     & #neural-particles {
       height: -webkit-fill-available !important;
     }
