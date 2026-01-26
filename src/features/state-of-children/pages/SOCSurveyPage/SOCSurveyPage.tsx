@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import {
     Box,
     Typography,
@@ -52,6 +52,27 @@ const initialState: SurveyState = {
 };
 
 // --------------------------------------------------------------------------
+// Helper: Check if answer is valid (handles 0 and false correctly)
+// --------------------------------------------------------------------------
+
+const isAnswerProvided = (answer: string | number | boolean | string[] | undefined): boolean => {
+    // undefined or null means no answer
+    if (answer === undefined || answer === null) return false;
+
+    // Empty string means no answer
+    if (answer === '') return false;
+
+    // Empty array means no selection
+    if (Array.isArray(answer) && answer.length === 0) return false;
+
+    // IMPORTANT: 0 is a valid answer for scale/number questions
+    // false is a valid answer for yes/no questions
+    // These pass through as valid (not caught by checks above)
+
+    return true;
+};
+
+// --------------------------------------------------------------------------
 // Component
 // --------------------------------------------------------------------------
 
@@ -80,14 +101,33 @@ const SOCSurveyPage: React.FC = () => {
         });
     }, [currentCategory, state.answers]);
 
-    // Count answered questions
+    // --------------------------------------------------------------------------
+    // FIX: Initialize scale questions with their minimum value when visible
+    // This ensures sliders that display "0" actually have "0" in state
+    // --------------------------------------------------------------------------
+
+    useEffect(() => {
+        const scaleDefaults: Record<string, number> = {};
+
+        visibleQuestions.forEach((question) => {
+            // Only initialize if: scale type AND not yet answered
+            if (question.type === 'scale' && state.answers[question.id] === undefined) {
+                scaleDefaults[question.id] = question.scaleMin ?? 0;
+            }
+        });
+
+        // Only update if there are defaults to set
+        if (Object.keys(scaleDefaults).length > 0) {
+            setState(prev => ({
+                ...prev,
+                answers: { ...prev.answers, ...scaleDefaults },
+            }));
+        }
+    }, [visibleQuestions, state.currentCategoryIndex]);
+
+    // Count answered questions (using helper that handles 0 correctly)
     const answeredCount = useMemo(() => {
-        return allQuestions.filter(q => {
-            const answer = state.answers[q.id];
-            if (answer === undefined || answer === null || answer === '') return false;
-            if (Array.isArray(answer) && answer.length === 0) return false;
-            return true;
-        }).length;
+        return allQuestions.filter(q => isAnswerProvided(state.answers[q.id])).length;
     }, [state.answers, allQuestions]);
 
     // --------------------------------------------------------------------------
@@ -148,10 +188,14 @@ const SOCSurveyPage: React.FC = () => {
         visibleQuestions.forEach((question) => {
             if (question.required) {
                 const answer = state.answers[question.id];
-                if (answer === undefined || answer === null || answer === '') {
-                    newErrors[question.id] = 'שדה חובה';
-                } else if (Array.isArray(answer) && answer.length === 0) {
-                    newErrors[question.id] = 'נא לבחור לפחות אפשרות אחת';
+
+                // Use helper function that handles 0 and false correctly
+                if (!isAnswerProvided(answer)) {
+                    if (question.type === 'multiple_choice') {
+                        newErrors[question.id] = 'נא לבחור לפחות אפשרות אחת';
+                    } else {
+                        newErrors[question.id] = 'שדה חובה';
+                    }
                 }
             }
         });
@@ -162,14 +206,24 @@ const SOCSurveyPage: React.FC = () => {
 
     const handleNext = useCallback(() => {
         if (!validateCategory()) {
-            // Scroll to first error
-            const firstErrorKey = Object.keys(state.errors)[0];
-            if (firstErrorKey) {
-                document.getElementById(`question-${firstErrorKey}`)?.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center'
+            // Small delay to ensure errors are set before scrolling
+            setTimeout(() => {
+                const errorKeys = Object.keys(state.errors);
+                // Re-check for errors since state may have updated
+                const currentErrors: string[] = [];
+                visibleQuestions.forEach((q) => {
+                    if (q.required && !isAnswerProvided(state.answers[q.id])) {
+                        currentErrors.push(q.id);
+                    }
                 });
-            }
+                const firstErrorKey = currentErrors[0] || errorKeys[0];
+                if (firstErrorKey) {
+                    document.getElementById(`question-${firstErrorKey}`)?.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'center'
+                    });
+                }
+            }, 100);
             return;
         }
 
@@ -183,13 +237,25 @@ const SOCSurveyPage: React.FC = () => {
         } else {
             setShowConfirmDialog(true);
         }
-    }, [validateCategory, state.currentCategoryIndex, state.errors]);
+    }, [validateCategory, state.currentCategoryIndex, state.errors, state.answers, visibleQuestions]);
 
     const handlePrevious = useCallback(() => {
         if (state.currentCategoryIndex > 0) {
             setState(prev => ({
                 ...prev,
                 currentCategoryIndex: prev.currentCategoryIndex - 1,
+                errors: {},
+            }));
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    }, [state.currentCategoryIndex]);
+
+    const handleGoToCategory = useCallback((index: number) => {
+        // Only allow going to previous or current categories
+        if (index <= state.currentCategoryIndex) {
+            setState(prev => ({
+                ...prev,
+                currentCategoryIndex: index,
                 errors: {},
             }));
             window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -212,21 +278,15 @@ const SOCSurveyPage: React.FC = () => {
             if (result.success) {
                 setState(prev => ({ ...prev, isComplete: true, isSubmitting: false }));
             } else {
-                setSubmitError(result.error || 'אירעה שגיאה בשליחת הסקר');
+                setSubmitError(result.error || 'אירעה שגיאה בשליחת הסקר. נסו שוב.');
                 setState(prev => ({ ...prev, isSubmitting: false }));
             }
         } catch (error) {
+            console.error('Submit error:', error);
             setSubmitError('אירעה שגיאה בשליחת הסקר. נסו שוב.');
             setState(prev => ({ ...prev, isSubmitting: false }));
         }
     };
-
-    const handleGoToCategory = useCallback((index: number) => {
-        if (index <= state.currentCategoryIndex) {
-            setState(prev => ({ ...prev, currentCategoryIndex: index }));
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    }, [state.currentCategoryIndex]);
 
     // --------------------------------------------------------------------------
     // Render: Email Registration

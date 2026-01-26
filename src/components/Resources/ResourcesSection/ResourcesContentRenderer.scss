@@ -1,0 +1,389 @@
+@use '../../../styles/abstracts/variables' as *;
+@use '../../../styles/abstracts/mixins' as *;
+
+.resources-content {
+  // Headings
+  &__heading {
+    @include heading-3;
+    margin-top: $spacing-10;
+    margin-bottom: $spacing-5;
+    position: relative;
+    padding-bottom: $spacing-3;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      inset-inline-end: 0;
+      width: 50px;
+      height: 3px;
+      background: $gradient-accent;
+      border-radius: $radius-sm;
+    }
+    
+    &:first-child {
+      margin-top: 0;
+    }
+  }
+
+  // Paragraphs
+  &__paragraph {
+    @include body-text;
+    margin-bottom: $spacing-5;
+    
+    strong, b {
+      color: $text-primary;
+      font-weight: $font-weight-semibold;
+    }
+    
+    a {
+      color: $color-accent;
+      text-decoration: underline;
+      text-decoration-color: rgba($color-accent, 0.3);
+      text-underline-offset: 3px;
+      @include safe-transition(all $transition-base);
+      
+      &:hover {
+        text-decoration-color: $color-accent;
+      }
+    }
+  }
+
+  // Lists
+  &__list-wrapper {
+    margin-bottom: $spacing-6;
+  }
+
+  &__list-title {
+    @include heading-4;
+    margin-bottom: $spacing-3;
+  }
+
+  &__list {
+    padding: 0;
+  }
+
+  &__list-item {
+    padding: $spacing-2 0;
+    align-items: flex-start;
+    
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba($border-light, 0.5);
+    }
+  }
+
+  &__list-icon {
+    min-width: 32px;
+    margin-top: $spacing-1;
+    
+    .MuiSvgIcon-root {
+      font-size: 0.5rem;
+      color: $color-accent;
+    }
+  }
+
+  &__list-text {
+    .MuiListItemText-primary {
+      color: $text-primary;
+      font-weight: $font-weight-medium;
+      font-size: $font-size-base;
+    }
+    
+    .MuiListItemText-secondary {
+      color: $text-secondary;
+      font-size: $font-size-sm;
+      margin-top: $spacing-1;
+    }
+  }
+
+  // Accordion (FAQ style)
+  &__accordion-wrapper {
+    margin-bottom: $spacing-6;
+  }
+
+  &__accordion {
+    @include card-base;
+    margin-bottom: $spacing-3 !important;
+    border: 1px solid $border-light !important;
+    
+    &::before {
+      display: none;
+    }
+    
+    &.Mui-expanded {
+      margin-bottom: $spacing-3 !important;
+      border-color: rgba($color-accent, 0.3) !important;
+      box-shadow: 0 4px 20px rgba($color-accent, 0.1) !important;
+    }
+  }
+
+  &__accordion-summary {
+    padding: $spacing-4 $spacing-5;
+    
+    &.Mui-expanded {
+      background: rgba($color-accent, 0.05);
+    }
+    
+    .MuiAccordionSummary-expandIconWrapper {
+      color: $color-accent;
+      
+      &.Mui-expanded {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  &__accordion-title {
+    font-family: $font-heading;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    font-size: $font-size-base;
+  }
+
+  &__accordion-details {
+    padding: $spacing-4 $spacing-5;
+    background: $color-bg-light;
+    border-top: 1px solid $border-light;
+    
+    .MuiTypography-root {
+      @include body-text;
+    }
+  }
+
+  // Callouts
+  &__callout {
+    display: flex;
+    gap: $spacing-4;
+    padding: $spacing-5;
+    border-radius: $radius-xl;
+    margin-bottom: $spacing-6;
+    border: 1px solid;
+    
+    &--info {
+      background: rgba($info, 0.08);
+      border-color: rgba($info, 0.2);
+      
+      .resources-content__callout-icon {
+        color: $info;
+      }
+    }
+    
+    &--warning {
+      background: rgba($warning, 0.08);
+      border-color: rgba($warning, 0.2);
+      
+      .resources-content__callout-icon {
+        color: $warning;
+      }
+    }
+    
+    &--tip {
+      background: rgba($color-accent, 0.08);
+      border-color: rgba($color-accent, 0.2);
+      
+      .resources-content__callout-icon {
+        color: $color-accent;
+      }
+    }
+    
+    &--success {
+      background: rgba($success, 0.08);
+      border-color: rgba($success, 0.2);
+      
+      .resources-content__callout-icon {
+        color: $success;
+      }
+    }
+  }
+
+  &__callout-icon {
+    flex-shrink: 0;
+    
+    .MuiSvgIcon-root {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__callout-content {
+    flex: 1;
+  }
+
+  &__callout-title {
+    @include heading-4;
+    font-size: $font-size-base;
+    margin-bottom: $spacing-2;
+  }
+
+  &__callout-text {
+    @include body-text;
+    font-size: $font-size-sm;
+  }
+
+  // Cards
+  &__card {
+    @include card-base;
+    @include hover-lift;
+    margin-bottom: $spacing-5;
+  }
+
+  &__card-title {
+    @include heading-4;
+    margin-bottom: $spacing-3;
+    padding-bottom: $spacing-3;
+    border-bottom: 2px solid rgba($color-accent, 0.2);
+  }
+
+  // Tables
+  &__table-container {
+    margin-bottom: $spacing-6;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    box-shadow: $shadow-sm;
+  }
+
+  &__table {
+    .MuiTableCell-root {
+      font-family: $font-primary;
+      border-color: $border-light;
+    }
+  }
+
+  &__table-header {
+    background: rgba($color-accent, 0.08);
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+  }
+
+  &__table-cell {
+    color: $text-secondary;
+  }
+
+  // Video
+  &__video-wrapper {
+    margin-bottom: $spacing-6;
+  }
+
+  &__video-title {
+    @include heading-4;
+    margin-bottom: $spacing-4;
+  }
+
+  &__video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; // 16:9 aspect ratio
+    border-radius: $radius-xl;
+    overflow: hidden;
+    box-shadow: $shadow-lg;
+  }
+
+  &__video-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  // Download Block
+  &__download {
+    margin: $spacing-6 0;
+  }
+
+  &__download-card {
+    border: 1px solid $border-light;
+    border-radius: $radius-xl;
+    background: $color-bg-white;
+    box-shadow: $shadow-sm;
+    @include safe-transition(all $transition-base);
+
+    &:hover {
+      box-shadow: $shadow-md;
+      border-color: rgba($color-accent, 0.3);
+    }
+
+    .MuiCardContent-root {
+      padding: $spacing-6;
+    }
+  }
+
+  &__download-title {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    font-family: $font-heading;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    margin-bottom: $spacing-3;
+
+    .MuiSvgIcon-root {
+      color: $color-accent;
+    }
+  }
+
+  &__download-desc {
+    color: $text-secondary;
+    margin-bottom: $spacing-4;
+    line-height: 1.7;
+  }
+
+  &__download-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-4;
+    margin-bottom: $spacing-4;
+  }
+
+  &__download-item {
+    padding: $spacing-4;
+    background: $color-bg-light;
+    border-radius: $radius-lg;
+    
+    .MuiTypography-subtitle2 {
+      font-weight: $font-weight-semibold;
+      color: $text-primary;
+      margin-bottom: $spacing-1;
+    }
+
+    .MuiTypography-body2 {
+      margin-bottom: $spacing-2;
+    }
+  }
+
+  &__download-btn {
+    margin-top: $spacing-2;
+    color: $color-accent;
+    border-color: $color-accent;
+    font-weight: $font-weight-medium;
+    text-transform: none;
+
+    &:hover {
+      background: rgba($color-accent, 0.1);
+      border-color: $color-accent;
+    }
+  }
+
+  &__download-main-btn {
+    background: $gradient-accent;
+    color: $text-on-dark;
+    font-weight: $font-weight-semibold;
+    text-transform: none;
+    padding: $spacing-2 $spacing-5;
+    border-radius: $radius-lg;
+
+    &:hover {
+      background: $color-accent-dark;
+    }
+  }
+}
+
+// RTL adjustments
+[dir="rtl"] {
+  .resources-content {
+    &__list-icon {
+      margin-left: $spacing-2;
+      margin-right: 0;
+    }
+  }
+}

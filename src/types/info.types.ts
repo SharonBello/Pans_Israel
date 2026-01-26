@@ -13,7 +13,7 @@ export interface InfoSection {
 
 export interface InfoContent {
   id: string;
-  type: 'heading' | 'paragraph' | 'list' | 'callout' | 'accordion' | 'table' | 'video' | 'download';
+  type: 'heading' | 'paragraph' | 'list' | 'callout' | 'accordion' | 'table' | 'video' | 'download' | 'card';
   title?: string;
   content?: string;
   items?: string[] | ListItem[];

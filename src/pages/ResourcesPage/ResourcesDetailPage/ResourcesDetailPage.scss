@@ -1,0 +1,336 @@
+@use '../../../styles/abstracts/variables' as *;
+@use '../../../styles/abstracts/mixins' as *;
+
+// Color scheme matching main resources page
+$pn-blue: #1a5276;
+$pn-blue-dark: #154360;
+$pn-coral: #e74c3c;
+$pn-gray-bg: #f8f9fa;
+$pn-text: #2c3e50;
+$pn-text-light: #5d6d7e;
+
+.resources-detail {
+  background: #fff;
+  min-height: 100vh;
+
+  // ==========================================
+  // HERO SECTION
+  // ==========================================
+  &__hero {
+    position: relative;
+    min-height: 320px;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 48px;
+    
+    @include max-md {
+      min-height: 280px;
+      padding-bottom: 32px;
+    }
+  }
+
+  &__hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/resources/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba($pn-blue, 0.92) 0%,
+        rgba($pn-blue-dark, 0.88) 100%
+      );
+    }
+  }
+
+  &__hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+
+  &__breadcrumbs {
+    margin-bottom: 24px;
+    
+    .MuiBreadcrumbs-separator {
+      color: rgba(255, 255, 255, 0.5);
+      margin: 0 8px;
+    }
+  }
+
+  &__breadcrumb-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    background: none;
+    border: none;
+    cursor: pointer;
+    
+    &:hover {
+      color: #fff !important;
+    }
+    
+    .MuiSvgIcon-root {
+      font-size: 1rem;
+    }
+  }
+
+  &__breadcrumb-current {
+    color: #fff !important;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  &__hero-title {
+    font-family: $font-heading;
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 12px;
+    line-height: 1.2;
+  }
+
+  &__hero-subtitle {
+    font-family: $font-primary;
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 700px;
+    line-height: 1.7;
+    
+    @include max-sm {
+      font-size: 1rem;
+    }
+  }
+
+  // ==========================================
+  // MAIN CONTENT
+  // ==========================================
+  &__content {
+    padding: 60px 0 80px;
+    
+    @include max-md {
+      padding: 40px 0 60px;
+    }
+  }
+
+  &__main {
+    max-width: 900px;
+  }
+
+  // ==========================================
+  // DOWNLOADS SECTION
+  // ==========================================
+  &__downloads {
+    margin-top: 60px;
+    padding-top: 48px;
+    border-top: 1px solid #e5e8eb;
+  }
+
+  &__downloads-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: $font-heading;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $pn-text;
+    margin-bottom: 32px;
+    
+    .MuiSvgIcon-root {
+      color: $pn-coral;
+      font-size: 1.75rem;
+    }
+  }
+
+  &__downloads-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    
+    @include max-sm {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__download-card {
+    border: 1px solid #e5e8eb;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      border-color: rgba($pn-blue, 0.3);
+    }
+    
+    .MuiCardContent-root {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+  }
+
+  &__download-title {
+    font-family: $font-heading;
+    font-size: 1rem;
+    font-weight: 600;
+    color: $pn-text;
+    margin-bottom: 8px;
+  }
+
+  &__download-desc {
+    font-family: $font-primary;
+    font-size: 0.9rem;
+    color: $pn-text-light;
+    line-height: 1.6;
+    flex-grow: 1;
+    margin-bottom: 8px;
+  }
+
+  &__download-en {
+    display: block;
+    color: $pn-text-light;
+    font-style: italic;
+    margin-bottom: 16px;
+  }
+
+  &__download-btn {
+    align-self: flex-start;
+    font-family: $font-primary;
+    font-weight: 600;
+    color: $pn-blue;
+    border-color: $pn-blue;
+    text-transform: none;
+    
+    &:hover {
+      background: $pn-blue;
+      color: #fff;
+    }
+  }
+
+  // ==========================================
+  // RELATED PAGES
+  // ==========================================
+  &__related {
+    margin-top: 60px;
+    padding-top: 48px;
+    border-top: 1px solid #e5e8eb;
+  }
+
+  &__related-title {
+    font-family: $font-heading;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $pn-text;
+    margin-bottom: 32px;
+  }
+
+  &__related-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    
+    @include max-sm {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__related-card {
+    border: 1px solid #e5e8eb;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    
+    &:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      border-color: rgba($pn-blue, 0.3);
+      
+      .resources-detail__related-arrow {
+        opacity: 1;
+        transform: translateX(-8px);
+      }
+    }
+    
+    .MuiCardContent-root {
+      padding: 24px;
+      padding-inline-start: 48px;
+    }
+    
+    h6 {
+      font-family: $font-heading;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: $pn-text;
+      margin-bottom: 8px;
+    }
+    
+    .MuiTypography-body2 {
+      font-family: $font-primary;
+      color: $pn-text-light;
+      line-height: 1.6;
+    }
+  }
+
+  &__related-arrow {
+    position: absolute;
+    top: 50%;
+    inset-inline-start: 16px;
+    transform: translateY(-50%) rotate(180deg);
+    color: $pn-coral;
+    opacity: 0.5;
+    transition: all 0.3s ease;
+  }
+
+  // ==========================================
+  // BACK BUTTON
+  // ==========================================
+  &__back {
+    margin-top: 60px;
+    padding-top: 32px;
+    border-top: 1px solid #e5e8eb;
+  }
+
+  &__back-btn {
+    font-family: $font-primary;
+    font-weight: 600;
+    color: $pn-blue;
+    border-color: $pn-blue;
+    text-transform: none;
+    padding: 10px 24px;
+    
+    .MuiSvgIcon-root.rtl-flip {
+      transform: rotate(180deg);
+    }
+    
+    &:hover {
+      background: $pn-blue;
+      color: #fff;
+    }
+  }
+}
+
+// ==========================================
+// RTL ADJUSTMENTS
+// ==========================================
+[dir="rtl"] {
+  .resources-detail {
+    &__related-arrow {
+      transform: translateY(-50%);
+    }
+    
+    &__related-card:hover &__related-arrow {
+      transform: translateY(-50%) translateX(8px);
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     Box,
     Typography,
@@ -32,6 +32,14 @@ const SurveyQuestion: React.FC<SurveyQuestionProps> = ({
     error,
     disabled = false,
 }) => {
+
+    useEffect(() => {
+        if (question.type === 'scale' && value === undefined) {
+            const minValue = question.scaleMin ?? 0;
+            onChange(minValue);
+        }
+    }, [question.type, question.scaleMin]);
+
     // --------------------------------------------------------------------------
     // Single Choice (Radio)
     // --------------------------------------------------------------------------
@@ -59,10 +67,34 @@ const SurveyQuestion: React.FC<SurveyQuestionProps> = ({
     const renderMultipleChoice = () => {
         const selectedValues = Array.isArray(value) ? value : [];
 
-        const handleCheckboxChange = (optionValue: string, checked: boolean) => {
+        // Check if an option is a "none" type option (mutually exclusive)
+        const nonePatterns = ['none', 'לא', 'אף אחד', 'לא רלוונטי', 'אין', 'ללא'];
+        const isNoneOption = (optionValue: string, optionLabel?: string): boolean => {
+            const checkValue = (optionValue || '').toLowerCase();
+            const checkLabel = (optionLabel || '').toLowerCase();
+            return nonePatterns.some(pattern =>
+                checkValue.includes(pattern.toLowerCase()) ||
+                checkLabel.includes(pattern.toLowerCase())
+            );
+        };
+
+        const handleCheckboxChange = (optionValue: string, optionLabel: string, checked: boolean) => {
+            const optionIsNone = isNoneOption(optionValue, optionLabel);
+
             if (checked) {
-                onChange([...selectedValues, optionValue]);
+                if (optionIsNone) {
+                    // Selecting "none" clears all other selections
+                    onChange([optionValue]);
+                } else {
+                    // Selecting a regular option removes any "none" options
+                    const filtered = selectedValues.filter(v => {
+                        const opt = question.options?.find(o => String(o.value) === v);
+                        return !isNoneOption(v, opt?.label);
+                    });
+                    onChange([...filtered, optionValue]);
+                }
             } else {
+                // Unchecking - just remove this option
                 onChange(selectedValues.filter((v) => v !== optionValue));
             }
         };
@@ -76,7 +108,11 @@ const SurveyQuestion: React.FC<SurveyQuestionProps> = ({
                             <Checkbox
                                 checked={selectedValues.includes(String(option.value))}
                                 onChange={(e) =>
-                                    handleCheckboxChange(String(option.value), e.target.checked)
+                                    handleCheckboxChange(
+                                        String(option.value),
+                                        option.label,
+                                        e.target.checked
+                                    )
                                 }
                                 disabled={disabled}
                             />
@@ -101,9 +137,12 @@ const SurveyQuestion: React.FC<SurveyQuestionProps> = ({
             marks.push({
                 value: i,
                 label: i === min ? question.scaleMinLabel || String(i) :
-                       i === max ? question.scaleMaxLabel || String(i) : String(i),
+                    i === max ? question.scaleMaxLabel || String(i) : String(i),
             });
         }
+
+        // FIX: Use min as fallback, but 0 is a valid value
+        const currentValue = typeof value === 'number' ? value : min;
 
         return (
             <Box className="survey-question__scale">
@@ -116,7 +155,7 @@ const SurveyQuestion: React.FC<SurveyQuestionProps> = ({
                     </Typography>
                 </Box>
                 <Slider
-                    value={typeof value === 'number' ? value : min}
+                    value={currentValue}
                     onChange={(_, newValue) => onChange(newValue as number)}
                     min={min}
                     max={max}
@@ -133,27 +172,38 @@ const SurveyQuestion: React.FC<SurveyQuestionProps> = ({
     // --------------------------------------------------------------------------
     // Yes/No Toggle
     // --------------------------------------------------------------------------
-    const renderYesNo = () => (
-        <ToggleButtonGroup
-            value={value === true || value === 'true' || value === 'yes' ? 'yes' : 
-                   value === false || value === 'false' || value === 'no' ? 'no' : null}
-            exclusive
-            onChange={(_, newValue) => {
-                if (newValue !== null) {
-                    onChange(newValue === 'yes');
-                }
-            }}
-            className="survey-question__toggle-group"
-            disabled={disabled}
-        >
-            <ToggleButton value="yes" className="survey-question__toggle-btn">
-                כן
-            </ToggleButton>
-            <ToggleButton value="no" className="survey-question__toggle-btn">
-                לא
-            </ToggleButton>
-        </ToggleButtonGroup>
-    );
+    const renderYesNo = () => {
+        // Determine current toggle value handling all representations
+        let toggleValue: 'yes' | 'no' | null = null;
+
+        if (value === true || value === 'true' || value === 'yes' || value === 'כן') {
+            toggleValue = 'yes';
+        } else if (value === false || value === 'false' || value === 'no' || value === 'לא') {
+            toggleValue = 'no';
+        }
+
+        return (
+            <ToggleButtonGroup
+                value={toggleValue}
+                exclusive
+                onChange={(_, newValue) => {
+                    if (newValue !== null) {
+                        onChange(newValue === 'yes');
+                    }
+                    // Don't allow deselection - keep current value
+                }}
+                className="survey-question__toggle-group"
+                disabled={disabled}
+            >
+                <ToggleButton value="yes" className="survey-question__toggle-btn">
+                    כן
+                </ToggleButton>
+                <ToggleButton value="no" className="survey-question__toggle-btn">
+                    לא
+                </ToggleButton>
+            </ToggleButtonGroup>
+        );
+    };
 
     // --------------------------------------------------------------------------
     // Text Input
@@ -178,24 +228,40 @@ const SurveyQuestion: React.FC<SurveyQuestionProps> = ({
     // --------------------------------------------------------------------------
     // Number Input
     // --------------------------------------------------------------------------
-    const renderNumber = () => (
-        <TextField
-            type="number"
-            value={value ?? ''}
-            onChange={(e) => {
-                const numValue = e.target.value === '' ? '' : Number(e.target.value);
-                onChange(numValue as number);
-            }}
-            inputProps={{
-                min: question.min,
-                max: question.max,
-            }}
-            disabled={disabled}
-            className="survey-question__number-field"
-            dir="ltr"
-        />
-    );
+    const renderNumber = () => {
+        // Display empty string for undefined/null, but show 0 if value is 0
+        const displayValue = value !== undefined && value !== null && value !== ''
+            ? String(value)
+            : '';
 
+        return (
+            <TextField
+                type="number"
+                value={displayValue}
+                onChange={(e) => {
+                    const inputVal = e.target.value;
+                    if (inputVal === '') {
+                        // Field cleared - store empty string or undefined
+                        onChange('' as unknown as number);
+                    } else {
+                        const numValue = Number(inputVal);
+                        // Only update if it's a valid number (0 is valid!)
+                        if (!isNaN(numValue)) {
+                            onChange(numValue);
+                        }
+                    }
+                }}
+                inputProps={{
+                    min: question.min,
+                    max: question.max,
+                }}
+                disabled={disabled}
+                className="survey-question__number-field"
+                dir="ltr"
+            />
+        );
+    };
+    
     // --------------------------------------------------------------------------
     // Date Input
     // --------------------------------------------------------------------------

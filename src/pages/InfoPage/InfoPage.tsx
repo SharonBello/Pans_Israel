@@ -4,7 +4,6 @@ import {
   Box,
   Container,
   Typography,
-  IconButton,
   useMediaQuery,
   useTheme,
   Card,
@@ -13,8 +12,6 @@ import {
   Fab,
 } from '@mui/material';
 import {
-  Menu as MenuIcon,
-  ArrowBack as ArrowIcon,
   KeyboardArrowUp as ScrollTopIcon,
 } from '@mui/icons-material';
 import InfoTabs from '../../components/Info/InfoTabs/InfoTabs';

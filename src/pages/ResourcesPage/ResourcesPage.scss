@@ -1,0 +1,469 @@
+@use '../../styles/abstracts/variables' as *;
+@use '../../styles/abstracts/mixins' as *;
+
+// Color overrides to match PANDAS Network
+$pn-blue: #1a5276;
+$pn-blue-dark: #154360;
+$pn-coral: #e74c3c;
+$pn-gray-bg: #f8f9fa;
+$pn-text: #2c3e50;
+$pn-text-light: #5d6d7e;
+
+.resources-page {
+  background: #fff;
+  
+  // ==========================================
+  // HERO SECTION
+  // ==========================================
+  &__hero {
+    position: relative;
+    height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    
+    @include max-md {
+      height: 350px;
+    }
+    
+    @include max-sm {
+      height: 280px;
+    }
+  }
+
+  &__hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/resources/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        135deg,
+        rgba($pn-blue, 0.9) 0%,
+        rgba($pn-blue-dark, 0.85) 100%
+      );
+    }
+  }
+
+  &__hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 $spacing-6;
+  }
+
+  &__hero-title {
+    font-family: $font-heading;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    
+    span {
+      color: $pn-coral;
+    }
+  }
+
+  // ==========================================
+  // SECTIONS
+  // ==========================================
+  &__section {
+    padding: 80px 0;
+    
+    @include max-md {
+      padding: 60px 0;
+    }
+    
+    @include max-sm {
+      padding: 40px 0;
+    }
+    
+    &--gray {
+      background: $pn-gray-bg;
+    }
+    
+    &--archives {
+      background: #fff;
+      overflow: hidden;
+    }
+    
+    &--cta {
+      background: #fff;
+      border-top: 1px solid #e5e8eb;
+    }
+  }
+
+  &__section-title {
+    font-family: $font-heading;
+    font-size: clamp(1.5rem, 3vw, 2rem) !important;
+    font-weight: 700;
+    color: $pn-text;
+    margin-bottom: 24px !important;
+    line-height: 1 !important;
+    
+    &--center {
+      text-align: center;
+    }
+  }
+
+  &__section-subtitle {
+    font-family: $font-primary;
+    font-size: 1.125rem;
+    color: $pn-text-light;
+    margin-bottom: 48px;
+    max-width: 650px;
+    line-height: 1.7;
+    
+    &--center {
+      text-align: center;
+      margin-inline: auto;
+    }
+    
+    @include max-sm {
+      font-size: 1rem;
+      margin-bottom: 32px;
+    }
+  }
+
+  &__text {
+    font-family: $font-primary;
+    font-size: 1.125rem;
+    color: $pn-text-light;
+    line-height: 1.8;
+    margin-bottom: 24px;
+    
+    @include max-sm {
+      font-size: 1rem;
+    }
+  }
+
+  // ==========================================
+  // CARDS GRID (Research & News)
+  // ==========================================
+  &__cards-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    
+    @include max-lg {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @include max-sm {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+  }
+
+  &__card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+      
+      .resources-page__card-image img {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  &__card-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #e8f4f8 0%, #d4e5ed 100%);
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    
+    @include max-sm {
+      height: 180px;
+    }
+  }
+
+  &__card-title {
+    font-family: $font-heading;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: $pn-text;
+    padding: 20px;
+    line-height: 1.5;
+    margin: 0;
+    
+    @include max-sm {
+      font-size: 1rem;
+      padding: 16px;
+    }
+  }
+
+  &__card-source {
+    display: block;
+    font-family: $font-primary;
+    font-size: 0.875rem;
+    color: $pn-text-light;
+    padding: 0 20px 20px;
+    margin-top: -8px;
+  }
+
+  // ==========================================
+  // SPLIT LAYOUTS (Image + Text)
+  // ==========================================
+  &__split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    
+    @include max-md {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+    
+    &--text-first {
+      .resources-page__split-text {
+        order: 1;
+      }
+      .resources-page__split-image {
+        order: 2;
+      }
+      
+      @include max-md {
+        .resources-page__split-image {
+          order: 1;
+        }
+        .resources-page__split-text {
+          order: 2;
+        }
+      }
+    }
+    
+    &--image-first {
+      .resources-page__split-image {
+        order: 1;
+      }
+      .resources-page__split-text {
+        order: 2;
+      }
+    }
+  }
+
+  &__split-image {
+    img {
+      width: 100%;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+      object-fit: cover;
+      aspect-ratio: 4 / 3;
+    }
+  }
+
+  &__split-text {
+    @include max-md {
+      text-align: center;
+    }
+  }
+
+  // ==========================================
+  // LINK BUTTON
+  // ==========================================
+  &__link-btn {
+    font-family: $font-primary;
+    font-size: 1rem;
+    font-weight: 600;
+    color: $pn-blue;
+    padding: 8px 0;
+    text-transform: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    
+    &:hover {
+      color: $pn-coral;
+      background: transparent;
+    }
+  }
+
+  // ==========================================
+  // ARCHIVES SECTION
+  // ==========================================
+  &__archives-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    min-height: 400px;
+    
+    @include max-md {
+      grid-template-columns: 1fr;
+      min-height: auto;
+    }
+  }
+
+  &__archives-boxes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+    padding: 40px 60px 40px 0;
+    
+    @include max-md {
+      padding: 40px 0;
+      text-align: center;
+    }
+  }
+
+  &__archive-box {
+    // Just text, no special styling needed
+  }
+
+  &__archive-title {
+    font-family: $font-heading;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $pn-text;
+    margin-bottom: 12px;
+  }
+
+  &__archive-text {
+    font-family: $font-primary;
+    font-size: 1rem;
+    color: $pn-text-light;
+    margin-bottom: 16px;
+    line-height: 1.6;
+  }
+
+  &__archives-image {
+    position: relative;
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 400px;
+      
+      @include max-md {
+        min-height: 250px;
+        border-radius: 16px;
+      }
+    }
+    
+    @include max-md {
+      order: -1;
+      padding: 0 0 20px;
+    }
+  }
+
+  // ==========================================
+  // CTA SECTION
+  // ==========================================
+  &__cta-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 48px;
+    
+    @include max-md {
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+  }
+
+  &__cta-card {
+    text-align: center;
+    padding: 40px 24px;
+  }
+
+  &__cta-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 24px;
+    background: rgba($pn-blue, 0.08);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    
+    .MuiSvgIcon-root {
+      font-size: 2rem;
+      color: $pn-blue;
+      transition: color 0.3s ease;
+    }
+  }
+
+  &__cta-card:hover &__cta-icon {
+    background: $pn-blue;
+    transform: scale(1.1);
+    
+    .MuiSvgIcon-root {
+      color: #fff;
+    }
+  }
+
+  &__cta-title {
+    font-family: $font-heading;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $pn-text;
+    margin: 0 0 12px;
+  }
+
+  &__cta-text {
+    font-family: $font-primary;
+    font-size: 0.9375rem;
+    color: $pn-text-light;
+    margin: 0 0 20px;
+    line-height: 1.6;
+  }
+
+  &__cta-btn {
+    font-family: $font-primary;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: $pn-blue;
+    padding: 10px 28px;
+    border: 2px solid $pn-blue;
+    border-radius: 6px;
+    background: transparent;
+    cursor: pointer;
+    text-transform: none;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: $pn-blue;
+      color: #fff;
+    }
+  }
+}
+
+// ==========================================
+// RTL ADJUSTMENTS
+// ==========================================
+[dir="rtl"] {
+  .resources-page {
+    &__archives-boxes {
+      padding: 40px 0 40px 60px;
+      
+      @include max-md {
+        padding: 40px 0;
+      }
+    }
+  }
+}

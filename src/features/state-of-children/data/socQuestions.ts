@@ -623,6 +623,27 @@ const diagnosisQuestions: SOCQuestion[] = [
         ],
         ppnEquivalent: 'Q20',
     }),
+    createQuestion({
+        id: 'misdiagnoses',
+        category: 'diagnosis',
+        type: 'multiple_choice',
+        questionText: 'אילו אבחנות נוספות קיבלתם לפני אבחנת הפאנדס/פאנדס? (ניתן לבחור מספר תשובות)',
+        required: false,
+        options: [
+            { id: 'none', label: 'לא קיבלנו אבחנות נוספות', value: 'none' },
+            { id: 'ocd', label: 'OCD', value: 'ocd' },
+            { id: 'anxiety', label: 'הפרעת חרדה', value: 'anxiety' },
+            { id: 'adhd', label: 'ADHD', value: 'adhd' },
+            { id: 'autism', label: 'אוטיזם / ASD', value: 'autism' },
+            { id: 'tourette', label: 'תסמונת טורט', value: 'tourette' },
+            { id: 'bipolar', label: 'הפרעה דו-קוטבית', value: 'bipolar' },
+            { id: 'depression', label: 'דיכאון', value: 'depression' },
+            { id: 'behavioral', label: 'בעיות התנהגות', value: 'behavioral' },
+            { id: 'psychosis', label: 'פסיכוזה', value: 'psychosis' },
+            { id: 'other', label: 'אחר', value: 'other' },
+        ],
+        ppnEquivalent: 'Q21',
+    }),
 ];
 
 // --------------------------------------------------------------------------
@@ -870,7 +891,7 @@ const familyImpactQuestions: SOCQuestion[] = [
         category: 'family_impact',
         type: 'single_choice',
         questionText: 'הערכה של סכום ההוצאות הכולל (בשקלים)',
-        questionSubtext: 'כולל בדיקות, טיפולים, נסיעות, אובדן הכנסה',
+        questionSubtext: ' מאז תחילת המחלה כולל בדיקות, טיפולים, נסיעות, אובדן הכנסה',
         required: false,
         options: [
             { id: 'under_5k', label: 'פחות מ-5,000 ₪', value: 'under_5k' },
@@ -878,6 +899,7 @@ const familyImpactQuestions: SOCQuestion[] = [
             { id: '20k_50k', label: '20,000-50,000 ₪', value: '20k_50k' },
             { id: '50k_100k', label: '50,000-100,000 ₪', value: '50k_100k' },
             { id: '100k_plus', label: 'יותר מ-100,000 ₪', value: '100k_plus' },
+            { id: '200k_plus', label: 'יותר מ-200,000 ₪', value: '200k_plus' },
         ],
         ppnEquivalent: 'Q29',
     }),
@@ -917,6 +939,7 @@ const familyImpactQuestions: SOCQuestion[] = [
             { id: 'changed_job', label: 'החלפנו עבודה', value: 'changed_job' },
             { id: 'quit', label: 'אחד ההורים הפסיק לעבוד', value: 'quit' },
             { id: 'both_affected', label: 'שני ההורים מושפעים', value: 'both_affected' },
+            { id: 'both_quit', label: 'שני ההורים לא עובדים', value: 'both_quit' },
         ],
         ppnEquivalent: 'Q32',
     }),

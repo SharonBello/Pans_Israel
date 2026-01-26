@@ -2,7 +2,6 @@ import React from 'react';
 
 import HomePage from './pages/HomePage/HomePage.tsx';
 import SymptomsPage from './pages/SymptomsPage/SymptomsPage.tsx';
-import ResourcesPage from './pages/ResourcesPage/ResourcesPage.tsx';
 import TestimonialsPage from './pages/TestimonialsPage/TestimonialsPage.tsx';
 import ProfessionalsHelpPage from './pages/MedicalHelpPage/ProfessionalsHelpPage.tsx';
 import PandasScalePage from './pages/SymptomsPage/scales/PANDASScale/PandasScalePage/PandasScalePage.tsx';
@@ -24,6 +23,7 @@ import AboutPage from './pages/AboutPage/AboutPage.tsx';
 import { SOCAdminPage, SOCResultsPage, SOCSurveyPage } from './features/index.ts';
 import SurveysPage from './pages/SurveysPage/SurveysPage.tsx';
 import InfoPage from './pages/InfoPage/InfoPage.tsx';
+import ResourcesPage from './pages/ResourcesPage/ResourcesPage.tsx';
 
 type AppRoute = {
   path: string;
@@ -58,6 +58,10 @@ const AppRoutes: AppRoute[] = [
   {
     path: '/resources',
     component: <ResourcesPage />,
+  },
+  {
+    path: '/resources/:pageId',
+    component: <ResourcesPage />
   },
   {
     path: '/testimonials',

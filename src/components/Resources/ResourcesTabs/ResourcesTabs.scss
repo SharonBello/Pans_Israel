@@ -1,0 +1,154 @@
+@use '../../../styles/abstracts/variables' as *;
+@use '../../../styles/abstracts/mixins' as *;
+
+.resources-tabs {
+  position: sticky;
+  top: $header-height;
+  z-index: $z-sticky;
+  @include glass-effect;
+  
+  @include max-xs {
+    top: $header-height-mobile;
+  }
+
+  &__container {
+    @include container;
+    padding-block: 0;
+  }
+
+  &__tabs {
+    .MuiTabs-flexContainer {
+      gap: $spacing-2;
+      justify-content: center;
+      
+      @include max-sm {
+        justify-content: flex-start;
+      }
+    }
+    
+    .MuiTabs-scroller {
+      overflow-x: auto !important;
+      @include custom-scrollbar;
+    }
+  }
+
+  &__tab {
+    min-height: 56px;
+    padding: $spacing-3 $spacing-5;
+    border-radius: $radius-lg $radius-lg 0 0;
+    font-family: $font-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $text-muted;
+    text-transform: none;
+    @include safe-transition(all $transition-base);
+    position: relative;
+    overflow: hidden;
+    gap: $spacing-2;
+    
+    &::before {
+      content: '';
+      @include absolute-fill;
+      background: linear-gradient(180deg, rgba($color-accent, 0.08) 0%, transparent 100%);
+      opacity: 0;
+      @include safe-transition(opacity $transition-base);
+    }
+    
+    .MuiSvgIcon-root {
+      font-size: 1.2rem;
+      @include safe-transition(all $transition-base);
+    }
+    
+    &:hover {
+      color: $color-accent;
+      background: rgba($color-accent, 0.05);
+      
+      &::before {
+        opacity: 1;
+      }
+      
+      .MuiSvgIcon-root {
+        transform: scale(1.1);
+      }
+    }
+    
+    &.Mui-selected {
+      color: $color-accent;
+      font-weight: $font-weight-semibold;
+      background: rgba($color-accent, 0.08);
+      
+      .MuiSvgIcon-root {
+        color: $color-accent;
+      }
+    }
+    
+    @include max-md {
+      padding: $spacing-3 $spacing-4;
+      font-size: $font-size-sm;
+      min-width: auto;
+    }
+    
+    @include max-sm {
+      padding: $spacing-3;
+      min-width: 56px;
+      
+      .MuiSvgIcon-root {
+        font-size: 1.4rem;
+      }
+    }
+  }
+
+  &__indicator {
+    height: 3px;
+    background: $gradient-accent;
+    border-radius: $radius-sm $radius-sm 0 0;
+    box-shadow: $shadow-glow-accent;
+  }
+
+  &__decoration {
+    position: relative;
+    height: 1px;
+  }
+
+  &__decoration-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      $border-color 20%,
+      $border-color 80%,
+      transparent 100%
+    );
+  }
+
+  &__decoration-glow {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 20px;
+    background: radial-gradient(
+      ellipse at center,
+      rgba($color-accent, 0.15) 0%,
+      transparent 70%
+    );
+    pointer-events: none;
+  }
+}
+
+// RTL adjustments
+[dir="rtl"] {
+  .resources-tabs {
+    &__tab {
+      .MuiSvgIcon-root {
+        margin-left: $spacing-2;
+        margin-right: 0;
+      }
+    }
+  }
+}
