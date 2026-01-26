@@ -1,0 +1,292 @@
+@use '../../styles/abstracts/variables' as *;
+@use '../../styles/abstracts/mixins' as *;
+
+.info-page {
+  min-height: 100vh;
+  background: $color-bg-light;
+
+  // Hero Section
+  &__hero {
+    position: relative;
+    min-height: 280px;
+    @include flex-center;
+    overflow: hidden;
+    background: $color-bg-white;
+    
+    @include max-sm {
+      min-height: 220px;
+    }
+  }
+
+  &__hero-background {
+    @include absolute-fill;
+    z-index: $z-base;
+  }
+
+  &__hero-gradient {
+    @include absolute-fill;
+    background: linear-gradient(
+      135deg,
+      rgba($color-primary, 0.08) 0%,
+      rgba($color-medium, 0.05) 50%,
+      rgba($color-bg-white, 1) 100%
+    );
+  }
+
+  &__hero-pattern {
+    @include absolute-fill;
+    opacity: 0.02;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23023373' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  &__hero-content {
+    position: relative;
+    z-index: $z-base + 1;
+    @include container;
+    padding-block: $spacing-16 $spacing-10;
+    
+    @include max-sm {
+      padding-block: $spacing-10 $spacing-8;
+    }
+  }
+
+  &__hero-label {
+    color: $color-primary;
+    font-family: $font-heading;
+    font-weight: $font-weight-bold;
+    font-size: $font-size-xs;
+    letter-spacing: $letter-spacing-wider;
+    margin-bottom: $spacing-3;
+    display: block;
+  }
+
+  &__hero-title {
+    @include heading-1;
+    margin-bottom: $spacing-4;
+    
+    @include max-sm {
+      font-size: $font-size-3xl;
+    }
+  }
+
+  &__hero-description {
+    @include body-text;
+    font-size: $font-size-lg;
+    max-width: 600px;
+    
+    @include max-sm {
+      font-size: $font-size-base;
+    }
+  }
+
+  // Layout
+  &__layout {
+    display: flex;
+    max-width: $container-3xl;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  &__mobile-nav {
+    @include flex-start;
+    gap: $spacing-2;
+    padding: $spacing-3 $spacing-4;
+    @include glass-effect;
+    position: sticky;
+    top: calc($header-height + 56px); // Below tabs
+    z-index: $z-sticky - 1;
+    
+    .MuiTypography-root {
+      @include small-text;
+    }
+  }
+
+  &__menu-button {
+    background: rgba($color-primary, 0.1) !important;
+    color: $color-primary !important;
+    
+    &:hover {
+      background: rgba($color-primary, 0.15) !important;
+    }
+  }
+
+  &__main {
+    flex: 1;
+    min-width: 0;
+    padding: 0 $spacing-6 $spacing-16;
+    
+    @include max-md {
+      padding: 0 $spacing-4 $spacing-10;
+    }
+  }
+
+  &__content-container {
+    padding-top: $spacing-5;
+  }
+
+  // Assessment Scales Section
+  &__scales-section {
+    margin-top: $spacing-12;
+    padding-top: $spacing-12;
+    border-top: 1px solid $border-light;
+  }
+
+  // Related Pages
+  &__related {
+    margin-top: $spacing-16;
+    padding-top: $spacing-12;
+    border-top: 1px solid $border-light;
+  }
+
+  &__related-title {
+    @include heading-3;
+    margin-bottom: $spacing-6;
+    position: relative;
+    padding-bottom: $spacing-3;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      inset-inline-end: 0;
+      width: 50px;
+      height: 3px;
+      background: $gradient-primary;
+      border-radius: $radius-sm;
+    }
+  }
+
+  &__related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: $spacing-5;
+    
+    @include max-sm {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__related-card {
+    @include card-base;
+    @include hover-lift;
+    overflow: hidden;
+    
+    &:hover {
+      border-color: rgba($color-primary, 0.2);
+      
+      .info-page__related-card-arrow {
+        opacity: 1;
+        transform: translateX(-8px);
+        
+        [dir="rtl"] & {
+          transform: translateX(8px);
+        }
+      }
+    }
+    
+    .MuiCardContent-root {
+      padding: $spacing-6;
+      position: relative;
+    }
+  }
+
+  &__related-card-title {
+    @include heading-4;
+    margin-bottom: $spacing-2;
+  }
+
+  &__related-card-description {
+    @include body-text;
+  }
+
+  &__related-card-arrow {
+    position: absolute;
+    inset-inline-start: $spacing-5;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    @include safe-transition(all $transition-base);
+    color: $color-primary;
+    
+    .MuiSvgIcon-root {
+      font-size: 1.5rem;
+      
+      [dir="rtl"] & {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  // Call to Action
+  &__cta {
+    margin-top: $spacing-16;
+    padding: $spacing-10;
+    background: rgba($color-primary, 0.05);
+    border-radius: $radius-2xl;
+    text-align: center;
+    border: 1px solid rgba($color-primary, 0.1);
+    
+    @include max-sm {
+      padding: $spacing-6;
+      margin-top: $spacing-12;
+    }
+  }
+
+  &__cta-title {
+    @include heading-3;
+    margin-bottom: $spacing-2;
+  }
+
+  &__cta-text {
+    @include body-text;
+    margin-bottom: $spacing-6;
+  }
+
+  &__cta-buttons {
+    @include flex-center;
+    gap: $spacing-4;
+    flex-wrap: wrap;
+  }
+
+  &__cta-button {
+    @include button-base;
+    
+    &--primary {
+      @include button-primary;
+    }
+    
+    &--secondary {
+      @include button-secondary;
+    }
+  }
+
+  // Scroll to Top
+  &__scroll-top {
+    position: fixed !important;
+    bottom: $spacing-8;
+    inset-inline-start: $spacing-8;
+    background: $gradient-primary !important;
+    color: $text-on-dark !important;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    @include safe-transition(all $transition-base);
+    box-shadow: $shadow-glow-primary !important;
+    
+    &.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 25px rgba($color-primary, 0.4) !important;
+    }
+    
+    @include max-sm {
+      bottom: $spacing-5;
+      inset-inline-start: $spacing-5;
+    }
+  }
+}

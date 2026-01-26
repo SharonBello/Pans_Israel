@@ -27,6 +27,11 @@ const founders: Founder[] = [
         role: 'מייסדת שותפה',
         description: 'אמא לילד עם PANS/PANDAS. מובילה את פעילות הקהילה והתמיכה ההדדית בין ההורים.',
     },
+    {
+        name: 'אושר ברכה קסלסי',
+        role: 'מייסדת שותפה',
+        description: 'מרצה על פאנס/פאנדס במכללות ובבית ספר. מטפלת cbt שמתמחה בפאנס/פאנדס',
+    },
 ];
 
 // Values data
@@ -178,7 +183,7 @@ const AboutPage: React.FC = () => {
                         המייסדות
                     </h2>
                     <p className="about-section__subtitle">
-                        שלוש אמהות שהחליטו לעשות שינוי
+                        אקבע אמהות שהחליטו לעשות שינוי
                     </p>
                     
                     <div className="about-founders__grid">

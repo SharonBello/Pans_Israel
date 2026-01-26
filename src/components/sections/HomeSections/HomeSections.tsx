@@ -19,14 +19,14 @@ const HomeSections: React.FC = (): React.JSX.Element => {
             {
                 id: 'symptoms',
                 title: 'בדיקת תסמינים ומדדים',
-                description: 'איך לבדוק אם ייתכן PANS/PANDAS? מחשבונים ומדדי תסמינים (כעת: מדד אחד, בהמשך עוד שניים).',
+                description: 'איך לבדוק אם ייתכן PANS/PANDAS? מחשבונים ומדדי תסמינים.',
                 to: '/symptoms',
                 Icon: FaClipboardList,
             },
             {
                 id: 'medical',
                 title: 'רופאים וסיוע רפואי',
-                description: 'רשימת מומחים, מרפאות, גורמי טיפול ותמיכה. (נוסיף/נעדכן בהתאם למידע מאומת.)',
+                description: 'רשימת מומחים, מרפאות, גורמי טיפול ותמיכה.',
                 to: '/Professionals-help',
                 Icon: FaUserDoctor,
             },
@@ -62,7 +62,6 @@ const HomeSections: React.FC = (): React.JSX.Element => {
                                 <div className="hs-card__content">
                                     <h3 className="hs-card__title">{s.title}</h3>
                                     <p className="hs-card__desc">{s.description}</p>
-                                    <span className="hs-card__cta">למעבר לעמוד</span>
                                 </div>
                             </Link>
                         );

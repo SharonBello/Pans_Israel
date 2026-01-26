@@ -1,0 +1,376 @@
+@use '../../../styles/abstracts/variables' as *;
+@use '../../../styles/abstracts/mixins' as *;
+
+.info-content {
+  padding: $spacing-8 0;
+  
+  // Headings
+  &__heading {
+    @include heading-3;
+    margin: $spacing-10 0 $spacing-6;
+    position: relative;
+    padding-bottom: $spacing-4;
+    
+    &:first-child {
+      margin-top: 0;
+    }
+    
+    @include max-sm {
+      font-size: $font-size-xl;
+    }
+  }
+  
+  &__heading-decoration {
+    position: absolute;
+    bottom: 0;
+    inset-inline-end: 0;
+    width: 60px;
+    height: 3px;
+    background: $gradient-primary;
+    border-radius: $radius-sm;
+  }
+
+  // Paragraphs
+  &__paragraph {
+    @include body-text;
+    font-size: $font-size-base;
+    line-height: $line-height-relaxed;
+    margin-bottom: $spacing-5;
+    text-align: justify;
+    
+    @include max-sm {
+      text-align: start;
+    }
+  }
+
+  // Lists
+  &__list-container {
+    margin: $spacing-6 0;
+  }
+  
+  &__list-title {
+    @include heading-4;
+    margin-bottom: $spacing-4;
+  }
+  
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  &__list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-3;
+    margin-bottom: $spacing-3;
+    padding: $spacing-3 $spacing-4;
+    background: rgba($color-light, 0.15);
+    border-radius: $radius-lg;
+    border-inline-end: 3px solid transparent;
+    @include safe-transition(all $transition-base);
+    
+    &:hover {
+      background: rgba($color-primary, 0.05);
+      border-inline-end-color: $color-primary;
+      transform: translateX(-4px);
+      
+      [dir="rtl"] & {
+        transform: translateX(4px);
+      }
+    }
+    
+    .MuiTypography-body1 {
+      color: $text-secondary;
+      line-height: $line-height-relaxed;
+    }
+    
+    &--detailed {
+      flex-direction: row;
+      align-items: flex-start;
+      padding: $spacing-4 $spacing-5;
+      background: $color-bg-white;
+      border: 1px solid $border-light;
+      
+      &:hover {
+        background: rgba($color-primary, 0.03);
+        box-shadow: $shadow-md;
+      }
+    }
+  }
+  
+  &__list-bullet {
+    width: 8px;
+    height: 8px;
+    min-width: 8px;
+    background: $gradient-primary;
+    border-radius: $radius-full;
+    margin-top: $spacing-2;
+  }
+  
+  &__list-item-title {
+    font-family: $font-heading;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    margin-bottom: $spacing-1;
+    font-size: $font-size-base;
+  }
+  
+  &__list-item-description {
+    color: $text-secondary;
+    line-height: $line-height-relaxed;
+    font-size: $font-size-sm;
+  }
+
+  // Callouts
+  &__callout {
+    display: flex;
+    gap: $spacing-4;
+    padding: $spacing-6;
+    margin: $spacing-6 0;
+    border-radius: $radius-xl;
+    border-inline-end: 4px solid;
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      inset-inline-end: 0;
+      width: 100px;
+      height: 100%;
+      background: radial-gradient(
+        circle at right center,
+        rgba($color-bg-white, 0.3) 0%,
+        transparent 70%
+      );
+    }
+    
+    &--info {
+      background: rgba($info, 0.08);
+      border-color: $info;
+      
+      .info-content__callout-icon {
+        color: $info;
+      }
+    }
+    
+    &--warning {
+      background: rgba($warning, 0.08);
+      border-color: $warning;
+      
+      .info-content__callout-icon {
+        color: $warning;
+      }
+    }
+    
+    &--success {
+      background: rgba($success, 0.08);
+      border-color: $success;
+      
+      .info-content__callout-icon {
+        color: $success;
+      }
+    }
+    
+    &--tip {
+      background: rgba($color-accent, 0.08);
+      border-color: $color-accent;
+      
+      .info-content__callout-icon {
+        color: $color-accent;
+      }
+    }
+    
+    @include max-sm {
+      padding: $spacing-4;
+      gap: $spacing-3;
+    }
+  }
+  
+  &__callout-icon {
+    .MuiSvgIcon-root {
+      font-size: 1.5rem;
+    }
+  }
+  
+  &__callout-content {
+    flex: 1;
+  }
+  
+  &__callout-title {
+    font-family: $font-heading;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    margin-bottom: $spacing-2;
+  }
+  
+  &__callout-text {
+    color: $text-secondary;
+    line-height: $line-height-relaxed;
+  }
+
+  // Accordions
+  &__accordion-container {
+    margin: $spacing-6 0;
+  }
+  
+  &__accordion {
+    @include card-base;
+    margin-bottom: $spacing-2 !important;
+    
+    &::before {
+      display: none;
+    }
+    
+    &.Mui-expanded {
+      background: $color-bg-white !important;
+      box-shadow: $shadow-lg;
+    }
+  }
+  
+  &__accordion-summary {
+    padding: $spacing-4 $spacing-5 !important;
+    
+    .MuiTypography-root {
+      font-family: $font-heading;
+      font-weight: $font-weight-semibold;
+      color: $text-primary;
+    }
+    
+    .MuiAccordionSummary-expandIconWrapper {
+      color: $color-primary;
+    }
+  }
+  
+  &__accordion-details {
+    padding: 0 $spacing-5 $spacing-5 !important;
+    
+    .MuiTypography-root {
+      color: $text-secondary;
+      line-height: $line-height-relaxed;
+    }
+  }
+
+  // Tables
+  &__table-container {
+    margin: $spacing-6 0;
+    border-radius: $radius-xl !important;
+    @include card-base;
+    overflow: hidden;
+  }
+  
+  &__table {
+    .MuiTableCell-root {
+      font-family: $font-primary;
+      border-color: $border-light;
+    }
+  }
+  
+  &__table-header {
+    background: rgba($color-primary, 0.05) !important;
+    font-family: $font-heading !important;
+    font-weight: $font-weight-semibold !important;
+    color: $text-primary !important;
+    text-align: start !important;
+  }
+  
+  &__table-row {
+    @include safe-transition(background $transition-base);
+    
+    &:hover {
+      background: rgba($color-primary, 0.02);
+    }
+    
+    &:last-child {
+      .MuiTableCell-root {
+        border-bottom: none;
+      }
+    }
+  }
+  
+  &__table-cell {
+    color: $text-secondary !important;
+    text-align: start !important;
+    padding: $spacing-4 !important;
+  }
+
+  // Video
+  &__video {
+    margin: $spacing-6 0;
+    padding: $spacing-6;
+    background: rgba($color-primary, 0.05);
+    border-radius: $radius-xl;
+    border: 1px solid rgba($color-primary, 0.1);
+  }
+  
+  &__video-title {
+    font-family: $font-heading;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    @include flex-start;
+    gap: $spacing-2;
+    margin-bottom: $spacing-3;
+    
+    .MuiSvgIcon-root {
+      color: $color-primary;
+    }
+  }
+  
+  &__video-description {
+    color: $text-secondary;
+    margin-bottom: $spacing-4;
+  }
+  
+  &__video-link {
+    text-decoration: none;
+  }
+  
+  &__video-button {
+    @include button-secondary;
+    border-radius: $radius-md !important;
+  }
+
+  // Download
+  &__download {
+    margin: $spacing-6 0;
+    padding: $spacing-6;
+    background: rgba($success, 0.05);
+    border-radius: $radius-xl;
+    border: 1px solid rgba($success, 0.15);
+  }
+  
+  &__download-title {
+    font-family: $font-heading;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    @include flex-start;
+    gap: $spacing-2;
+    margin-bottom: $spacing-4;
+    
+    .MuiSvgIcon-root {
+      color: $success;
+    }
+  }
+  
+  &__download-link {
+    text-decoration: none;
+  }
+  
+  &__download-button {
+    background: $success !important;
+    color: $text-on-dark !important;
+    font-family: $font-primary !important;
+    font-weight: $font-weight-medium !important;
+    border-radius: $radius-md !important;
+    padding: $spacing-3 $spacing-6 !important;
+    box-shadow: 0 4px 15px rgba($success, 0.3) !important;
+    @include safe-transition(all $transition-base);
+    
+    &:hover {
+      box-shadow: 0 6px 20px rgba($success, 0.4) !important;
+      transform: translateY(-2px);
+    }
+  }
+}

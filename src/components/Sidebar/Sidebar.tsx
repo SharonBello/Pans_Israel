@@ -58,7 +58,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
 
   return (
     <Drawer
-      variant="temporary"  // Changed: Always use temporary for mobile sidebar
+      variant="temporary"
       anchor="right"
       open={open}
       onClose={onClose}

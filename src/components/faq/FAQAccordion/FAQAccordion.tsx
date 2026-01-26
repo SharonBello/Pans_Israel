@@ -11,7 +11,6 @@ export type FAQAccordionProps = {
 const FAQAccordion: React.FC<FAQAccordionProps> = ({
     items,
     title = 'שאלות נפוצות',
-    subtitle = 'תשובות קצרות לשאלות שמגיעות שוב ושוב מהורים ומצוותים חינוכיים.',
 }): React.JSX.Element => {
     const [openId, setOpenId] = useState<string | null>(items[0]?.id ?? null);
 
@@ -67,7 +66,6 @@ const FAQAccordion: React.FC<FAQAccordionProps> = ({
             <div className="faq__container">
                 <div className="faq__header">
                     <h2 className="faq__title">{title}</h2>
-                    <p className="faq__subtitle">{subtitle}</p>
                 </div>
 
                 <div className="faq__list">{rendered}</div>
