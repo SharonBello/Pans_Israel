@@ -82,21 +82,6 @@ const InfoPage: React.FC = () => {
 
       {/* Main Content Area */}
       <Box className="info-page__layout">
-        {/* Sidebar Toggle for Mobile */}
-        {isMobile && (
-          <Box className="info-page__mobile-nav">
-            <IconButton
-              onClick={() => setSidebarOpen(true)}
-              className="info-page__menu-button"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="subtitle2">
-              ניווט מהיר
-            </Typography>
-          </Box>
-        )}
-
         {/* Main Content */}
         <Box className="info-page__main">
           <Container maxWidth="lg" className="info-page__content-container">
