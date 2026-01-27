@@ -1116,6 +1116,18 @@ const currentStatusQuestions: SOCQuestion[] = [
         scaleMaxLabel: 'אופטימי מאוד',
         ppnEquivalent: 'Q41',
     }),
+    createQuestion({
+        id: 'בcurrent_rating',
+        category: 'current_status',
+        type: 'scale',
+        questionText: 'מה רמת הקושי היומיומי?',
+        required: true,
+        scaleMin: 1,
+        scaleMax: 5,
+        scaleMinLabel: 'קושי משמעותי',
+        scaleMaxLabel: 'לא מורגש',
+        ppnEquivalent: 'Q42',
+    }),
 ];
 
 // --------------------------------------------------------------------------
@@ -1131,7 +1143,7 @@ const openQuestions: SOCQuestion[] = [
         questionSubtext: 'שתפו עצה, תובנה או מילים מעודדות',
         required: false,
         maxLength: 1000,
-        ppnEquivalent: 'Q42',
+        ppnEquivalent: 'Q43',
     }),
     createQuestion({
         id: 'biggest_challenge',
@@ -1140,7 +1152,7 @@ const openQuestions: SOCQuestion[] = [
         questionText: 'מה האתגר הגדול ביותר שאתם מתמודדים איתו?',
         required: false,
         maxLength: 500,
-        ppnEquivalent: 'Q43',
+        ppnEquivalent: 'Q44',
     }),
     createQuestion({
         id: 'what_helped_most',
@@ -1149,7 +1161,7 @@ const openQuestions: SOCQuestion[] = [
         questionText: 'מה עזר לכם הכי הרבה במסע?',
         required: false,
         maxLength: 500,
-        ppnEquivalent: 'Q44',
+        ppnEquivalent: 'Q45',
     }),
     createQuestion({
         id: 'additional_comments',
@@ -1159,7 +1171,7 @@ const openQuestions: SOCQuestion[] = [
         questionSubtext: 'כל מידע נוסף שתרצו לשתף',
         required: false,
         maxLength: 1000,
-        ppnEquivalent: 'Q45',
+        ppnEquivalent: 'Q46',
     }),
 ];
 
