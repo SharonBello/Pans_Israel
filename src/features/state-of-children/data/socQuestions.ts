@@ -1128,6 +1128,19 @@ const currentStatusQuestions: SOCQuestion[] = [
         scaleMaxLabel: 'לא מורגש',
         ppnEquivalent: 'Q42',
     }),
+    createQuestion({
+        id: 'siblins',
+        category: 'current_status',
+        type: 'single_choice',
+        questionText: 'כמה ילדים במשפחה מאובחנים עם פאנס/פאנדס?',
+        required: true,
+        options: [
+            { id: 'one', label: 'ילד אחד', value: 'one' },
+            { id: 'two', label: 'שניים', value: 'two' },
+            { id: 'three_more', label: 'שלושה או יותק', value: 'three_more' },
+        ],
+        ppnEquivalent: 'Q43',
+    }),
 ];
 
 // --------------------------------------------------------------------------
@@ -1143,7 +1156,7 @@ const openQuestions: SOCQuestion[] = [
         questionSubtext: 'שתפו עצה, תובנה או מילים מעודדות',
         required: false,
         maxLength: 1000,
-        ppnEquivalent: 'Q43',
+        ppnEquivalent: 'Q44',
     }),
     createQuestion({
         id: 'biggest_challenge',
@@ -1152,7 +1165,7 @@ const openQuestions: SOCQuestion[] = [
         questionText: 'מה האתגר הגדול ביותר שאתם מתמודדים איתו?',
         required: false,
         maxLength: 500,
-        ppnEquivalent: 'Q44',
+        ppnEquivalent: 'Q45',
     }),
     createQuestion({
         id: 'what_helped_most',
@@ -1161,7 +1174,7 @@ const openQuestions: SOCQuestion[] = [
         questionText: 'מה עזר לכם הכי הרבה במסע?',
         required: false,
         maxLength: 500,
-        ppnEquivalent: 'Q45',
+        ppnEquivalent: 'Q46',
     }),
     createQuestion({
         id: 'additional_comments',
@@ -1171,7 +1184,7 @@ const openQuestions: SOCQuestion[] = [
         questionSubtext: 'כל מידע נוסף שתרצו לשתף',
         required: false,
         maxLength: 1000,
-        ppnEquivalent: 'Q46',
+        ppnEquivalent: 'Q47',
     }),
 ];
 
