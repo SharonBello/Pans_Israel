@@ -29,17 +29,9 @@ const ResourcesDetailPage: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [pageId]);
 
-  // Debug logging
-  console.log('ResourcesDetailPage - pageId:', pageId);
-  console.log('ResourcesDetailPage - available sections:', Object.keys(resourceSections));
-
   // Validate pageId - check if section exists
   const currentPageId = pageId && resourceSections[pageId] ? pageId : null;
   const currentSection = currentPageId ? resourceSections[currentPageId] : null;
-
-  console.log('ResourcesDetailPage - currentPageId:', currentPageId);
-  console.log('ResourcesDetailPage - currentSection:', currentSection);
-  console.log('ResourcesDetailPage - content length:', currentSection?.content?.length);
 
   // Page not found
   if (!currentSection) {

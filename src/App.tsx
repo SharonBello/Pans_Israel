@@ -23,15 +23,11 @@ const cacheRtl = createCache({
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-   console.log('App render - isMenuOpen:', isMenuOpen);
-
   const handleMenuToggle = () => {
-    console.log('Toggle clicked! Current state:', isMenuOpen);
     setIsMenuOpen((prev) => !prev);
   };
 
   const handleSidebarClose = () => {
-    console.log('Close sidebar');
     setIsMenuOpen(false);
   };
 

@@ -73,9 +73,6 @@ const ResourcesContentRenderer: React.FC<ResourcesContentRendererProps> = ({ con
   };
 
   const renderBlock = (block: ContentBlock) => {
-    // Debug logging
-    console.log('Rendering block:', block.type, block.id);
-    
     switch (block.type) {
       case 'heading':
         return (
@@ -338,9 +335,6 @@ const ResourcesContentRenderer: React.FC<ResourcesContentRendererProps> = ({ con
         );
     }
   };
-
-  // Debug: log content
-  console.log('ResourcesContentRenderer - content:', content?.length, 'blocks');
 
   if (!content || content.length === 0) {
     return (
