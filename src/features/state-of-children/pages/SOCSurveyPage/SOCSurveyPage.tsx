@@ -277,6 +277,7 @@ const SOCSurveyPage: React.FC = () => {
 
             if (result.success) {
                 setState(prev => ({ ...prev, isComplete: true, isSubmitting: false }));
+                navigate('/surveys/state-of-children/results')
             } else {
                 setSubmitError(result.error || 'אירעה שגיאה בשליחת הסקר. נסו שוב.');
                 setState(prev => ({ ...prev, isSubmitting: false }));

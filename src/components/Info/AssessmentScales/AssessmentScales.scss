@@ -285,7 +285,7 @@
     border: 1px solid rgba($warning, 0.2);
     
     .MuiTypography-root {
-      color: darken($warning, 15%);
+      // color: darken($warning, 15%);
       line-height: $line-height-relaxed;
       font-size: $font-size-sm;
     }

@@ -624,7 +624,7 @@ const diagnosisQuestions: SOCQuestion[] = [
         ppnEquivalent: 'Q20',
     }),
     createQuestion({
-        id: 'misdiagnoses',
+        id: 'additional',
         category: 'diagnosis',
         type: 'multiple_choice',
         questionText: 'אילו אבחנות נוספות קיבלתם לפני אבחנת הפאנדס/פאנדס? (ניתן לבחור מספר תשובות)',
@@ -981,6 +981,7 @@ const familyHistoryQuestions: SOCQuestion[] = [
         questionText: 'אילו מחלות אוטואימוניות קיימות במשפחה?',
         required: false,
         options: [
+            { id: 'pans', label: 'פאנס/פאנדס (Pans, Pandas)', value: 'pans' },
             { id: 'thyroid', label: 'מחלות בלוטת התריס (Hashimoto, Graves)', value: 'thyroid' },
             { id: 'rheumatoid', label: 'דלקת מפרקים שגרונית', value: 'rheumatoid' },
             { id: 'lupus', label: 'לופוס', value: 'lupus' },
@@ -1077,10 +1078,12 @@ const currentStatusQuestions: SOCQuestion[] = [
         options: [
             { id: 'none', label: 'אין טיפול כרגע', value: 'none' },
             { id: 'antibiotics_prophylactic', label: 'אנטיביוטיקה מניעתית', value: 'antibiotics_prophylactic' },
+            { id: 'steroids_monthly', label: 'סטרואידים תקופתי', value: 'steroids_monthly' },
             { id: 'psychiatric_meds', label: 'תרופות פסיכיאטריות', value: 'psychiatric_meds' },
             { id: 'therapy', label: 'טיפול פסיכולוגי', value: 'therapy' },
             { id: 'ivig_ongoing', label: 'IVIG תקופתי', value: 'ivig_ongoing' },
             { id: 'supplements', label: 'תוספי תזונה', value: 'supplements' },
+            { id: 'alternative', label: 'טיפול אלטרנטיבי', value: 'alternative' },
             { id: 'monitoring', label: 'מעקב בלבד', value: 'monitoring' },
         ],
         ppnEquivalent: 'Q39',

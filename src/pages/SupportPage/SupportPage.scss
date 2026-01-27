@@ -1,0 +1,474 @@
+// ==========================================================================
+// Support Page Styles
+// ==========================================================================
+
+@use '../../styles/abstracts/variables' as *;
+@use '../../styles/abstracts/mixins' as *;
+
+.support-page {
+  min-height: 100vh;
+  background: $color-bg-light;
+
+  // ==========================================
+  // HERO SECTION
+  // ==========================================
+  &__hero {
+    position: relative;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 0;
+    overflow: hidden;
+
+    @include max-md {
+      min-height: 350px;
+      padding: 60px 0;
+    }
+  }
+
+  &__hero-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    z-index: 1;
+
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+  }
+
+  &__hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 30% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+    z-index: 2;
+  }
+
+  &__hero-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+  }
+
+  &__hero-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    margin-bottom: 24px;
+    animation: pulse 2s ease-in-out infinite;
+
+    .MuiSvgIcon-root {
+      font-size: 40px;
+      color: #fff;
+    }
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+
+  &__hero-title {
+    font-family: $font-heading;
+    font-size: 3.5rem;
+    font-weight: $font-weight-bold;
+    color: #fff;
+    margin-bottom: 16px;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+
+    @include max-md {
+      font-size: 2.5rem;
+    }
+  }
+
+  &__hero-subtitle {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 16px;
+    font-weight: $font-weight-medium;
+
+    @include max-md {
+      font-size: 1.25rem;
+    }
+  }
+
+  &__hero-description {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  // ==========================================
+  // STATS SECTION
+  // ==========================================
+  &__stats {
+    padding: 40px 0;
+    background: #fff;
+    margin-top: -40px;
+    position: relative;
+    z-index: 10;
+    border-radius: 24px 24px 0 0;
+  }
+
+  &__stats-grid {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+
+    @include max-sm {
+      gap: 30px;
+    }
+  }
+
+  &__stat {
+    text-align: center;
+  }
+
+  &__stat-icon {
+    color: #667eea;
+    font-size: 32px !important;
+    margin-bottom: 8px;
+  }
+
+  &__stat-number {
+    font-size: 2rem;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    font-family: $font-heading;
+  }
+
+  &__stat-label {
+    font-size: 0.9rem;
+    color: $text-secondary;
+  }
+
+  // ==========================================
+  // VOLUNTEERS SECTION
+  // ==========================================
+  &__volunteers {
+    padding: 60px 0 80px;
+    background: #fff;
+  }
+
+  &__section-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  &__section-title {
+    font-family: $font-heading;
+    font-size: 2.25rem;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    margin-bottom: 12px;
+
+    @include max-md {
+      font-size: 1.75rem;
+    }
+  }
+
+  &__section-subtitle {
+    font-size: 1.1rem;
+    color: $text-secondary;
+  }
+
+  &__loading,
+  &__empty {
+    text-align: center;
+    padding: 60px 20px;
+
+    .MuiCircularProgress-root {
+      color: #667eea;
+      margin-bottom: 16px;
+    }
+
+    .MuiButton-root {
+      margin-top: 16px;
+    }
+  }
+
+  &__grid {
+    margin-bottom: 48px;
+  }
+
+  // ==========================================
+  // VOLUNTEER CARD
+  // ==========================================
+  &__card {
+    height: 100%;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+      border-color: rgba(102, 126, 234, 0.3);
+    }
+  }
+
+  &__card-content {
+    padding: 24px !important;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  &__card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  &__card-avatar {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-size: 1.25rem;
+    font-weight: $font-weight-semibold;
+  }
+
+  &__card-name-wrap {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__card-name {
+    font-size: 1.1rem;
+    font-weight: $font-weight-semibold;
+    color: $text-primary;
+    margin-bottom: 2px;
+  }
+
+  &__card-profession {
+    font-size: 0.9rem;
+    color: #667eea;
+    font-weight: $font-weight-medium;
+  }
+
+  &__card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  }
+
+  &__card-info-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: $text-secondary;
+    font-size: 0.9rem;
+
+    .MuiSvgIcon-root {
+      color: rgba(0, 0, 0, 0.4);
+      font-size: 18px;
+    }
+  }
+
+  &__card-help {
+    flex: 1;
+    font-size: 0.95rem;
+    color: $text-secondary;
+    line-height: 1.6;
+    font-style: italic;
+    margin-bottom: 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__card-preferences {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+
+  &__card-chip {
+    background: rgba(102, 126, 234, 0.1) !important;
+    color: #667eea !important;
+    font-size: 0.75rem !important;
+
+    .MuiSvgIcon-root {
+      color: #667eea !important;
+    }
+  }
+
+  &__card-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    margin-top: auto;
+  }
+
+  &__contact-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px !important;
+    transition: all 0.2s ease !important;
+
+    &--whatsapp {
+      background: #25d366 !important;
+      color: #fff !important;
+
+      &:hover {
+        background: #128c7e !important;
+        transform: scale(1.1);
+      }
+    }
+
+    &--email {
+      background: #ea4335 !important;
+      color: #fff !important;
+
+      &:hover {
+        background: #c5221f !important;
+        transform: scale(1.1);
+      }
+    }
+
+    &--phone {
+      background: #667eea !important;
+      color: #fff !important;
+
+      &:hover {
+        background: #5a6fd6 !important;
+        transform: scale(1.1);
+      }
+    }
+  }
+
+  // ==========================================
+  // CTA SECTION
+  // ==========================================
+  &__cta {
+    text-align: center;
+    padding: 48px;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    border-radius: 24px;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+  }
+
+  &__cta-title {
+    font-family: $font-heading;
+    font-size: 1.75rem;
+    font-weight: $font-weight-bold;
+    color: $text-primary;
+    margin-bottom: 12px;
+  }
+
+  &__cta-text {
+    font-size: 1.05rem;
+    color: $text-secondary;
+    margin-bottom: 24px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__cta-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: #fff !important;
+    padding: 12px 32px !important;
+    font-size: 1rem !important;
+    font-weight: $font-weight-semibold !important;
+    border-radius: 12px !important;
+    text-transform: none !important;
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3) !important;
+
+    &:hover {
+      box-shadow: 0 6px 30px rgba(102, 126, 234, 0.4) !important;
+      transform: translateY(-2px);
+    }
+  }
+
+  // ==========================================
+  // DIALOG / FORM
+  // ==========================================
+  &__dialog {
+    .MuiDialog-paper {
+      border-radius: 20px;
+      max-height: 90vh;
+    }
+  }
+
+  &__dialog-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    padding: 20px 24px !important;
+    font-family: $font-heading;
+    font-weight: $font-weight-semibold;
+
+    .MuiSvgIcon-root:first-child {
+      font-size: 28px;
+    }
+  }
+
+  &__dialog-close {
+    position: absolute !important;
+    left: 16px;
+    color: rgba(255, 255, 255, 0.8) !important;
+
+    &:hover {
+      color: #fff !important;
+      background: rgba(255, 255, 255, 0.1) !important;
+    }
+  }
+
+  &__dialog-content {
+    padding: 24px !important;
+  }
+
+  &__dialog-intro {
+    color: $text-secondary;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  &__dialog-alert {
+    margin-top: 24px;
+  }
+
+  &__dialog-actions {
+    padding: 16px 24px !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+
+    .MuiButton-contained {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 10px;
+      text-transform: none;
+      font-weight: $font-weight-semibold;
+    }
+  }
+}
+
+// RTL Adjustments
+[dir="rtl"] {
+  .support-page {
+    &__dialog-close {
+      left: 16px;
+      right: auto;
+    }
+  }
+}

@@ -25,6 +25,7 @@ import SurveysPage from './pages/SurveysPage/SurveysPage.tsx';
 import InfoPage from './pages/InfoPage/InfoPage.tsx';
 import ResourcesPage from './pages/ResourcesPage/ResourcesPage.tsx';
 import ResourcesDetailPage from './pages/ResourcesPage/ResourcesDetailPage/ResourcesDetailPage.tsx';
+import SupportPage from './pages/SupportPage/SupportPage.tsx';
 
 type AppRoute = {
   path: string;
@@ -63,6 +64,10 @@ const AppRoutes: AppRoute[] = [
   {
     path: '/resources/:pageId',
     component: <ResourcesDetailPage />,
+  },
+  {
+    path: '/support',
+    component: <SupportPage  />,
   },
   {
     path: '/testimonials',
