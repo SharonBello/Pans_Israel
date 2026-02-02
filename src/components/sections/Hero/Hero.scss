@@ -12,34 +12,36 @@
   // Particles Background
   &__particles {
     // background: url("https://particles.js.org/images/background3.jpg");
-    background: url("../../../styles/assets/hero.png");
-    background-position: cover;
+    // background: url("../../../styles/assets/hero.png");
+    background: url("../../../styles/assets/hero-bg.svg");
+    background-position: fill;
+    // background-position: cover;
     position: absolute;
     inset: 0;
     z-index: 1;
 
-    @media (max-width: 850px) {
-      background: url("https://particles.js.org/images/background3.jpg");
-    }
+    // @media (max-width: 850px) {
+    //   background: url("https://particles.js.org/images/background3.jpg");
+    // }
 
-    & #neural-particles {
-      height: -webkit-fill-available !important;
-    }
+    // & #neural-particles {
+    //   height: -webkit-fill-available !important;
+    // }
   }
 
   // Gradient Overlay for better text readability
-  &__overlay {
-    position: absolute;
-    inset: 0;
-    z-index: 2;
-    background: radial-gradient(
-      ellipse at center,
-      rgba($color-bg-white, 0.5) 0%,
-      rgba($color-bg-white, 0.7) 70%,
-      rgba($color-bg-light, 0.9) 100%
-    );
-    pointer-events: none;
-  }
+  // &__overlay {
+  //   position: absolute;
+  //   inset: 0;
+  //   z-index: 2;
+  //   background: radial-gradient(
+  //     ellipse at center,
+  //     rgba($color-bg-white, 0.5) 0%,
+  //     rgba($color-bg-white, 0.7) 70%,
+  //     rgba($color-bg-light, 0.9) 100%
+  //   );
+  //   pointer-events: none;
+  // }
 
   // Container
   &__container {
@@ -89,13 +91,14 @@
       font-size: $font-size-3xl;
     }
   }
-
+  
   &__title-highlight {
     display: block;
     background: $gradient-primary;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    font-size: $font-size-2xl;
   }
 
   // Description

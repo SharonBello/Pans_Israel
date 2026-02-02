@@ -47,11 +47,12 @@ const SurveyQuestion: React.FC<SurveyQuestionProps> = ({
         <RadioGroup
             value={value || ''}
             onChange={(e) => onChange(e.target.value)}
+            name={question.id}  
             className="survey-question__radio-group"
         >
             {question.options?.map((option) => (
                 <FormControlLabel
-                    key={option.id}
+                    key={`${question.id}-${option.id}`}
                     value={option.value}
                     control={<Radio disabled={disabled} />}
                     label={option.label}
@@ -103,9 +104,11 @@ const SurveyQuestion: React.FC<SurveyQuestionProps> = ({
             <FormGroup className="survey-question__checkbox-group">
                 {question.options?.map((option) => (
                     <FormControlLabel
-                        key={option.id}
+                        key={`${question.id}-${option.id}`}
                         control={
                             <Checkbox
+                                id={`checkbox-${question.id}-${option.id}`}
+                                name={question.id}
                                 checked={selectedValues.includes(String(option.value))}
                                 onChange={(e) =>
                                     handleCheckboxChange(
@@ -261,7 +264,7 @@ const SurveyQuestion: React.FC<SurveyQuestionProps> = ({
             />
         );
     };
-    
+
     // --------------------------------------------------------------------------
     // Date Input
     // --------------------------------------------------------------------------
