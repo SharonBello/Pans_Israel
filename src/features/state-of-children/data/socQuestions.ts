@@ -1126,8 +1126,8 @@ const currentStatusQuestions: SOCQuestion[] = [
         required: true,
         scaleMin: 1,
         scaleMax: 5,
-        scaleMinLabel: 'קושי משמעותי',
-        scaleMaxLabel: 'לא מורגש',
+        scaleMinLabel: 'לא מורגש',
+        scaleMaxLabel: 'קושי משמעותי',
         ppnEquivalent: 'Q42',
     }),
     createQuestion({
@@ -1139,7 +1139,7 @@ const currentStatusQuestions: SOCQuestion[] = [
         options: [
             { id: 'one', label: 'ילד אחד', value: 'one' },
             { id: 'two', label: 'שניים', value: 'two' },
-            { id: 'three_more', label: 'שלושה או יותק', value: 'three_more' },
+            { id: 'three_more', label: 'שלושה או יותר', value: 'three_more' },
         ],
         ppnEquivalent: 'Q43',
     }),

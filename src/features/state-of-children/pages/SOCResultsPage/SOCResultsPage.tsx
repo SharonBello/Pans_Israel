@@ -119,18 +119,28 @@ const calculateSymptomAverages = (
     const symptomQuestions = [
         { id: 'symptom_ocd', label: 'OCD' },
         { id: 'symptom_anxiety', label: 'חרדה' },
-        { id: 'symptom_irritability', label: 'עצבנות' },
-        { id: 'symptom_mood_swings', label: 'שינויי מצב רוח' },
-        { id: 'symptom_tics_motor', label: 'טיקים מוטוריים' },
-        { id: 'symptom_sleep_issues', label: 'בעיות שינה' },
-        { id: 'symptom_cognitive_decline', label: 'ירידה קוגניטיבית' },
         { id: 'symptom_separation_anxiety', label: 'חרדת פרידה' },
+        { id: 'symptom_mood_swings', label: 'שינויי מצב רוח' },
+        { id: 'symptom_irritability', label: 'עצבנות' },
+        { id: 'symptom_aggression', label: 'תוקפנות' },
+        { id: 'symptom_depression', label: 'דיכאון' },
+        { id: 'symptom_tics_motor', label: 'טיקים מוטוריים' },
+        { id: 'symptom_tics_vocal', label: 'טיקים קוליים' },
+        { id: 'symptom_sensory_sensitivity', label: 'רגישות חושית' },
+        { id: 'symptom_sleep_issues', label: 'בעיות שינה' },
+        { id: 'symptom_eating_issues', label: 'בעיות אכילה' },
+        { id: 'symptom_urinary_issues', label: 'בעיות במתן שתן' },
+        { id: 'symptom_cognitive_decline', label: 'ירידה קוגניטיבית' },
+        { id: 'symptom_handwriting_decline', label: 'ירידה בכתב יד' },
+        { id: 'symptom_regression', label: 'רגרסיה' },
+        { id: 'symptom_hallucinations', label: 'הזיות' },
     ];
 
     return symptomQuestions.map(q => ({
         name: q.label,
-        value: Math.round(calculateAverageScale(responses, q.id) * 20), // Convert 0-5 to 0-100
-    })).sort((a, b) => b.value - a.value);
+        value: Math.round(calculateAverageScale(responses, q.id) * 20),
+    })).filter(s => s.value > 0)  // Only show symptoms that exist
+        .sort((a, b) => b.value - a.value);
 };
 
 // --------------------------------------------------------------------------
@@ -232,18 +242,17 @@ const SOCResultsPage: React.FC = () => {
             { value: 'other', label: 'אחר' },
         ]), [responses]);
 
-    const symptomData = useMemo(() =>
-        calculateSymptomAverages(responses), [responses]);
+    const symptomData = useMemo(() => calculateSymptomAverages(responses), [responses]);
 
     const diagnosedByData = useMemo(() =>
         calculatePercentages(responses, 'diagnosed_by', [
             { value: 'pediatrician', label: 'רופא ילדים' },
-            { value: 'neurologist', label: 'נוירולוג' },    
+            { value: 'neurologist', label: 'נוירולוג' },
             { value: 'psychiatrist', label: 'פסיכיאטר' },
             { value: 'immunologist', label: 'אימונולוג' },
             { value: 'infectious', label: 'מומחה למחלות זיהומיות' },
             { value: 'rheumatologist', label: 'ראומטולוג' },
-            { value: 'naturopath', label: 'רופא נטורופתי' },   
+            { value: 'naturopath', label: 'רופא נטורופתי' },
             { value: 'self', label: 'אבחון עצמי' },
             { value: 'other', label: 'אחר' },
         ]), [responses]);
@@ -251,10 +260,13 @@ const SOCResultsPage: React.FC = () => {
     const treatmentData = useMemo(() => {
         const treatments = [
             { id: 'antibiotics', label: 'אנטיביוטיקה' },
+            { id: 'nsaids', label: 'נוגדי דלקת' },
             { id: 'steroids', label: 'סטרואידים' },
             { id: 'ivig', label: 'IVIG' },
             { id: 'cbt', label: 'CBT' },
             { id: 'ssri', label: 'SSRI' },
+            { id: 'other_psychiatric', label: 'תרופות פסיכיאטריות אחרות' },
+            { id: 'alternative', label: 'טיפולים אלטרנטיביים' },
             { id: 'supplements', label: 'תוספים' },
         ];
 
@@ -268,12 +280,124 @@ const SOCResultsPage: React.FC = () => {
                 name: t.label,
                 value: responses.length > 0 ? Math.round((count / responses.length) * 100) : 0,
             };
-        }).sort((a, b) => b.value - a.value);
+        }).filter(t => t.value > 0).sort((a, b) => b.value - a.value);
     }, [responses]);
 
     const outlookData = useMemo(() => {
         const avg = calculateAverageScale(responses, 'outlook_rating');
         return [{ name: 'אופטימיות', value: avg * 20, fill: '#4CAF50' }];
+    }, [responses]);
+
+    // Comorbid conditions
+    const comorbidData = useMemo(() => {
+        const conditions = [
+            { id: 'adhd', label: 'ADHD' },
+            { id: 'autism', label: 'אוטיזם / ASD' },
+            { id: 'learning_disability', label: 'לקות למידה' },
+            { id: 'asthma', label: 'אסטמה' },
+            { id: 'eczema', label: 'אקזמה' },
+            { id: 'autoimmune', label: 'מחלה אוטואימונית' },
+            { id: 'thyroid', label: 'בעיות בלוטת התריס' },
+            { id: 'gi', label: 'בעיות עיכול' },
+            { id: 'other', label: 'אחר' },
+        ];
+
+        return conditions.map(c => {
+            const count = responses.filter(r => {
+                const comorbid = r.answers.comorbid_conditions;
+                return Array.isArray(comorbid) && comorbid.includes(c.id);
+            }).length;
+
+            return {
+                name: c.label,
+                value: responses.length > 0 ? Math.round((count / responses.length) * 100) : 0,
+            };
+        }).filter(c => c.value > 0)
+            .sort((a, b) => b.value - a.value);
+    }, [responses]);
+
+    // Family autoimmune history
+    const familyAutoimmueData = useMemo(() => {
+        const conditions = [
+            { id: 'pans', label: 'פאנס/פאנדס' },
+            { id: 'thyroid', label: 'בלוטת התריס' },
+            { id: 'rheumatoid', label: 'דלקת מפרקים' },
+            { id: 'lupus', label: 'לופוס' },
+            { id: 'celiac', label: 'צליאק' },
+            { id: 'ms', label: 'טרשת נפוצה' },
+            { id: 'psoriasis', label: 'פסוריאזיס' },
+            { id: 'ibd', label: 'מחלת מעי דלקתית' },
+            { id: 'diabetes_1', label: 'סוכרת סוג 1' },
+            { id: 'other', label: 'אחר' },
+        ];
+
+        return conditions.map(c => {
+            const count = responses.filter(r => {
+                const family = r.answers.family_autoimmune_conditions;
+                return Array.isArray(family) && family.includes(c.id);
+            }).length;
+
+            return {
+                name: c.label,
+                value: responses.length > 0 ? Math.round((count / responses.length) * 100) : 0,
+            };
+        }).filter(c => c.value > 0)
+            .sort((a, b) => b.value - a.value);
+    }, [responses]);
+
+    // Family psychiatric history
+    const familyPsychiatricData = useMemo(() => {
+        const conditions = [
+            { id: 'depression', label: 'דיכאון' },
+            { id: 'bipolar', label: 'הפרעה דו-קוטבית' },
+            { id: 'adhd', label: 'ADHD' },
+            { id: 'autism', label: 'אוטיזם' },
+            { id: 'tics', label: 'טיקים / טורט' },
+            { id: 'eating', label: 'הפרעות אכילה' },
+            { id: 'other', label: 'אחר' },
+        ];
+
+        return conditions.map(c => {
+            const count = responses.filter(r => {
+                const family = r.answers.family_psychiatric_history;
+                return Array.isArray(family) && family.includes(c.id);
+            }).length;
+
+            return {
+                name: c.label,
+                value: responses.length > 0 ? Math.round((count / responses.length) * 100) : 0,
+            };
+        }).filter(c => c.value > 0)
+            .sort((a, b) => b.value - a.value);
+    }, [responses]);
+
+    // Misdiagnoses
+    const misdiagnosesData = useMemo(() => {
+        const diagnoses = [
+            { id: 'ocd', label: 'OCD' },
+            { id: 'anxiety', label: 'הפרעת חרדה' },
+            { id: 'adhd', label: 'ADHD' },
+            { id: 'autism', label: 'אוטיזם / ASD' },
+            { id: 'tourette', label: 'תסמונת טורט' },
+            { id: 'bipolar', label: 'הפרעה דו-קוטבית' },
+            { id: 'depression', label: 'דיכאון' },
+            { id: 'behavioral', label: 'בעיות התנהגות' },
+            { id: 'psychosis', label: 'פסיכוזה' },
+            { id: 'other', label: 'אחר' },
+        ];
+
+        return diagnoses.map(d => {
+            const count = responses.filter(r => {
+                const misdiag = r.answers.misdiagnoses;
+                return Array.isArray(misdiag) && misdiag.includes(d.id);
+            }).length;
+
+            return {
+                name: d.label,
+                value: responses.length > 0 ? Math.round((count / responses.length) * 100) : 0,
+            };
+        }).filter(d => d.value > 0)
+            .sort((a, b) => b.value - a.value);
     }, [responses]);
 
     // --------------------------------------------------------------------------
@@ -362,6 +486,7 @@ const SOCResultsPage: React.FC = () => {
                         <Tab label="דמוגרפיה" />
                         <Tab label="תסמינים" />
                         <Tab label="אבחון וטיפול" />
+                        <Tab label="משפחה ומצבים נלווים" />
                     </Tabs>
                 </Box>
 
@@ -559,6 +684,86 @@ const SOCResultsPage: React.FC = () => {
                                                     fill="#6CA6D9"
                                                     radius={[4, 4, 0, 0]}
                                                 />
+                                            </BarChart>
+                                        </ResponsiveContainer>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+                        </Grid>
+                    )}
+
+                    {activeTab === 3 && (
+                        <Grid container spacing={4}>
+                            <Grid sx={{ xs: 12, md: 6 }}>
+                                <Card className="soc-results__chart-card">
+                                    <CardContent>
+                                        <Typography className="soc-results__chart-title">
+                                            מצבים נלווים בילד (%)
+                                        </Typography>
+                                        <ResponsiveContainer width="100%" height={300}>
+                                            <BarChart data={comorbidData} layout="vertical">
+                                                <CartesianGrid strokeDasharray="3 3" />
+                                                <XAxis type="number" domain={[0, 100]} />
+                                                <YAxis dataKey="name" type="category" width={120} tick={{ fontFamily: 'Heebo', fontSize: 12 }} />
+                                                <Tooltip formatter={(value: number | undefined) => [`${value ?? 0}%`, 'שכיחות']} />
+                                                <Bar dataKey="value" fill="#9C27B0" radius={[0, 4, 4, 0]} />
+                                            </BarChart>
+                                        </ResponsiveContainer>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+
+                            <Grid sx={{ xs: 12, md: 6 }}>
+                                <Card className="soc-results__chart-card">
+                                    <CardContent>
+                                        <Typography className="soc-results__chart-title">
+                                            אבחנות שגויות שהתקבלו (%)
+                                        </Typography>
+                                        <ResponsiveContainer width="100%" height={300}>
+                                            <BarChart data={misdiagnosesData} layout="vertical">
+                                                <CartesianGrid strokeDasharray="3 3" />
+                                                <XAxis type="number" domain={[0, 100]} />
+                                                <YAxis dataKey="name" type="category" width={120} tick={{ fontFamily: 'Heebo', fontSize: 12 }} />
+                                                <Tooltip formatter={(value: number | undefined) => [`${value ?? 0}%`, 'שכיחות']} />
+                                                <Bar dataKey="value" fill="#FF5722" radius={[0, 4, 4, 0]} />
+                                            </BarChart>
+                                        </ResponsiveContainer>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+
+                            <Grid sx={{ xs: 12, md: 6 }}>
+                                <Card className="soc-results__chart-card">
+                                    <CardContent>
+                                        <Typography className="soc-results__chart-title">
+                                            מחלות אוטואימוניות במשפחה (%)
+                                        </Typography>
+                                        <ResponsiveContainer width="100%" height={300}>
+                                            <BarChart data={familyAutoimmueData} layout="vertical">
+                                                <CartesianGrid strokeDasharray="3 3" />
+                                                <XAxis type="number" domain={[0, 100]} />
+                                                <YAxis dataKey="name" type="category" width={120} tick={{ fontFamily: 'Heebo', fontSize: 12 }} />
+                                                <Tooltip formatter={(value: number | undefined) => [`${value ?? 0}%`, 'שכיחות']} />
+                                                <Bar dataKey="value" fill="#00BCD4" radius={[0, 4, 4, 0]} />
+                                            </BarChart>
+                                        </ResponsiveContainer>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
+
+                            <Grid sx={{ xs: 12, md: 6 }}>
+                                <Card className="soc-results__chart-card">
+                                    <CardContent>
+                                        <Typography className="soc-results__chart-title">
+                                            מצבים נפשיים במשפחה (%)
+                                        </Typography>
+                                        <ResponsiveContainer width="100%" height={300}>
+                                            <BarChart data={familyPsychiatricData} layout="vertical">
+                                                <CartesianGrid strokeDasharray="3 3" />
+                                                <XAxis type="number" domain={[0, 100]} />
+                                                <YAxis dataKey="name" type="category" width={120} tick={{ fontFamily: 'Heebo', fontSize: 12 }} />
+                                                <Tooltip formatter={(value: number | undefined) => [`${value ?? 0}%`, 'שכיחות']} />
+                                                <Bar dataKey="value" fill="#E67E22" radius={[0, 4, 4, 0]} />
                                             </BarChart>
                                         </ResponsiveContainer>
                                     </CardContent>
