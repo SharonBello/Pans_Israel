@@ -192,9 +192,9 @@ const SupportPage: React.FC = () => {
           <Typography className="support-page__hero-subtitle">
             כל שאלה והתלבטות - אנחנו כאן בשבילכם
           </Typography>
-          <Typography className="support-page__hero-description">
+          <p className="support-page__hero-description">
             קהילת הורים ואנשי מקצוע שעברו את הדרך ומוכנים לתמוך, להקשיב ולעזור
-          </Typography>
+          </p>
         </Container>
       </section>
 
@@ -369,9 +369,9 @@ const SupportPage: React.FC = () => {
             <Typography variant="h3" className="support-page__cta-title">
               רוצים להצטרף לצוות המתנדבים?
             </Typography>
-            <Typography className="support-page__cta-text">
+            <p className="support-page__cta-text">
               אם עברתם את הדרך ורוצים לעזור למשפחות אחרות, נשמח שתצטרפו אלינו
-            </Typography>
+            </p>
             <Button
               variant="contained"
               size="large"

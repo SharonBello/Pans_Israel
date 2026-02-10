@@ -125,7 +125,7 @@ const ResourcesPage: React.FC = () => {
       </section>
 
       {/* ===== LATEST NEWS SECTION ===== */}
-      <section className="resources-page__section">
+      {/* <section className="resources-page__section">
         <Container maxWidth="lg">
           <Typography variant="h2" className="resources-page__section-title">
             חדשות אחרונות
@@ -166,7 +166,7 @@ const ResourcesPage: React.FC = () => {
             </article>
           </div>
         </Container>
-      </section>
+      </section> */}
 
       {/* ===== PARENT RESOURCES SECTION ===== */}
       <section className="resources-page__section resources-page__section--gray">
@@ -249,9 +249,9 @@ const ResourcesPage: React.FC = () => {
           <Typography variant="h2" className="resources-page__section-title resources-page__section-title--center">
             תמכו במשימה שלנו
           </Typography>
-          <Typography className="resources-page__section-subtitle resources-page__section-subtitle--center">
+          <p className="resources-page__section-subtitle resources-page__section-subtitle--center">
             עזרו לנו להמשיך לתמוך בילדים ומבוגרים החיים עם PANDAS/PANS
-          </Typography>
+          </p>
 
           <div className="resources-page__cta-row">
             <div className="resources-page__cta-card">

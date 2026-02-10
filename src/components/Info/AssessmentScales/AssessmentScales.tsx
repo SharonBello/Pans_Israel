@@ -96,7 +96,7 @@ const AssessmentScales: React.FC<AssessmentScalesProps> = ({ showInteractive = t
   return (
     <Box className="assessment-scales" dir="rtl">
       {/* External Scales Section */}
-      <Box className="assessment-scales__section">
+      {/* <Box className="assessment-scales__section">
         <Typography variant="h5" className="assessment-scales__section-title">
           <DownloadIcon />
           סולמות הערכה להורדה
@@ -137,7 +137,7 @@ const AssessmentScales: React.FC<AssessmentScalesProps> = ({ showInteractive = t
             </Card>
           ))}
         </Box>
-      </Box>
+      </Box> */}
 
       {/* Interactive Scales Section */}
       {showInteractive && interactiveScales.length > 0 && (

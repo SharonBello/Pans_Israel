@@ -1,110 +1,116 @@
-@use '../../../styles/abstracts/variables' as *;
-@use '../../../styles/abstracts/mixins' as *;
+@use "../../../styles/abstracts/variables" as *;
+@use "../../../styles/abstracts/mixins" as *;
 
 .resources-tabs {
   position: sticky;
   top: $header-height;
   z-index: $z-sticky;
-  @include glass-effect;
-  
-  @include max-xs {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba($color-primary, 0.08);
+
+  @media (max-width: $breakpoint-xs) {
     top: $header-height-mobile;
   }
 
   &__container {
-    @include container;
-    padding-block: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
   }
 
   &__tabs {
     .MuiTabs-flexContainer {
-      gap: $spacing-2;
+      gap: 2px;
       justify-content: center;
-      
-      @include max-sm {
+
+      @media (max-width: $breakpoint-sm) {
         justify-content: flex-start;
       }
     }
-    
+
     .MuiTabs-scroller {
       overflow-x: auto !important;
-      @include custom-scrollbar;
+
+      /* Slim custom scrollbar */
+      &::-webkit-scrollbar {
+        height: 3px;
+      }
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: rgba($color-primary, 0.15);
+        border-radius: 10px;
+      }
     }
   }
 
+  /* ── Individual tab ── */
   &__tab {
-    min-height: 56px;
-    padding: $spacing-3 $spacing-5;
-    border-radius: $radius-lg $radius-lg 0 0;
+    min-height: 52px;
+    padding: 8px 18px;
+    border-radius: $radius-md $radius-md 0 0;
     font-family: $font-primary;
     font-size: $font-size-sm;
     font-weight: $font-weight-medium;
     color: $text-muted;
     text-transform: none;
-    @include safe-transition(all $transition-base);
+    transition:
+      color 0.2s ease,
+      background 0.2s ease;
+    gap: 6px;
     position: relative;
-    overflow: hidden;
-    gap: $spacing-2;
-    
-    &::before {
-      content: '';
-      @include absolute-fill;
-      background: linear-gradient(180deg, rgba($color-accent, 0.08) 0%, transparent 100%);
-      opacity: 0;
-      @include safe-transition(opacity $transition-base);
-    }
-    
+
     .MuiSvgIcon-root {
-      font-size: 1.2rem;
-      @include safe-transition(all $transition-base);
+      font-size: 1.15rem;
+      transition: color 0.2s ease;
     }
-    
+
     &:hover {
-      color: $color-accent;
-      background: rgba($color-accent, 0.05);
-      
-      &::before {
-        opacity: 1;
-      }
-      
+      color: $color-primary;
+      background: rgba($color-primary, 0.04);
+
       .MuiSvgIcon-root {
-        transform: scale(1.1);
+        color: $color-primary;
       }
     }
-    
+
     &.Mui-selected {
-      color: $color-accent;
+      color: $color-primary;
       font-weight: $font-weight-semibold;
-      background: rgba($color-accent, 0.08);
-      
+      background: rgba($color-primary, 0.06);
+
       .MuiSvgIcon-root {
         color: $color-accent;
       }
     }
-    
-    @include max-md {
-      padding: $spacing-3 $spacing-4;
+
+    @media (max-width: $breakpoint-md) {
+      padding: 8px 14px;
       font-size: $font-size-sm;
       min-width: auto;
     }
-    
-    @include max-sm {
-      padding: $spacing-3;
-      min-width: 56px;
-      
+
+    @media (max-width: $breakpoint-sm) {
+      padding: 8px 10px;
+      min-width: 48px;
+
       .MuiSvgIcon-root {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
       }
     }
   }
 
+  /* ── Active indicator ── */
   &__indicator {
     height: 3px;
-    background: $gradient-accent;
+    background: linear-gradient(90deg, $color-primary, $color-accent);
     border-radius: $radius-sm $radius-sm 0 0;
-    box-shadow: $shadow-glow-accent;
   }
 
+  /* ── Bottom decoration ── */
   &__decoration {
     position: relative;
     height: 1px;
@@ -116,37 +122,20 @@
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(
-      90deg,
-      transparent 0%,
-      $border-color 20%,
-      $border-color 80%,
-      transparent 100%
-    );
+    background: linear-gradient(90deg, transparent 0%, $border-light 20%, $border-light 80%, transparent 100%);
   }
 
   &__decoration-glow {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    height: 20px;
-    background: radial-gradient(
-      ellipse at center,
-      rgba($color-accent, 0.15) 0%,
-      transparent 70%
-    );
-    pointer-events: none;
+    display: none; /* Removed — was too subtle to matter, kept layout clean */
   }
 }
 
-// RTL adjustments
+/* RTL icon spacing fix */
 [dir="rtl"] {
   .resources-tabs {
     &__tab {
       .MuiSvgIcon-root {
-        margin-left: $spacing-2;
+        margin-left: 6px;
         margin-right: 0;
       }
     }

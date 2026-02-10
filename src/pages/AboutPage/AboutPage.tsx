@@ -15,7 +15,7 @@ const founders: Founder[] = [
     {
         name: 'שרון בלו',
         role: 'מייסדת שותפה',
-        description: 'אמא לילד עם PANS/PANDAS. פעילה למען הגברת המודעות והנגשת מידע להורים בישראל.',
+        description: 'אמא לשלושה ילדים עם PANS/PANDAS. פעילה למען הגברת המודעות והנגשת מידע להורים בישראל.',
     },
     {
         name: 'אורלי בר טל',
@@ -183,7 +183,7 @@ const AboutPage: React.FC = () => {
                         המייסדות
                     </h2>
                     <p className="about-section__subtitle">
-                        אקבע אמהות שהחליטו לעשות שינוי
+                        ארבע אמהות שהחליטו לעשות שינוי
                     </p>
 
                     <div className="about-founders__grid">

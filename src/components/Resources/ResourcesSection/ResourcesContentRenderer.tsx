@@ -28,6 +28,7 @@ import {
   Lightbulb as TipIcon,
   Download as DownloadIcon,
   Circle as BulletIcon,
+  OpenInNew as ExternalLinkIcon,
 } from '@mui/icons-material';
 import './ResourcesContentRenderer.scss';
 
@@ -98,25 +99,75 @@ const ResourcesContentRenderer: React.FC<ResourcesContentRendererProps> = ({ con
 
       case 'list':
         return (
-          <Box key={block.id} className="resources-content__list-wrapper">
+          <Box key={block.id} className="content-block content-block--list">
             {block.title && (
-              <Typography variant="h6" className="resources-content__list-title">
+              <Typography variant="subtitle1" className="content-block__list-title">
                 {block.title}
               </Typography>
             )}
-            <List className="resources-content__list">
-              {block.items?.map((item: any, index: number) => (
-                <ListItem key={index} className="resources-content__list-item">
-                  <ListItemIcon className="resources-content__list-icon">
-                    <BulletIcon />
-                  </ListItemIcon>
-                  <ListItemText
-                    primary={typeof item === 'string' ? item : item.title}
-                    secondary={typeof item === 'object' ? item.description : undefined}
-                    className="resources-content__list-text"
-                  />
-                </ListItem>
-              ))}
+            <List className="content-block__list" disablePadding>
+              {block.items?.map((item, index) => {
+                const isString = typeof item === 'string';
+                const title = isString ? item : item.title;
+                const description = isString ? undefined : item.description;
+                const url = isString ? undefined : (item as any).url;
+
+                const listItemContent = (
+                  <ListItem
+                    key={`${block.id}-item-${index}`}
+                    className={`content-block__list-item ${url ? 'content-block__list-item--link' : ''}`}
+                    disablePadding
+                    sx={{ mb: 0.5 }}
+                  >
+                    <ListItemIcon sx={{ minWidth: 32 }}>
+                      {url ? (
+                        <ExternalLinkIcon sx={{ fontSize: '1.1rem', color: '#E67E22' }} />
+                      ) : (
+                        <BulletIcon sx={{ fontSize: '0.5rem', color: '#6CA6D9' }} />
+                      )}
+                    </ListItemIcon>
+                    <ListItemText
+                      primary={
+                        url ? (
+                          <Box component="span" sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                            <span>{title}</span>
+                          </Box>
+                        ) : (
+                          title
+                        )
+                      }
+                      secondary={description || undefined}
+                      primaryTypographyProps={{
+                        fontWeight: url ? 600 : (description ? 600 : 400),
+                        fontSize: '0.95rem',
+                        color: url ? '#023373' : 'inherit',
+                      }}
+                      secondaryTypographyProps={{
+                        fontSize: '0.875rem',
+                        lineHeight: 1.6,
+                        sx: { mt: 0.25 },
+                      }}
+                    />
+                  </ListItem>
+                );
+
+                // Wrap in <a> if URL exists
+                if (url) {
+                  return (
+                    <a
+                      key={`${block.id}-link-${index}`}
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="content-block__external-link"
+                    >
+                      {listItemContent}
+                    </a>
+                  );
+                }
+
+                return listItemContent;
+              })}
             </List>
           </Box>
         );
@@ -251,7 +302,7 @@ const ResourcesContentRenderer: React.FC<ResourcesContentRendererProps> = ({ con
       case 'download':
         const downloadUrl = block.url || block.downloadUrl;
         const downloadLabel = block.buttonText || block.downloadLabel || 'הורד קובץ';
-        
+
         return (
           <Box key={block.id} className="resources-content__download">
             <Card className="resources-content__download-card">

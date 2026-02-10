@@ -1,5 +1,5 @@
-@use '../../../styles/abstracts/variables' as *;
-@use '../../../styles/abstracts/mixins' as *;
+@use "../../../styles/abstracts/variables" as *;
+@use "../../../styles/abstracts/mixins" as *;
 
 .resources-content {
   // Headings
@@ -9,9 +9,9 @@
     margin-bottom: $spacing-5;
     position: relative;
     padding-bottom: $spacing-3;
-    
+
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       bottom: 0;
       inset-inline-end: 0;
@@ -20,7 +20,7 @@
       background: $gradient-accent;
       border-radius: $radius-sm;
     }
-    
+
     &:first-child {
       margin-top: 0;
     }
@@ -30,19 +30,20 @@
   &__paragraph {
     @include body-text;
     margin-bottom: $spacing-5;
-    
-    strong, b {
+
+    strong,
+    b {
       color: $text-primary;
       font-weight: $font-weight-semibold;
     }
-    
+
     a {
       color: $color-accent;
       text-decoration: underline;
       text-decoration-color: rgba($color-accent, 0.3);
       text-underline-offset: 3px;
       @include safe-transition(all $transition-base);
-      
+
       &:hover {
         text-decoration-color: $color-accent;
       }
@@ -66,7 +67,7 @@
   &__list-item {
     padding: $spacing-2 0;
     align-items: flex-start;
-    
+
     &:not(:last-child) {
       border-bottom: 1px solid rgba($border-light, 0.5);
     }
@@ -75,7 +76,7 @@
   &__list-icon {
     min-width: 32px;
     margin-top: $spacing-1;
-    
+
     .MuiSvgIcon-root {
       font-size: 0.5rem;
       color: $color-accent;
@@ -88,7 +89,7 @@
       font-weight: $font-weight-medium;
       font-size: $font-size-base;
     }
-    
+
     .MuiListItemText-secondary {
       color: $text-secondary;
       font-size: $font-size-sm;
@@ -105,11 +106,11 @@
     @include card-base;
     margin-bottom: $spacing-3 !important;
     border: 1px solid $border-light !important;
-    
+
     &::before {
       display: none;
     }
-    
+
     &.Mui-expanded {
       margin-bottom: $spacing-3 !important;
       border-color: rgba($color-accent, 0.3) !important;
@@ -119,14 +120,14 @@
 
   &__accordion-summary {
     padding: $spacing-4 $spacing-5;
-    
+
     &.Mui-expanded {
       background: rgba($color-accent, 0.05);
     }
-    
+
     .MuiAccordionSummary-expandIconWrapper {
       color: $color-accent;
-      
+
       &.Mui-expanded {
         transform: rotate(180deg);
       }
@@ -144,7 +145,7 @@
     padding: $spacing-4 $spacing-5;
     background: $color-bg-light;
     border-top: 1px solid $border-light;
-    
+
     .MuiTypography-root {
       @include body-text;
     }
@@ -158,38 +159,38 @@
     border-radius: $radius-xl;
     margin-bottom: $spacing-6;
     border: 1px solid;
-    
+
     &--info {
       background: rgba($info, 0.08);
       border-color: rgba($info, 0.2);
-      
+
       .resources-content__callout-icon {
         color: $info;
       }
     }
-    
+
     &--warning {
       background: rgba($warning, 0.08);
       border-color: rgba($warning, 0.2);
-      
+
       .resources-content__callout-icon {
         color: $warning;
       }
     }
-    
+
     &--tip {
       background: rgba($color-accent, 0.08);
       border-color: rgba($color-accent, 0.2);
-      
+
       .resources-content__callout-icon {
         color: $color-accent;
       }
     }
-    
+
     &--success {
       background: rgba($success, 0.08);
       border-color: rgba($success, 0.2);
-      
+
       .resources-content__callout-icon {
         color: $success;
       }
@@ -198,7 +199,7 @@
 
   &__callout-icon {
     flex-shrink: 0;
-    
+
     .MuiSvgIcon-root {
       font-size: 1.5rem;
     }
@@ -339,7 +340,7 @@
     padding: $spacing-4;
     background: $color-bg-light;
     border-radius: $radius-lg;
-    
+
     .MuiTypography-subtitle2 {
       font-weight: $font-weight-semibold;
       color: $text-primary;
@@ -385,5 +386,45 @@
       margin-left: $spacing-2;
       margin-right: 0;
     }
+  }
+}
+
+.content-block__external-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+  margin-bottom: 4px;
+
+  &:hover {
+    background: rgba(2, 51, 115, 0.04);
+
+    .content-block__list-item--link {
+      .MuiListItemText-primary {
+        color: #e67e22 !important;
+      }
+
+      .MuiSvgIcon-root {
+        transform: scale(1.15);
+        color: #e67e22;
+      }
+    }
+  }
+}
+
+.content-block__list-item--link {
+  padding: 10px 14px !important;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  .MuiSvgIcon-root {
+    transition: all 0.2s ease;
+  }
+
+  &:hover {
+    border-color: rgba(2, 51, 115, 0.1);
   }
 }

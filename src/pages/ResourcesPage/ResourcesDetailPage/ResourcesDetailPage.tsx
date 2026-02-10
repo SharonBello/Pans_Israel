@@ -110,15 +110,6 @@ const ResourcesDetailPage: React.FC = () => {
       <section className="resources-detail__content">
         <Container maxWidth="lg">
           <div className="resources-detail__main">
-            {/* Debug info - remove in production */}
-            {process.env.NODE_ENV === 'development' && (
-              <Box sx={{ p: 2, mb: 2, bgcolor: '#f5f5f5', borderRadius: 1 }}>
-                <Typography variant="caption" display="block">
-                  Debug: pageId={currentPageId}, content blocks={currentSection.content?.length || 0}
-                </Typography>
-              </Box>
-            )}
-
             {/* Render dynamic content */}
             {currentSection.content && currentSection.content.length > 0 ? (
               <ResourcesContentRenderer content={currentSection.content as any} />
@@ -154,6 +145,7 @@ const ResourcesDetailPage: React.FC = () => {
                           variant="outlined"
                           size="small"
                           href={resource.url}
+                          download={`${resource.id}.pdf`}
                           target="_blank"
                           rel="noopener noreferrer"
                           startIcon={<DownloadIcon />}

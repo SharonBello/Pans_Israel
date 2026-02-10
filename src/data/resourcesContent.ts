@@ -107,13 +107,13 @@ export const resourceSections: Record<string, InfoSection> = {
         imageUrl: relatedImage3,
         slug: 'educators'
       },
-      {
-        id: 'videos',
-        title: 'סרטונים ווובינרים',
-        description: 'ספריית וידאו ממומחים רפואיים',
-        imageUrl: relatedImage4,
-        slug: 'videos'
-      }
+      // {
+      //   id: 'videos',
+      //   title: 'סרטונים ווובינרים',
+      //   description: 'ספריית וידאו ממומחים רפואיים',
+      //   imageUrl: relatedImage4,
+      //   slug: 'videos'
+      // }
     ]
   },
 
@@ -373,20 +373,20 @@ export const resourceSections: Record<string, InfoSection> = {
         imageUrl: relatedImage1,
         slug: 'parents'
       },
-      {
-        id: 'videos',
-        title: 'סרטונים ווובינרים',
-        description: 'ספריית וידאו ממומחים רפואיים',
-        imageUrl: relatedImage2,
-        slug: 'videos'
-      },
-      {
-        id: 'news',
-        title: 'חדשות ומאמרים',
-        description: 'עדכונים אחרונים מהתחום',
-        imageUrl: relatedImage3,
-        slug: 'news'
-      }
+      // {
+      //   id: 'videos',
+      //   title: 'סרטונים ווובינרים',
+      //   description: 'ספריית וידאו ממומחים רפואיים',
+      //   imageUrl: relatedImage2,
+      //   slug: 'videos'
+      // },
+      // {
+      //   id: 'news',
+      //   title: 'חדשות ומאמרים',
+      //   description: 'עדכונים אחרונים מהתחום',
+      //   imageUrl: relatedImage3,
+      //   slug: 'news'
+      // }
     ]
   },
 
@@ -483,7 +483,7 @@ export const resourceSections: Record<string, InfoSection> = {
       {
         id: 'ihcp-heading',
         type: 'heading',
-        title: 'כיצד לפתח תוכנית טיפול בריאותי אישית (IHCP)?'
+        title: 'כיצד לפתח תוכנית טיפול בריאותי אישית?'
       },
       {
         id: 'ihcp-list',
@@ -528,29 +528,29 @@ export const resourceSections: Record<string, InfoSection> = {
           'חינוך גופני מותאם והוראה בבית/בית חולים'
         ]
       },
-      {
-        id: 'books-heading',
-        type: 'heading',
-        title: 'ספרים מומלצים למחנכים'
-      },
-      {
-        id: 'books-list',
-        type: 'list',
-        items: [
-          {
-            title: 'PANDAS and PANS in School Settings',
-            description: 'מדריך מקיף למחנכים על עבודה עם תלמידים עם PANDAS/PANS'
-          },
-          {
-            title: 'A Parents\' Guide to PANDAS, PANS, and Related Neuroimmune Disorders',
-            description: 'מדריך להורים על הפרעות נוירואימוניות'
-          },
-          {
-            title: 'PANS, CANS, and Automobiles',
-            description: 'מדריך עזר מקיף לסיוע לתלמידים עם PANDAS ו-PANS'
-          }
-        ]
-      }
+      // {
+      //   id: 'books-heading',
+      //   type: 'heading',
+      //   title: 'ספרים מומלצים למחנכים'
+      // },
+      // {
+      //   id: 'books-list',
+      //   type: 'list',
+      //   items: [
+      //     {
+      //       title: 'PANDAS and PANS in School Settings',
+      //       description: 'מדריך מקיף למחנכים על עבודה עם תלמידים עם PANDAS/PANS'
+      //     },
+      //     {
+      //       title: 'A Parents\' Guide to PANDAS, PANS, and Related Neuroimmune Disorders',
+      //       description: 'מדריך להורים על הפרעות נוירואימוניות'
+      //     },
+      //     {
+      //       title: 'PANS, CANS, and Automobiles',
+      //       description: 'מדריך עזר מקיף לסיוע לתלמידים עם PANDAS ו-PANS'
+      //     }
+      //   ]
+      // }
     ],
     relatedPages: [
       {
@@ -577,167 +577,167 @@ export const resourceSections: Record<string, InfoSection> = {
     ]
   },
 
-  videos: {
-    id: 'videos',
-    title: 'סרטונים ווובינרים',
-    slug: 'videos',
-    description: 'ספריית וידאו ממומחים רפואיים ומטפלים',
-    content: [
-      {
-        id: 'intro-heading',
-        type: 'heading',
-        title: 'ספריית וידאו'
-      },
-      {
-        id: 'intro-paragraph',
-        type: 'paragraph',
-        content: 'גלו שפע של משאבים מאנשי מקצוע רפואיים על PANDAS/PANS. הסרטונים שלנו כוללים הרצאות, וובינרים וסיפורים אישיים.'
-      },
-      {
-        id: 'featured-heading',
-        type: 'heading',
-        title: 'סרטונים מומלצים'
-      },
-      {
-        id: 'featured-list',
-        type: 'list',
-        items: [
-          {
-            title: 'הבנת ספקטרום דלקת המוח בילדות כולל PANDAS ו-PANS',
-            description: 'כנס Northwell Health 2022 - הרצאות ממומחים מובילים'
-          },
-          {
-            title: 'חוטים משותפים בין מחלות אוטואימוניות מופעלות זיהום של המוח',
-            description: 'פאנל עגול מליאה עם מומחים בינלאומיים'
-          },
-          {
-            title: 'מדע עצבים ונוירולוגיה: אנצפלופתיות אוטואימוניות',
-            description: 'הרצאה על דלקות מוח אוטואימוניות'
-          }
-        ]
-      },
-      {
-        id: 'youtube-callout',
-        type: 'callout',
-        variant: 'info',
-        title: 'ערוץ YouTube',
-        content: 'בקרו בערוץ YouTube של PANDAS Network לצפייה בספריית הסרטונים המלאה, כולל עדויות משפחות, הרצאות רפואיות ועדכונים מהתחום.'
-      },
-      {
-        id: 'story-heading',
-        type: 'heading',
-        title: 'הסיפור של רבקה'
-      },
-      {
-        id: 'story-paragraph',
-        type: 'paragraph',
-        content: 'רבקה הייתה ילדה מוחצנת שאישיותה השתנתה באופן דרמטי לאחר זיהום סטרפ. קבלת אבחנת PANDAS נתנה למשפחתה תקווה. שמעו את סיפורה על אבחון, טיפול והחלמה מ-PANDAS.'
-      }
-    ],
-    relatedPages: [
-      {
-        id: 'news',
-        title: 'חדשות ומאמרים',
-        description: 'עדכונים אחרונים מהתחום',
-        imageUrl: relatedImage1,
-        slug: 'news'
-      },
-      {
-        id: 'websites',
-        title: 'אתרים מועילים',
-        description: 'קישורים לארגונים ומשאבים נוספים',
-        imageUrl: relatedImage2,
-        slug: 'websites'
-      },
-      {
-        id: 'clinicians',
-        title: 'משאבים לאנשי מקצוע',
-        description: 'הנחיות אבחון ופרוטוקולי טיפול',
-        imageUrl: relatedImage3,
-        slug: 'clinicians'
-      }
-    ]
-  },
+  // videos: {
+  //   id: 'videos',
+  //   title: 'סרטונים ווובינרים',
+  //   slug: 'videos',
+  //   description: 'ספריית וידאו ממומחים רפואיים ומטפלים',
+  //   content: [
+  //     {
+  //       id: 'intro-heading',
+  //       type: 'heading',
+  //       title: 'ספריית וידאו'
+  //     },
+  //     {
+  //       id: 'intro-paragraph',
+  //       type: 'paragraph',
+  //       content: 'גלו שפע של משאבים מאנשי מקצוע רפואיים על PANDAS/PANS. הסרטונים שלנו כוללים הרצאות, וובינרים וסיפורים אישיים.'
+  //     },
+  //     {
+  //       id: 'featured-heading',
+  //       type: 'heading',
+  //       title: 'סרטונים מומלצים'
+  //     },
+  //     {
+  //       id: 'featured-list',
+  //       type: 'list',
+  //       items: [
+  //         {
+  //           title: 'הבנת ספקטרום דלקת המוח בילדות כולל PANDAS ו-PANS',
+  //           description: 'כנס Northwell Health 2022 - הרצאות ממומחים מובילים'
+  //         },
+  //         {
+  //           title: 'חוטים משותפים בין מחלות אוטואימוניות מופעלות זיהום של המוח',
+  //           description: 'פאנל עגול מליאה עם מומחים בינלאומיים'
+  //         },
+  //         {
+  //           title: 'מדע עצבים ונוירולוגיה: אנצפלופתיות אוטואימוניות',
+  //           description: 'הרצאה על דלקות מוח אוטואימוניות'
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: 'youtube-callout',
+  //       type: 'callout',
+  //       variant: 'info',
+  //       title: 'ערוץ YouTube',
+  //       content: 'בקרו בערוץ YouTube של PANDAS Network לצפייה בספריית הסרטונים המלאה, כולל עדויות משפחות, הרצאות רפואיות ועדכונים מהתחום.'
+  //     },
+  //     {
+  //       id: 'story-heading',
+  //       type: 'heading',
+  //       title: 'הסיפור של רבקה'
+  //     },
+  //     {
+  //       id: 'story-paragraph',
+  //       type: 'paragraph',
+  //       content: 'רבקה הייתה ילדה מוחצנת שאישיותה השתנתה באופן דרמטי לאחר זיהום סטרפ. קבלת אבחנת PANDAS נתנה למשפחתה תקווה. שמעו את סיפורה על אבחון, טיפול והחלמה מ-PANDAS.'
+  //     }
+  //   ],
+  //   relatedPages: [
+  //     // {
+  //     //   id: 'news',
+  //     //   title: 'חדשות ומאמרים',
+  //     //   description: 'עדכונים אחרונים מהתחום',
+  //     //   imageUrl: relatedImage1,
+  //     //   slug: 'news'
+  //     // },
+  //     {
+  //       id: 'websites',
+  //       title: 'אתרים מועילים',
+  //       description: 'קישורים לארגונים ומשאבים נוספים',
+  //       imageUrl: relatedImage2,
+  //       slug: 'websites'
+  //     },
+  //     {
+  //       id: 'clinicians',
+  //       title: 'משאבים לאנשי מקצוע',
+  //       description: 'הנחיות אבחון ופרוטוקולי טיפול',
+  //       imageUrl: relatedImage3,
+  //       slug: 'clinicians'
+  //     }
+  //   ]
+  // },
 
-  news: {
-    id: 'news',
-    title: 'חדשות ומאמרים',
-    slug: 'news',
-    description: 'עדכונים אחרונים על טיפול, אבחון ומודעות ל-PANDAS/PANS',
-    content: [
-      {
-        id: 'intro-heading',
-        type: 'heading',
-        title: 'חדשות ומאמרים'
-      },
-      {
-        id: 'intro-paragraph',
-        type: 'paragraph',
-        content: 'גלו את החדשות והמידע האחרונים הנוגעים לטיפול, אבחון ומודעות ל-PANDAS/PANS.'
-      },
-      {
-        id: 'articles-heading',
-        type: 'heading',
-        title: 'מאמרים אחרונים'
-      },
-      {
-        id: 'articles-list',
-        type: 'list',
-        items: [
-          {
-            title: 'המוח שלו היה מודלק. פתאום הקו בין בריאות פיזית ונפשית התחיל להיטשטש',
-            description: 'CBC News - פברואר 2023'
-          },
-          {
-            title: 'בריטניה סובלת ממתקפה של קדחת שני. האם ארה"ב הבאה?',
-            description: 'Wired Magazine - מרץ 2021'
-          },
-          {
-            title: 'אשם חדש ומוזר מאחורי הפרעות אכילה',
-            description: 'The Atlantic - אוקטובר 2019'
-          },
-          {
-            title: 'הורות לילד נוירו-שונה היא קשה!',
-            description: 'Psychology Today - אוגוסט 2021'
-          },
-          {
-            title: '25 שנה ל-PANS/PANDAS',
-            description: 'ציון דרך היסטורי במחקר והכרה בתסמונות'
-          }
-        ]
-      },
-      {
-        id: 'archive-callout',
-        type: 'callout',
-        variant: 'info',
-        title: 'ארכיון מאמרים',
-        content: 'גשו לארכיון המלא של מאמרי חדשות על PANDAS/PANS מהשנים האחרונות.'
-      }
-    ],
-    relatedPages: [
-      {
-        id: 'videos',
-        title: 'סרטונים ווובינרים',
-        description: 'ספריית וידאו ממומחים רפואיים',
-        imageUrl: relatedImage1,
-        slug: 'videos'
-      },
-      {
-        id: 'websites',
-        title: 'אתרים מועילים',
-        description: 'קישורים לארגונים ומשאבים נוספים',
-        imageUrl: relatedImage2,
-        slug: 'websites'
-      },
-      {
-        id: 'overview',
-        title: 'משאבים - סקירה כללית',
-        description: 'חזרה לעמוד המשאבים הראשי',
-        imageUrl: relatedImage3,
-        slug: 'overview'
-      }
-    ]
-  },
+  // news: {
+  //   id: 'news',
+  //   title: 'חדשות ומאמרים',
+  //   slug: 'news',
+  //   description: 'עדכונים אחרונים על טיפול, אבחון ומודעות ל-PANDAS/PANS',
+  //   content: [
+  //     {
+  //       id: 'intro-heading',
+  //       type: 'heading',
+  //       title: 'חדשות ומאמרים'
+  //     },
+  //     {
+  //       id: 'intro-paragraph',
+  //       type: 'paragraph',
+  //       content: 'גלו את החדשות והמידע האחרונים הנוגעים לטיפול, אבחון ומודעות ל-PANDAS/PANS.'
+  //     },
+  //     {
+  //       id: 'articles-heading',
+  //       type: 'heading',
+  //       title: 'מאמרים אחרונים'
+  //     },
+  //     {
+  //       id: 'articles-list',
+  //       type: 'list',
+  //       items: [
+  //         {
+  //           title: 'המוח שלו היה מודלק. פתאום הקו בין בריאות פיזית ונפשית התחיל להיטשטש',
+  //           description: 'CBC News - פברואר 2023'
+  //         },
+  //         {
+  //           title: 'בריטניה סובלת ממתקפה של קדחת שני. האם ארה"ב הבאה?',
+  //           description: 'Wired Magazine - מרץ 2021'
+  //         },
+  //         {
+  //           title: 'אשם חדש ומוזר מאחורי הפרעות אכילה',
+  //           description: 'The Atlantic - אוקטובר 2019'
+  //         },
+  //         {
+  //           title: 'הורות לילד נוירו-שונה היא קשה!',
+  //           description: 'Psychology Today - אוגוסט 2021'
+  //         },
+  //         {
+  //           title: '25 שנה ל-PANS/PANDAS',
+  //           description: 'ציון דרך היסטורי במחקר והכרה בתסמונות'
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       id: 'archive-callout',
+  //       type: 'callout',
+  //       variant: 'info',
+  //       title: 'ארכיון מאמרים',
+  //       content: 'גשו לארכיון המלא של מאמרי חדשות על PANDAS/PANS מהשנים האחרונות.'
+  //     }
+  //   ],
+  //   relatedPages: [
+  //     {
+  //       id: 'videos',
+  //       title: 'סרטונים ווובינרים',
+  //       description: 'ספריית וידאו ממומחים רפואיים',
+  //       imageUrl: relatedImage1,
+  //       slug: 'videos'
+  //     },
+  //     {
+  //       id: 'websites',
+  //       title: 'אתרים מועילים',
+  //       description: 'קישורים לארגונים ומשאבים נוספים',
+  //       imageUrl: relatedImage2,
+  //       slug: 'websites'
+  //     },
+  //     {
+  //       id: 'overview',
+  //       title: 'משאבים - סקירה כללית',
+  //       description: 'חזרה לעמוד המשאבים הראשי',
+  //       imageUrl: relatedImage3,
+  //       slug: 'overview'
+  //     }
+  //   ]
+  // },
 
   websites: {
     id: 'websites',
@@ -766,39 +766,48 @@ export const resourceSections: Record<string, InfoSection> = {
         items: [
           {
             title: 'PANDAS Physicians Network',
-            description: 'PPN מוקדש לעזור לאנשי מקצוע רפואיים להבין טוב יותר את PANDAS/PANS דרך מידע בזמן אמת ונטוורקינג. הנחיות PPN לאבחון וטיפול פותחו על ידי ועדות ויועצים מיוחדים ממוסדות אקדמיים רפואיים מובילים בארה"ב.'
+            description: 'PPN מוקדש לעזור לאנשי מקצוע רפואיים להבין טוב יותר את PANDAS/PANS דרך מידע בזמן אמת ונטוורקינג.',
+            url: 'https://www.pandasppn.org/'
           },
           {
             title: 'International OCD Foundation',
-            description: 'המשימה של International OCD Foundation היא לעזור לכל מי שמושפע מהפרעה טורדנית-כפייתית והפרעות קשורות לחיות חיים מלאים ופרודוקטיביים.'
+            description: 'המשימה של International OCD Foundation היא לעזור לכל מי שמושפע מהפרעה טורדנית-כפייתית והפרעות קשורות.',
+            url: 'https://iocdf.org/'
           },
           {
             title: 'המכון הלאומי לבריאות הנפש (NIMH)',
-            description: 'המכון הלאומי לבריאות הנפש (NIMH) הוא סוכנות המחקר הפדרלית המובילה להפרעות נפשיות.'
+            description: 'סוכנות המחקר הפדרלית המובילה להפרעות נפשיות.',
+            url: 'https://www.nimh.nih.gov/'
           },
           {
             title: 'The Balanced Mind Foundation',
-            description: 'רשת ההורים Balanced Mind מנחה משפחות המגדלות ילדים עם הפרעות מצב רוח לתשובות, תמיכה ויציבות שהם מחפשים.'
+            description: 'רשת ההורים Balanced Mind מנחה משפחות המגדלות ילדים עם הפרעות מצב רוח לתשובות, תמיכה ויציבות.',
+            url: 'https://www.dbsalliance.org/support/for-friends-family/for-parents/balanced-mind-parent-network/'
           },
           {
             title: 'On Our Sleeves',
-            description: 'On Our Sleeves מציעה משאבים מבוססי ראיות מהמומחים בבית החולים לילדים Nationwide Children\'s לחינוך משפחות ותומכים בנושאי בריאות הנפש של ילדים.'
+            description: 'On Our Sleeves מציעה משאבים מבוססי ראיות מהמומחים בבית החולים לילדים Nationwide Children\'s.',
+            url: 'https://www.onoursleeves.org/'
           },
           {
             title: 'Immune Deficiency Foundation',
-            description: 'קרן חסר החיסון משפרת את האבחון, הטיפול ואיכות החיים של אנשים המושפעים מחסר חיסוני ראשוני.'
+            description: 'קרן חסר החיסון משפרת את האבחון, הטיפול ואיכות החיים של אנשים עם חסר חיסוני ראשוני.',
+            url: 'https://primaryimmune.org/'
           },
           {
             title: 'New England PANS/PANDAS Association',
-            description: 'עמותת ניו אינגלנד PANS/PANDAS היא קבוצת הורים ומתנדבים רפואיים ממדינות שונות ברחבי ניו אינגלנד המתמקדת בהעלאת מודעות.'
+            description: 'קבוצת הורים ומתנדבים רפואיים ממדינות שונות ברחבי ניו אינגלנד המתמקדת בהעלאת מודעות.',
+            url: 'https://nepans.org/'
           },
           {
             title: 'Northwest PANDAS/PANS Network',
-            description: 'רשת Northwest PANDAS/PANS היא עמותה המשרתת את אלה במערב צפון אמריקה עם PANDAS/PANS/AE ומשפחותיהם.'
+            description: 'עמותה המשרתת את אלה במערב צפון אמריקה עם PANDAS/PANS/AE ומשפחותיהם.',
+            url: 'https://www.nwppn.org/'
           },
           {
             title: 'Aspire',
-            description: 'המשימה של Aspire היא לשפר את חייהם של ילדים ומבוגרים המושפעים מ-PANS/PANDAS ואנצפלופתיות אחרות הקשורות לחיסון.'
+            description: 'המשימה של Aspire היא לשפר את חייהם של ילדים ומבוגרים המושפעים מ-PANS/PANDAS.',
+            url: 'https://aspire.care/'
           }
         ]
       },
@@ -813,27 +822,28 @@ export const resourceSections: Record<string, InfoSection> = {
         items: [
           {
             title: 'PANS PANDAS UK (בריטניה)',
-            description: 'PANS PANDAS UK היא עמותה שהוקמה ונרשמה במאי 2018 על ידי קבוצת הורים מסורה עם ילדים המושפעים ממצבים אלה.'
+            description: 'עמותה בריטית שהוקמה על ידי קבוצת הורים מסורה עם ילדים המושפעים ממצבים אלה.',
+            url: 'https://www.panspandasuk.org/'
           },
           {
             title: 'SANE - PANDAS Sweden (שבדיה)',
-            description: 'ארגון זה מציע רשת תמיכה בחברות למטופלים ומשפחותיהם. SANE אוסף ומפיץ מידע על PANS/PANDAS.'
-          },
-          {
-            title: 'Children\'s e-Hospital (בריטניה)',
-            description: 'בית החולים האלקטרוני לילדים מציע גישה למומחי בריאות ילדים והרבה מידע לעזור להורים לטפל בבריאות ילדיהם.'
+            description: 'ארגון זה מציע רשת תמיכה בחברות למטופלים ומשפחותיהם.',
+            url: 'https://sane.nu/'
           },
           {
             title: 'Inflamed Brain Alliance (קנדה)',
-            description: 'ברית המוח הדלוק שואפת להקל על הנטל הכבד שלכם על ידי עזרה בניווט מסלולים לטיפול קליני ומעקב.'
+            description: 'ברית המוח הדלוק שואפת להקל על הנטל על ידי עזרה בניווט מסלולים לטיפול קליני.',
+            url: 'https://inflamedbrain.org/'
           },
           {
             title: 'PANDAS Poland (פולין)',
-            description: 'אתר ובלוג המנוהלים על ידי אם מסורה לשיתוף מידע על PANDAS, PANS ותסמיני ASD, קריטריונים אבחנתיים ותמיכה.'
+            description: 'אתר ובלוג המנוהלים על ידי אם מסורה לשיתוף מידע על PANDAS, PANS ותסמיני ASD.',
+            url: 'https://www.facebook.com/pandaspansPL/'
           },
           {
             title: 'PANDAS Italia (איטליה)',
-            description: 'PANDAS Italia ODV היא ארגון התנדבותי שנולד באמפולי באוגוסט 2010 הודות לשני הורים וחברים קרובים.'
+            description: 'PANDAS Italia ODV היא ארגון התנדבותי שנולד באמפולי באוגוסט 2010.',
+            url: 'https://pandasitalia.it/'
           }
         ]
       }
@@ -861,7 +871,7 @@ export const resourceSections: Record<string, InfoSection> = {
         slug: 'overview'
       }
     ]
-  }
+  },
 };
 
 // Navigation items for the resources section
@@ -886,16 +896,16 @@ export const resourceNavItems = [
     title: 'משאבים למחנכים',
     slug: 'educators'
   },
-  {
-    id: 'videos',
-    title: 'סרטונים ווובינרים',
-    slug: 'videos'
-  },
-  {
-    id: 'news',
-    title: 'חדשות ומאמרים',
-    slug: 'news'
-  },
+  // {
+  //   id: 'videos',
+  //   title: 'סרטונים ווובינרים',
+  //   slug: 'videos'
+  // },
+  // {
+  //   id: 'news',
+  //   title: 'חדשות ומאמרים',
+  //   slug: 'news'
+  // },
   {
     id: 'websites',
     title: 'אתרים מועילים',
@@ -910,7 +920,7 @@ export const downloadableResources: ResourceLink[] = [
     title: 'עובדות מהירות על PANDAS/PANS',
     titleEn: 'PANDAS, PANS Quick Facts',
     description: 'מדריך תמציתי להבנת התסמונות',
-    url: 'https://pandasnetwork.org/wp-content/uploads/2019/04/PANDAS-NETWORK_QUICKFACTS.pdf',
+    url: '/pdfs/quickFactsHe.pdf',
     type: 'pdf'
   },
   {

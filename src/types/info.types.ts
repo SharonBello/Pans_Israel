@@ -28,6 +28,7 @@ export interface InfoContent {
 export interface ListItem {
   title: string;
   description: string;
+  url?: string;
 }
 
 export interface RelatedPage {

@@ -143,7 +143,7 @@ const Hero: React.FC = () => {
           <div className="hero__content">
 
             <h1 className="hero__title">
-              הכל בראש
+             פאנס ישראל
               <span className="hero__title-highlight">העמותה הישראלית לאנצפליטיס אוטואימוני</span>
             </h1>
 

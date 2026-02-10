@@ -253,13 +253,13 @@ export const infoSections: Record<string, InfoSection> = {
         title: 'חשיבות התיעוד',
         content: 'הצגת חומרת התסמינים, משך הזמן וההופעה הפתאומית הם כלים חשובים בקביעת אבחנה אפשרית. סולמות ההערכה להלן יעזרו להורים להציג את התסמינים של ילדם בצורה מסודרת לצוות הרפואי.'
       },
-      {
-        id: 'scales-downloads',
-        type: 'download',
-        title: 'סולמות להורדה',
-        downloadUrl: 'https://pandasnetwork.org/wp-content/uploads/2024/06/PANS-31-Item-Symptom-Rating-Scale-4-30-24.pdf',
-        downloadLabel: 'סולם הערכת תסמינים PANS (31 פריטים)'
-      }
+      // {
+      //   id: 'scales-downloads',
+      //   type: 'download',
+      //   title: 'סולמות להורדה',
+      //   downloadUrl: 'https://pandasnetwork.org/wp-content/uploads/2024/06/PANS-31-Item-Symptom-Rating-Scale-4-30-24.pdf',
+      //   downloadLabel: 'סולם הערכת תסמינים PANS (31 פריטים)'
+      // }
     ],
     relatedPages: [
       {
@@ -309,7 +309,7 @@ export const infoSections: Record<string, InfoSection> = {
         items: [
           'נוכחות של אובססיות, כפיות או טיקים משמעותיים',
           'הופעה פתאומית של תסמינים או מהלך של התלקחויות והפוגות',
-          'הופעה לפני גיל ההתבגרות',
+          // 'הופעה לפני גיל ההתבגרות',
           'קשר לזיהום סטרפטוקוקי',
           'קשר לתסמינים נוירו-פסיכיאטריים נוספים'
         ]
@@ -420,16 +420,16 @@ export const infoSections: Record<string, InfoSection> = {
         title: 'בדיקת בני משפחה',
         content: 'חשוב לבדוק את כל בני המשפחה כדי לוודא שאף אחד אינו נשא א-תסמיני או נשא סטרפ. נשאים לעיתים קרובות לא יראו תסמיני סטרפ, אבל אם ייבדקו, הם יהיו חיוביים. בדיקת בני המשפחה תפחית את הסיכוי של ילדכם להידבק מחדש.'
       },
-      {
-        id: 'cunningham-heading',
-        type: 'heading',
-        title: 'פאנל קנינגהם'
-      },
-      {
-        id: 'cunningham-paragraph',
-        type: 'paragraph',
-        content: 'פאנל קנינגהם™ קובע את "הסבירות שמצבו של המטופל הוא אוטואימוני באופיו", כולל PANDAS ו-PANS אפשריים. הבדיקה מודדת חמישה מדדים וזמינה מסחרית על ידי Moleculera Labs. מחקרה של ד"ר קנינגהם, שהוביל לבדיקה זו, מדד נוגדנים מגיבים-צולבים המוגברים במוח של ילד עם PANDAS.'
-      },
+      // {
+      //   id: 'cunningham-heading',
+      //   type: 'heading',
+      //   title: 'פאנל קנינגהם'
+      // },
+      // {
+      //   id: 'cunningham-paragraph',
+      //   type: 'paragraph',
+      //   content: 'פאנל קנינגהם™ קובע את "הסבירות שמצבו של המטופל הוא אוטואימוני באופיו", כולל PANDAS ו-PANS אפשריים. הבדיקה מודדת חמישה מדדים וזמינה מסחרית על ידי Moleculera Labs. מחקרה של ד"ר קנינגהם, שהוביל לבדיקה זו, מדד נוגדנים מגיבים-צולבים המוגברים במוח של ילד עם PANDAS.'
+      // },
       {
         id: 'imaging-heading',
         type: 'heading',
