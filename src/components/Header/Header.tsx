@@ -12,10 +12,10 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen = false }) => 
       <div className="header__container">
         {/* Logo */}
         <a href="/" className="header__logo">
-          <div className="header__logo-icon">🧠</div>
+          <img src='/src/styles/assets/logo.png' className="header__logo-icon" alt='logo'/>
           <div className="header__logo-text">
-            <span className="header__logo-title">PANS/PANDAS</span>
-            <span className="header__logo-subtitle">Israel</span>
+            <span className="header__logo-title">פאנס/פאנדס</span>
+            <span className="header__logo-subtitle">ישראל</span>
           </div>
         </a>
 
