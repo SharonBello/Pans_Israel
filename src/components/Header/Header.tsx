@@ -1,4 +1,5 @@
 import { FiMenu, FiX } from 'react-icons/fi';
+import logoPng from '../../styles/assets/logo.png';
 import './Header.scss';
 
 interface HeaderProps {
@@ -12,7 +13,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen = false }) => 
       <div className="header__container">
         {/* Logo */}
         <a href="/" className="header__logo">
-          <img src='/src/styles/assets/logo.png' className="header__logo-icon" alt='logo'/>
+          <img src={logoPng} className="header__logo-icon" alt="logo" />
           <div className="header__logo-text">
             <span className="header__logo-title">פאנס/פאנדס</span>
             <span className="header__logo-subtitle">ישראל</span>
