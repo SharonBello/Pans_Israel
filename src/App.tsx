@@ -13,6 +13,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 // Styles
 import './styles/main.scss';
 import './App.scss';
+import { AccessibilityBar } from './components/AccessibilityBar';
 
 // Create RTL cache for MUI components
 const cacheRtl = createCache({
@@ -39,6 +40,7 @@ function App() {
 
           {/* ADD THE SIDEBAR HERE */}
           <Sidebar open={isMenuOpen} onClose={handleSidebarClose} />
+          <AccessibilityBar />
 
           <main style={{ flex: '1 0 auto' }} className="main-content">
             <Routes>
