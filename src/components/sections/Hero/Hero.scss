@@ -1,47 +1,37 @@
 @use "sass:color";
-@use "../../../styles//abstracts" as *;
+@use "../../../styles/abstracts" as *;
 
 .hero {
   position: relative;
-  height: 70vh;
+  min-height: 75vh;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 
-  // Particles Background
+  // Background
   &__particles {
-    // background: url("https://particles.js.org/images/background3.jpg");
-    // background: url("../../../styles/assets/hero.png");
     background: url("../../../styles/assets/hero-bg.svg");
-    background-position: fill;
-    // background-position: cover;
+    background-size: cover;
+    background-position: center;
     position: absolute;
     inset: 0;
     z-index: 1;
-
-    // @media (max-width: 850px) {
-    //   background: url("https://particles.js.org/images/background3.jpg");
-    // }
-
-    // & #neural-particles {
-    //   height: -webkit-fill-available !important;
-    // }
   }
 
-  // Gradient Overlay for better text readability
-  // &__overlay {
-  //   position: absolute;
-  //   inset: 0;
-  //   z-index: 2;
-  //   background: radial-gradient(
-  //     ellipse at center,
-  //     rgba($color-bg-white, 0.5) 0%,
-  //     rgba($color-bg-white, 0.7) 70%,
-  //     rgba($color-bg-light, 0.9) 100%
-  //   );
-  //   pointer-events: none;
-  // }
+  // Soft overlay — improves text contrast against the SVG
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(#fff, 0.25) 0%,
+      rgba(#fff, 0.5) 50%,
+      rgba($color-background, 0.8) 100%
+    );
+    pointer-events: none;
+  }
 
   // Container
   &__container {
@@ -49,12 +39,12 @@
     position: relative;
     z-index: 3;
     padding-top: calc(var(--header-height) + #{$spacing-8});
-    padding-bottom: $spacing-16;
+    padding-bottom: $spacing-12;
   }
 
   // Content
   &__content {
-    max-width: 800px;
+    max-width: 760px;
     margin: 0 auto;
     text-align: center;
   }
@@ -73,14 +63,14 @@
     animation: fadeInDown 0.6s ease-out;
   }
 
-  // Title
+  // ── Title ──
   &__title {
     font-family: $font-heading;
     font-size: $font-size-5xl;
     font-weight: $font-weight-black;
     color: $color-darkest;
     line-height: 1.1;
-    margin-bottom: $spacing-6;
+    margin-bottom: $spacing-2;
     animation: fadeInUp 0.6s ease-out 0.1s both;
 
     @include max-md {
@@ -91,7 +81,7 @@
       font-size: $font-size-3xl;
     }
   }
-  
+
   &__title-highlight {
     display: block;
     background: $gradient-primary;
@@ -99,15 +89,28 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: $font-size-2xl;
+    margin-top: $spacing-1;
+
+    @include max-sm {
+      font-size: $font-size-lg;
+    }
   }
 
-  // Description
+  // ── Description ──
+  // Glass card wrapping the paragraph for readability
   &__description {
-    font-size: $font-size-lg;
+    font-size: $font-size-base;
     color: $text-secondary;
     line-height: $line-height-relaxed;
-    max-width: 600px;
-    margin: 0 auto $spacing-8;
+    // max-width: 640px;
+    margin: $spacing-6 auto $spacing-10;
+    padding: $spacing-5 $spacing-6;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba($color-primary, 0.08);
+    border-radius: $radius-xl;
+    text-align: start;
     animation: fadeInUp 0.6s ease-out 0.2s both;
 
     strong {
@@ -116,17 +119,18 @@
     }
 
     @include max-sm {
-      font-size: $font-size-base;
+      font-size: $font-size-sm;
+      padding: $spacing-4 $spacing-5;
     }
   }
 
-  // Action Buttons
+  // ── Action Buttons ──
   &__actions {
     display: flex;
     flex-wrap: wrap;
     gap: $spacing-4;
     justify-content: center;
-    margin-bottom: $spacing-12;
+    margin-bottom: $spacing-10;
     animation: fadeInUp 0.6s ease-out 0.3s both;
   }
 
@@ -134,12 +138,14 @@
     display: inline-flex;
     align-items: center;
     gap: $spacing-2;
-    padding: $spacing-4 $spacing-8;
+    padding: $spacing-2 $spacing-6;
     font-size: $font-size-base;
     font-weight: $font-weight-semibold;
     text-decoration: none;
     border-radius: $radius-lg;
     transition: all $transition-base;
+    border: none;
+    cursor: pointer;
 
     &:hover {
       text-decoration: none;
@@ -184,47 +190,103 @@
     }
   }
 
-  // Stats
+  // ══════════════════════════════════════
+  //  STATS — frosted glass cards (new)
+  // ══════════════════════════════════════
   &__stats {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: $spacing-6;
-    animation: fadeInUp 0.6s ease-out 0.4s both;
+    margin-top: $spacing-8;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: $spacing-4;
+    animation: fadeInUp 0.6s ease-out 0.35s both;
+
+    @include max-md {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 
     @include max-sm {
-      flex-direction: column;
-      gap: $spacing-4;
+      grid-template-columns: 1fr;
     }
   }
 
-  &__stat {
-    text-align: center;
+  &__statCard {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $spacing-4;
+    padding: $spacing-5 $spacing-5;
+    border-radius: $radius-2xl;
+
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba($color-primary, 0.1);
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.08);
+
+    transition:
+      transform $transition-base,
+      box-shadow $transition-base,
+      border-color $transition-base;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow-lg;
+      border-color: rgba($color-primary, 0.18);
+    }
   }
 
-  &__stat-number {
-    display: block;
+  &__statText {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0; // prevents overflow
+    text-align: start;
+  }
+
+  &__statTopRow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: $spacing-2;
+    flex-wrap: wrap;
+  }
+
+  &__statNumber {
     font-family: $font-heading;
-    font-size: $font-size-2xl;
-    font-weight: $font-weight-bold;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-black;
     color: $color-primary;
     line-height: 1;
-    margin-bottom: $spacing-1;
+    letter-spacing: -0.02em;
   }
 
-  &__stat-label {
-    font-size: $font-size-sm;
+  &__statLabel {
+    font-size: $font-size-xs;
+    font-weight: 400;
+    color: $color-darkest;
+    opacity: 0.92;
+  }
+
+  &__statSubLabel {
+    font-size: $font-size-xs;
     color: $text-muted;
+    line-height: 1.35;
   }
 
-  &__stat-divider {
-    width: 1px;
-    height: 40px;
-    background: $border-color;
+  &__statsNote {
+    margin-top: $spacing-3;
+    font-size: $font-size-xs;
+    color: $text-muted;
+    line-height: 1.4;
+    text-align: start;
+
+    // keep note aligned with the description card width
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
 
     @include max-sm {
-      width: 60px;
-      height: 1px;
+      text-align: center;
     }
   }
 
@@ -276,7 +338,7 @@
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;

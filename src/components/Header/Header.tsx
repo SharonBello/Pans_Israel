@@ -1,6 +1,7 @@
 import { FiMenu, FiX } from 'react-icons/fi';
 import logoPng from '../../styles/assets/logo.png';
 import './Header.scss';
+import { FaWhatsapp } from 'react-icons/fa';
 
 interface HeaderProps {
   onMenuToggle?: () => void;
@@ -27,8 +28,15 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen = false }) => 
           <a href="/support" className="header__nav-link">תמיכה</a>
           <a href="/resources" className="header__nav-link">משאבים</a>
           {/* <a href="/surveys" className="header__nav-link">סקרים</a> */}
-          <a href="/contact" className="header__nav-link header__nav-link--cta">
-            צור קשר
+          <a
+            href="https://wa.me/972544767146"
+            className="hero__btn hero__btn--primary"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="דברו איתנו בוואטסאפ"
+          >
+            <span>צור קשר</span>
+            <FaWhatsapp />
           </a>
         </nav>
 

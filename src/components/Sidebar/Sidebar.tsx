@@ -22,6 +22,7 @@ import {
 import { FiClipboard } from 'react-icons/fi';
 import { useNavigate, useLocation } from 'react-router-dom';
 import './Sidebar.scss';
+import { FaWhatsapp } from 'react-icons/fa';
 
 interface SidebarProps {
   open: boolean;
@@ -46,7 +47,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
     { title: 'תמיכה', icon: <FavoriteIcon />, path: '/support' },
     { title: 'משאבים', icon: <ArticleIcon />, path: '/resources' },
     { title: 'סקרים', icon: <FiClipboard />, path: '/surveys' },
-    { title: 'צור קשר', icon: <ContactMailIcon />, path: '/contact', isCta: true },
+    { title: 'צור קשר', icon: <FaWhatsapp />, path: '/contact', isCta: true },
   ];
 
   const handleMenuClick = (item: MenuItem) => {

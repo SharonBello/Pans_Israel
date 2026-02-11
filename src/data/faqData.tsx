@@ -1,9 +1,38 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { FiArrowLeft } from 'react-icons/fi';
+import WhatIsPansPandasModal from '@/components/WhatIsPansPandasModal';
 
 export type FAQItem = {
     id: string;
     question: string;
     answer: string | React.ReactNode;
+};
+
+// First FAQ answer with "learn more" modal trigger
+const WhatIsPansPandasAnswer: React.FC = () => {
+    const [modalOpen, setModalOpen] = useState(false);
+
+    return (
+        <>
+            <p>
+                אלו תסמונות שבהן מופיעים בפתאומיות תסמינים כמו OCD/חרדה/טיקים
+                ושינויים התנהגותיים, לעיתים לאחר זיהום. חשוב לבצע הערכה רפואית
+                ולשקול אבחנה מבדלת.
+            </p>
+            <button
+                onClick={() => setModalOpen(true)}
+                className="faq-learn-more-btn"
+                type="button"
+            >
+                <span>קראו עוד על פאנס/פאנדס</span>
+                <FiArrowLeft />
+            </button>
+            <WhatIsPansPandasModal
+                open={modalOpen}
+                onClose={() => setModalOpen(false)}
+            />
+        </>
+    );
 };
 
 // Recommended Tests Component (rich content)
@@ -81,8 +110,7 @@ export const FAQ_ITEMS: FAQItem[] = [
     {
         id: 'what-is-pans-pandas',
         question: 'מה זה פאנס/פאנדס בקצרה?',
-        answer:
-            'אלו תסמונות שבהן מופיעים בפתאומיות תסמינים כמו OCD/חרדה/טיקים ושינויים התנהגותיים, לעיתים לאחר זיהום. חשוב לבצע הערכה רפואית ולשקול אבחנה מבדלת.',
+        answer: <WhatIsPansPandasAnswer />,
     },
     {
         id: 'recommended-tests',
