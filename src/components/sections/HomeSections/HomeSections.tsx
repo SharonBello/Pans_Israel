@@ -36,9 +36,9 @@ const HomeSections: React.FC = (): React.JSX.Element => {
         return [
             {
                 id: 'symptoms',
-                title: 'בדיקת תסמינים ומדדים',
+                title: 'איך מאבחנים?',
                 description:
-                    'איך לבדוק אם ייתכן PANS/PANDAS? מחשבונים ומדדי תסמינים.',
+                    'איך לבדוק אם ייתכן פאנס/פאנדס? מדדים ותסמינים',
                 to: '/symptoms',
                 Icon: FaClipboardList,
                 image: '/images/home/symptoms.jpg',
@@ -89,7 +89,7 @@ const HomeSections: React.FC = (): React.JSX.Element => {
                             {/* <span className="survey-banner__badge">חדש</span> */}
                             <h2 className="survey-banner__title">סקר מצב ילדינו 2026</h2>
                             <p className="survey-banner__desc">
-                                סקר מקיף למשפחות ילדים עם PANS/PANDAS בישראל. השתתפותכם חשובה
+                                סקר מקיף למשפחות ילדים עם פאנס/פאנדס בישראל. השתתפותכם חשובה
                                 לנו — המידע יסייע להגביר את המודעות ולקדם מחקר בתחום.
                             </p>
                         </div>

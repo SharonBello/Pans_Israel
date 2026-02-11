@@ -34,7 +34,7 @@ const SurveysPage: React.FC = (): React.JSX.Element => {
     {
       id: 'state-of-children',
       title: 'סקר מצב ילדינו 2026',
-      description: 'סקר מקיף למשפחות ילדים עם PANS/PANDAS בישראל. המידע יסייע להגביר את המודעות ולקדם מחקר בתחום.',
+      description: 'סקר מקיף למשפחות ילדים עם פאנס/פאנדס בישראל. המידע יסייע להגביר את המודעות ולקדם מחקר בתחום.',
       route: '/surveys/state-of-children',
       resultsRoute: '/surveys/state-of-children/results',  // Added
       available: true,

@@ -323,7 +323,7 @@ const SupportPage: React.FC = () => {
                               className="support-page__contact-btn support-page__contact-btn--whatsapp"
                               href={generateWhatsAppLink(
                                 volunteer.phone,
-                                `שלום ${volunteer.firstName}, פניתי אליך דרך אתר PANS/PANDAS ישראל`
+                                `שלום ${volunteer.firstName}, פניתי אליך דרך אתר פאנס/פאנדס ישראל`
                               )}
                               target="_blank"
                               rel="noopener noreferrer"
@@ -338,8 +338,8 @@ const SupportPage: React.FC = () => {
                               className="support-page__contact-btn support-page__contact-btn--email"
                               href={generateEmailLink(
                                 volunteer.email,
-                                'פנייה מאתר PANS/PANDAS ישראל',
-                                `שלום ${volunteer.firstName},\n\nפניתי אליך דרך אתר PANS/PANDAS ישראל.\n\n`
+                                'פנייה מאתר פאנס/פאנדס ישראל',
+                                `שלום ${volunteer.firstName},\n\nפניתי אליך דרך אתר פאנס/פאנדס ישראל.\n\n`
                               )}
                             >
                               <EmailIcon />

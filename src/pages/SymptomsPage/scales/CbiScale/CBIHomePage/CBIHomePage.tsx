@@ -60,7 +60,7 @@ const CBIHomePage: React.FC = () => {
           </Typography>
 
           <Typography variant="h6" className="hero-subtitle">
-            כלי להערכת העומס הרגשי, הפיזי והחברתי של הורים לילדים עם PANS/PANDAS
+            כלי להערכת העומס הרגשי, הפיזי והחברתי של הורים לילדים עם פאנס/פאנדס
           </Typography>
 
           <Box className="hero-stats">
@@ -95,7 +95,7 @@ const CBIHomePage: React.FC = () => {
           className="cbi-homepage__parent-message"
         >
           <Typography variant="body2">
-            <strong>להורים:</strong> הטיפול בילד עם PANS/PANDAS יכול להיות מאתגר מאוד.
+            <strong>להורים:</strong> הטיפול בילד עם פאנס/פאנדס יכול להיות מאתגר מאוד.
             השאלון הזה נועד לעזור לכם לזהות את תחומי העומס ולפנות לקבלת תמיכה כשצריך.
             אתם לא לבד.
           </Typography>
@@ -256,7 +256,7 @@ const CBIHomePage: React.FC = () => {
             </Typography>
 
             <Typography variant="body1" paragraph>
-              <strong>חשוב לדעת:</strong> עומס גבוה הוא תגובה נורמלית לטיפול בילד עם PANS/PANDAS.
+              <strong>חשוב לדעת:</strong> עומס גבוה הוא תגובה נורמלית לטיפול בילד עם פאנס/פאנדס.
               מטרת השאלון היא לעזור לכם לזהות תחומים שבהם אתם צריכים תמיכה נוספת.
             </Typography>
 

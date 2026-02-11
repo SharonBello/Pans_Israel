@@ -54,7 +54,7 @@ const SymptomsPage: React.FC = () => {
   const scales: ScaleCard[] = [
     {
       id: 'pans31',
-      title: 'סולם PANS 31-פריטים',
+      title: 'מדד פאנס 31-פריטים',
       description: 'כלי הערכה מאומת מחקרית (Cronbach\'s α=0.89) לזיהוי ומדידת חומרת תסמיני PANS',
       route: '/scales/pans31',
       available: true,
@@ -77,10 +77,10 @@ const SymptomsPage: React.FC = () => {
     },
     {
       id: 'pandas',
-      title: t('symptoms.pandasScale.title', 'סולם PANDAS/PANS'),
+      title: t('symptoms.pandasScale.title', 'מדד פאנס/פאנדס'),
       description: t(
         'symptoms.pandasScale.description',
-        'כלי הערכה מקיף למעקב אחר תסמיני PANDAS/PANS לאורך זמן'
+        'כלי הערכה מקיף למעקב אחר תסמיני פאנס/פאנדס לאורך זמן'
       ),
       route: '/scales/pandas',
       available: true,
@@ -244,7 +244,7 @@ const SymptomsPage: React.FC = () => {
                 }}
               >
                 {scale.available
-                  ? t('symptoms.startScale', 'התחל סולם')
+                  ? t('symptoms.startScale', 'התחל מדד')
                   : t('symptoms.pcansScale.comingSoon', 'בקרוב')}
               </Button>
             </CardActions>
@@ -299,7 +299,7 @@ const SymptomsPage: React.FC = () => {
               sx={{ color: '#6C5CE7' }}
             />
             <Tab
-              label="קובאצ'ביץ'"
+              label="קובאביץ'"
               icon={<Science sx={{ fontSize: 18 }} />}
               iconPosition="start"
               sx={{ color: '#E17055' }}

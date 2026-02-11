@@ -143,17 +143,21 @@ const Hero: React.FC = () => {
           <div className="hero__content">
 
             <h1 className="hero__title">
-             פאנס/פאנדס ישראל
+              פאנס/פאנדס ישראל
               <span className="hero__title-highlight">העמותה הישראלית לאנצפליטיס אוטואימוני</span>
             </h1>
-
             <p className="hero__description">
-              אתם לא לבד. הצטרפו לקהילת הורים תומכת לילדים עם תסמונות
-              <strong> PANDAS </strong>
-              ו-
-              <strong>PANS </strong>
-              בישראל. מידע, משאבים ותמיכה הדדית.
+              אנצפליטיס אוטואימוני של גרעיני הבסיס (Autoimmune Basal Ganglia Encephalitis) הוא מצב פוסט־זיהומי הפוגע בגרעיני הבסיס במוח, וגורם לתסמינים מגוונים, לדוגמא - טיקים, חרדות, ושינויים בהתנהגות. מגובר בתסמונת שמתחילה לרוב במהלך הילדות אולם היא יכולה להתפרץ גם מאוחר יותר.
+              פאנדס היא אחת התסמונות הנכללות תחת קבוצה זו, ואינה מוגבלת לזיהום סטרפטוקוקלי בלבד, שכן גם זיהומים אחרים, כולל זיהומים וירליים כגון SARS-CoV-2, עשויים לשמש כטריגר.
             </p>
+
+            {/* <p className="hero__description">
+              אתם לא לבד. הצטרפו לקהילת הורים תומכת לילדים עם תסמונות
+              <strong> פאנדס </strong>
+              ו-
+              <strong>פאנס </strong>
+              בישראל. מידע, משאבים ותמיכה הדדית.
+            </p> */}
 
             <div className="hero__actions">
               <a
@@ -172,13 +176,13 @@ const Hero: React.FC = () => {
                 className="hero__btn hero__btn--secondary"
                 type="button"
               >
-                <span>מה זה PANS/PANDAS?</span>
+                <span>מה זה פאנס/פאנדס?</span>
                 <FiArrowLeft />
               </button>
             </div>
 
 
-            <div className="hero__stats">
+            {/* <div className="hero__stats">
               <div className="hero__stat">
                 <span className="hero__stat-number">1000+</span>
                 <span className="hero__stat-label">משפחות בקהילה</span>
@@ -193,13 +197,13 @@ const Hero: React.FC = () => {
                 <span className="hero__stat-number">100%</span>
                 <span className="hero__stat-label">התנדבותי</span>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
 
       </section>
 
-      {/* What Is PANS/PANDAS Modal */}
+      {/* What Is פאנס/פאנדס Modal */}
       <WhatIsPansPandasModal
         open={modalOpen}
         onClose={handleCloseModal}

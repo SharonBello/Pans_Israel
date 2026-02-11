@@ -10,7 +10,7 @@ import RecommendModal from '@/components/professionals/RecommendProfessionalModa
 import ProfessionalCard from '@/components/professionals/ProfessionalCard/ProfessionalCard';
 
 const TABS: Tab[] = [
-  { key: 'medical', label: 'רופאים', icon: MedicalIcon, description: 'רופאים ומומחים רפואיים עם ידע בתסמונות PANDAS/PANS' },
+  { key: 'medical', label: 'רופאים', icon: MedicalIcon, description: 'רופאים ומומחים רפואיים עם ידע בתסמונות פאנס/פאנדס' },
   { key: 'holistic', label: 'רפואה משלימה', icon: HolisticIcon, description: 'נטורופתים, תזונאים ומטפלים ברפואה משלימה' },
   { key: 'therapy', label: 'טיפולים', icon: TherapyIcon, description: 'מרפאים בעיסוק, פסיכולוגים ומטפלים' },
 ];
@@ -81,7 +81,7 @@ const ProfessionalsHelpPage: React.FC = () => {
       <header className="page-header">
         <div className="page-header__content">
           <h1>אנשי מקצוע וגורמי תמיכה</h1>
-          <p>מאגר אנשי מקצוע המכירים ומטפלים בתסמונות PANDAS/PANS</p>
+          <p>מאגר אנשי מקצוע המכירים ומטפלים בתסמונות פאנס/פאנדס</p>
           <button className="page-header__btn" onClick={() => setIsModalOpen(true)}>
             <PlusIcon />
             <span>המליצו על איש מקצוע</span>

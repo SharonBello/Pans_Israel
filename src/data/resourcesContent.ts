@@ -32,19 +32,19 @@ export const resourceSections: Record<string, InfoSection> = {
       {
         id: 'intro-heading',
         type: 'heading',
-        title: 'משאבים להתמודדות עם PANDAS/PANS'
+        title: 'משאבים להתמודדות עם פאנס/פאנדס'
       },
       {
         id: 'intro-paragraph',
         type: 'paragraph',
-        content: 'צוללים לספריית המשאבים שלנו הכוללת מידע ממומחים רפואיים ומטפלים על PANDAS/PANS. כאן תמצאו מדריכים להורדה, סרטוני הדרכה, קישורים לאתרים מועילים ומאמרי חדשות.'
+        content: 'צוללים לספריית המשאבים שלנו הכוללת מידע ממומחים רפואיים ומטפלים על פאנס/פאנדס. כאן תמצאו מדריכים להורדה, סרטוני הדרכה, קישורים לאתרים מועילים ומאמרי חדשות.'
       },
       {
         id: 'for-parents-callout',
         type: 'callout',
         variant: 'info',
         title: 'משאבים להורים',
-        content: 'מרשימות רופאים מומחים ועד סיפורי חיים אמיתיים, גלו את כל המשאבים שלנו להורים שיעזרו לכם לטפל בילדכם החי עם PANDAS/PANS ולהעלות מודעות בקהילה שלכם.'
+        content: 'מרשימות רופאים מומחים ועד סיפורי חיים אמיתיים, גלו את כל המשאבים שלנו להורים שיעזרו לכם לטפל בילדכם החי עם פאנס/פאנדס ולהעלות מודעות בקהילה שלכם.'
       },
       {
         id: 'for-clinicians-callout',
@@ -58,7 +58,7 @@ export const resourceSections: Record<string, InfoSection> = {
         type: 'callout',
         variant: 'success',
         title: 'משאבים למחנכים',
-        content: 'קבלו גישה למידע ותובנות על חינוך ילדים וצעירים בכיתה עם PANDAS/PANS.'
+        content: 'קבלו גישה למידע ותובנות על חינוך ילדים וצעירים בכיתה עם פאנס/פאנדס.'
       },
       {
         id: 'quick-links-heading',
@@ -71,7 +71,7 @@ export const resourceSections: Record<string, InfoSection> = {
         title: 'מסמכים להורדה',
         items: [
           {
-            title: 'עובדות מהירות על PANDAS/PANS',
+            title: 'עובדות מהירות על פאנס/פאנדס',
             description: 'מדריך קצר ותמציתי להבנת התסמונות'
           },
           {
@@ -121,17 +121,17 @@ export const resourceSections: Record<string, InfoSection> = {
     id: 'parents',
     title: 'משאבים להורים',
     slug: 'parents',
-    description: 'כל מה שהורים צריכים לדעת על החיים עם PANDAS/PANS',
+    description: 'כל מה שהורים צריכים לדעת על החיים עם פאנס/פאנדס',
     content: [
       {
         id: 'living-heading',
         type: 'heading',
-        title: 'החיים עם PANDAS/PANS'
+        title: 'החיים עם פאנס/פאנדס'
       },
       {
         id: 'living-paragraph',
         type: 'paragraph',
-        content: 'ללמוד שלילדכם או לאדם אהוב אובחנה PANDAS/PANS זה לא קל. הדבר החשוב ביותר הוא להיות תומכים ומודעים לכאב ולבלבול שהם עשויים לחוות. עם אבחון וטיפול מוקדם, למטופלים יש סיכוי גבוה יותר להחלים ולהבריא מהתסמינים.'
+        content: 'ללמוד שלילדכם או לאדם אהוב אובחנה פאנס/פאנדס זה לא קל. הדבר החשוב ביותר הוא להיות תומכים ומודעים לכאב ולבלבול שהם עשויים לחוות. עם אבחון וטיפול מוקדם, למטופלים יש סיכוי גבוה יותר להחלים ולהבריא מהתסמינים.'
       },
       {
         id: 'advocate-callout',
@@ -150,24 +150,24 @@ export const resourceSections: Record<string, InfoSection> = {
         type: 'accordion',
         items: [
           {
-            title: 'מהן PANDAS/PANS?',
+            title: 'מהן פאנס/פאנדס?',
             description: 'PANDAS (הפרעות נוירופסיכיאטריות אוטואימוניות ילדיות הקשורות לסטרפטוקוק) ו-PANS (תסמונת נוירופסיכיאטרית ילדית בהופעה חריפה) הן תסמונות נוירופסיכיאטריות הנגרמות על ידי תגובה מוטעית של מערכת החיסון.'
           },
           {
-            title: 'מה גורם ל-PANDAS/PANS?',
-            description: 'מטופלים עשויים לחוות תסמינים לאחר "גירוי חזק" למערכת החיסון, כמו זיהום סטרפ, שפעת, דלקת ריאות או אפילו הצטננות רגילה. במטופלים עם PANDAS/PANS, מערכת החיסון מגיבה בטעות וגורמת לתגובה אוטואימונית שגורמת לדלקת בחלק המוח האחראי על שליטה מוטורית, תפקודים ניהוליים, התנהגויות ורגשות.'
+            title: 'מה גורם ל-פאנס/פאנדס?',
+            description: 'מטופלים עשויים לחוות תסמינים לאחר "גירוי חזק" למערכת החיסון, כמו זיהום סטרפ, שפעת, דלקת ריאות או אפילו הצטננות רגילה. במטופלים עם פאנס/פאנדס, מערכת החיסון מגיבה בטעות וגורמת לתגובה אוטואימונית שגורמת לדלקת בחלק המוח האחראי על שליטה מוטורית, תפקודים ניהוליים, התנהגויות ורגשות.'
           },
           {
-            title: 'מהם תסמינים אופייניים של PANDAS/PANS?',
-            description: 'PANDAS/PANS יכולות לייצר תסמינים פתאומיים, לא אחידים וחריגים בילדים, בדרך כלל בגילאי 4 עד 10. אך זה יכול להופיע גם אצל מתבגרים, ומחקר חדש מצביע על כך שזה יכול להתרחש גם בבגרות צעירה. תסמינים עשויים לכלול חרדת נטישה, אובססיות וכפיות, חוסר יכולת לסבול פעילויות מסוימות, טיקים, תנועות לא רצוניות או היפראקטיביות.'
+            title: 'מהם תסמינים אופייניים של פאנס/פאנדס?',
+            description: 'פאנס/פאנדס יכולות לייצר תסמינים פתאומיים, לא אחידים וחריגים בילדים, בדרך כלל בגילאי 4 עד 10. אך זה יכול להופיע גם אצל מתבגרים, ומחקר חדש מצביע על כך שזה יכול להתרחש גם בבגרות צעירה. תסמינים עשויים לכלול חרדת נטישה, אובססיות וכפיות, חוסר יכולת לסבול פעילויות מסוימות, טיקים, תנועות לא רצוניות או היפראקטיביות.'
           },
           {
             title: 'אילו סוגי טיפולים זמינים?',
-            description: 'הטיפולים הבאים יכולים לעזור להקל על תסמיני PANDAS/PANS: אנטיביוטיקה (פניצילין, אוגמנטין, צפלוספורינים, אזיתרומיצין), IVIG (אימונוגלובולין תוך-ורידי), פלסמפרזיס, סטרואידים, כריתת שקדים, וטיפול קוגניטיבי-התנהגותי (CBT/ERP).'
+            description: 'הטיפולים הבאים יכולים לעזור להקל על תסמיני פאנס/פאנדס: אנטיביוטיקה (פניצילין, אוגמנטין, צפלוספורינים, אזיתרומיצין), IVIG (אימונוגלובולין תוך-ורידי), פלסמפרזיס, סטרואידים, כריתת שקדים, וטיפול קוגניטיבי-התנהגותי (CBT/ERP).'
           },
           {
             title: 'למה כל כך קשה למצוא אבחנה וטיפול לילדי?',
-            description: 'יש מחקר מוגבל על PANDAS/PANS, והמצב מאובחן לעיתים קרובות בטעות. בנוסף, PANDAS/PANS עשויות להתרחש עם הפרעות אוטואימוניות אחרות, חסר חיסוני או הפרעות נוירולוגיות או פסיכיאטריות אחרות. זה יכול להפוך את הטיפול והניהול למורכבים יותר.'
+            description: 'יש מחקר מוגבל על פאנס/פאנדס, והמצב מאובחן לעיתים קרובות בטעות. בנוסף, פאנס/פאנדס עשויות להתרחש עם הפרעות אוטואימוניות אחרות, חסר חיסוני או הפרעות נוירולוגיות או פסיכיאטריות אחרות. זה יכול להפוך את הטיפול והניהול למורכבים יותר.'
           }
         ]
       },
@@ -181,15 +181,15 @@ export const resourceSections: Record<string, InfoSection> = {
         type: 'list',
         items: [
           {
-            title: 'עובדות מהירות על PANDAS/PANS',
+            title: 'עובדות מהירות על פאנס/פאנדס',
             description: 'PDF - מדריך תמציתי'
           },
           {
-            title: 'חדש ל-PANDAS/PANS?',
+            title: 'חדש ל-פאנס/פאנדס?',
             description: 'מדריך התחלתי להורים חדשים'
           },
           {
-            title: 'חוברת PANDAS',
+            title: 'חוברת פאנדס',
             description: 'חוברת מידע להפצה'
           }
         ]
@@ -209,7 +209,7 @@ export const resourceSections: Record<string, InfoSection> = {
         type: 'list',
         items: [
           {
-            title: 'מכתב לבית הספר בזמן התלקחות PANDAS',
+            title: 'מכתב לבית הספר בזמן התלקחות פאנס/פאנדס',
             description: 'לשימוש כשהילד נמצא באפיזודה פעילה'
           },
           {
@@ -285,7 +285,7 @@ export const resourceSections: Record<string, InfoSection> = {
       {
         id: 'intro-paragraph',
         type: 'paragraph',
-        content: 'אין גישה אחת שמתאימה לכולם לאבחון וטיפול במטופל עם PANDAS/PANS. אנו כאן לעזור לכם עם תובנות נוספות ומחקר כדי שתוכלו לספק למטופלים ולמשפחותיהם את המידע והתמיכה העדכניים ביותר בזמן שהם מנווטים בהפרעה זו.'
+        content: 'אין גישה אחת שמתאימה לכולם לאבחון וטיפול במטופל עם פאנס/פאנדס. אנו כאן לעזור לכם עם תובנות נוספות ומחקר כדי שתוכלו לספק למטופלים ולמשפחותיהם את המידע והתמיכה העדכניים ביותר בזמן שהם מנווטים בהפרעה זו.'
       },
       {
         id: 'faq-heading',
@@ -297,16 +297,16 @@ export const resourceSections: Record<string, InfoSection> = {
         type: 'accordion',
         items: [
           {
-            title: 'אילו בדיקות זמינות ל-PANDAS/PANS?',
-            description: 'כרגע, אין בדיקה מוחלטת 100% ל-PANDAS/PANS, ולכן האבחנה נעשית על בסיס הערכה קלינית של התסמינים הנוירולוגיים ובריאות הנפש, יחד עם היסטוריה רפואית וממצאי מעבדה. אם אתם חושדים שלמטופל שלכם יש PANDAS/PANS, בדיקות מעבדה כולל בדיקות דם בסיסיות, בדיקות ויראליות/חיידקיות כולל תרביות גרון לסטרפ ופאנל קנינגהם יכולות לעזור באבחנה נכונה.'
+            title: 'אילו בדיקות זמינות ל-פאנס/פאנדס?',
+            description: 'כרגע, אין בדיקה מוחלטת 100% ל-פאנס/פאנדס, ולכן האבחנה נעשית על בסיס הערכה קלינית של התסמינים הנוירולוגיים ובריאות הנפש, יחד עם היסטוריה רפואית וממצאי מעבדה. אם אתם חושדים שלמטופל שלכם יש פאנס/פאנדס, בדיקות מעבדה כולל בדיקות דם בסיסיות, בדיקות ויראליות/חיידקיות כולל תרביות גרון לסטרפ ופאנל קנינגהם יכולות לעזור באבחנה נכונה.'
           },
           {
-            title: 'אילו טיפולים זמינים לילדים עם PANDAS/PANS?',
+            title: 'אילו טיפולים זמינים לילדים עם פאנס/פאנדס?',
             description: 'אנטיביוטיקה (פניצילין, אוגמנטין, צפלוספורינים, אזיתרומיצין), אנטיביוטיקה מניעתית, IVIG, פלסמפרזיס, סטרואידים, כריתת שקדים, וטיפול קוגניטיבי-התנהגותי או חשיפה ומניעת תגובה (ERP).'
           },
           {
-            title: 'מהם גורמי הסיכון ל-PANDAS/PANS?',
-            description: 'למרות שסטרפ הוא הטריגר הנפוץ ביותר ל-PANDAS/PANS, חיידקים, וירוסים וגורמים סביבתיים אחרים יכולים ליצור את התגובה החיסונית המוטעית, כולל Mycoplasma pneumoniae, זיהומי סטאפ, מחלת ליים, שפעת, קוקסקי, אפשטיין-בר ונגיף הרפס סימפלקס. טריגרים אפשריים נוספים כוללים חשיפה למחלה, אלרגיות, מתח, כלור, תזונה וצמיחת יתר של שמרים.'
+            title: 'מהם גורמי הסיכון ל-פאנס/פאנדס?',
+            description: 'למרות שסטרפ הוא הטריגר הנפוץ ביותר ל-פאנס/פאנדס, חיידקים, וירוסים וגורמים סביבתיים אחרים יכולים ליצור את התגובה החיסונית המוטעית, כולל Mycoplasma pneumoniae, זיהומי סטאפ, מחלת ליים, שפעת, קוקסקי, אפשטיין-בר ונגיף הרפס סימפלקס. טריגרים אפשריים נוספים כוללים חשיפה למחלה, אלרגיות, מתח, כלור, תזונה וצמיחת יתר של שמרים.'
           },
           {
             title: 'מה צריך לדעת על אינטראקציה עם הורים?',
@@ -351,7 +351,7 @@ export const resourceSections: Record<string, InfoSection> = {
         type: 'list',
         items: [
           {
-            title: 'עובדות מהירות על PANDAS/PANS',
+            title: 'עובדות מהירות על פאנס/פאנדס',
             description: 'סיכום תמציתי לאנשי מקצוע'
           },
           {
@@ -359,7 +359,7 @@ export const resourceSections: Record<string, InfoSection> = {
             description: 'מדריך ספציפי לאחיות בית ספר'
           },
           {
-            title: 'חוברת PANDAS',
+            title: 'חוברת פאנדס',
             description: 'חוברת מידע מקיפה'
           }
         ]
@@ -399,29 +399,29 @@ export const resourceSections: Record<string, InfoSection> = {
       {
         id: 'intro-heading',
         type: 'heading',
-        title: 'PANS/PANDAS בסביבה בית ספרית'
+        title: 'פאנס/פאנדס בסביבה בית ספרית'
       },
       {
         id: 'intro-paragraph',
         type: 'paragraph',
-        content: 'קבוצת העבודה לגישה חינוכית של רשת PANDAS פיתחה ערכת כלים להורדה לצוות בית הספר, ושיתפה פעולה עם סטודנטים לתואר שני בריפוי בעיסוק מאוניברסיטת באפלו לפיתוח הדרכה פיילוט בת 1.5 שעות לצוות בית הספר.'
+        content: 'קבוצת העבודה לגישה חינוכית של רשת פאנדס פיתחה ערכת כלים להורדה לצוות בית הספר, ושיתפה פעולה עם סטודנטים לתואר שני בריפוי בעיסוק מאוניברסיטת באפלו לפיתוח הדרכה פיילוט בת 1.5 שעות לצוות בית הספר.'
       },
       {
         id: 'toolkit-callout',
         type: 'callout',
         variant: 'success',
         title: 'ערכת כלים חינוכית',
-        content: 'הורידו את ערכת הכלים החינוכית המקיפה שלנו הכוללת מידע, טיפים והמלצות לעבודה עם תלמידים עם PANDAS/PANS.'
+        content: 'הורידו את ערכת הכלים החינוכית המקיפה שלנו הכוללת מידע, טיפים והמלצות לעבודה עם תלמידים עם פאנס/פאנדס.'
       },
       {
         id: 'impact-heading',
         type: 'heading',
-        title: 'כיצד PANDAS/PANS יכולות להשפיע על השתתפות בבית הספר?'
+        title: 'כיצד פאנס/פאנדס יכולות להשפיע על השתתפות בבית הספר?'
       },
       {
         id: 'impact-paragraph',
         type: 'paragraph',
-        content: 'תסמיני PANDAS/PANS עשויים לגרום לחסרים בביצוע, במיוחד בתחומים הבאים:'
+        content: 'תסמיני פאנס/פאנדס עשויים לגרום לחסרים בביצוע, במיוחד בתחומים הבאים:'
       },
       {
         id: 'impact-list',
@@ -465,7 +465,7 @@ export const resourceSections: Record<string, InfoSection> = {
       {
         id: 'abilities-paragraph',
         type: 'paragraph',
-        content: 'בהתאם לחומרה, שעשויה להשתנות לאורך זמן, PANDAS/PANS עשויות להשפיע על יכולת התלמיד:'
+        content: 'בהתאם לחומרה, שעשויה להשתנות לאורך זמן, פאנס/פאנדס עשויות להשפיע על יכולת התלמיד:'
       },
       {
         id: 'abilities-list',
@@ -488,7 +488,7 @@ export const resourceSections: Record<string, InfoSection> = {
       {
         id: 'ihcp-list',
         type: 'list',
-        title: 'אחיות בית ספר העובדות עם תלמידי PANDAS/PANS יכולות ליישם את הצעדים הבאים:',
+        title: 'אחיות בית ספר העובדות עם תלמידי פאנס/פאנדס יכולות ליישם את הצעדים הבאים:',
         items: [
           {
             title: 'התחילו בשיתוף פעולה',
@@ -539,7 +539,7 @@ export const resourceSections: Record<string, InfoSection> = {
       //   items: [
       //     {
       //       title: 'PANDAS and PANS in School Settings',
-      //       description: 'מדריך מקיף למחנכים על עבודה עם תלמידים עם PANDAS/PANS'
+      //       description: 'מדריך מקיף למחנכים על עבודה עם תלמידים עם פאנס/פאנדס'
       //     },
       //     {
       //       title: 'A Parents\' Guide to PANDAS, PANS, and Related Neuroimmune Disorders',
@@ -547,7 +547,7 @@ export const resourceSections: Record<string, InfoSection> = {
       //     },
       //     {
       //       title: 'PANS, CANS, and Automobiles',
-      //       description: 'מדריך עזר מקיף לסיוע לתלמידים עם PANDAS ו-PANS'
+      //       description: 'מדריך עזר מקיף לסיוע לתלמידים עם פאנדס ו-PANS'
       //     }
       //   ]
       // }
@@ -591,7 +591,7 @@ export const resourceSections: Record<string, InfoSection> = {
   //     {
   //       id: 'intro-paragraph',
   //       type: 'paragraph',
-  //       content: 'גלו שפע של משאבים מאנשי מקצוע רפואיים על PANDAS/PANS. הסרטונים שלנו כוללים הרצאות, וובינרים וסיפורים אישיים.'
+  //       content: 'גלו שפע של משאבים מאנשי מקצוע רפואיים על פאנס/פאנדס. הסרטונים שלנו כוללים הרצאות, וובינרים וסיפורים אישיים.'
   //     },
   //     {
   //       id: 'featured-heading',
@@ -603,7 +603,7 @@ export const resourceSections: Record<string, InfoSection> = {
   //       type: 'list',
   //       items: [
   //         {
-  //           title: 'הבנת ספקטרום דלקת המוח בילדות כולל PANDAS ו-PANS',
+  //           title: 'הבנת ספקטרום דלקת המוח בילדות כולל פאנדס ו-פאנס',
   //           description: 'כנס Northwell Health 2022 - הרצאות ממומחים מובילים'
   //         },
   //         {
@@ -631,7 +631,7 @@ export const resourceSections: Record<string, InfoSection> = {
   //     {
   //       id: 'story-paragraph',
   //       type: 'paragraph',
-  //       content: 'רבקה הייתה ילדה מוחצנת שאישיותה השתנתה באופן דרמטי לאחר זיהום סטרפ. קבלת אבחנת PANDAS נתנה למשפחתה תקווה. שמעו את סיפורה על אבחון, טיפול והחלמה מ-PANDAS.'
+  //       content: 'רבקה הייתה ילדה מוחצנת שאישיותה השתנתה באופן דרמטי לאחר זיהום סטרפ. קבלת אבחנת פאנדס נתנה למשפחתה תקווה. שמעו את סיפורה על אבחון, טיפול והחלמה מ-PANDAS.'
   //     }
   //   ],
   //   relatedPages: [
@@ -663,7 +663,7 @@ export const resourceSections: Record<string, InfoSection> = {
   //   id: 'news',
   //   title: 'חדשות ומאמרים',
   //   slug: 'news',
-  //   description: 'עדכונים אחרונים על טיפול, אבחון ומודעות ל-PANDAS/PANS',
+  //   description: 'עדכונים אחרונים על טיפול, אבחון ומודעות ל-פאנס/פאנדס',
   //   content: [
   //     {
   //       id: 'intro-heading',
@@ -673,7 +673,7 @@ export const resourceSections: Record<string, InfoSection> = {
   //     {
   //       id: 'intro-paragraph',
   //       type: 'paragraph',
-  //       content: 'גלו את החדשות והמידע האחרונים הנוגעים לטיפול, אבחון ומודעות ל-PANDAS/PANS.'
+  //       content: 'גלו את החדשות והמידע האחרונים הנוגעים לטיפול, אבחון ומודעות ל-פאנס/פאנדס.'
   //     },
   //     {
   //       id: 'articles-heading',
@@ -701,7 +701,7 @@ export const resourceSections: Record<string, InfoSection> = {
   //           description: 'Psychology Today - אוגוסט 2021'
   //         },
   //         {
-  //           title: '25 שנה ל-PANS/PANDAS',
+  //           title: '25 שנה ל-פאנס/פאנדס',
   //           description: 'ציון דרך היסטורי במחקר והכרה בתסמונות'
   //         }
   //       ]
@@ -711,7 +711,7 @@ export const resourceSections: Record<string, InfoSection> = {
   //       type: 'callout',
   //       variant: 'info',
   //       title: 'ארכיון מאמרים',
-  //       content: 'גשו לארכיון המלא של מאמרי חדשות על PANDAS/PANS מהשנים האחרונות.'
+  //       content: 'גשו לארכיון המלא של מאמרי חדשות על פאנס/פאנדס מהשנים האחרונות.'
   //     }
   //   ],
   //   relatedPages: [
@@ -753,7 +753,7 @@ export const resourceSections: Record<string, InfoSection> = {
       {
         id: 'intro-paragraph',
         type: 'paragraph',
-        content: 'למדו עוד על PANDAS/PANS והפרעות קשורות וארגונים מרשימת האתרים המועילים להלן.'
+        content: 'למדו עוד על פאנס/פאנדס והפרעות קשורות וארגונים מרשימת האתרים המועילים להלן.'
       },
       {
         id: 'us-heading',
@@ -766,7 +766,7 @@ export const resourceSections: Record<string, InfoSection> = {
         items: [
           {
             title: 'PANDAS Physicians Network',
-            description: 'PPN מוקדש לעזור לאנשי מקצוע רפואיים להבין טוב יותר את PANDAS/PANS דרך מידע בזמן אמת ונטוורקינג.',
+            description: 'PPN מוקדש לעזור לאנשי מקצוע רפואיים להבין טוב יותר את פאנס/פאנדס דרך מידע בזמן אמת ונטוורקינג.',
             url: 'https://www.pandasppn.org/'
           },
           {
@@ -801,12 +801,12 @@ export const resourceSections: Record<string, InfoSection> = {
           },
           {
             title: 'Northwest PANDAS/PANS Network',
-            description: 'עמותה המשרתת את אלה במערב צפון אמריקה עם PANDAS/PANS/AE ומשפחותיהם.',
+            description: 'עמותה המשרתת את אלה במערב צפון אמריקה עם פאנס/פאנדס/AE ומשפחותיהם.',
             url: 'https://www.nwppn.org/'
           },
           {
             title: 'Aspire',
-            description: 'המשימה של Aspire היא לשפר את חייהם של ילדים ומבוגרים המושפעים מ-PANS/PANDAS.',
+            description: 'המשימה של Aspire היא לשפר את חייהם של ילדים ומבוגרים המושפעים מ-פאנס/פאנדס.',
             url: 'https://aspire.care/'
           }
         ]
@@ -837,7 +837,7 @@ export const resourceSections: Record<string, InfoSection> = {
           },
           {
             title: 'PANDAS Poland (פולין)',
-            description: 'אתר ובלוג המנוהלים על ידי אם מסורה לשיתוף מידע על PANDAS, PANS ותסמיני ASD.',
+            description: 'אתר ובלוג המנוהלים על ידי אם מסורה לשיתוף מידע על פאנדס, פאנס ותסמיני ASD.',
             url: 'https://www.facebook.com/pandaspansPL/'
           },
           {
@@ -917,7 +917,7 @@ export const resourceNavItems = [
 export const downloadableResources: ResourceLink[] = [
   {
     id: 'quick-facts',
-    title: 'עובדות מהירות על PANDAS/PANS',
+    title: 'עובדות מהירות על פאנס/פאנדס',
     titleEn: 'PANDAS, PANS Quick Facts',
     description: 'מדריך תמציתי להבנת התסמונות',
     url: '/pdfs/quickFactsHe.pdf',
@@ -933,7 +933,7 @@ export const downloadableResources: ResourceLink[] = [
   },
   {
     id: 'brochure',
-    title: 'חוברת PANDAS',
+    title: 'חוברת פאנדס',
     titleEn: 'PANDAS Brochure',
     description: 'חוברת מידע להפצה',
     url: 'https://pandasnetwork.org/wp-content/uploads/2023/04/Brochure.pdf',
@@ -975,13 +975,13 @@ export const downloadableResources: ResourceLink[] = [
     id: 'handout-teachers',
     title: 'דף מידע למורים',
     titleEn: 'Handout for Teachers',
-    description: 'מידע תמציתי למורים על PANDAS/PANS',
+    description: 'מידע תמציתי למורים על פאנס/פאנדס',
     url: 'https://pandasnetwork.org/wp-content/uploads/2021/08/Handout-for-Teachers1.pdf',
     type: 'pdf'
   },
   {
     id: 'friend-wants-to-know',
-    title: 'מה החבר שלך עם PANDAS/PANS רוצה שתדע',
+    title: 'מה החבר שלך עם פאנס/פאנדס רוצה שתדע',
     titleEn: 'What Your Friend with PANDAS/PANS Wants You To Know',
     description: 'מדריך לחברים ובני משפחה',
     url: 'https://pandasnetwork.org/wp-content/uploads/2021/08/What-your-friend-with-PANDAS-or-PANS-wants-you-to-know.pdf',
@@ -995,7 +995,7 @@ export const helpfulWebsites = {
     {
       id: 'ppn',
       name: 'PANDAS Physicians Network',
-      nameHe: 'רשת רופאי PANDAS',
+      nameHe: 'רשת רופאי פאנדס',
       description: 'רשת רופאים בינלאומית מקצועית עם הנחיות אבחון וטיפול',
       url: 'https://www.pandasppn.org/'
     },
@@ -1037,14 +1037,14 @@ export const helpfulWebsites = {
     {
       id: 'nepans',
       name: 'New England PANS/PANDAS Association',
-      nameHe: 'עמותת ניו אינגלנד PANS/PANDAS',
+      nameHe: 'עמותת ניו אינגלנד פאנס/פאנדס',
       description: 'קבוצת הורים ומתנדבים להעלאת מודעות',
       url: 'https://nepans.org/'
     },
     {
       id: 'nwppn',
-      name: 'Northwest PANDAS/PANS Network',
-      nameHe: 'רשת Northwest PANDAS/PANS',
+      name: 'Northwest פאנס/פאנדס Network',
+      nameHe: 'רשת Northwest פאנס/פאנדס',
       description: 'עמותה המשרתת משפחות במערב צפון אמריקה',
       url: 'https://www.nwppn.org/'
     },
@@ -1052,7 +1052,7 @@ export const helpfulWebsites = {
       id: 'aspire',
       name: 'Aspire',
       nameHe: 'Aspire',
-      description: 'משפרת חיי ילדים ומבוגרים עם PANS/PANDAS',
+      description: 'משפרת חיי ילדים ומבוגרים עם פאנס/פאנדס',
       url: 'https://aspire.care/'
     }
   ],
@@ -1060,7 +1060,7 @@ export const helpfulWebsites = {
     {
       id: 'pans-pandas-uk',
       name: 'PANS PANDAS UK',
-      nameHe: 'PANS PANDAS UK (בריטניה)',
+      nameHe: 'פאנס פאנדס (בריטניה)',
       description: 'עמותה בריטית שהוקמה על ידי הורים מסורים',
       url: 'https://www.panspandasuk.org/'
     },
@@ -1082,13 +1082,13 @@ export const helpfulWebsites = {
       id: 'pandas-poland',
       name: 'PANDAS Poland',
       nameHe: 'PANDAS Poland (פולין)',
-      description: 'אתר ובלוג בפולנית על PANDAS/PANS',
+      description: 'אתר ובלוג בפולנית על פאנס/פאנדס',
       url: 'https://www.facebook.com/pandaspansPL/'
     },
     {
       id: 'pandas-italia',
       name: 'PANDAS Italia',
-      nameHe: 'PANDAS Italia (איטליה)',
+      nameHe: 'פאנדס איטליה',
       description: 'ארגון התנדבותי איטלקי',
       url: 'https://pandasitalia.it/'
     }

@@ -31,7 +31,7 @@ const ResourcesPage: React.FC = () => {
         <div className="resources-page__hero-bg" />
         <div className="resources-page__hero-content">
           <Typography variant="h1" className="resources-page__hero-title">
-            משאבי <span>PANDAS/PANS</span>
+            משאבי <span>פאנס/פאנדס</span>
           </Typography>
         </div>
       </section> */}
@@ -110,7 +110,7 @@ const ResourcesPage: React.FC = () => {
                 מצא רופא מומחה
               </Typography>
               <Typography className="resources-page__text">
-                חפשו במאגר שלנו כדי למצוא מטפל עם ניסיון בסיוע למטופלים עם תסמינים הקשורים ל-PANDAS/PANS.
+                חפשו במאגר שלנו כדי למצוא מטפל עם ניסיון בסיוע למטופלים עם תסמינים הקשורים ל-פאנס/פאנדס.
               </Typography>
             </div>
               <Button
@@ -131,7 +131,7 @@ const ResourcesPage: React.FC = () => {
             חדשות אחרונות
           </Typography>
           <Typography className="resources-page__section-subtitle">
-            גלו את החדשות והמידע האחרונים הנוגעים לטיפול, אבחון ומודעות ל-PANDAS/PANS
+            גלו את החדשות והמידע האחרונים הנוגעים לטיפול, אבחון ומודעות ל-פאנס/פאנדס
           </Typography>
 
           <div className="resources-page__cards-row">
@@ -180,7 +180,7 @@ const ResourcesPage: React.FC = () => {
                 משאבים להורים
               </Typography>
               <Typography className="resources-page__text">
-                מרשימות מטפלים ועד סיפורי חיים אמיתיים, גלו את כל המשאבים שלנו להורים שיעזרו לכם לטפל בילדכם החי עם PANDAS/PANS ולהעלות מודעות בקהילה שלכם.
+                מרשימות מטפלים ועד סיפורי חיים אמיתיים, גלו את כל המשאבים שלנו להורים שיעזרו לכם לטפל בילדכם החי עם פאנס/פאנדס ולהעלות מודעות בקהילה שלכם.
               </Typography>
               <Button
                 className="resources-page__link-btn"
@@ -230,7 +230,7 @@ const ResourcesPage: React.FC = () => {
                 משאבים למחנכים
               </Typography>
               <Typography className="resources-page__text">
-                קבלו גישה למידע ותובנות על חינוך ילדים וצעירים בכיתה עם PANDAS/PANS.
+                קבלו גישה למידע ותובנות על חינוך ילדים וצעירים בכיתה עם פאנס/פאנדס.
               </Typography>
               <Button
                 className="resources-page__link-btn"
@@ -250,7 +250,7 @@ const ResourcesPage: React.FC = () => {
             תמכו במשימה שלנו
           </Typography>
           <p className="resources-page__section-subtitle resources-page__section-subtitle--center">
-            עזרו לנו להמשיך לתמוך בילדים ומבוגרים החיים עם PANDAS/PANS
+            עזרו לנו להמשיך לתמוך בילדים ומבוגרים החיים עם פאנס/פאנדס
           </p>
 
           <div className="resources-page__cta-row">
@@ -273,7 +273,7 @@ const ResourcesPage: React.FC = () => {
                 <CommunityIcon />
               </div>
               <h4 className="resources-page__cta-title">הצטרפו אלינו</h4>
-              <p className="resources-page__cta-text">עזרו לנו להפיץ מודעות על PANDAS.</p>
+              <p className="resources-page__cta-text">עזרו לנו להפיץ מודעות על פאנס/פאנדס.</p>
               <Button
                 className="resources-page__cta-btn"
                 onClick={() => navigate('/community')}
@@ -287,7 +287,7 @@ const ResourcesPage: React.FC = () => {
                 <ContactIcon />
               </div>
               <h4 className="resources-page__cta-title">צרו קשר</h4>
-              <p className="resources-page__cta-text">פנו לצוות שלנו לקבלת מידע נוסף על PANDAS.</p>
+              <p className="resources-page__cta-text">פנו לצוות שלנו לקבלת מידע נוסף על פאנס/פאנדס.</p>
               <Button
                 className="resources-page__cta-btn"
                 onClick={() => navigate('/contact')}

@@ -270,7 +270,7 @@ const PANS31ScalePage: React.FC = () => {
   return (
     <Container maxWidth="md" className="pans31-scale-page" dir="rtl">
       <Typography variant="h4" align="center" gutterBottom>
-        סולם PANS 31-פריטים
+        מדד פאנס 31-פריטים
       </Typography>
 
       {/* Progress */}

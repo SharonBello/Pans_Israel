@@ -56,11 +56,11 @@ const PANS31HomePage: React.FC = () => {
           </Box>
 
           <Typography variant="h3" component="h1" className="hero-title">
-            סולם PANS 31-פריטים
+            מדד פאנס 31-פריטים
           </Typography>
 
           <Typography variant="h6" className="hero-subtitle">
-            כלי הערכה מאומת לזיהוי ומדידת חומרת תסמיני PANS
+            כלי הערכה מאומת לזיהוי ומדידת חומרת תסמיני פאנס
           </Typography>
 
           <Box className="hero-stats">
@@ -95,8 +95,8 @@ const PANS31HomePage: React.FC = () => {
           className="pans31-homepage__validation"
         >
           <Typography variant="body2">
-            <strong>מאומת מחקרית:</strong> סולם זה עבר תיקוף פסיכומטרי באוניברסיטת סטנפורד
-            ואוניברסיטת מינסוטה עם 135 ילדים עם PANS. פורסם ב-Journal of Child and
+            <strong>מאומת מחקרית:</strong> מדד זה עבר תיקוף פסיכומטרי באוניברסיטת סטנפורד
+            ואוניברסיטת מינסוטה עם 135 ילדים עם פאנס. פורסם ב-Journal of Child and
             Adolescent Psychopharmacology (2024).
           </Typography>
         </Alert>
@@ -104,13 +104,13 @@ const PANS31HomePage: React.FC = () => {
         {/* Info Section */}
         <Paper elevation={2} className="pans31-homepage__info">
           <Typography variant="h5" gutterBottom>
-            על סולם PANS 31-פריטים
+            על מדד פאנס 31-פריטים
           </Typography>
 
           <Typography variant="body1" paragraph>
-            סולם ה-PANS 31-פריטים פותח על ידי ד"ר טניה מרפי (אוניברסיטת דרום פלורידה)
+            מדד ה-פאנס 31-פריטים פותח על ידי ד"ר טניה מרפי (אוניברסיטת דרום פלורידה)
             וד"ר גייל ברנשטיין (אוניברסיטת מינסוטה) כדי לזהות ולמדוד את חומרת
-            תסמיני PANS.
+            תסמיני פאנס.
           </Typography>
 
           <Divider sx={{ my: 3 }} />
@@ -126,7 +126,7 @@ const PANS31HomePage: React.FC = () => {
               </ListItemIcon>
               <ListItemText
                 primary="עקביות פנימית גבוהה (Cronbach's α = 0.89)"
-                secondary="מעיד על מהימנות גבוהה של הסולם"
+                secondary="מעיד על מהימנות גבוהה של המדד"
               />
             </ListItem>
             <ListItem>
@@ -240,17 +240,17 @@ const PANS31HomePage: React.FC = () => {
                 הבהרה חשובה
               </Typography>
               <Typography variant="body2" sx={{ mt: 1 }}>
-                סולם זה הוא כלי הערכה ואינו מהווה תחליף לאבחון רפואי מקצועי.
+                מדד זה הוא כלי הערכה ואינו מהווה תחליף לאבחון רפואי מקצועי.
                 יש להתייעץ עם רופא מומחה לקבלת אבחנה וטיפול.
               </Typography>
             </Alert>
 
             <Typography variant="body1" paragraph>
-              סולם PANS 31-פריטים מעריך את חומרת התסמינים <strong>בשבוע האחרון</strong>.
+              מדד פאנס 31-פריטים מעריך את חומרת התסמינים <strong>בשבוע האחרון</strong>.
             </Typography>
 
             <Typography variant="body1" paragraph>
-              <strong>מי ממלא:</strong> הסולם מיועד למילוי על ידי הורה או מטפל ראשי
+              <strong>מי ממלא:</strong> המדד מיועד למילוי על ידי הורה או מטפל ראשי
               המכיר היטב את הילד.
             </Typography>
 

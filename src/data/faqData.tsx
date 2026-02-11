@@ -10,7 +10,7 @@ export type FAQItem = {
 const RecommendedTestsAnswer: React.FC = () => (
     <div className="faq-tests">
         <p className="faq-tests__intro">
-            האבחנה של PANDAS ו-PANS היא אבחנה קלינית המבוססת על איסוף סימנים, תסמינים,
+            האבחנה של פאנדס ו-פאנס היא אבחנה קלינית המבוססת על איסוף סימנים, תסמינים,
             היסטוריה רפואית וממצאי מעבדה שלא ניתן להסבירם על ידי הפרעות נוירולוגיות או רפואיות אחרות.
             נכון להיום, <strong>אין בדיקה אחת שמאשרת את האבחנה ב-100%</strong>.
         </p>
@@ -63,7 +63,7 @@ const RecommendedTestsAnswer: React.FC = () => (
         </div>
 
         <p className="faq-tests__note">
-            אם אתם חושדים שלילדכם יש PANDAS או PANS, בנוסף לבדיקות המעבדה המפורטות למעלה,
+            אם אתם חושדים שלילדכם יש פאנדס או פאנס, בנוסף לבדיקות המעבדה המפורטות למעלה,
             מילוי שאלוני התסמינים יכול לסייע לרופא המטפל באבחון נכון.
         </p>
 
@@ -80,7 +80,7 @@ const RecommendedTestsAnswer: React.FC = () => (
 export const FAQ_ITEMS: FAQItem[] = [
     {
         id: 'what-is-pans-pandas',
-        question: 'מה זה PANS/PANDAS בקצרה?',
+        question: 'מה זה פאנס/פאנדס בקצרה?',
         answer:
             'אלו תסמונות שבהן מופיעים בפתאומיות תסמינים כמו OCD/חרדה/טיקים ושינויים התנהגותיים, לעיתים לאחר זיהום. חשוב לבצע הערכה רפואית ולשקול אבחנה מבדלת.',
     },

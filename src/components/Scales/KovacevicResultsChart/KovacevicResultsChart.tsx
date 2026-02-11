@@ -153,7 +153,7 @@ const KovacevicResultsChart: React.FC = () => {
         <Paper elevation={3} className="kovacevic-results-chart">
             <Box sx={{ px: 3, pt: 3, pb: 2 }}>
                 <Typography variant="h5" gutterBottom sx={{ textAlign: 'center', fontWeight: 'bold' }}>
-                    סטטיסטיקות קהילתיות - שאלון קובאצ'ביץ'
+                    סטטיסטיקות קהילתיות - שאלון קובאביץ'
                 </Typography>
                 <Typography variant="body2" color="text.secondary" sx={{ textAlign: 'center', mb: 3 }}>
                     מבוסס על {aggregated.count} שאלונים שהושלמו

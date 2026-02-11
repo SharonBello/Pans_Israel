@@ -538,7 +538,7 @@ const diagnosisQuestions: SOCQuestion[] = [
         id: 'diagnosed_by',
         category: 'diagnosis',
         type: 'single_choice',
-        questionText: 'מי ביצע את האבחנה של PANS/PANDAS?',
+        questionText: 'מי ביצע את האבחנה של פאנס/פאנדס?',
         required: true,
         options: [
             { id: 'pediatrician', label: 'רופא ילדים', value: 'pediatrician' },
@@ -1275,7 +1275,7 @@ export const socSurveyDefinition: SOCSurveyDefinition = {
     id: SOC_SURVEY_ID,
     slug: SOC_SURVEY_SLUG,
     title: 'סקר מצב ילדינו 2026',
-    description: 'סקר מקיף למשפחות ילדים עם PANS/PANDAS בישראל. המידע יסייע להגביר את המודעות ולקדם מחקר בתחום.',
+    description: 'סקר מקיף למשפחות ילדים עם פאנס/פאנדס בישראל. המידע יסייע להגביר את המודעות ולקדם מחקר בתחום.',
     version: SOC_SURVEY_VERSION,
     isActive: true,
     categories: socCategories,

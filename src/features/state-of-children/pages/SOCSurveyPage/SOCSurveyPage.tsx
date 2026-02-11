@@ -350,7 +350,7 @@ const SOCSurveyPage: React.FC = () => {
                             {emailInfo?.hasSubmitted && (
                                 <Alert severity="info" className="soc-survey__email-alert">
                                     כתובת האימייל הזו כבר מילאה {emailInfo.count} סקר/ים.
-                                    אם יש לכם ילד נוסף עם PANS/PANDAS, אתם מוזמנים למלא סקר נוסף.
+                                    אם יש לכם ילד נוסף עם פאנס/פאנדס, אתם מוזמנים למלא סקר נוסף.
                                     זה יהיה הסקר מספר {emailInfo.count + 1} עבור משפחתכם.
                                 </Alert>
                             )}
@@ -392,7 +392,7 @@ const SOCSurveyPage: React.FC = () => {
                         </Typography>
                         <Typography className="soc-survey__success-text">
                             הסקר נשלח בהצלחה. התשובות שלכם יסייעו להגביר את המודעות
-                            ל-PANS/PANDAS בישראל ולקדם מחקר בתחום.
+                            ל-פאנס/פאנדס בישראל ולקדם מחקר בתחום.
                         </Typography>
                         <Box className="soc-survey__success-actions">
                             <Button

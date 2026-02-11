@@ -8,17 +8,17 @@ export const infoSections: Record<string, InfoSection> = {
     id: 'overview',
     title: 'מידע על התסמונות',
     slug: 'overview',
-    description: 'מדריך מקיף להבנת PANDAS ו-PANS',
+    description: 'מדריך מקיף להבנת פאנדס ו-פאנס',
     content: [
       {
         id: 'intro-heading',
         type: 'heading',
-        title: 'מהן תסמונות PANDAS ו-PANS?'
+        title: 'מהן תסמונות פאנדס ו-פאנס?'
       },
       {
         id: 'intro-paragraph',
         type: 'paragraph',
-        content: 'PANS (Pediatric Acute-Onset Neuropsychiatric Syndrome) ו-PANDAS (Pediatric Autoimmune Neuropsychiatric Disorders Associated with Streptococcal Infections) הן תסמונות נוירו-פסיכיאטריות אוטואימוניות המאופיינות בהופעה פתאומית וחריפה של מגוון רחב של תסמינים נוירו-פסיכיאטריים.'
+        content: 'PANS (Pediatric Acute-Onset Neuropsychiatric Syndrome) ו-פאנדס (Pediatric Autoimmune Neuropsychiatric Disorders Associated with Streptococcal Infections) הן תסמונות נוירו-פסיכיאטריות אוטואימוניות המאופיינות בהופעה פתאומית וחריפה של מגוון רחב של תסמינים נוירו-פסיכיאטריים.'
       },
       {
         id: 'mechanism-heading',
@@ -34,8 +34,8 @@ export const infoSections: Record<string, InfoSection> = {
         id: 'difference-callout',
         type: 'callout',
         variant: 'info',
-        title: 'מה ההבדל בין PANDAS ל-PANS?',
-        content: 'PANDAS הוא תת-סוג של PANS, הנגרם ספציפית לאחר זיהום סטרפטוקוקי (כמו דלקת גרון סטרפטוקוקית). PANS ללא סטרפטוקוק = PANS. במילים אחרות, כאשר אין קשר לסטרפטוקוק, האבחנה היא PANS.'
+        title: 'מה ההבדל בין פאנדס ל-פאנס?',
+        content: 'פאנדס הוא תת-סוג של פאנס, הנגרם ספציפית לאחר זיהום סטרפטוקוקי (כמו דלקת גרון סטרפטוקוקית). פאנס ללא סטרפטוקוק = פאנס. במילים אחרות, כאשר אין קשר לסטרפטוקוק, האבחנה היא פאנס.'
       },
       {
         id: 'impact-heading',
@@ -45,7 +45,7 @@ export const infoSections: Record<string, InfoSection> = {
       {
         id: 'impact-paragraph',
         type: 'paragraph',
-        content: 'PANDAS/PANS מוכרות יותר ויותר כצורה של דלקת מוח אוטואימונית (Autoimmune Encephalitis) - ובאופן ספציפי יותר, דלקת מוח פוסט-זיהומית של גרעיני הבסיס (Basal Ganglia Encephalitis). תסמינים עלולים לגרום לנכות חמורה ולשינויים נוירולוגיים קיצוניים, כולל התקפים ו/או בעיות בשיווי משקל, דיבור או ראייה. תסמינים פסיכיאטריים גם הם שכיחים וכוללים תוקפנות, התנהגויות לא הולמות או כפייתיות, ופחד.'
+        content: 'פאנדס/פאנס מוכרות יותר ויותר כצורה של דלקת מוח אוטואימונית (Autoimmune Encephalitis) - ובאופן ספציפי יותר, דלקת מוח פוסט-זיהומית של גרעיני הבסיס (Basal Ganglia Encephalitis). תסמינים עלולים לגרום לנכות חמורה ולשינויים נוירולוגיים קיצוניים, כולל התקפים ו/או בעיות בשיווי משקל, דיבור או ראייה. תסמינים פסיכיאטריים גם הם שכיחים וכוללים תוקפנות, התנהגויות לא הולמות או כפייתיות, ופחד.'
       },
       {
         id: 'symptoms-preview-heading',
@@ -82,39 +82,39 @@ export const infoSections: Record<string, InfoSection> = {
       {
         id: 'why-hard-paragraph',
         type: 'paragraph',
-        content: 'PANS ו-PANDAS עלולות להידמות להפרעות אחרות כמו ADHD, OCD, חרדה כללית, הפרעות מצב רוח ואפילו אוטיזם, ולכן ילדים רבים מאובחנים בטעות ומקבלים טיפול שאינו מתאים. התסמונות עדיין נחשבות נדירות יחסית, אך יותר ויותר מחקרים מראים שהן עשויות להיות שכיחות יותר משחשבו בעבר.'
+        content: 'פאנס ו-פאנדס עלולות להידמות להפרעות אחרות כמו ADHD, OCD, חרדה כללית, הפרעות מצב רוח ואפילו אוטיזם, ולכן ילדים רבים מאובחנים בטעות ומקבלים טיפול שאינו מתאים. התסמונות עדיין נחשבות נדירות יחסית, אך יותר ויותר מחקרים מראים שהן עשויות להיות שכיחות יותר משחשבו בעבר.'
       },
       {
         id: 'parents-callout',
         type: 'callout',
         variant: 'tip',
         title: 'חשוב לדעת כהורים',
-        content: 'אתם לא מדמיינים — שינוי פתאומי וקיצוני בהתנהגות הילד מצריך בדיקה. יש אנשי מקצוע המנוסים בזיהוי PANS/PANDAS. אבחון נכון מאפשר טיפול יעיל יותר. התערבות מוקדמת מסייעת להפחתת סבל הילד והמשפחה.'
+        content: 'אתם לא מדמיינים — שינוי פתאומי וקיצוני בהתנהגות הילד מצריך בדיקה. יש אנשי מקצוע המנוסים בזיהוי פאנס/פאנדס. אבחון נכון מאפשר טיפול יעיל יותר. התערבות מוקדמת מסייעת להפחתת סבל הילד והמשפחה.'
       },
       {
         id: 'video-section',
         type: 'video',
         title: 'צפו בסרטון הסבר',
         videoUrl: 'https://www.youtube.com/watch?v=l55SX33ZQy0',
-        content: 'להבנה טובה יותר של הספקטרום של PANDAS/PANS ודלקת מוח אוטואימונית, צפו בסרטון הקצר הזה.'
+        content: 'להבנה טובה יותר של הספקטרום של פאנדס/פאנס ודלקת מוח אוטואימונית, צפו בסרטון הקצר הזה.'
       }
     ],
     relatedPages: [
       {
         id: 'diagnosis',
         slug: 'diagnosis',
-        title: 'אבחון PANDAS',
+        title: 'אבחון פאנדס',
         description: 'האבחון מבוסס על תסמינים, היסטוריה רפואית ובדיקות מעבדה.',
         imageUrl: relatedImage1,
-        imageAlt: 'אבחון PANDAS'
+        imageAlt: 'אבחון פאנדס'
       },
       {
         id: 'treatment',
         slug: 'treatment',
-        title: 'טיפול ב-PANDAS',
+        title: 'טיפול ב-פאנדס',
         description: 'טיפול מוקדם יכול לצמצם משך וחומרה של תסמינים.',
         imageUrl: relatedImage2,
-        imageAlt: 'טיפול ב-PANDAS'
+        imageAlt: 'טיפול ב-פאנדס'
       },
       {
         id: 'faq',
@@ -131,19 +131,19 @@ export const infoSections: Record<string, InfoSection> = {
     id: 'symptoms',
     title: 'סימנים ותסמינים',
     slug: 'symptoms',
-    description: 'מבט מעמיק על תסמיני PANDAS/PANS',
+    description: 'מבט מעמיק על תסמיני פאנדס/פאנס',
     content: [
       {
         id: 'symptoms-intro',
         type: 'paragraph',
-        content: 'PANDAS/PANS כוללות מגוון תסמינים שיכולים להופיע בפתאומיות ובאופן הרסני. רבים מהתסמינים הללו, בדרגות חומרה שונות, מופיעים בו-זמנית.'
+        content: 'פאנדס/פאנס כוללות מגוון תסמינים שיכולים להופיע בפתאומיות ובאופן הרסני. רבים מהתסמינים הללו, בדרגות חומרה שונות, מופיעים בו-זמנית.'
       },
       {
         id: 'symptoms-callout',
         type: 'callout',
         variant: 'info',
         title: 'אופי התסמינים',
-        content: 'חומרת התסמינים והופעת PANDAS/PANS משתנות ממטופל למטופל, אך התסמינים בדרך כלל מופיעים בפתאומיות ובאינטנסיביות. התסמינים יכולים להשתפר ואז להחמיר שוב, במה שמכונה מהלך אפיזודי.'
+        content: 'חומרת התסמינים והופעת פאנדס/פאנס משתנות ממטופל למטופל, אך התסמינים בדרך כלל מופיעים בפתאומיות ובאינטנסיביות. התסמינים יכולים להשתפר ואז להחמיר שוב, במה שמכונה מהלך אפיזודי.'
       },
       {
         id: 'comprehensive-heading',
@@ -244,7 +244,7 @@ export const infoSections: Record<string, InfoSection> = {
       {
         id: 'scales-intro',
         type: 'paragraph',
-        content: 'PANDAS ו-PANS הן אבחנות קליניות התלויות מאוד בהצגת התסמינים. אבחנה קלינית היא אבחנה שאינה מבוססת אך ורק על בדיקת אבחון כמו בדיקת דם. במקום זאת, האבחנה מבוססת על אוסף של סימנים, תסמינים, היסטוריה רפואית וממצאי מעבדה. כרגע, אין בדיקה אבחנתית מוחלטת 100% ל-PANDAS או PANS.'
+        content: 'פאנדס ו-פאנס הן אבחנות קליניות התלויות מאוד בהצגת התסמינים. אבחנה קלינית היא אבחנה שאינה מבוססת אך ורק על בדיקת אבחון כמו בדיקת דם. במקום זאת, האבחנה מבוססת על אוסף של סימנים, תסמינים, היסטוריה רפואית וממצאי מעבדה. כרגע, אין בדיקה אבחנתית מוחלטת 100% ל-פאנדס או פאנס.'
       },
       {
         id: 'scales-callout',
@@ -258,25 +258,25 @@ export const infoSections: Record<string, InfoSection> = {
       //   type: 'download',
       //   title: 'סולמות להורדה',
       //   downloadUrl: 'https://pandasnetwork.org/wp-content/uploads/2024/06/PANS-31-Item-Symptom-Rating-Scale-4-30-24.pdf',
-      //   downloadLabel: 'סולם הערכת תסמינים PANS (31 פריטים)'
+      //   downloadLabel: 'מדד הערכת תסמינים פאנס (31 פריטים)'
       // }
     ],
     relatedPages: [
       {
         id: 'diagnosis',
         slug: 'diagnosis',
-        title: 'אבחון PANDAS',
+        title: 'אבחון פאנדס',
         description: 'האבחון מבוסס על תסמינים, היסטוריה רפואית ובדיקות מעבדה.',
         imageUrl: relatedImage1,
-        imageAlt: 'אבחון PANDAS'
+        imageAlt: 'אבחון פאנדס'
       },
       {
         id: 'treatment',
         slug: 'treatment',
-        title: 'טיפול ב-PANDAS',
+        title: 'טיפול ב-פאנדס',
         description: 'טיפול מוקדם יכול לצמצם משך וחומרה של תסמינים.',
         imageUrl: relatedImage2,
-        imageAlt: 'טיפול ב-PANDAS'
+        imageAlt: 'טיפול ב-פאנדס'
       },
     ]
   },
@@ -285,27 +285,27 @@ export const infoSections: Record<string, InfoSection> = {
     id: 'diagnosis',
     title: 'אבחון',
     slug: 'diagnosis',
-    description: 'קריטריונים לאבחון PANDAS/PANS ובדיקות מומלצות',
+    description: 'קריטריונים לאבחון פאנדס/פאנס ובדיקות מומלצות',
     content: [
       {
         id: 'diagnosis-intro',
         type: 'paragraph',
-        content: 'PANDAS ו-PANS הן אבחנות קליניות המבוססות על אוסף של סימנים, תסמינים, היסטוריה רפואית וממצאי מעבדה שאינם יכולים להיות מוסברים על ידי הפרעות נוירולוגיות או רפואיות אחרות. כרגע, אין בדיקה אבחנתית מוחלטת 100% ל-PANDAS או PANS.'
+        content: 'פאנדס ו-פאנס הן אבחנות קליניות המבוססות על אוסף של סימנים, תסמינים, היסטוריה רפואית וממצאי מעבדה שאינם יכולים להיות מוסברים על ידי הפרעות נוירולוגיות או רפואיות אחרות. כרגע, אין בדיקה אבחנתית מוחלטת 100% ל-פאנדס או פאנס.'
       },
       {
         id: 'pandas-criteria-heading',
         type: 'heading',
-        title: 'קריטריונים לאבחון PANDAS'
+        title: 'קריטריונים לאבחון פאנדס'
       },
       {
         id: 'pandas-criteria-intro',
         type: 'paragraph',
-        content: 'המאפיין העיקרי של PANDAS הוא הופעה חריפה ופתאומית של חרדה אינטנסיבית ולאביליות במצב הרוח, מלווה בבעיות דמויות-OCD או טיקים, בקשר לזיהום סטרפטוקוקי (GABHS) שהתרחש מיד לפני התסמינים.'
+        content: 'המאפיין העיקרי של פאנדס הוא הופעה חריפה ופתאומית של חרדה אינטנסיבית ולאביליות במצב הרוח, מלווה בבעיות דמויות-OCD או טיקים, בקשר לזיהום סטרפטוקוקי (GABHS) שהתרחש מיד לפני התסמינים.'
       },
       {
         id: 'pandas-criteria-list',
         type: 'list',
-        title: 'אבחנה קלינית של PANDAS מוגדרת על ידי הקריטריונים הבאים:',
+        title: 'אבחנה קלינית של פאנדס מוגדרת על ידי הקריטריונים הבאים:',
         items: [
           'נוכחות של אובססיות, כפיות או טיקים משמעותיים',
           'הופעה פתאומית של תסמינים או מהלך של התלקחויות והפוגות',
@@ -317,17 +317,17 @@ export const infoSections: Record<string, InfoSection> = {
       {
         id: 'pans-criteria-heading',
         type: 'heading',
-        title: 'קריטריונים לאבחון PANS'
+        title: 'קריטריונים לאבחון פאנס'
       },
       {
         id: 'pans-criteria-intro',
         type: 'paragraph',
-        content: 'PANS היא אבחנה קלינית.'
+        content: 'פאנס היא אבחנה קלינית.'
       },
       {
         id: 'pans-criteria-list',
         type: 'list',
-        title: 'הקריטריונים לאבחון PANS:',
+        title: 'הקריטריונים לאבחון פאנס:',
         items: [
           {
             title: '1. הופעה פתאומית ודרמטית של OCD, או הגבלת אכילה חמורה',
@@ -351,7 +351,7 @@ export const infoSections: Record<string, InfoSection> = {
       {
         id: 'tests-intro',
         type: 'paragraph',
-        content: 'אם אתם חושדים שלילדכם יש PANDAS או PANS, הבדיקות הבאות, בנוסף למילוי סולמות התסמינים, יכולות לעזור לספק הרפואי שלכם לבצע אבחנה נכונה.'
+        content: 'אם אתם חושדים שלילדכם יש פאנדס או פאנס, הבדיקות הבאות, בנוסף למילוי סולמות התסמינים, יכולות לעזור לספק הרפואי שלכם לבצע אבחנה נכונה.'
       },
       {
         id: 'basic-blood-heading',
@@ -428,7 +428,7 @@ export const infoSections: Record<string, InfoSection> = {
       // {
       //   id: 'cunningham-paragraph',
       //   type: 'paragraph',
-      //   content: 'פאנל קנינגהם™ קובע את "הסבירות שמצבו של המטופל הוא אוטואימוני באופיו", כולל PANDAS ו-PANS אפשריים. הבדיקה מודדת חמישה מדדים וזמינה מסחרית על ידי Moleculera Labs. מחקרה של ד"ר קנינגהם, שהוביל לבדיקה זו, מדד נוגדנים מגיבים-צולבים המוגברים במוח של ילד עם PANDAS.'
+      //   content: 'פאנל קנינגהם™ קובע את "הסבירות שמצבו של המטופל הוא אוטואימוני באופיו", כולל פאנדס ו-פאנס אפשריים. הבדיקה מודדת חמישה מדדים וזמינה מסחרית על ידי Moleculera Labs. מחקרה של ד"ר קנינגהם, שהוביל לבדיקה זו, מדד נוגדנים מגיבים-צולבים המוגברים במוח של ילד עם פאנדס.'
       // },
       {
         id: 'imaging-heading',
@@ -441,11 +441,11 @@ export const infoSections: Record<string, InfoSection> = {
         items: [
           {
             title: 'MRI',
-            description: 'נוירולוג ילדים מזמין MRI. מחקרים מראים שנמצאו חריגות בסריקות מוח בילדים עם PANS.'
+            description: 'נוירולוג ילדים מזמין MRI. מחקרים מראים שנמצאו חריגות בסריקות מוח בילדים עם פאנס.'
           },
           {
             title: 'EEG',
-            description: 'כמה ילדים נמצאו עם EEG לא תקין. זה יכול להיות PANDAS או בעיה אחרת של התקפים באונה הקדמית. EEG גם מומלץ אם הילד חווה הפרעות שינה.'
+            description: 'כמה ילדים נמצאו עם EEG לא תקין. זה יכול להיות פאנדס או בעיה אחרת של התקפים באונה הקדמית. EEG גם מומלץ אם הילד חווה הפרעות שינה.'
           },
           {
             title: 'PET או CT',
@@ -458,18 +458,18 @@ export const infoSections: Record<string, InfoSection> = {
       {
         id: 'diagnosis',
         slug: 'diagnosis',
-        title: 'אבחון PANDAS',
+        title: 'אבחון פאנדס',
         description: 'האבחון מבוסס על תסמינים, היסטוריה רפואית ובדיקות מעבדה.',
         imageUrl: relatedImage1,
-        imageAlt: 'אבחון PANDAS'
+        imageAlt: 'אבחון פאנדס'
       },
       {
         id: 'treatment',
         slug: 'treatment',
-        title: 'טיפול ב-PANDAS',
+        title: 'טיפול ב-פאנדס',
         description: 'טיפול מוקדם יכול לצמצם משך וחומרה של תסמינים.',
         imageUrl: relatedImage2,
-        imageAlt: 'טיפול ב-PANDAS'
+        imageAlt: 'טיפול ב-פאנדס'
       },
       {
         id: 'faq',
@@ -486,14 +486,14 @@ export const infoSections: Record<string, InfoSection> = {
     id: 'treatment',
     title: 'טיפול',
     slug: 'treatment',
-    description: 'אפשרויות טיפול ב-PANDAS/PANS ופרוגנוזה',
+    description: 'אפשרויות טיפול ב-פאנדס/פאנס ופרוגנוזה',
     content: [
       {
         id: 'treatment-intro',
         type: 'callout',
         variant: 'success',
         title: 'למה טיפול מוקדם חשוב?',
-        content: 'התלקחות יכולה לחזור ולהפוך; הן נוטות להתארך ולהחמיר עם כל אפיזודה. PANDAS/PANS לא מטופל יכול לגרום לנכות קבועה, ובמקרים מסוימים יכול להפוך לדלקת מוח. זיהומי סטרפ חוזרים יכולים לגרום לבעיות חמורות, לכן חיוני לחסל את הסטרפ. כשמטופל מוקדם ובזמן, PANDAS/PANS יכול להיעלם לחלוטין.'
+        content: 'התלקחות יכולה לחזור ולהפוך; הן נוטות להתארך ולהחמיר עם כל אפיזודה. פאנדס/פאנס לא מטופל יכול לגרום לנכות קבועה, ובמקרים מסוימים יכול להפוך לדלקת מוח. זיהומי סטרפ חוזרים יכולים לגרום לבעיות חמורות, לכן חיוני לחסל את הסטרפ. כשמטופל מוקדם ובזמן, פאנדס/פאנס יכול להיעלם לחלוטין.'
       },
       {
         id: 'antibiotics-heading',
@@ -535,7 +535,7 @@ export const infoSections: Record<string, InfoSection> = {
       {
         id: 'prophylactic-paragraph',
         type: 'paragraph',
-        content: 'רופאים ממליצים שילד עם PANDAS יישאר על אנטיביוטיקה מניעתית בהתאם להנחיות קדחת שיגרונית (RF) שנקבעו על ידי האקדמיה האמריקאית לרפואת ילדים. ההנחיה קובעת שמניעה צריכה להימשך חמש שנים לאחר ההתקף האחרון, או עד גיל 21 (הארוך מביניהם).'
+        content: 'רופאים ממליצים שילד עם פאנדס יישאר על אנטיביוטיקה מניעתית בהתאם להנחיות קדחת שיגרונית (RF) שנקבעו על ידי האקדמיה האמריקאית לרפואת ילדים. ההנחיה קובעת שמניעה צריכה להימשך חמש שנים לאחר ההתקף האחרון, או עד גיל 21 (הארוך מביניהם).'
       },
       {
         id: 'prophylactic-callout',
@@ -552,14 +552,14 @@ export const infoSections: Record<string, InfoSection> = {
       {
         id: 'ivig-paragraph',
         type: 'paragraph',
-        content: 'IVIG הוא מוצר דם תוך-ורידי המורכב מאימונוגלובולינים המשמש לטיפול בחסרים חיסוניים, דלקת מוח ומצבים רפואיים אחרים. IVIG הוכח כמועיל לרוב הילדים עם PANDAS/PANS.'
+        content: 'IVIG הוא מוצר דם תוך-ורידי המורכב מאימונוגלובולינים המשמש לטיפול בחסרים חיסוניים, דלקת מוח ומצבים רפואיים אחרים. IVIG הוכח כמועיל לרוב הילדים עם פאנדס/פאנס.'
       },
       {
         id: 'ivig-results',
         type: 'callout',
         variant: 'success',
         title: 'תוצאות מחקר IVIG',
-        content: 'מחקר NIMH הראה הפחתה ממוצעת של 60% בתסמינים בחולי PANDAS. ב-21 מטופלים עם PANS בינוני עד חמור, התוצאות הדגימו הפחתות משמעותיות בתסמינים מתחילת הטיפול ועד סופו.'
+        content: 'מחקר NIMH הראה הפחתה ממוצעת של 60% בתסמינים בחולי פאנדס. ב-21 מטופלים עם פאנס בינוני עד חמור, התוצאות הדגימו הפחתות משמעותיות בתסמינים מתחילת הטיפול ועד סופו.'
       },
       {
         id: 'plasmapheresis-heading',
@@ -582,7 +582,7 @@ export const infoSections: Record<string, InfoSection> = {
         items: [
           {
             title: 'CBT/ERP (טיפול קוגניטיבי-התנהגותי)',
-            description: 'עשוי להיות מועיל לילד עם PANDAS בהחלמה. התערבויות רפואיות כמו אנטיביוטיקה, IVIG וכו\' נדרשות ליצור בסיס לפני הכנסת טיפול.'
+            description: 'עשוי להיות מועיל לילד עם פאנדס בהחלמה. התערבויות רפואיות כמו אנטיביוטיקה, IVIG וכו\' נדרשות ליצור בסיס לפני הכנסת טיפול.'
           },
           {
             title: 'סטרואידים',
@@ -598,7 +598,7 @@ export const infoSections: Record<string, InfoSection> = {
           },
           {
             title: 'NSAIDs (איבופרופן)',
-            description: 'חלק מהילדים חווים הקלה זמנית בתסמינים עם איבופרופן. אם ילד לא מראה שיפור עם איבופרופן, זה לא שולל אבחנה אפשרית של PANDAS או PANS.'
+            description: 'חלק מהילדים חווים הקלה זמנית בתסמינים עם איבופרופן. אם ילד לא מראה שיפור עם איבופרופן, זה לא שולל אבחנה אפשרית של פאנדס או פאנס.'
           },
           {
             title: 'פרוביוטיקה',
@@ -614,14 +614,14 @@ export const infoSections: Record<string, InfoSection> = {
       {
         id: 'prognosis-intro',
         type: 'paragraph',
-        content: 'הורים רוצים לדעת אם ילדם יגדל מ-PANDAS ו-PANS. כרגע אין מחקר פרוספקטיבי ארוך טווח של ילדי PANDAS/PANS. הפרוגנוזה אינה ידועה לאורך חיים שלם. עם זאת, אנו רואים תוצאות חיוביות עבור רוב הילדים.'
+        content: 'הורים רוצים לדעת אם ילדם יגדל מ-פאנדס ו-פאנס. כרגע אין מחקר פרוספקטיבי ארוך טווח של ילדי פאנדס/פאנס. הפרוגנוזה אינה ידועה לאורך חיים שלם. עם זאת, אנו רואים תוצאות חיוביות עבור רוב הילדים.'
       },
       {
         id: 'prognosis-positive',
         type: 'callout',
         variant: 'success',
         title: 'תוצאות חיוביות עם טיפול',
-        content: 'קונסורציום PANS נפגש לדון בתוצאות מקרים מאז 2013, ורוב הילדים משתפרים וחוזרים לבית הספר ולפעילויות חברתיות רגילות עם טיפולי אימונומודולציה.'
+        content: 'קונסורציום פאנס נפגש לדון בתוצאות מקרים מאז 2013, ורוב הילדים משתפרים וחוזרים לבית הספר ולפעילויות חברתיות רגילות עם טיפולי אימונומודולציה.'
       },
       {
         id: 'prognosis-maturity',
@@ -651,25 +651,25 @@ export const infoSections: Record<string, InfoSection> = {
         type: 'callout',
         variant: 'tip',
         title: 'ידע הוא כוח!',
-        content: 'הישארו מעודכנים ותמכו בקהילת ההורים. מחקר גנטי מתבצע בכל מרכז מחקר PANS ברחבי העולם, ואנו מקווים שבתוך עשור זה יעזור להסביר את הנטייה לתגובה יתר אוטואימונית.'
+        content: 'הישארו מעודכנים ותמכו בקהילת ההורים. מחקר גנטי מתבצע בכל מרכז מחקר פאנס ברחבי העולם, ואנו מקווים שבתוך עשור זה יעזור להסביר את הנטייה לתגובה יתר אוטואימונית.'
       }
     ],
     relatedPages: [
       {
         id: 'diagnosis',
         slug: 'diagnosis',
-        title: 'אבחון PANDAS',
+        title: 'אבחון פאנדס',
         description: 'האבחון מבוסס על תסמינים, היסטוריה רפואית ובדיקות מעבדה.',
         imageUrl: relatedImage1,
-        imageAlt: 'אבחון PANDAS'
+        imageAlt: 'אבחון פאנדס'
       },
       {
         id: 'treatment',
         slug: 'treatment',
-        title: 'טיפול ב-PANDAS',
+        title: 'טיפול ב-פאנדס',
         description: 'טיפול מוקדם יכול לצמצם משך וחומרה של תסמינים.',
         imageUrl: relatedImage2,
-        imageAlt: 'טיפול ב-PANDAS'
+        imageAlt: 'טיפול ב-פאנדס'
       },
     ]
   },
@@ -680,36 +680,36 @@ export const assessmentScales: AssessmentScale[] = [
   {
     id: 'pans-rating-scale',
     title: 'PANS Symptom Rating Scale',
-    titleHe: 'סולם דירוג תסמיני PANS',
+    titleHe: 'מדד דירוג תסמיני פאנס',
     description: 'A 31-item scale to quantify the frequency and severity of PANS symptoms',
-    descriptionHe: 'סולם בן 31 פריטים לכימות תדירות וחומרת תסמיני PANS',
+    descriptionHe: 'מדד בן 31 פריטים לכימות תדירות וחומרת תסמיני פאנס',
     type: 'external',
     externalUrl: 'https://pandasnetwork.org/wp-content/uploads/2024/06/PANS-31-Item-Symptom-Rating-Scale-4-30-24.pdf'
   },
   {
     id: 'ybocs',
     title: 'Y-BOCS (Yale-Brown OCD Scale)',
-    titleHe: 'סולם ייל-בראון ל-OCD',
+    titleHe: 'מדד ייל-בראון ל-OCD',
     description: 'Scale to measure OCD severity',
-    descriptionHe: 'סולם למדידת חומרת OCD',
+    descriptionHe: 'מדד למדידת חומרת OCD',
     type: 'external',
     externalUrl: 'https://pandasnetwork.org/wp-content/uploads/2018/11/y-bocs-w-checklist.pdf'
   },
   {
     id: 'ygtss',
     title: 'YGTSS (Yale Global Tic Severity Scale)',
-    titleHe: 'סולם ייל לחומרת טיקים',
+    titleHe: 'מדד ייל לחומרת טיקים',
     description: 'Scale to measure tic severity',
-    descriptionHe: 'סולם למדידת חומרת טיקים',
+    descriptionHe: 'מדד למדידת חומרת טיקים',
     type: 'external',
     externalUrl: 'https://pandasnetwork.org/wp-content/uploads/2018/11/YGTSS.pdf'
   },
   {
     id: 'caregiver-burden',
     title: 'Caregiver Burden Scale',
-    titleHe: 'סולם עומס המטפל',
+    titleHe: 'מדד עומס המטפל',
     description: 'Scale to assess caregiver burden',
-    descriptionHe: 'סולם להערכת עומס המטפל/ים',
+    descriptionHe: 'מדד להערכת עומס המטפל/ים',
     type: 'external',
     externalUrl: 'https://pandasnetwork.org/wp-content/uploads/2024/03/FTLDA-CARGIVER-BURDEN-SCALE.pdf'
   },

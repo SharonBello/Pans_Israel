@@ -80,7 +80,7 @@ const PANS31ResultsPage: React.FC = () => {
   return (
     <Container maxWidth="md" className="pans31-results-page" dir="rtl">
       <Typography variant="h4" align="center" gutterBottom>
-        תוצאות סולם PANS 31-פריטים
+        תוצאות מדד פאנס 31-פריטים
       </Typography>
 
       {savedDocId && (
@@ -295,7 +295,7 @@ const PANS31ResultsPage: React.FC = () => {
       {/* Disclaimer */}
       <Alert severity="warning" className="disclaimer">
         <Typography variant="body2">
-          <strong>הבהרה:</strong> סולם זה הוא כלי הערכה ואינו מהווה תחליף לאבחון רפואי מקצועי.
+          <strong>הבהרה:</strong> מדד זה הוא כלי הערכה ואינו מהווה תחליף לאבחון רפואי מקצועי.
           יש להתייעץ עם רופא מומחה לקבלת אבחנה וטיפול מתאים.
         </Typography>
       </Alert>

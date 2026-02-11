@@ -44,7 +44,7 @@ const KovacevicHomePage: React.FC = () => {
                     </Box>
 
                     <Typography variant="h3" component="h1" className="hero-title">
-                        קריטריוני האבחון של ד"ר קובאצ'ביץ'
+                        קריטריוני האבחון של ד"ר קובאביץ'
                     </Typography>
 
                     <Typography variant="h6" className="hero-subtitle">
@@ -83,7 +83,7 @@ const KovacevicHomePage: React.FC = () => {
                     </Typography>
 
                     <Typography variant="body1" paragraph>
-                        גישה זו לקריטריוני אבחון נובעת מתצפיות שנערכו על כ-591 מטופלים של ד"ר קובאצ'ביץ' (2019).
+                        גישה זו לקריטריוני אבחון נובעת מתצפיות שנערכו על כ-591 מטופלים של ד"ר קובאביץ' (2019).
                         תצפיות אלו סייעו לו להגיע לסוג אחר של קריטריון לאבחון הכולל נוסחה.
                     </Typography>
 
@@ -153,11 +153,11 @@ const KovacevicHomePage: React.FC = () => {
                 <Modal open={openExplanation} onClose={handleCloseExplanation}>
                     <Box className="explanation-modal">
                         <Typography variant="h5" gutterBottom className="modal-title">
-                            הסבר על שאלון קובאצ'ביץ'
+                            הסבר על שאלון קובאביץ'
                         </Typography>
 
                         <Typography variant="body1" paragraph>
-                            שאלון זה מבוסס על קריטריוני האבחון שפותחו על ידי ד"ר מירוסלב קובאצ'ביץ' בשנת 2019,
+                            שאלון זה מבוסס על קריטריוני האבחון שפותחו על ידי ד"ר מירוסלב קובאביץ' בשנת 2019,
                             בעקבות תצפיות קליניות על 591 מטופלים עם תסמונת פאנס/פאנדס.
                         </Typography>
 

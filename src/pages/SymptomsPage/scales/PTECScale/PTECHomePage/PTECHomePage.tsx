@@ -102,7 +102,7 @@ const PTECHomePage: React.FC = () => {
           </Typography>
 
           <Typography variant="body1" paragraph>
-            שאלון PTEC (PANS/PANDAS Treatment and Flare Evaluation Checklist) פותח על ידי
+            שאלון PTEC (פאנס/פאנדס Treatment and Flare Evaluation Checklist) פותח על ידי
             קרן Neuroimmune Foundation ככלי למעקב אחר שינויים בתסמינים לאורך זמן.
           </Typography>
 

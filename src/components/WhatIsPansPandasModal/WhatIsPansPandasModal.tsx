@@ -118,7 +118,7 @@ const WhatIsPansPandasModal: React.FC<WhatIsPansPandasModalProps> = ({
         <Box className="pans-pandas-modal__comparison">
           <Box className="pans-pandas-modal__comparison-item pans-pandas-modal__comparison-item--pans">
             <Typography className="pans-pandas-modal__comparison-title">
-              PANS
+              פאנס
             </Typography>
             <Typography className="pans-pandas-modal__comparison-text">
               התגובה החיסונית/דלקתית הלא תקינה שגורמת לתסמינים דווחה ככזו שעלולה להיות
@@ -127,7 +127,7 @@ const WhatIsPansPandasModal: React.FC<WhatIsPansPandasModalProps> = ({
           </Box>
           <Box className="pans-pandas-modal__comparison-item pans-pandas-modal__comparison-item--pandas">
             <Typography className="pans-pandas-modal__comparison-title">
-              PANDAS
+              פאנדס
             </Typography>
             <Typography className="pans-pandas-modal__comparison-text">
               התגובה החריגה מופעלת בעקבות <strong>זיהום סטרפטוקוקי מקבוצה A (GAS)</strong> בלבד.
@@ -144,7 +144,7 @@ const WhatIsPansPandasModal: React.FC<WhatIsPansPandasModalProps> = ({
             תסמינים אפשריים
           </Typography>
           <Typography className="pans-pandas-modal__text">
-            ילדים ובוגרים עם PANS/PANDAS יכולים לסבול בין היתר מהתסמינים הבאים:
+            ילדים ובוגרים עם פאנס/פאנדס יכולים לסבול בין היתר מהתסמינים הבאים:
           </Typography>
           <Box className="pans-pandas-modal__symptoms">
             {symptoms.map((symptom, index) => (
@@ -184,7 +184,7 @@ const WhatIsPansPandasModal: React.FC<WhatIsPansPandasModalProps> = ({
             למה קשה לזהות את זה?
           </Typography>
           <Typography className="pans-pandas-modal__text">
-            PANS ו־PANDAS עלולות להידמות להפרעות אחרות כמו ADHD, OCD, חרדה כללית,
+            פאנס פאנדס עלולות להידמות להפרעות אחרות כמו ADHD, OCD, חרדה כללית,
             הפרעות מצב רוח ואפילו אוטיזם, ולכן ילדים רבים מאובחנים בטעות ומקבלים טיפול
             שאינו מתאים. התסמונות עדיין נחשבות נדירות יחסית, אך יותר ויותר מחקרים מראים
             שהן עשויות להיות שכיחות יותר משחשבו בעבר.
@@ -208,7 +208,7 @@ const WhatIsPansPandasModal: React.FC<WhatIsPansPandasModalProps> = ({
             <Box className="pans-pandas-modal__tip">
               <span className="pans-pandas-modal__tip-icon">✓</span>
               <Typography>
-                יש אנשי מקצוע המנוסים בזיהוי PANS/PANDAS.
+                יש אנשי מקצוע המנוסים בזיהוי פאנס/פאנדס.
               </Typography>
             </Box>
             <Box className="pans-pandas-modal__tip">

@@ -226,7 +226,7 @@ const CBIResultsPage: React.FC = () => {
         </Box>
 
         <Typography variant="body2" paragraph>
-          הטיפול בילד עם PANS/PANDAS מאתגר. הנה כמה דברים שיכולים לעזור:
+          הטיפול בילד עם פאנס/פאנדס מאתגר. הנה כמה דברים שיכולים לעזור:
         </Typography>
 
         <Box component="ul" sx={{ pl: 2 }}>

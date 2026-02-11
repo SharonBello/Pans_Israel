@@ -274,7 +274,7 @@ const AssessmentScales: React.FC<AssessmentScalesProps> = ({ showInteractive = t
                         <Box className="assessment-scales__disclaimer">
                           <Typography variant="caption">
                             ⚠️ שים לב: הערכה זו היא כלי עזר בלבד ואינה מהווה אבחנה רפואית.
-                            אם אתה חושד שלילדך יש PANS/PANDAS, פנה לרופא מומחה.
+                            אם אתה חושד שלילדך יש פאנס/פאנדס, פנה לרופא מומחה.
                           </Typography>
                         </Box>
                       </Box>

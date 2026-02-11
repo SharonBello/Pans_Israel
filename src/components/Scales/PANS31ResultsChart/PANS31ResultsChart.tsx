@@ -100,7 +100,7 @@ const PANS31ResultsChart: React.FC = () => {
   if (!aggregated || aggregated.count === 0) {
     return (
       <Alert severity="info" sx={{ mb: 2 }}>
-        אין עדיין נתונים להצגה עבור סולם PANS 31-פריטים. התוצאות יופיעו כאן לאחר שמשתמשים ימלאו את הסולם.
+        אין עדיין נתונים להצגה עבור מדד PANS 31-פריטים. התוצאות יופיעו כאן לאחר שמשתמשים ימלאו את המדד.
       </Alert>
     );
   }
@@ -151,7 +151,7 @@ const PANS31ResultsChart: React.FC = () => {
     <Paper elevation={3} className="pans31-results-chart">
       <Box sx={{ px: 3, pt: 3, pb: 2 }}>
         <Typography variant="h5" gutterBottom sx={{ textAlign: 'center', fontWeight: 'bold' }}>
-          סטטיסטיקות קהילתיות - סולם PANS 31-פריטים
+          סטטיסטיקות קהילתיות - מדד PANS 31-פריטים
         </Typography>
         <Typography variant="body2" color="text.secondary" sx={{ textAlign: 'center', mb: 3 }}>
           מבוסס על {aggregated.count} הערכות שהושלמו
@@ -290,7 +290,7 @@ const PANS31ResultsChart: React.FC = () => {
 
       <Box sx={{ px: 3, pb: 3 }}>
         <Typography variant="caption" color="text.secondary" sx={{ textAlign: 'center', display: 'block' }}>
-          הנתונים מתעדכנים אוטומטית כאשר משתמשים חדשים ממלאים את הסולם.
+          הנתונים מתעדכנים אוטומטית כאשר משתמשים חדשים ממלאים את המדד.
         </Typography>
       </Box>
     </Paper>
