@@ -30,7 +30,7 @@ const heroStats: HeroStat[] = [
   },
   {
     id: 'age',
-    value: '3–14',
+    value: '14–3',
     label: 'גיל הופעה אופייני',
     // subLabel: 'אפשר גם מאוחר יותר',
     Icon: FiCalendar,
