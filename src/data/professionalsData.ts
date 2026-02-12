@@ -1,20 +1,20 @@
 import type { Professional, ProfessionalField, Location } from '../types/professionals';
 
 export const MEDICAL_FIELDS: ProfessionalField[] = [
-    { key: 'pediatric-neurologist', label: 'נוירולוג ילדים', category: 'medical' },
-    { key: 'pediatric-psychiatrist', label: 'פסיכיאטר ילדים', category: 'medical' },
-    { key: 'pediatric-immunologist', label: 'אימונולוג ילדים', category: 'medical' },
-    { key: 'infectious-disease', label: 'מומחה למחלות זיהומיות', category: 'medical' },
-    { key: 'pediatrician', label: 'רופא ילדים', category: 'medical' },
-    { key: 'rheumatologist', label: 'ראומטולוג ילדים', category: 'medical' },
-    { key: 'ent', label: 'רופא אף אוזן גרון', category: 'medical' },
+    { key: 'pediatric-neurologist', label: 'נוירולוגיה', category: 'medical' },
+    { key: 'pediatric-psychiatrist', label: 'פסיכיאטריה', category: 'medical' },
+    { key: 'pediatric-immunologist', label: 'אימונולוגיה', category: 'medical' },
+    { key: 'infectious-disease', label: 'מחלות זיהומיות', category: 'medical' },
+    { key: 'pediatrician', label: 'ילדים', category: 'medical' },
+    { key: 'rheumatologist', label: 'ראומטולוגיה', category: 'medical' },
+    { key: 'ent', label: 'אף אוזן גרון', category: 'medical' },
 ];
 
 export const HOLISTIC_FIELDS: ProfessionalField[] = [
-    { key: 'naturopath', label: 'נטורופת/ית', category: 'holistic' },
-    { key: 'homeopath', label: 'הומאופת/ית', category: 'holistic' },
+    { key: 'naturopath', label: 'נטורופתיה', category: 'holistic' },
+    { key: 'homeopath', label: 'הומאופתיה', category: 'holistic' },
     { key: 'functional-medicine', label: 'רפואה פונקציונלית', category: 'holistic' },
-    { key: 'nutritionist', label: 'תזונאי/ת קלינית', category: 'holistic' },
+    { key: 'nutritionist', label: 'תזונה קלינית', category: 'holistic' },
     { key: 'acupuncture', label: 'דיקור סיני', category: 'holistic' },
     { key: 'chinese-medicine', label: 'רפואה סינית', category: 'holistic' },
     { key: 'reflexology', label: 'רפלקסולוגיה', category: 'holistic' },
@@ -23,13 +23,13 @@ export const HOLISTIC_FIELDS: ProfessionalField[] = [
 ];
 
 export const THERAPY_FIELDS: ProfessionalField[] = [
-    { key: 'occupational-therapist', label: 'מרפא/ה בעיסוק', category: 'therapy' },
-    { key: 'speech-therapist', label: 'קלינאי/ת תקשורת', category: 'therapy' },
-    { key: 'psychologist', label: 'פסיכולוג/ית', category: 'therapy' },
-    { key: 'cbt-therapist', label: 'מטפל/ת CBT', category: 'therapy' },
-    { key: 'art-therapist', label: 'מטפל/ת באומנות', category: 'therapy' },
-    { key: 'play-therapist', label: 'מטפל/ת במשחק', category: 'therapy' },
-    { key: 'family-therapist', label: 'מטפל/ת משפחתי', category: 'therapy' },
+    { key: 'occupational-therapist', label: 'ריפוי בעיסוק', category: 'therapy' },
+    { key: 'speech-therapist', label: 'קלינאות תקשורת', category: 'therapy' },
+    { key: 'psychologist', label: 'פסיכולוגיה', category: 'therapy' },
+    { key: 'cbt-therapist', label: 'טיפול CBT', category: 'therapy' },
+    { key: 'art-therapist', label: 'טיפול באומנות', category: 'therapy' },
+    { key: 'play-therapist', label: 'טיפול במשחק', category: 'therapy' },
+    { key: 'family-therapist', label: 'טיפול משפחתי', category: 'therapy' },
     { key: 'sensory-integration', label: 'אינטגרציה סנסורית', category: 'therapy' },
 ];
 

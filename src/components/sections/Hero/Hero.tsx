@@ -23,8 +23,8 @@ const heroStats: HeroStat[] = [
   },
   {
     id: 'incidence',
-    value: '≈ 1 ל־12,000',
-    label: 'אומדן ממחקר Primary Care',
+    value: '100%',
+    label: 'התנדבותי',
     // subLabel: 'אומדן ממחקר Primary Care',
     Icon: FiTrendingUp,
   },
