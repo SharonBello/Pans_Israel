@@ -1,7 +1,7 @@
 import type { PansFormData, PansScores } from '../types/pandasScale';
 
 /**
- * Computes the PANDAS/PANS scale scores from form data
+ * Computes the PANS/PANDAS scale scores from form data
  * Formula:
  * - OCD Score (0-25): Maximum rating among OCD symptoms × 5
  * - Associated Score (0-25): Sum of top 5 domain ratings

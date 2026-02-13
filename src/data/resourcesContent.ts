@@ -800,7 +800,7 @@ export const resourceSections: Record<string, InfoSection> = {
             url: 'https://nepans.org/'
           },
           {
-            title: 'Northwest PANDAS/PANS Network',
+            title: 'Northwest PANS/PANDAS Network',
             description: 'עמותה המשרתת את אלה במערב צפון אמריקה עם פאנס/פאנדס/AE ומשפחותיהם.',
             url: 'https://www.nwppn.org/'
           },
@@ -982,7 +982,7 @@ export const downloadableResources: ResourceLink[] = [
   {
     id: 'friend-wants-to-know',
     title: 'מה החבר שלך עם פאנס/פאנדס רוצה שתדע',
-    titleEn: 'What Your Friend with PANDAS/PANS Wants You To Know',
+    titleEn: 'What Your Friend with PANS/PANDAS Wants You To Know',
     description: 'מדריך לחברים ובני משפחה',
     url: 'https://pandasnetwork.org/wp-content/uploads/2021/08/What-your-friend-with-PANDAS-or-PANS-wants-you-to-know.pdf',
     type: 'pdf'
