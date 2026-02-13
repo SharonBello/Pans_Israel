@@ -14,6 +14,7 @@ import Sidebar from './components/Sidebar/Sidebar';
 import './styles/main.scss';
 import './App.scss';
 import { AccessibilityBar } from './components/AccessibilityBar';
+import LegalDisclaimer from './components/LegalDisclaimer/LegalDisclaimer';
 
 // Create RTL cache for MUI components
 const cacheRtl = createCache({
@@ -36,6 +37,7 @@ function App() {
     <CacheProvider value={cacheRtl}>
       <Router>
         <div dir="rtl" lang="he" className="app">
+          <LegalDisclaimer />
           <Header onMenuToggle={handleMenuToggle} isMenuOpen={isMenuOpen} />
 
           {/* ADD THE SIDEBAR HERE */}
