@@ -53,23 +53,23 @@ const hashEmail = (email: string): string => {
 const generateSerial = async (): Promise<string> => {
     const year = new Date().getFullYear();
     const counterRef = doc(db, 'counters', 'survey_serial');
-    
+
     try {
         const newSerial = await runTransaction(db, async (transaction) => {
             const counterDoc = await transaction.get(counterRef);
-            
+
             let currentCount = 1;
             if (counterDoc.exists()) {
                 currentCount = (counterDoc.data().count || 0) + 1;
             }
-            
+
             transaction.set(counterRef, { count: currentCount }, { merge: true });
-            
+
             // Format: IL-2025-00001
             const paddedCount = currentCount.toString().padStart(5, '0');
             return `IL-${year}-${paddedCount}`;
         });
-        
+
         return newSerial;
     } catch (error) {
         // Fallback if transaction fails
@@ -86,9 +86,9 @@ const generateSerial = async (): Promise<string> => {
 export const getOrCreateSerial = async (email: string): Promise<SurveySerial> => {
     const emailHash = hashEmail(email);
     const serialRef = doc(db, SERIALS_COLLECTION, emailHash);
-    
+
     const existingDoc = await getDoc(serialRef);
-    
+
     if (existingDoc.exists()) {
         const data = existingDoc.data() as SurveySerial;
         // Update response count
@@ -100,7 +100,7 @@ export const getOrCreateSerial = async (email: string): Promise<SurveySerial> =>
             responseCount: data.responseCount + 1,
         };
     }
-    
+
     // Create new serial
     const newSerial = await generateSerial();
     const serialData: SurveySerial = {
@@ -109,9 +109,9 @@ export const getOrCreateSerial = async (email: string): Promise<SurveySerial> =>
         createdAt: Timestamp.now(),
         responseCount: 1,
     };
-    
+
     await setDoc(serialRef, serialData);
-    
+
     return serialData;
 };
 
@@ -128,7 +128,7 @@ export const submitSurveyResponse = async <T extends BaseSurveyResponse>(
     try {
         // Get or create serial
         const serialData = await getOrCreateSerial(email);
-        
+
         // Prepare response document
         const responseData: BaseSurveyResponse = {
             surveyId,
@@ -137,18 +137,18 @@ export const submitSurveyResponse = async <T extends BaseSurveyResponse>(
             submittedAt: Timestamp.now(),
             answers: answers as Record<string, string | number | boolean | string[]>,
         };
-        
+
         // Save to survey-specific collection
         const responsesRef = collection(db, RESPONSES_COLLECTION, surveyId, 'responses');
         const docRef = await addDoc(responsesRef, responseData);
-        
+
         // Update survey metadata (total responses)
         const surveyMetaRef = doc(db, SURVEYS_COLLECTION, surveyId);
         await setDoc(surveyMetaRef, {
             totalResponses: increment(1),
             lastResponseAt: Timestamp.now(),
         }, { merge: true });
-        
+
         return {
             success: true,
             responseId: docRef.id,
@@ -172,14 +172,14 @@ export const getSurveyResponses = async (
 ): Promise<BaseSurveyResponse[]> => {
     try {
         const responsesRef = collection(db, RESPONSES_COLLECTION, surveyId, 'responses');
-        
+
         let q = query(responsesRef, orderBy('submittedAt', 'desc'));
         if (limitCount) {
             q = query(q, limit(limitCount));
         }
-        
+
         const snapshot = await getDocs(q);
-        
+
         return snapshot.docs.map(doc => ({
             id: doc.id,
             ...doc.data(),
@@ -194,16 +194,12 @@ export const getSurveyResponses = async (
 // Get Survey Response Count
 // --------------------------------------------------------------------------
 
+// Replace the getSurveyResponseCount function with this:
 export const getSurveyResponseCount = async (surveyId: string): Promise<number> => {
     try {
-        const surveyMetaRef = doc(db, SURVEYS_COLLECTION, surveyId);
-        const surveyDoc = await getDoc(surveyMetaRef);
-        
-        if (surveyDoc.exists()) {
-            return surveyDoc.data().totalResponses || 0;
-        }
-        
-        return 0;
+        const responsesRef = collection(db, RESPONSES_COLLECTION, surveyId, 'responses');
+        const snapshot = await getDocs(responsesRef);
+        return snapshot.docs.length;
     } catch (error) {
         console.error('Error getting response count:', error);
         return 0;
@@ -218,7 +214,7 @@ export const getUniqueFamilyCount = async (surveyId: string): Promise<number> =>
     try {
         const responsesRef = collection(db, RESPONSES_COLLECTION, surveyId, 'responses');
         const snapshot = await getDocs(responsesRef);
-        
+
         const uniqueSerials = new Set<string>();
         snapshot.docs.forEach(doc => {
             const data = doc.data();
@@ -226,7 +222,7 @@ export const getUniqueFamilyCount = async (surveyId: string): Promise<number> =>
                 uniqueSerials.add(data.serial);
             }
         });
-        
+
         return uniqueSerials.size;
     } catch (error) {
         console.error('Error getting family count:', error);
@@ -243,13 +239,13 @@ export const calculateSurveyStatistics = async (
 ): Promise<SurveyStatistics | null> => {
     try {
         const responses = await getSurveyResponses(surveyId);
-        
+
         if (responses.length === 0) {
             return null;
         }
-        
+
         const uniqueSerials = new Set(responses.map(r => r.serial));
-        
+
         // Calculate question-level statistics
         const questionStats: Record<string, {
             questionId: string;
@@ -258,7 +254,7 @@ export const calculateSurveyStatistics = async (
             optionPercentages: Record<string, number>;
             values: number[];
         }> = {};
-        
+
         responses.forEach(response => {
             Object.entries(response.answers).forEach(([questionId, answer]) => {
                 if (!questionStats[questionId]) {
@@ -270,10 +266,10 @@ export const calculateSurveyStatistics = async (
                         values: [],
                     };
                 }
-                
+
                 const stat = questionStats[questionId];
                 stat.totalAnswers++;
-                
+
                 // Handle different answer types
                 if (typeof answer === 'number') {
                     stat.values.push(answer);
@@ -289,7 +285,7 @@ export const calculateSurveyStatistics = async (
                 }
             });
         });
-        
+
         // Calculate percentages and averages
         Object.values(questionStats).forEach(stat => {
             // Percentages for option counts
@@ -297,14 +293,14 @@ export const calculateSurveyStatistics = async (
                 stat.optionPercentages[option] = Math.round((count / stat.totalAnswers) * 100);
             });
         });
-        
+
         // Get last response time
         const sortedResponses = responses.sort((a, b) => {
             const aTime = a.submittedAt instanceof Timestamp ? a.submittedAt.toMillis() : 0;
             const bTime = b.submittedAt instanceof Timestamp ? b.submittedAt.toMillis() : 0;
             return bTime - aTime;
         });
-        
+
         return {
             totalResponses: responses.length,
             uniqueFamilies: uniqueSerials.size,
@@ -326,36 +322,36 @@ export const exportSurveyData = async (
     options: ExportOptions
 ): Promise<{ data: string; filename: string; mimeType: string }> => {
     const responses = await getSurveyResponses(surveyId);
-    
+
     // Filter by date range if provided
     let filteredResponses = responses;
     if (options.dateRange) {
         filteredResponses = responses.filter(r => {
-            const submittedAt = r.submittedAt instanceof Timestamp 
-                ? r.submittedAt.toDate() 
+            const submittedAt = r.submittedAt instanceof Timestamp
+                ? r.submittedAt.toDate()
                 : new Date();
-            return submittedAt >= options.dateRange!.start && 
-                   submittedAt <= options.dateRange!.end;
+            return submittedAt >= options.dateRange!.start &&
+                submittedAt <= options.dateRange!.end;
         });
     }
-    
+
     // Prepare data rows
     const rows = filteredResponses.map(response => {
         const row: Record<string, unknown> = {
             ...(options.anonymize ? {} : { serial: response.serial }),
             childIndex: response.childIndex,
-            submittedAt: response.submittedAt instanceof Timestamp 
-                ? response.submittedAt.toDate().toISOString() 
+            submittedAt: response.submittedAt instanceof Timestamp
+                ? response.submittedAt.toDate().toISOString()
                 : '',
             ...response.answers,
         };
         return row;
     });
-    
-    const timestamp = options.includeTimestamp 
-        ? `_${new Date().toISOString().split('T')[0]}` 
+
+    const timestamp = options.includeTimestamp
+        ? `_${new Date().toISOString().split('T')[0]}`
         : '';
-    
+
     if (options.format === 'json') {
         return {
             data: JSON.stringify(rows, null, 2),
@@ -363,7 +359,7 @@ export const exportSurveyData = async (
             mimeType: 'application/json',
         };
     }
-    
+
     // CSV format
     if (rows.length === 0) {
         return {
@@ -372,11 +368,11 @@ export const exportSurveyData = async (
             mimeType: 'text/csv',
         };
     }
-    
+
     const headers = Object.keys(rows[0]);
     const csvRows = [
         headers.join(','),
-        ...rows.map(row => 
+        ...rows.map(row =>
             headers.map(header => {
                 const value = row[header];
                 if (value === null || value === undefined) return '';
@@ -390,7 +386,7 @@ export const exportSurveyData = async (
             }).join(',')
         ),
     ];
-    
+
     return {
         data: csvRows.join('\n'),
         filename: `${surveyId}${timestamp}.csv`,
@@ -407,9 +403,9 @@ export const getEmailSubmissionInfo = async (
 ): Promise<{ hasSubmitted: boolean; submissionCount: number }> => {
     const emailHash = hashEmail(email);
     const serialRef = doc(db, SERIALS_COLLECTION, emailHash);
-    
+
     const existingDoc = await getDoc(serialRef);
-    
+
     if (existingDoc.exists()) {
         const data = existingDoc.data() as SurveySerial;
         return {
@@ -417,7 +413,7 @@ export const getEmailSubmissionInfo = async (
             submissionCount: data.responseCount,
         };
     }
-    
+
     return {
         hasSubmitted: false,
         submissionCount: 0,
