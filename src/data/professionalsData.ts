@@ -67,6 +67,17 @@ export const LOCATIONS: Location[] = [
     { key: 'n/a', label: 'יישוב לא ברשימה', region: 'לא ידוע' },
 ];
 
+export const HEALTH_FUNDS = [
+    { key: 'clalit', label: 'כללית' },
+    { key: 'maccabi', label: 'מכבי' },
+    { key: 'meuhedet', label: 'מאוחדת' },
+    { key: 'leumit', label: 'לאומית' },
+    { key: 'private', label: 'פרטי' },
+    { key: 'unknown', label: 'לא ידוע' },
+] as const;
+
+export type HealthFundKey = typeof HEALTH_FUNDS[number]['key'];
+
 export const getFieldsByCategory = (category: 'medical' | 'holistic' | 'therapy'): ProfessionalField[] => {
     switch (category) {
         case 'medical':

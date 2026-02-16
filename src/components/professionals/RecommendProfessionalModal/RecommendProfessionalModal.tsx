@@ -1,8 +1,9 @@
 import { CloseIcon } from "@/components/icons/Icons";
-import { HOLISTIC_FIELDS, LOCATIONS, MEDICAL_FIELDS, THERAPY_FIELDS } from "@/data/professionalsData";
+import { HOLISTIC_FIELDS, LOCATIONS, MEDICAL_FIELDS, THERAPY_FIELDS, HEALTH_FUNDS } from "@/data/professionalsData";
 import type { NewProfessionalPayload, RecommendModalProps } from "@/types/professionals";
-// import type { ProfessionalField, Location } from '../../types/professionals';
+import type { HealthFundKey } from "@/data/professionalsData";
 import { useState } from "react";
+import './RecommendProfessionalModal.scss'
 
 
 const RecommendModal: React.FC<RecommendModalProps> = ({ isOpen, onClose, category, onSubmit }) => {
@@ -15,12 +16,26 @@ const RecommendModal: React.FC<RecommendModalProps> = ({ isOpen, onClose, catego
         address: '',
         website: '',
         description: '',
+        healthFunds: [] as HealthFundKey[],
         recommenderName: '',
         recommenderEmail: '',
     });
     const [submitted, setSubmitted] = useState(false);
 
     const fields = category === 'medical' ? MEDICAL_FIELDS : category === 'holistic' ? HOLISTIC_FIELDS : THERAPY_FIELDS;
+
+    // Handle health fund checkbox toggle
+    const handleHealthFundToggle = (fundKey: HealthFundKey) => {
+        setFormData(prev => {
+            const isSelected = prev.healthFunds.includes(fundKey);
+            return {
+                ...prev,
+                healthFunds: isSelected
+                    ? prev.healthFunds.filter(f => f !== fundKey)
+                    : [...prev.healthFunds, fundKey]
+            };
+        });
+    };
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -44,6 +59,7 @@ const RecommendModal: React.FC<RecommendModalProps> = ({ isOpen, onClose, catego
             ...(formData.address ? { address: formData.address } : {}),
             ...(formData.website ? { website: formData.website } : {}),
             ...(formData.description ? { description: formData.description } : {}),
+            ...(formData.healthFunds.length > 0 ? { healthFunds: formData.healthFunds } : {}),
         };
 
         await onSubmit(payload);
@@ -60,6 +76,7 @@ const RecommendModal: React.FC<RecommendModalProps> = ({ isOpen, onClose, catego
             address: '',
             website: '',
             description: '',
+            healthFunds: [],
             recommenderName: '',
             recommenderEmail: '',
         });
@@ -124,6 +141,24 @@ const RecommendModal: React.FC<RecommendModalProps> = ({ isOpen, onClose, catego
                                     </select>
                                 </div>
                             </div>
+
+                            {/* NEW: Health Funds Multi-Select */}
+                            <div className="modal__field">
+                                <label>קופות חולים</label>
+                                <div className="modal__checkboxes">
+                                    {HEALTH_FUNDS.map((fund) => (
+                                        <label key={fund.key} className="modal__checkbox-label">
+                                            <input
+                                                type="checkbox"
+                                                checked={formData.healthFunds.includes(fund.key)}
+                                                onChange={() => handleHealthFundToggle(fund.key)}
+                                            />
+                                            <span>{fund.label}</span>
+                                        </label>
+                                    ))}
+                                </div>
+                            </div>
+
                             <div className="modal__field">
                                 <label>כתובת מלאה</label>
                                 <input

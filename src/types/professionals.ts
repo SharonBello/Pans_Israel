@@ -1,3 +1,5 @@
+import type { HealthFundKey } from "@/data/professionalsData";
+
 export type ProfessionalCategory = 'medical' | 'holistic' | 'therapy';
 
 // export interface Professional {
@@ -82,6 +84,7 @@ export interface Professional {
   address?: string;
   website?: string;
   description?: string;
+  healthFunds?: HealthFundKey[];
   imageUrl?: string;
 }
 

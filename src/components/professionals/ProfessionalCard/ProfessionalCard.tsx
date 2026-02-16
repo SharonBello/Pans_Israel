@@ -1,5 +1,7 @@
 import { CheckIcon, EmailIcon, LocationIcon, NavigationIcon, PhoneIcon, WebIcon, XIcon } from "@/components/icons/Icons";
+import { HEALTH_FUNDS } from "@/data/professionalsData";
 import type { ProfessionalCardProps } from "@/types/professionals";
+import type { ReactElement, JSXElementConstructor, ReactNode, ReactPortal, Key } from "react";
 
 // ============ HELPER FUNCTIONS ============
 const generateGoogleMapsLink = (address: string, location: string): string => {
@@ -13,7 +15,12 @@ const generateWazeLink = (address: string, location: string): string => {
 };
 
 const ProfessionalCard: React.FC<ProfessionalCardProps> = ({ professional }) => {
-  const { name, field, location, phone, email, website, address, description, acceptingNewPatients } = professional;
+  const { name, field, location, phone, email, website, address, description, acceptingNewPatients, healthFunds } = professional;
+
+  // Get health fund labels from keys
+  const healthFundLabels = healthFunds?.map((key: string) =>
+    HEALTH_FUNDS.find(fund => fund.key === key)?.label
+  ).filter(Boolean);
 
   return (
     <article className="pro-card">
@@ -35,6 +42,20 @@ const ProfessionalCard: React.FC<ProfessionalCardProps> = ({ professional }) => 
           </>
         )}
       </div>
+
+      {/* NEW: Health Funds Display */}
+      {healthFundLabels && healthFundLabels.length > 0 && (
+        <div className="pro-card__health-funds">
+          <span className="pro-card__health-funds-label">קופות חולים:</span>
+          <div className="pro-card__health-funds-tags">
+            {healthFundLabels.map((label: string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<string | number | bigint | boolean | ReactPortal | ReactElement<unknown, string | JSXElementConstructor<any>> | Iterable<ReactNode> | null | undefined> | Iterable<ReactNode> | null | undefined, index: Key | null | undefined) => (
+              <span key={index} className="pro-card__health-fund-tag">
+                {label}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Navigation Links for Address */}
       {address && (
