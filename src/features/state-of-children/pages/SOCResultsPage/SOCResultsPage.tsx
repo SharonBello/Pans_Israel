@@ -454,7 +454,7 @@ const SOCResultsPage: React.FC = () => {
                 {/* Stats Cards */}
                 <Grid container spacing={3} className="soc-results__stats">
                     {statsCards.map((card, index) => (
-                        <Grid sx={{ xs: 12, md: 3 }} key={index}>
+                        <Box sx={{ xs: 12, md: 3 }} key={index}>
                             <Card className="soc-results__stat-card">
                                 <CardContent>
                                     <Box
@@ -471,7 +471,7 @@ const SOCResultsPage: React.FC = () => {
                                     </Typography>
                                 </CardContent>
                             </Card>
-                        </Grid>
+                        </Box>
                     ))}
                 </Grid>
 

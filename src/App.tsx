@@ -16,6 +16,7 @@ import './App.scss';
 import { AccessibilityBar } from './components/AccessibilityBar';
 import LegalDisclaimer from './components/LegalDisclaimer/LegalDisclaimer';
 import Footer from './components/Footer';
+import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 
 // Create RTL cache for MUI components
 const cacheRtl = createCache({
@@ -46,6 +47,7 @@ function App() {
           <AccessibilityBar />
 
           <main style={{ flex: '1 0 auto' }} className="main-content">
+            <ScrollToTop /> 
             <Routes>
               {AppRoutes.map((route) => (
                 <Route key={route.path} element={route.component} path={route.path} />

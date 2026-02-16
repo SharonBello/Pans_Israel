@@ -5,13 +5,13 @@
 @use "sass:color";
 
 $color-primary: #023373;
-$color-accent: #E67E22;
-$color-medium: #6CA6D9;
-$color-light: #A7D5F2;
-$color-background: #F2F2F2;
-$text-primary: #0E0D26;
+$color-accent: #e67e22;
+$color-medium: #6ca6d9;
+$color-light: #a7d5f2;
+$color-background: #f2f2f2;
+$text-primary: #0e0d26;
 $text-secondary: #023373;
-$success: #4CAF50;
+$success: #4caf50;
 
 .soc-results {
     min-height: 100vh;
@@ -34,7 +34,7 @@ $success: #4CAF50;
         gap: 20px;
 
         .MuiTypography-root {
-            font-family: 'Heebo', sans-serif;
+            font-family: "Heebo", sans-serif;
             color: $text-secondary;
         }
     }
@@ -51,14 +51,14 @@ $success: #4CAF50;
         box-shadow: 0 10px 40px rgba($color-primary, 0.1);
 
         h4 {
-            font-family: 'Heebo', sans-serif !important;
+            font-family: "Heebo", sans-serif !important;
             font-weight: 700 !important;
             color: $color-primary !important;
             margin-bottom: 12px !important;
         }
 
         p {
-            font-family: 'Heebo', sans-serif !important;
+            font-family: "Heebo", sans-serif !important;
             color: $text-secondary !important;
         }
     }
@@ -73,7 +73,7 @@ $success: #4CAF50;
     }
 
     &__title {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: clamp(1.75rem, 5vw, 2.5rem) !important;
         font-weight: 800 !important;
         color: $color-primary !important;
@@ -81,7 +81,7 @@ $success: #4CAF50;
     }
 
     &__subtitle {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 1.125rem !important;
         color: $text-secondary !important;
         opacity: 0.85;
@@ -93,6 +93,15 @@ $success: #4CAF50;
 
     &__stats {
         margin-bottom: 40px !important;
+        width: 100%;
+        display: grid !important;
+        grid-template-columns: repeat(4, 1fr) !important;
+        grid-template-rows: 1fr !important;
+
+        @media (max-width: 600px) {
+            grid-template-rows: repeat(4, 1fr) !important;
+            grid-template-columns: 1fr !important;
+        }
     }
 
     &__stat-card {
@@ -101,6 +110,7 @@ $success: #4CAF50;
         box-shadow: 0 4px 20px rgba($color-primary, 0.08) !important;
         transition: all 0.3s ease;
         height: 100%;
+        width: 100%;
 
         &:hover {
             transform: translateY(-4px);
@@ -131,7 +141,7 @@ $success: #4CAF50;
     }
 
     &__stat-value {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 2rem !important;
         font-weight: 800 !important;
         color: $text-primary !important;
@@ -139,7 +149,7 @@ $success: #4CAF50;
     }
 
     &__stat-label {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 0.875rem !important;
         color: $text-secondary !important;
         opacity: 0.8;
@@ -159,7 +169,7 @@ $success: #4CAF50;
 
     &__tabs {
         .MuiTab-root {
-            font-family: 'Heebo', sans-serif;
+            font-family: "Heebo", sans-serif;
             font-size: 1rem;
             font-weight: 600;
             text-transform: none;
@@ -208,7 +218,7 @@ $success: #4CAF50;
     }
 
     &__chart-title {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 1.125rem !important;
         font-weight: 700 !important;
         color: $color-primary !important;
@@ -217,7 +227,7 @@ $success: #4CAF50;
     }
 
     &__gauge-value {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 2.5rem !important;
         font-weight: 800 !important;
         color: $success !important;
@@ -233,29 +243,29 @@ $success: #4CAF50;
         direction: ltr; // Charts work better in LTR
 
         .recharts-text {
-            font-family: 'Heebo', sans-serif;
+            font-family: "Heebo", sans-serif;
         }
 
         .recharts-cartesian-axis-tick-value {
-            font-family: 'Heebo', sans-serif;
+            font-family: "Heebo", sans-serif;
             font-size: 12px;
             fill: $text-secondary;
         }
 
         .recharts-tooltip-wrapper {
             .recharts-default-tooltip {
-                font-family: 'Heebo', sans-serif;
+                font-family: "Heebo", sans-serif;
                 border-radius: 8px !important;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
             }
         }
 
         .recharts-legend-item-text {
-            font-family: 'Heebo', sans-serif;
+            font-family: "Heebo", sans-serif;
         }
 
         .recharts-pie-label-text {
-            font-family: 'Heebo', sans-serif;
+            font-family: "Heebo", sans-serif;
             font-size: 11px;
         }
     }
@@ -272,7 +282,7 @@ $success: #4CAF50;
         border: 1px dashed rgba($color-primary, 0.2);
 
         .MuiTypography-root {
-            font-family: 'Heebo', sans-serif !important;
+            font-family: "Heebo", sans-serif !important;
             font-size: 0.875rem !important;
             color: $text-secondary !important;
             opacity: 0.8;
