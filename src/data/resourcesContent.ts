@@ -171,69 +171,69 @@ export const resourceSections: Record<string, InfoSection> = {
           }
         ]
       },
-      {
-        id: 'downloads-heading',
-        type: 'heading',
-        title: 'מדריכים ומשאבים להורדה'
-      },
-      {
-        id: 'downloads-list',
-        type: 'list',
-        items: [
-          {
-            title: 'עובדות מהירות על פאנס/פאנדס',
-            description: 'PDF - מדריך תמציתי'
-          },
-          {
-            title: 'חדש ל-פאנס/פאנדס?',
-            description: 'מדריך התחלתי להורים חדשים'
-          },
-          {
-            title: 'חוברת פאנדס',
-            description: 'חוברת מידע להפצה'
-          }
-        ]
-      },
-      {
-        id: 'letters-heading',
-        type: 'heading',
-        title: 'מכתבים לדוגמה למשפחות'
-      },
-      {
-        id: 'letters-paragraph',
-        type: 'paragraph',
-        content: 'תוכלו להשתמש במסגרות אלו ליצירת מכתב למורים, מנהלים וצוות שמתקשרים עם ילדכם בבית הספר. העתיקו והדביקו את הטקסט, ואז התאימו אותם לשימוש האישי שלכם.'
-      },
-      {
-        id: 'letters-list',
-        type: 'list',
-        items: [
-          {
-            title: 'מכתב לבית הספר בזמן התלקחות פאנס/פאנדס',
-            description: 'לשימוש כשהילד נמצא באפיזודה פעילה'
-          },
-          {
-            title: 'מכתב לבית הספר בזמן הפוגה',
-            description: 'לשימוש כשהילד במצב יציב'
-          },
-          {
-            title: 'מכתב בקשה להתראה על חשיפה לסטרפ',
-            description: 'בקשה מבית הספר להודיע על מקרי סטרפ בכיתה'
-          }
-        ]
-      },
+      // {
+      //   id: 'downloads-heading',
+      //   type: 'heading',
+      //   title: 'מדריכים ומשאבים להורדה'
+      // },
+      // {
+      //   id: 'downloads-list',
+      //   type: 'list',
+      //   items: [
+      //     {
+      //       title: 'עובדות מהירות על פאנס/פאנדס',
+      //       description: 'PDF - מדריך תמציתי'
+      //     },
+      //     {
+      //       title: 'חדש ל-פאנס/פאנדס?',
+      //       description: 'מדריך התחלתי להורים חדשים'
+      //     },
+      //     {
+      //       title: 'חוברת פאנדס',
+      //       description: 'חוברת מידע להפצה'
+      //     }
+      //   ]
+      // },
+      // {
+      //   id: 'letters-heading',
+      //   type: 'heading',
+      //   title: 'מכתבים לדוגמה למשפחות'
+      // },
+      // {
+      //   id: 'letters-paragraph',
+      //   type: 'paragraph',
+      //   content: 'תוכלו להשתמש במסגרות אלו ליצירת מכתב למורים, מנהלים וצוות שמתקשרים עם ילדכם בבית הספר. העתיקו והדביקו את הטקסט, ואז התאימו אותם לשימוש האישי שלכם.'
+      // },
+      // {
+      //   id: 'letters-list',
+      //   type: 'list',
+      //   items: [
+      //     {
+      //       title: 'מכתב לבית הספר בזמן התלקחות פאנס/פאנדס',
+      //       description: 'לשימוש כשהילד נמצא באפיזודה פעילה'
+      //     },
+      //     {
+      //       title: 'מכתב לבית הספר בזמן הפוגה',
+      //       description: 'לשימוש כשהילד במצב יציב'
+      //     },
+      //     {
+      //       title: 'מכתב בקשה להתראה על חשיפה לסטרפ',
+      //       description: 'בקשה מבית הספר להודיע על מקרי סטרפ בכיתה'
+      //     }
+      //   ]
+      // },
       {
         id: 'tips-heading',
         type: 'heading',
         title: 'טיפים לתקשורת עם בית הספר'
       },
-      {
-        id: 'tips-callout',
-        type: 'callout',
-        variant: 'info',
-        title: 'הצעות שימושיות',
-        content: 'גם אם אין לכם תוכנית 504 או IEP, עדיין תוכלו לדבר עם המורה/ים וההנהלה על מה שיהפוך את בית הספר לנוח יותר עבור ילדכם ועבורכם.'
-      },
+      // {
+      //   id: 'tips-callout',
+      //   type: 'callout',
+      //   variant: 'info',
+      //   title: 'הצעות שימושיות',
+      //   content: 'גם אם אין לכם תוכנית 504 או IEP, עדיין תוכלו לדבר עם המורה/ים וההנהלה על מה שיהפוך את בית הספר לנוח יותר עבור ילדכם ועבורכם.'
+      // },
       {
         id: 'tips-list',
         type: 'list',
@@ -325,45 +325,49 @@ export const resourceSections: Record<string, InfoSection> = {
         items: [
           {
             title: 'PANDAS Physicians Network',
-            description: 'רשת רופאים בינלאומית מקצועית עם הנחיות אבחון וטיפול'
+            description: 'רשת רופאים בינלאומית מקצועית עם הנחיות אבחון וטיפול',
+            url: 'https://www.pandasppn.org/'
           },
           {
             title: 'המכון הלאומי לבריאות הנפש (NIMH)',
-            description: 'סוכנות המחקר הפדרלית המובילה להפרעות נפשיות'
+            description: 'סוכנות המחקר הפדרלית המובילה להפרעות נפשיות',
+            url: 'https://www.nimh.nih.gov/'
           },
           {
             title: 'International OCD Foundation',
-            description: 'המשימה היא לעזור לכל מי שמושפע מ-OCD והפרעות קשורות'
+            description: 'המשימה היא לעזור לכל מי שמושפע מ-OCD והפרעות קשורות',
+            url: 'https://iocdf.org/'
           },
           {
             title: 'ערכות כלים למחלות נדירות',
-            description: 'מידע שימושי על חיים עם או תמיכה במטופלים עם מחלות נדירות'
+            description: 'מידע שימושי על חיים עם או תמיכה במטופלים עם מחלות נדירות',
+            url: 'https://rarediseases.org/'
           }
         ]
       },
-      {
-        id: 'pdf-heading',
-        type: 'heading',
-        title: 'משאבי PDF'
-      },
-      {
-        id: 'pdf-list',
-        type: 'list',
-        items: [
-          {
-            title: 'עובדות מהירות על פאנס/פאנדס',
-            description: 'סיכום תמציתי לאנשי מקצוע'
-          },
-          {
-            title: 'עובדות מהירות לאחיות בית ספר',
-            description: 'מדריך ספציפי לאחיות בית ספר'
-          },
-          {
-            title: 'חוברת פאנדס',
-            description: 'חוברת מידע מקיפה'
-          }
-        ]
-      }
+      // {
+      //   id: 'pdf-heading',
+      //   type: 'heading',
+      //   title: 'משאבי PDF'
+      // },
+      // {
+      //   id: 'pdf-list',
+      //   type: 'list',
+      //   items: [
+      //     {
+      //       title: 'עובדות מהירות על פאנס/פאנדס',
+      //       description: 'סיכום תמציתי לאנשי מקצוע'
+      //     },
+      //     {
+      //       title: 'עובדות מהירות לאחיות בית ספר',
+      //       description: 'מדריך ספציפי לאחיות בית ספר'
+      //     },
+      //     {
+      //       title: 'חוברת פאנדס',
+      //       description: 'חוברת מידע מקיפה'
+      //     }
+      //   ]
+      // }
     ],
     relatedPages: [
       {
@@ -406,13 +410,13 @@ export const resourceSections: Record<string, InfoSection> = {
         type: 'paragraph',
         content: 'קבוצת העבודה לגישה חינוכית של רשת פאנדס פיתחה ערכת כלים להורדה לצוות בית הספר, ושיתפה פעולה עם סטודנטים לתואר שני בריפוי בעיסוק מאוניברסיטת באפלו לפיתוח הדרכה פיילוט בת 1.5 שעות לצוות בית הספר.'
       },
-      {
-        id: 'toolkit-callout',
-        type: 'callout',
-        variant: 'success',
-        title: 'ערכת כלים חינוכית',
-        content: 'הורידו את ערכת הכלים החינוכית המקיפה שלנו הכוללת מידע, טיפים והמלצות לעבודה עם תלמידים עם פאנס/פאנדס.'
-      },
+      // {
+      //   id: 'toolkit-callout',
+      //   type: 'callout',
+      //   variant: 'success',
+      //   title: 'ערכת כלים חינוכית',
+      //   content: 'הורידו את ערכת הכלים החינוכית המקיפה שלנו הכוללת מידע, טיפים והמלצות לעבודה עם תלמידים עם פאנס/פאנדס.'
+      // },
       {
         id: 'impact-heading',
         type: 'heading',
@@ -979,14 +983,14 @@ export const downloadableResources: ResourceLink[] = [
     url: 'https://pandasnetwork.org/wp-content/uploads/2021/08/Handout-for-Teachers1.pdf',
     type: 'pdf'
   },
-  {
-    id: 'friend-wants-to-know',
-    title: 'מה החבר שלך עם פאנס/פאנדס רוצה שתדע',
-    titleEn: 'What Your Friend with PANS/PANDAS Wants You To Know',
-    description: 'מדריך לחברים ובני משפחה',
-    url: 'https://pandasnetwork.org/wp-content/uploads/2021/08/What-your-friend-with-PANDAS-or-PANS-wants-you-to-know.pdf',
-    type: 'pdf'
-  }
+  // {
+  //   id: 'friend-wants-to-know',
+  //   title: 'מה החבר שלך עם פאנס/פאנדס רוצה שתדע',
+  //   titleEn: 'What Your Friend with PANS/PANDAS Wants You To Know',
+  //   description: 'מדריך לחברים ובני משפחה',
+  //   url: 'https://pandasnetwork.org/wp-content/uploads/2021/08/What-your-friend-with-PANDAS-or-PANS-wants-you-to-know.pdf',
+  //   type: 'pdf'
+  // }
 ];
 
 // Helpful websites organized by category
