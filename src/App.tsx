@@ -15,6 +15,7 @@ import './styles/main.scss';
 import './App.scss';
 import { AccessibilityBar } from './components/AccessibilityBar';
 import LegalDisclaimer from './components/LegalDisclaimer/LegalDisclaimer';
+import Footer from './components/Footer';
 
 // Create RTL cache for MUI components
 const cacheRtl = createCache({
@@ -51,6 +52,8 @@ function App() {
               ))}
             </Routes>
           </main>
+          {/* Footer */}
+          <Footer />
         </div>
       </Router>
     </CacheProvider>
