@@ -47,6 +47,7 @@ interface ContentBlock {
   buttonText?: string;
   downloadUrl?: string;
   downloadLabel?: string;
+  imageUrl?: string;
 }
 
 interface ResourcesContentRendererProps {
@@ -372,6 +373,29 @@ const ResourcesContentRenderer: React.FC<ResourcesContentRendererProps> = ({ con
                 )}
               </CardContent>
             </Card>
+          </Box>
+        );
+
+      case 'image':
+        return (
+          <Box key={block.id} className="resources-content__image-block">
+            {block.title && (
+              <Typography variant="h6" className="resources-content__image-title">
+                {block.title}
+              </Typography>
+            )}
+            <Box className="resources-content__image-container">
+              <img
+                src={block.url || block.imageUrl}
+                alt={block.title || 'תמונה'}
+                className="resources-content__image"
+              />
+            </Box>
+            {block.content && (
+              <Typography variant="caption" className="resources-content__image-caption">
+                {block.content}
+              </Typography>
+            )}
           </Box>
         );
 

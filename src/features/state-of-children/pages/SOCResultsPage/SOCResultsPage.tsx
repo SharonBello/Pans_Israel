@@ -288,6 +288,11 @@ const SOCResultsPage: React.FC = () => {
         return [{ name: 'אופטימיות', value: avg * 20, fill: '#4CAF50' }];
     }, [responses]);
 
+    const difficultyData = useMemo(() => {
+        const avg = calculateAverageScale(responses, 'בcurrent_rating');
+        return [{ name: 'קושי יומיומי', value: avg * 20, fill: '#E67E22' }];
+    }, [responses]);
+
     // Comorbid conditions
     const comorbidData = useMemo(() => {
         const conditions = [
@@ -561,71 +566,64 @@ const SOCResultsPage: React.FC = () => {
 
                     {/* Symptoms Tab */}
                     {activeTab === 1 && (
-                        <Grid container spacing={4}>
-                            <Grid sx={{ xs: 12 }}>
-                                <Card className="soc-results__chart-card">
-                                    <CardContent>
-                                        <Typography className="soc-results__chart-title">
-                                            חומרת תסמינים ממוצעת (%)
-                                        </Typography>
-                                        <ResponsiveContainer width="100%" height={400}>
-                                            <BarChart
-                                                data={symptomData}
-                                                layout="vertical"
-                                                margin={{ top: 20, right: 30, left: 100, bottom: 5 }}
-                                            >
-                                                <CartesianGrid strokeDasharray="3 3" />
-                                                <XAxis type="number" domain={[0, 100]} />
-                                                <YAxis
-                                                    dataKey="name"
-                                                    type="category"
-                                                    tick={{ fontFamily: 'Heebo' }}
-                                                />
-                                                <Tooltip
-                                                    formatter={(value: number | undefined) => [`${value ?? 0}%`, 'שימוש']}
-                                                />
-                                                <Bar
-                                                    dataKey="value"
-                                                    fill="#023373"
-                                                    radius={[0, 4, 4, 0]}
-                                                />
-                                            </BarChart>
-                                        </ResponsiveContainer>
-                                    </CardContent>
-                                </Card>
-                            </Grid>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
 
-                            <Grid sx={{ xs: 12, md: 6 }}>
-                                <Card className="soc-results__chart-card soc-results__chart-card--gauge">
-                                    <CardContent>
-                                        <Typography className="soc-results__chart-title">
-                                            רמת אופטימיות ממוצעת
-                                        </Typography>
-                                        <ResponsiveContainer width="100%" height={250}>
-                                            <RadialBarChart
-                                                cx="50%"
-                                                cy="50%"
-                                                innerRadius="60%"
-                                                outerRadius="80%"
-                                                barSize={20}
-                                                data={outlookData}
-                                                startAngle={180}
-                                                endAngle={0}
-                                            >
-                                                <RadialBar
-                                                    dataKey="value"
-                                                    cornerRadius={10}
-                                                    background
-                                                />
+                            {/* Bar chart - full width */}
+                            <Card className="soc-results__chart-card">
+                                <CardContent>
+                                    <Typography className="soc-results__chart-title">
+                                        חומרת תסמינים ממוצעת (%)
+                                    </Typography>
+                                    <ResponsiveContainer width="100%" height={400}>
+                                        <BarChart
+                                            data={symptomData}
+                                            layout="vertical"
+                                            margin={{ top: 20, right: 30, left: 100, bottom: 5 }}
+                                        >
+                                            <CartesianGrid strokeDasharray="3 3" />
+                                            <XAxis type="number" domain={[0, 100]} />
+                                            <YAxis dataKey="name" type="category" tick={{ fontFamily: 'Heebo' }} />
+                                            <Tooltip formatter={(value: number | undefined) => [`${value ?? 0}%`, 'שימוש']} />
+                                            <Bar dataKey="value" fill="#023373" radius={[0, 4, 4, 0]} />
+                                        </BarChart>
+                                    </ResponsiveContainer>
+                                </CardContent>
+                            </Card>
+
+                            {/* Two gauge cards - side by side */}
+                            <Box sx={{ display: 'flex', gap: 3, flexDirection: { xs: 'column', md: 'row' } }}>
+                                <Card className="soc-results__chart-card soc-results__chart-card--gauge" sx={{ flex: 1 }}>
+                                    <CardContent sx={{ textAlign: 'center' }}>
+                                        <Typography className="soc-results__chart-title">רמת אופטימיות ממוצעת</Typography>
+                                        <ResponsiveContainer width="100%" height={200}>
+                                            <RadialBarChart cx="50%" cy="80%" innerRadius="60%" outerRadius="80%"
+                                                barSize={20} data={outlookData} startAngle={180} endAngle={0}>
+                                                <RadialBar dataKey="value" cornerRadius={10} background />
                                             </RadialBarChart>
                                         </ResponsiveContainer>
-                                        <Typography className="soc-results__gauge-value">
+                                        <Typography className="soc-results__gauge-value" sx={{ color: '#4CAF50' }}>
                                             {outlookData[0]?.value.toFixed(0)}%
                                         </Typography>
                                     </CardContent>
                                 </Card>
-                            </Grid>
-                        </Grid>
+
+                                <Card className="soc-results__chart-card soc-results__chart-card--gauge" sx={{ flex: 1 }}>
+                                    <CardContent sx={{ textAlign: 'center' }}>
+                                        <Typography className="soc-results__chart-title">רמת הקושי היומיומי הממוצעת</Typography>
+                                        <ResponsiveContainer width="100%" height={200}>
+                                            <RadialBarChart cx="50%" cy="80%" innerRadius="60%" outerRadius="80%"
+                                                barSize={20} data={difficultyData} startAngle={180} endAngle={0}>
+                                                <RadialBar dataKey="value" cornerRadius={10} background />
+                                            </RadialBarChart>
+                                        </ResponsiveContainer>
+                                        <Typography className="soc-results__gauge-value" sx={{ color: '#E67E22' }}>
+                                            {difficultyData[0]?.value.toFixed(0)}%
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
+                            </Box>
+
+                        </Box>
                     )}
 
                     {/* Diagnosis & Treatment Tab */}
@@ -780,8 +778,8 @@ const SOCResultsPage: React.FC = () => {
                         המידע מוצג למטרות מודעות ומחקר בלבד ואינו מהווה ייעוץ רפואי.
                     </Typography>
                 </Box>
-            </Container>
-        </Box>
+            </Container >
+        </Box >
     );
 };
 

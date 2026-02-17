@@ -242,9 +242,10 @@ export const resourceSections: Record<string, InfoSection> = {
           'דברו עם המורה על מתן הפסקות שירותים תכופות אם תכיפות במתן שתן היא בעיה',
           'קבעו "קוד" עם המורה - אות שהתלמיד מוצף וזקוק להפסקה מהכיתה',
           'קבלו אישור לילדכם להשתמש בבקבוק מים בכיתה למניעת חשיפה לחיידקים ממזרקות מים',
-          'בדקו יומני כתיבה ישנים לשינויים אפשריים בכתב יד - כולל סטיות משוליים ובעיות קריאות'
+          'בדקו יומני כתיבה ישנים לשינויים אפשריים בכתב יד - כולל סטיות משוליים ובעיות קריאות',
+          'מוזמנים ליצור קשר במיגה ותרצו הרצאה והסברים עבור צוותי החינוך העובדים עם ילדכם'
         ]
-      }
+      },
     ],
     relatedPages: [
       {
@@ -555,6 +556,20 @@ export const resourceSections: Record<string, InfoSection> = {
       //     }
       //   ]
       // }
+      {
+        id: 'info-flyer',
+        type: 'image',
+        url: '/images/school_diagram.jpeg',
+        title: '',
+        content: ''
+      },
+      {
+        id: 'info-lecture',
+        type: 'image',
+        url: '/images/school_lecture_flyer.png',
+        title: '',
+        content: ''
+      },
     ],
     relatedPages: [
       {
@@ -943,20 +958,20 @@ export const downloadableResources: ResourceLink[] = [
     url: 'https://pandasnetwork.org/wp-content/uploads/2023/04/Brochure.pdf',
     type: 'pdf'
   },
-  {
-    id: 'school-nurse',
-    title: 'עובדות מהירות לאחיות בית ספר',
-    titleEn: 'Quick Facts for School Nurses',
-    description: 'מדריך ספציפי לאחיות בית ספר',
-    url: 'https://pandasnetwork.org/wp-content/uploads/2019/04/PANDAS-NETWORK_SCHOOLNURSE.pdf',
-    type: 'pdf'
-  },
+  // {
+  //   id: 'school-nurse',
+  //   title: 'עובדות מהירות לאחיות בית ספר',
+  //   titleEn: 'Quick Facts for School Nurses',
+  //   description: 'מדריך ספציפי לאחיות בית ספר',
+  //   url: 'https://pandasnetwork.org/wp-content/uploads/2019/04/PANDAS-NETWORK_SCHOOLNURSE.pdf',
+  //   type: 'pdf'
+  // },
   {
     id: 'letter-exacerbation',
     title: 'מכתב לבית הספר בזמן התלקחות',
     titleEn: 'Letter to School while in Exacerbation',
     description: 'לשימוש כשהילד נמצא באפיזודה פעילה',
-    url: 'https://pandasnetwork.org/wp-content/uploads/2021/08/Letter-while-in-exacerbation.pdf',
+    url: '/pdfs/Letter_School_PANDAS_Flare.pdf',
     type: 'pdf'
   },
   {
@@ -964,23 +979,31 @@ export const downloadableResources: ResourceLink[] = [
     title: 'מכתב לבית הספר בזמן הפוגה',
     titleEn: 'Letter to School while in Remission',
     description: 'לשימוש כשהילד במצב יציב',
-    url: 'https://pandasnetwork.org/wp-content/uploads/2021/08/Letter-while-in-remission.pdf',
+    url: '/pdfs/Letter_School_PANDAS_Remission.pdf',
     type: 'pdf'
   },
-  {
-    id: 'strep-notification',
-    title: 'מכתב בקשה להתראה על חשיפה לסטרפ',
-    titleEn: 'Letter Requesting Notification of Strep Exposure',
-    description: 'בקשה מבית הספר להודיע על מקרי סטרפ בכיתה',
-    url: 'https://pandasnetwork.org/wp-content/uploads/2021/08/Notification-Letter.pdf',
-    type: 'pdf'
-  },
+  // {
+  //   id: 'strep-notification',
+  //   title: 'מכתב בקשה להתראה על חשיפה לסטרפ',
+  //   titleEn: 'Letter Requesting Notification of Strep Exposure',
+  //   description: 'בקשה מבית הספר להודיע על מקרי סטרפ בכיתה',
+  //   url: 'https://pandasnetwork.org/wp-content/uploads/2021/08/Notification-Letter.pdf',
+  //   type: 'pdf'
+  // },
   {
     id: 'handout-teachers',
     title: 'דף מידע למורים',
     titleEn: 'Handout for Teachers',
     description: 'מידע תמציתי למורים על פאנס/פאנדס',
-    url: 'https://pandasnetwork.org/wp-content/uploads/2021/08/Handout-for-Teachers1.pdf',
+    url: '/pdfs/Letter_School_PANDAS_Handout.pdf',
+    type: 'pdf'
+  },
+  {
+    id: 'handout-kindergarden-teachers',
+    title: 'דף מידע לגננות',
+    titleEn: 'Handout for Kindergarden Teachers',
+    description: 'מידע תמציתי לגננות על פאנס/פאנדס',
+    url: '/pdfs/Letter_Kindergarden_PANDAS_Handout.pdf',
     type: 'pdf'
   },
   // {
