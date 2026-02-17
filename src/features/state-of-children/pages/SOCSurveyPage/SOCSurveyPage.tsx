@@ -521,9 +521,9 @@ const SOCSurveyPage: React.FC = () => {
                         האם אתם בטוחים שברצונכם לשלוח את הסקר?
                         לא ניתן לערוך את התשובות לאחר השליחה.
                     </Typography>
-                    <Typography className="soc-survey__dialog-stats">
+                    {/* <Typography className="soc-survey__dialog-stats">
                         ענית על {answeredCount} מתוך {allQuestions.length} שאלות
-                    </Typography>
+                    </Typography> */}
                 </DialogContent>
                 <DialogActions className="soc-survey__dialog-actions">
                     <Button onClick={() => setShowConfirmDialog(false)}>
