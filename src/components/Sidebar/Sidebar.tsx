@@ -44,6 +44,7 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
     { title: 'דף הבית', icon: <HomeIcon />, path: '/' },
     { title: 'אודות', icon: <GroupsIcon />, path: '/about' },
     { title: 'מידע', icon: <InfoIcon />, path: '/info' },
+    { title: 'מטפלים', icon: <InfoIcon />, path: '/Professionals-help' },
     { title: 'תמיכה', icon: <FavoriteIcon />, path: '/support' },
     { title: 'משאבים', icon: <ArticleIcon />, path: '/resources' },
     { title: 'סקרים', icon: <FiClipboard />, path: '/surveys' },

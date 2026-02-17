@@ -25,6 +25,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen = false }) => 
         <nav className="header__nav">
           <a href="/about" className="header__nav-link">אודות</a>
           <a href="/info" className="header__nav-link">מידע</a>
+          <a href="/Professionals-help" className="header__nav-link">מטפלים</a>
           <a href="/support" className="header__nav-link">תמיכה</a>
           <a href="/resources" className="header__nav-link">משאבים</a>
           {/* <a href="/surveys" className="header__nav-link">סקרים</a> */}
