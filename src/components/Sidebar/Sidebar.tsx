@@ -34,11 +34,17 @@ interface MenuItem {
   icon: React.ReactElement;
   path: string;
   isCta?: boolean;
+  isExternal?: boolean;
+  externalUrl?: string;
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const WHATSAPP_MESSAGE = `שלום,
+אני יוצר/ת קשר דרך אתר פאנס/פאנדס - העמותה הישראלית לאנספיליטיס אוטואימוני.
+אשמח לשוחח בנושא:`;
+  const WHATSAPP_NUMBER = '972544767146';
 
   const menuItems: MenuItem[] = [
     { title: 'דף הבית', icon: <HomeIcon />, path: '/' },
@@ -48,11 +54,15 @@ const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
     { title: 'תמיכה', icon: <FavoriteIcon />, path: '/support' },
     { title: 'משאבים', icon: <ArticleIcon />, path: '/resources' },
     { title: 'סקרים', icon: <FiClipboard />, path: '/surveys' },
-    { title: 'צור קשר', icon: <FaWhatsapp />, path: '/contact', isCta: true },
+    { title: 'צור קשר', icon: <FaWhatsapp />, path: '/contact', isCta: true, isExternal: true, externalUrl: `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}` },
   ];
 
   const handleMenuClick = (item: MenuItem) => {
-    navigate(item.path);
+    if (item.isExternal && item.externalUrl) {
+      window.open(item.externalUrl, '_blank');
+    } else {
+      navigate(item.path);
+    }
     onClose();
   };
 
