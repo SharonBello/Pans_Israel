@@ -1,127 +1,19 @@
+// Sidebar.scss — PANS/PANDAS Israel
+
 .sidebar {
+  display: flex;
+  flex-direction: column;
+
   &__header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 16px;
-    min-height: 64px;
-
-    @media (max-width: 600px) {
-      min-height: 56px;
-    }
+    justify-content: flex-start; // close btn on left (RTL: logical start)
+    padding: 10px 16px;
+    min-height: 58px;
   }
 
   &__list {
-    padding: 8px 0;
-  }
-}
-
-// Backdrop overlay
-.sidebar-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 9998;
-  opacity: 0;
-  visibility: hidden;
-  transition:
-    opacity 0.3s ease,
-    visibility 0.3s ease;
-
-  &--open {
-    opacity: 1;
-    visibility: visible;
-  }
-}
-
-// Sidebar panel
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: -300px; // Hidden off-screen LEFT
-  width: 280px;
-  height: 100vh;
-  background: #fff;
-  z-index: 9999;
-  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15); // Shadow on right side
-  transition: left 0.3s ease !important;
-  display: flex;
-  flex-direction: column;
-  direction: rtl !important;
-  
-  &--open {
-    left: 0; // Slide in from left
-    direction: rtl !important;
-  }
-
-  & .muirtl-taal5x{
-    direction: rtl !important;
-  }
-
-  &__header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 16px 20px;
-    border-bottom: 1px solid #e0e0e0;
-
-    h2 {
-      margin: 0;
-      font-size: 1.25rem;
-      color: #2c5282;
-    }
-  }
-
-  &__close {
-    background: none;
-    border: none;
-    padding: 8px;
-    cursor: pointer;
-    color: #666;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    &:hover {
-      background: #f0f0f0;
-      color: #333;
-    }
-  }
-
-  &__nav {
+    padding: 8px 0 24px;
     flex: 1;
-    padding: 16px 12px;
-    overflow-y: auto;
-  }
-
-  &__link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    width: 100%;
-    padding: 14px 16px;
-    background: none;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    color: #333;
-    cursor: pointer;
-    text-align: right;
-    transition: background 0.2s ease;
-
-    &:hover {
-      background: #e3f2fd;
-      color: #2c5282;
-    }
-  }
-
-  &__icon {
-    display: flex;
-    align-items: center;
-    color: #2c5282;
   }
 }

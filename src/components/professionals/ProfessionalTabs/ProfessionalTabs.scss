@@ -1,0 +1,85 @@
+.professional-tabs {
+    position: sticky;
+    top: 64px;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+    @media (max-width: 600px) {
+        top: 56px;
+    }
+
+    &__container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 24px;
+        @media (max-width: 600px) {
+            padding: 0 8px;
+        }
+    }
+
+    &__tabs {
+        .MuiTabs-flexContainer {
+            justify-content: center;
+            @media (max-width: 600px) {
+                justify-content: flex-start;
+            }
+        }
+    }
+
+    .MuiTab-root {
+        min-height: 56px;
+        padding: 0 20px;
+        font-family: "Heebo", "Assistant", sans-serif;
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: #607d8b;
+        text-transform: none;
+        transition:
+            color 0.2s ease,
+            background 0.2s ease;
+        gap: 6px;
+
+        .MuiSvgIcon-root {
+            font-size: 1.1rem;
+        }
+
+        &:hover {
+            color: #023373;
+            background: rgba(2, 51, 115, 0.04);
+        }
+        &.Mui-selected {
+            color: #023373;
+            font-weight: 600;
+            background: rgba(2, 51, 115, 0.05);
+        }
+
+        @media (max-width: 900px) {
+            padding: 0 12px;
+            font-size: 0.8rem;
+        }
+        @media (max-width: 600px) {
+            padding: 0 10px;
+            min-width: 48px;
+        }
+    }
+
+    .MuiTabs-indicator {
+        height: 3px;
+        background: linear-gradient(90deg, #023373, #1565c0);
+        border-radius: 3px 3px 0 0;
+    }
+
+    &__decoration {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.07), transparent);
+    }
+}
+
+[dir="rtl"] .professional-tabs .MuiTab-root .MuiSvgIcon-root {
+    margin-left: 6px;
+    margin-right: 0;
+}

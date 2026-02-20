@@ -1,0 +1,609 @@
+// ─── Hero ──────────────────────────────────────────────────────────────────────
+.prof-hero {
+    position: relative;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #023373 0%, #1565c0 60%, #1976d2 100%);
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+            radial-gradient(circle at 10% 50%, rgba(255, 255, 255, 0.06) 0%, transparent 55%),
+            radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0.04) 0%, transparent 40%),
+            url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23fff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    @media (max-width: 600px) {
+        min-height: 160px;
+    }
+
+    &__inner {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; // RTL
+        padding: 32px 24px;
+        text-align: right;
+        gap: 4px;
+    }
+
+    &__icon-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.15);
+        margin-bottom: 8px;
+        .MuiSvgIcon-root {
+            font-size: 1.6rem;
+            color: #fff;
+        }
+    }
+
+    &__label {
+        font-size: 0.68rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.18em !important;
+        color: rgba(255, 255, 255, 0.55) !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+    }
+
+    &__title {
+        font-size: clamp(1.8rem, 4.5vw, 2.8rem) !important;
+        font-weight: 800 !important;
+        color: #fff !important;
+        line-height: 1.1 !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+    }
+
+    &__desc {
+        font-size: clamp(0.82rem, 1.4vw, 0.95rem) !important;
+        color: rgba(255, 255, 255, 0.78) !important;
+        line-height: 1.6 !important;
+        max-width: 560px;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+    }
+}
+
+// ─── Page wrapper ──────────────────────────────────────────────────────────────
+.professional-page {
+    min-height: 100vh;
+    background: #f5f6fa;
+}
+
+// ─── Section ──────────────────────────────────────────────────────────────────
+.prof-section {
+    margin-bottom: 48px;
+
+    &__header {
+        border-right: 4px solid #023373;
+        padding-right: 14px;
+        margin-bottom: 20px;
+    }
+
+    &__title {
+        font-weight: 800 !important;
+        color: #1a2744 !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+        font-size: 1.15rem !important;
+    }
+}
+
+// ─── Info banner ──────────────────────────────────────────────────────────────
+.prof-info-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 14px 18px;
+    background: #e3f2fd;
+    border-radius: 10px;
+    border: 1px solid rgba(21, 101, 192, 0.15);
+    margin-bottom: 24px;
+
+    &__icon {
+        color: #1565c0;
+        flex-shrink: 0;
+        margin-top: 2px;
+    }
+    &__text {
+        font-size: 0.88rem;
+        color: #1a2744;
+        line-height: 1.6;
+        font-family: "Heebo", "Assistant", sans-serif;
+        a {
+            color: #1565c0;
+            font-weight: 600;
+        }
+    }
+}
+
+// ─── Criteria grid ────────────────────────────────────────────────────────────
+.prof-criteria-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 8px;
+
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.prof-criteria-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+
+    &__label {
+        font-weight: 800 !important;
+        font-size: 1.1rem !important;
+        color: #023373 !important;
+        margin-bottom: 14px !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+    }
+
+    &__item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 5px 0;
+
+        .MuiSvgIcon-root {
+            color: #2e7d32;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+        .MuiTypography-root {
+            font-size: 0.85rem;
+            color: #37474f;
+            font-family: "Heebo", "Assistant", sans-serif;
+        }
+    }
+}
+
+// ─── 3-column check cards ─────────────────────────────────────────────────────
+.prof-3col-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 8px;
+
+    @media (max-width: 860px) {
+        grid-template-columns: 1fr 1fr;
+    }
+    @media (max-width: 540px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.prof-check-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 18px;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+
+    &__title {
+        font-weight: 700 !important;
+        font-size: 0.9rem !important;
+        color: #1a2744 !important;
+        margin-bottom: 12px !important;
+        padding-bottom: 8px;
+        border-bottom: 2px solid #e0e7ef;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+    }
+
+    &__item {
+        display: flex;
+        align-items: flex-start;
+        gap: 6px;
+        padding: 4px 0;
+
+        .MuiSvgIcon-root {
+            color: #023373;
+            font-size: 0.95rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .MuiTypography-root {
+            font-size: 0.82rem;
+            color: #546e7a;
+            font-family: "Heebo", "Assistant", sans-serif;
+        }
+    }
+}
+
+// ─── Accordions ───────────────────────────────────────────────────────────────
+.prof-accordion {
+    border-radius: 10px !important;
+    margin-bottom: 8px !important;
+    border: 1px solid rgba(0, 0, 0, 0.07) !important;
+    box-shadow: none !important;
+    overflow: hidden;
+
+    &::before {
+        display: none !important;
+    }
+
+    &__q {
+        font-weight: 600 !important;
+        color: #1a2744 !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+        font-size: 0.92rem !important;
+    }
+
+    &__a {
+        font-size: 0.85rem !important;
+        color: #546e7a !important;
+        line-height: 1.7 !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+    }
+}
+
+// ─── Link cards grid ──────────────────────────────────────────────────────────
+.prof-links-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+
+    @media (max-width: 600px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.prof-link-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #fff;
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    text-decoration: none;
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(2, 51, 115, 0.1);
+    }
+
+    &__body {
+        flex: 1;
+    }
+
+    &__title {
+        font-weight: 700 !important;
+        font-size: 0.88rem !important;
+        color: #023373 !important;
+        margin-bottom: 4px !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+        direction: ltr;
+        text-align: right;
+    }
+
+    &__desc {
+        font-size: 0.78rem !important;
+        color: #607d8b !important;
+        line-height: 1.5 !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+    }
+
+    &__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 10px;
+        padding-top: 8px;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    &__tag {
+        font-size: 0.7rem !important;
+        font-weight: 700 !important;
+    }
+    &__icon {
+        font-size: 1rem !important;
+        color: #b0bec5;
+    }
+}
+
+// ─── Articles list ────────────────────────────────────────────────────────────
+.prof-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+}
+
+.prof-filter-chip {
+    font-family: "Heebo", "Assistant", sans-serif !important;
+    font-size: 0.8rem !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    background: #fff !important;
+    cursor: pointer;
+    transition: background 0.2s !important;
+
+    &--active {
+        background: #023373 !important;
+        color: #fff !important;
+        border-color: #023373 !important;
+    }
+}
+
+.prof-articles-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.prof-article-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+
+    &__meta {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-bottom: 8px;
+    }
+
+    &__year {
+        font-size: 0.75rem !important;
+        color: #90a4ae !important;
+        font-family: "Assistant", sans-serif !important;
+    }
+
+    &__title {
+        font-weight: 700 !important;
+        font-size: 0.95rem !important;
+        color: #1a2744 !important;
+        margin-bottom: 4px !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+        direction: ltr;
+        text-align: right;
+    }
+
+    &__authors {
+        font-size: 0.78rem !important;
+        color: #607d8b !important;
+        margin-bottom: 2px !important;
+        font-family: "Assistant", sans-serif !important;
+        direction: ltr;
+        text-align: right;
+    }
+
+    &__journal {
+        font-size: 0.75rem !important;
+        color: #90a4ae !important;
+        display: block;
+        margin-bottom: 8px !important;
+        font-family: "Assistant", sans-serif !important;
+        direction: ltr;
+        text-align: right;
+    }
+
+    &__abstract {
+        font-size: 0.84rem !important;
+        color: #546e7a !important;
+        line-height: 1.6 !important;
+        margin-bottom: 10px !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+    }
+
+    &__link {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        color: #1565c0;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-decoration: none;
+        font-family: "Heebo", "Assistant", sans-serif;
+        direction: ltr;
+
+        &:hover {
+            text-decoration: underline;
+        }
+        .MuiSvgIcon-root {
+            font-size: 0.9rem;
+        }
+    }
+}
+
+// ─── Trial cards ──────────────────────────────────────────────────────────────
+.prof-trial-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    margin-bottom: 12px;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 8px;
+
+        @media (max-width: 600px) {
+            flex-direction: column;
+        }
+    }
+
+    &__id {
+        font-size: 0.7rem !important;
+        color: #90a4ae !important;
+        font-family: "Assistant", sans-serif !important;
+        direction: ltr;
+    }
+
+    &__title {
+        font-weight: 700 !important;
+        font-size: 0.92rem !important;
+        color: #1a2744 !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+        direction: ltr;
+        text-align: right;
+    }
+
+    &__badges {
+        display: flex;
+        gap: 6px;
+        flex-shrink: 0;
+    }
+
+    &__desc {
+        font-size: 0.83rem !important;
+        color: #546e7a !important;
+        line-height: 1.6 !important;
+        margin: 8px 0 !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+    }
+
+    &__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-top: 10px;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    &__location {
+        font-size: 0.78rem !important;
+        color: #90a4ae !important;
+        font-family: "Assistant", sans-serif !important;
+        direction: ltr;
+    }
+}
+
+// ─── Stats grid ──────────────────────────────────────────────────────────────
+.prof-stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 8px;
+
+    @media (max-width: 860px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @media (max-width: 480px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.prof-stat-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    border-top: 4px solid #023373;
+    text-align: center;
+
+    &__number {
+        font-size: 2rem !important;
+        font-weight: 900 !important;
+        line-height: 1 !important;
+        margin-bottom: 6px !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+    }
+
+    &__label {
+        font-size: 0.82rem !important;
+        font-weight: 600 !important;
+        color: #1a2744 !important;
+        margin-bottom: 4px !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+        line-height: 1.3 !important;
+    }
+
+    &__source {
+        font-size: 0.68rem !important;
+        color: #90a4ae !important;
+        font-family: "Assistant", sans-serif !important;
+        direction: ltr;
+    }
+}
+
+// ─── Survey CTA ───────────────────────────────────────────────────────────────
+.prof-survey-cta {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 32px;
+    background: linear-gradient(135deg, #023373, #1565c0);
+    border-radius: 16px;
+    color: #fff;
+    overflow: hidden;
+
+    @media (max-width: 600px) {
+        flex-direction: column;
+        padding: 24px 20px;
+    }
+
+    &__content {
+        flex: 1;
+    }
+
+    &__title {
+        font-weight: 800 !important;
+        color: #fff !important;
+        margin-bottom: 10px !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+        font-size: 1.2rem !important;
+    }
+
+    &__desc {
+        color: rgba(255, 255, 255, 0.82) !important;
+        font-size: 0.88rem !important;
+        line-height: 1.6 !important;
+        margin-bottom: 18px !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+    }
+
+    &__btn {
+        display: inline-block;
+        padding: 10px 24px;
+        background: #fff;
+        color: #023373;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 0.88rem;
+        text-decoration: none;
+        font-family: "Heebo", "Assistant", sans-serif;
+        transition: opacity 0.2s;
+
+        &:hover {
+            opacity: 0.88;
+        }
+    }
+
+    &__deco {
+        display: flex;
+        align-items: flex-end;
+        gap: 5px;
+        height: 80px;
+        flex-shrink: 0;
+
+        @media (max-width: 600px) {
+            display: none;
+        }
+    }
+
+    &__bar {
+        width: 10px;
+        background: rgba(255, 255, 255, 0.25);
+        border-radius: 3px 3px 0 0;
+        transition: height 0.3s;
+    }
+}

@@ -1,0 +1,385 @@
+.videos-page {
+    min-height: 100vh;
+    background: #f5f6fa;
+
+    &__hero {
+        position: relative;
+        height: 200px;
+        max-height: 200px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        background: linear-gradient(135deg, #4a3f8f 0%, #7b5ea7 50%, #9b72cb 100%);
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        @media (max-width: 600px) {
+            height: 160px;
+            max-height: 160px;
+        }
+    }
+
+    &__hero-content {
+        position: relative;
+        z-index: 1;
+        text-align: right;
+    }
+
+    &__hero-label {
+        display: block;
+        font-size: 0.7rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.18em !important;
+        color: rgba(255, 255, 255, 0.65) !important;
+        margin-bottom: 6px;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+    }
+
+    &__hero-title {
+        font-size: clamp(2rem, 5vw, 3rem) !important;
+        font-weight: 800 !important;
+        color: #fff !important;
+        line-height: 1.1 !important;
+        margin-bottom: 8px !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+    }
+
+    &__hero-desc {
+        font-size: clamp(0.85rem, 1.5vw, 1rem) !important;
+        color: rgba(255, 255, 255, 0.82) !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+    }
+
+    &__filter-bar {
+        background: #fff;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+        padding: 4px 0;
+    }
+
+    &__filter-inner {
+        display: flex !important;
+        align-items: center !important;
+        gap: 12px;
+
+        @media (max-width: 600px) {
+            flex-direction: column !important;
+            align-items: stretch !important;
+        }
+    }
+
+    &__filter-tabs {
+        flex: 1;
+
+        .MuiTabs-flexContainer {
+            justify-content: center !important;
+        }
+
+        .MuiTab-root {
+            min-height: 48px;
+            font-family: "Heebo", "Assistant", sans-serif;
+            font-size: 0.88rem;
+            font-weight: 500;
+            color: #607d8b;
+            text-transform: none;
+            padding: 0 20px;
+            min-width: 90px;
+
+            &:hover {
+                color: #4a3f8f;
+                background: rgba(74, 63, 143, 0.04);
+            }
+            &.Mui-selected {
+                color: #4a3f8f;
+                font-weight: 700;
+            }
+        }
+
+        .MuiTabs-indicator {
+            height: 3px;
+            background: linear-gradient(90deg, #4a3f8f, #9b72cb);
+            border-radius: 3px 3px 0 0;
+        }
+    }
+
+    &__count {
+        font-size: 0.8rem !important;
+        color: #90a4ae !important;
+        white-space: nowrap;
+        padding: 0 8px;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+        flex-shrink: 0;
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+
+        @media (max-width: 1024px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @media (max-width: 600px) {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__more {
+        margin-top: 56px;
+        padding: 32px;
+        background: #fff;
+        border-radius: 16px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+
+    &__more-title {
+        font-weight: 700 !important;
+        color: #1a2744 !important;
+        margin-bottom: 20px !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+    }
+
+    &__more-links {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    &__more-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: #4a3f8f;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-family: "Heebo", "Assistant", sans-serif;
+        font-weight: 500;
+        direction: ltr;
+        transition: color 0.2s;
+
+        .MuiSvgIcon-root {
+            font-size: 1rem;
+            opacity: 0.6;
+        }
+        &:hover {
+            color: #9b72cb;
+            text-decoration: underline;
+        }
+    }
+}
+
+// ── Video Card ──────────────────────────────────────────────────────────────
+.video-card {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    text-decoration: none;
+    transition:
+        transform 0.22s ease,
+        box-shadow 0.22s ease;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(74, 63, 143, 0.14);
+        .video-card__play-btn {
+            opacity: 1;
+        }
+        .video-card__thumb img {
+            transform: scale(1.04);
+        }
+    }
+
+    &__thumb {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+        flex-shrink: 0;
+        background: #111;
+    }
+
+    &__thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.3s ease;
+    }
+
+    // Colored placeholder shown while thumbnail loads or on error
+    &__placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &--youtube {
+            background: linear-gradient(135deg, #c8102e 0%, #8b0000 100%);
+        }
+        &--vimeo {
+            background: linear-gradient(135deg, #1ab7ea 0%, #0f7db4 100%);
+        }
+        &--other {
+            background: linear-gradient(135deg, #4a3f8f 0%, #9b72cb 100%);
+        }
+    }
+
+    &__placeholder-icon {
+        font-size: 3rem !important;
+        color: rgba(255, 255, 255, 0.45);
+    }
+
+    // Hover play button shown over thumbnail
+    &__play-btn {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        transition: opacity 0.22s ease;
+
+        .MuiSvgIcon-root {
+            font-size: 3.5rem;
+            color: #fff;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+        }
+    }
+
+    &__duration {
+        position: absolute;
+        bottom: 8px;
+        left: 8px;
+        background: rgba(0, 0, 0, 0.72);
+        color: #fff;
+        font-size: 0.72rem;
+        font-weight: 600;
+        padding: 2px 7px;
+        border-radius: 5px;
+        font-family: "Heebo", "Assistant", sans-serif;
+    }
+
+    &__platform {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 2px 7px;
+        border-radius: 5px;
+        font-family: "Heebo", "Assistant", sans-serif;
+
+        &--yt {
+            background: #c8102e;
+            color: #fff;
+        }
+        &--vimeo {
+            background: #1ab7ea;
+            color: #fff;
+        }
+        &--he {
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+        }
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        padding: 16px;
+        gap: 5px;
+    }
+
+    &__badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 5px;
+        margin-bottom: 2px;
+    }
+
+    &__badge {
+        font-size: 0.68rem;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 99px;
+        font-family: "Heebo", "Assistant", sans-serif;
+
+        &--parents {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        &--clinicians {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        &--educators {
+            background: #fff3e0;
+            color: #e65100;
+        }
+    }
+
+    &__title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: #1a2744;
+        line-height: 1.35;
+        margin: 0;
+        font-family: "Heebo", "Assistant", sans-serif;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    &__speaker {
+        font-size: 0.78rem;
+        color: #4a3f8f;
+        font-weight: 600;
+        margin: 0;
+        font-family: "Heebo", "Assistant", sans-serif;
+    }
+
+    &__desc {
+        font-size: 0.8rem;
+        color: #607d8b;
+        line-height: 1.5;
+        margin: 0;
+        font-family: "Heebo", "Assistant", sans-serif;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    &__footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: auto;
+        padding-top: 10px;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    &__source {
+        font-size: 0.72rem;
+        color: #90a4ae;
+        font-family: "Heebo", "Assistant", sans-serif;
+        font-weight: 500;
+    }
+
+    &__external {
+        font-size: 0.9rem !important;
+        color: #b0bec5;
+    }
+}

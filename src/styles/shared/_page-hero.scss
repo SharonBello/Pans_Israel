@@ -1,0 +1,148 @@
+// ── Design tokens ─────────────────────────────────────────────────────────────
+$hero-bg-from: #023373; // primary navy
+$hero-bg-to: #1565c0; // medium blue
+$hero-min-height: 80px;
+$hero-max-height: 200px;
+$hero-min-height-sm: 200px;
+$hero-padding-y: 64px;
+$hero-padding-y-sm: 44px;
+$hero-label-color: rgba(255, 255, 255, 0.65);
+$hero-title-size: clamp(2.4rem, 5.5vw, 4rem);
+$hero-desc-size: clamp(0.95rem, 1.8vw, 1.15rem);
+
+$tab-bar-height: 56px; // all tab bars same height
+$tab-bar-top: 64px; // header height (sticky offset)
+$tab-bar-top-sm: 56px;
+
+// ── Mixin: page hero ──────────────────────────────────────────────────────────
+@mixin page-hero($bg-from: $hero-bg-from, $bg-to: $hero-bg-to) {
+    position: relative;
+    max-height: $hero-max-height;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, $bg-from 0%, $bg-to 100%);
+
+    // Subtle noise/pattern overlay
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+            radial-gradient(circle at 15% 50%, rgba(255, 255, 255, 0.06) 0%, transparent 55%),
+            radial-gradient(circle at 85% 20%, rgba(255, 255, 255, 0.04) 0%, transparent 40%);
+        pointer-events: none;
+    }
+
+    @media (max-width: 600px) {
+        min-height: $hero-min-height-sm;
+    }
+}
+
+// ── Mixin: hero content container ─────────────────────────────────────────────
+@mixin page-hero-content {
+    position: relative;
+    z-index: 1;
+    padding: $hero-padding-y 0;
+    text-align: right;
+
+    @media (max-width: 600px) {
+        padding: $hero-padding-y-sm 0;
+    }
+}
+
+// ── Mixin: hero label (overline) ──────────────────────────────────────────────
+@mixin page-hero-label {
+    display: block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: $hero-label-color;
+    margin-bottom: 10px;
+    font-family: "Heebo", "Assistant", sans-serif;
+}
+
+// ── Mixin: hero title ─────────────────────────────────────────────────────────
+@mixin page-hero-title {
+    font-size: $hero-title-size;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.1;
+    margin: 0 0 14px 0;
+    font-family: "Heebo", "Assistant", sans-serif;
+}
+
+// ── Mixin: hero description ───────────────────────────────────────────────────
+@mixin page-hero-desc {
+    font-size: $hero-desc-size;
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.65;
+    max-width: 600px;
+    font-family: "Heebo", "Assistant", sans-serif;
+}
+
+// ── Mixin: sticky tab bar ─────────────────────────────────────────────────────
+@mixin page-tab-bar {
+    position: sticky;
+    top: $tab-bar-top;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+    .MuiTabs-root {
+        min-height: $tab-bar-height;
+    }
+
+    .MuiTab-root {
+        min-height: $tab-bar-height;
+        padding: 0 24px;
+        font-family: "Heebo", "Assistant", sans-serif;
+        font-size: 0.88rem;
+        font-weight: 500;
+        color: #607d8b;
+        text-transform: none;
+        transition:
+            color 0.2s,
+            background 0.2s;
+        gap: 6px;
+
+        .MuiSvgIcon-root {
+            font-size: 1.1rem;
+        }
+
+        &:hover {
+            color: #023373;
+            background: rgba(2, 51, 115, 0.04);
+        }
+
+        &.Mui-selected {
+            color: #023373;
+            font-weight: 600;
+            background: rgba(2, 51, 115, 0.05);
+        }
+
+        @media (max-width: 900px) {
+            padding: 0 14px;
+            font-size: 0.82rem;
+        }
+
+        @media (max-width: 600px) {
+            padding: 0 10px;
+            min-width: 48px;
+        }
+    }
+
+    .MuiTabs-indicator {
+        height: 3px;
+        background: linear-gradient(90deg, #023373, #1565c0);
+        border-radius: 3px 3px 0 0;
+    }
+
+    @media (max-width: 600px) {
+        top: $tab-bar-top-sm;
+    }
+}

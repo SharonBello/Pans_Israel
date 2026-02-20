@@ -673,6 +673,105 @@ export const infoSections: Record<string, InfoSection> = {
       },
     ]
   },
+  overview_professional: {
+    id: 'overview-professional',
+    title: 'סקירה לאנשי מקצוע',
+    slug: 'overview-professional',
+    description: 'מידע קליני על תסמונות PANS/PANDAS לרופאים ואנשי מקצוע בתחום הבריאות',
+    content: [
+      {
+        id: 'prof-overview-intro',
+        type: 'callout',
+        variant: 'info',
+        title: 'מידע לאנשי מקצוע',
+        content:
+          'דף זה מיועד לרופאים, פסיכולוגים, עובדים סוציאליים ואנשי מקצוע אחרים. המידע מבוסס על ספרות מדעית עדכנית. לקריאת מאמרים מלאים עיינו בסעיף המאמרים המדעיים.',
+      },
+      {
+        id: 'prof-overview-definition',
+        type: 'heading',
+        title: 'הגדרה קלינית',
+      },
+      {
+        id: 'prof-overview-def-text',
+        type: 'paragraph',
+        content:
+          'PANS (Pediatric Acute-onset Neuropsychiatric Syndrome) ו-PANDAS (Pediatric Autoimmune Neuropsychiatric Disorders Associated with Streptococcal Infections) הן תסמונות נוירופסיכיאטריות אוטואימוניות המתאפיינות בהופעה פתאומית וחמורה של OCD, הגבלת אכילה חריפה ולפחות שני תסמינים נוספים מתוך שבע קטגוריות.',
+      },
+      {
+        id: 'prof-criteria-heading',
+        type: 'heading',
+        title: 'קריטריונים לאבחון PANS',
+      },
+      {
+        id: 'prof-criteria-list',
+        type: 'list',
+        items: [
+          {
+            title: 'הופעה פתאומית של OCD או הגבלת אכילה',
+            description: 'תסמינים קשים, בולטים, עם הופעה חריפה (לא הדרגתית)',
+          },
+          {
+            title: 'לפחות 2 תסמינים נוספים',
+            description:
+              'חרדה, לביליות רגשית/דיכאון, תסמינים חושיים/מוטוריים, הידרדרות בכתב יד, רגרסיה התנהגותית, קשיי שינה, הטנחה תכופה',
+          },
+          {
+            title: 'לא ניתן להסבר על ידי מחלה נוירולוגית אחרת',
+            description: 'יש לשלול מחלות אחרות לפני האבחנה',
+          },
+        ],
+      },
+      {
+        id: 'prof-pandas-heading',
+        type: 'heading',
+        title: 'קריטריונים לאבחון PANDAS',
+      },
+      {
+        id: 'prof-pandas-list',
+        type: 'list',
+        items: [
+          { title: 'OCD ו/או טיקים', description: 'תסמינים ראשוניים' },
+          { title: 'גיל 3 עד גיל ההתבגרות', description: 'הופעה בטווח גיל זה' },
+          { title: 'הופעה פתאומית ואפיזודית', description: 'דפוס של החמרה ורמיסיה' },
+          { title: 'קשר זמני לזיהום סטרפטוקוקלי', description: 'תועד על ידי תרבית גרון חיובית או עלייה בטיטרים (ASO/Anti-DNAse B)' },
+          { title: 'ממצאים נוירולוגיים', description: 'חוסר מנוחה מוטורי, תנועות כוראיות' },
+        ],
+      },
+      {
+        id: 'prof-workup-heading',
+        type: 'heading',
+        title: 'הערכה אבחנתית מומלצת',
+      },
+      {
+        id: 'prof-workup-table',
+        type: 'table',
+        columns: ['בדיקה', 'מטרה', 'הערות'],
+        rows: [
+          ['תרבית גרון + ASO/Anti-DNAse B', 'זיהוי זיהום סטרפטוקוקלי', 'טיטרים עשויים להיות תקינים בין האפיזודות'],
+          ['CBC + CMP', 'שלילת סיבות אחרות', 'כולל בדיקות כבד וכליות'],
+          ['ANA, Anti-dsDNA', 'שלילת לופוס SLE', 'בעיקר בבנות'],
+          ['Anti-basal ganglia antibodies', 'מחקרי — לא standard of care', 'זמין רק במרכזים מסוימים'],
+          ['MRI מוח', 'שלילת פתולוגיה מבנית', 'לרוב תקין ב-PANS/PANDAS'],
+          ['EEG', 'שלילת אפילפסיה', 'בעת תסמינים אפיזודיים'],
+        ],
+      },
+      {
+        id: 'prof-treatment-heading',
+        type: 'heading',
+        title: 'עקרונות טיפול',
+      },
+      {
+        id: 'prof-treatment-callout',
+        type: 'callout',
+        variant: 'tip',
+        title: 'גישת טיפול משולב',
+        content:
+          'הספרות תומכת בגישה תלת-כיוונית: (1) אנטיביוטיקה/אנטי-ויראלית לטיפול בזיהום הטריגרי, (2) אימונומודולציה להפחתת תגובה אוטואימונית, (3) טיפול פסיכיאטרי/פסיכולוגי לניהול תסמינים.',
+      },
+    ],
+    relatedPages: [],
+  },
 };
 
 // Assessment Scales Data

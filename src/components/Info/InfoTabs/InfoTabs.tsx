@@ -2,26 +2,23 @@ import React from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Box, Tabs, Tab, useMediaQuery, useTheme } from '@mui/material';
 import {
-  Info as InfoIcon,
-  MonitorHeart as SymptomsIcon,
-  ContentPasteSearch as DiagnosisIcon,
-  MedicalServices as TreatmentIcon,
-  Groups as StoriesIcon,
+  Info as OverviewIcon,
+  Psychology as SymptomsIcon,
+  Biotech as DiagnosisIcon,
+  Assessment as ScalesIcon,
 } from '@mui/icons-material';
-import { infoNavItems } from '../../../data/infoContent';
 import './InfoTabs.scss';
 
 interface InfoTabsProps {
   currentPage: string;
 }
 
-const iconMap: Record<string, React.ReactElement> = {
-  overview: <InfoIcon />,
-  symptoms: <SymptomsIcon />,
-  diagnosis: <DiagnosisIcon />,
-  treatment: <TreatmentIcon />,
-  stories: <StoriesIcon />,
-};
+const INFO_TABS = [
+  { id: 'overview', slug: 'overview', label: 'סקירה כללית', icon: <OverviewIcon /> },
+  { id: 'symptoms', slug: 'symptoms', label: 'תסמינים נפוצים', icon: <SymptomsIcon /> },
+  { id: 'diagnosis', slug: 'diagnosis', label: 'אבחון', icon: <DiagnosisIcon /> },
+  { id: 'scales', slug: 'scales', label: 'כלי הערכה', icon: <ScalesIcon /> },
+] as const;
 
 const InfoTabs: React.FC<InfoTabsProps> = ({ currentPage }) => {
   const navigate = useNavigate();
@@ -29,51 +26,54 @@ const InfoTabs: React.FC<InfoTabsProps> = ({ currentPage }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
-  const getCurrentTabIndex = () => {
-    const index = infoNavItems.findIndex(
-      (item) => location.pathname.includes(item.slug) || currentPage === item.slug
-    );
-    return index >= 0 ? index : 0;
+  const getCurrentIndex = (): number => {
+    // Get the last segment of the path e.g. 'scales' from '/info/scales'
+    const segment = location.pathname.replace(/\/$/, '').split('/').pop() ?? '';
+
+    // Try matching by path segment first (most reliable)
+    const bySegment = INFO_TABS.findIndex(t => t.slug === segment);
+    if (bySegment >= 0) return bySegment;
+
+    // Fall back to currentPage prop
+    const byProp = INFO_TABS.findIndex(t => t.slug === currentPage);
+    if (byProp >= 0) return byProp;
+
+    // Default to overview (index 0)
+    return 0;
   };
 
-  const handleTabChange = (_event: React.SyntheticEvent, newValue: number) => {
-    const item = infoNavItems[newValue];
-    if (item) {
-      navigate(`/info/${item.slug}`);
-    }
+  const handleChange = (_: React.SyntheticEvent, newValue: number) => {
+    const tab = INFO_TABS[newValue];
+    if (tab) navigate(`/info/${tab.slug}`);
   };
 
   return (
     <Box className="info-tabs" dir="rtl">
       <Box className="info-tabs__container">
         <Tabs
-          value={getCurrentTabIndex()}
-          onChange={handleTabChange}
-          variant={isMobile ? 'scrollable' : 'fullWidth'}
-          scrollButtons={isMobile ? 'auto' : false}
+          value={getCurrentIndex()}
+          onChange={handleChange}
+          variant="scrollable"
+          scrollButtons="auto"
           allowScrollButtonsMobile
           className="info-tabs__tabs"
-          TabIndicatorProps={{
-            className: 'info-tabs__indicator',
-          }}
+          TabIndicatorProps={{ className: 'info-tabs__indicator' }}
         >
-          {infoNavItems.map((item) => (
+          {INFO_TABS.map((tab) => (
             <Tab
-              key={item.id}
-              icon={iconMap[item.id]}
+              key={tab.id}
+              icon={tab.icon}
               iconPosition="start"
-              label={isMobile ? undefined : item.title}
+              label={isMobile ? undefined : tab.label}
               className="info-tabs__tab"
-              aria-label={item.title}
+              aria-label={tab.label}
+              title={tab.label}
             />
           ))}
         </Tabs>
       </Box>
-      
-      {/* Decorative line */}
       <Box className="info-tabs__decoration">
         <Box className="info-tabs__decoration-line" />
-        <Box className="info-tabs__decoration-glow" />
       </Box>
     </Box>
   );

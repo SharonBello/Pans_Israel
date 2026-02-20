@@ -1,0 +1,25 @@
+@use "../../styles/shared/page-hero" as hero;
+
+.holistic-page {
+    min-height: 100vh;
+
+    &__hero {
+        @include hero.page-hero();
+    }
+
+    &__hero-content {
+        @include hero.page-hero-content();
+    }
+
+    &__hero-label {
+        @include hero.page-hero-label();
+    }
+
+    &__hero-title {
+        @include hero.page-hero-title();
+    }
+
+    &__hero-description {
+        @include hero.page-hero-desc();
+    }
+}

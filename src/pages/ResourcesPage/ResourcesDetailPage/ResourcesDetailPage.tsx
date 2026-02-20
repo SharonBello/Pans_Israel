@@ -5,7 +5,7 @@ import {
   Typography,
   Container,
   Button,
-  Breadcrumbs,
+  // Breadcrumbs,
   Link,
   Card,
   CardContent,
@@ -19,10 +19,12 @@ import { resourceSections, downloadableResources } from '../../../data/resources
 import ResourcesContentRenderer from '../../../components/Resources/ResourcesSection/ResourcesContentRenderer';
 import ResourcesTabs from '../../../components/Resources/ResourcesTabs/ResourcesTabs';
 import './ResourcesDetailPage.scss';
+import SupportTabs from '@/components/Support/SupportTabs/SupportTabs';
 
 const ResourcesDetailPage: React.FC = () => {
   const { pageId } = useParams<{ pageId: string }>();
   const navigate = useNavigate();
+  const SUPPORT_PAGES = ['parents', 'videos'];
 
   // Scroll to top when page changes
   useEffect(() => {
@@ -47,8 +49,8 @@ const ResourcesDetailPage: React.FC = () => {
           <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
             עמודים זמינים: {Object.keys(resourceSections).join(', ')}
           </Typography>
-          <Button 
-            variant="contained" 
+          <Button
+            variant="contained"
             onClick={() => navigate('/resources')}
             sx={{ mt: 2 }}
           >
@@ -67,11 +69,11 @@ const ResourcesDetailPage: React.FC = () => {
         <div className="resources-detail__hero-content">
           <Container maxWidth="lg">
             {/* Breadcrumbs */}
-            <Breadcrumbs 
+            {/* <Breadcrumbs
               className="resources-detail__breadcrumbs"
               separator="‹"
-            >
-              <Link
+            > */}
+              {/* <Link
                 component="button"
                 onClick={() => navigate('/')}
                 className="resources-detail__breadcrumb-link"
@@ -88,8 +90,8 @@ const ResourcesDetailPage: React.FC = () => {
               </Link>
               <Typography className="resources-detail__breadcrumb-current">
                 {currentSection.title}
-              </Typography>
-            </Breadcrumbs>
+              </Typography> */}
+            {/* </Breadcrumbs> */}
 
             <Typography variant="h1" className="resources-detail__hero-title">
               {currentSection.title}
@@ -104,7 +106,10 @@ const ResourcesDetailPage: React.FC = () => {
       </section>
 
       {/* Tabs Navigation */}
-      <ResourcesTabs currentPage={currentPageId || ''} />
+      {SUPPORT_PAGES.includes(currentPageId || '')
+        ? <SupportTabs />
+        : <ResourcesTabs currentPage={currentPageId || ''} />
+      }
 
       {/* Main Content */}
       <section className="resources-detail__content">
@@ -168,8 +173,8 @@ const ResourcesDetailPage: React.FC = () => {
                 </Typography>
                 <div className="resources-detail__related-grid">
                   {currentSection.relatedPages.map((page) => (
-                    <Card 
-                      key={page.id} 
+                    <Card
+                      key={page.id}
                       className="resources-detail__related-card"
                       onClick={() => navigate(`/resources/${page.slug}`)}
                     >

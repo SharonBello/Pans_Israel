@@ -7,6 +7,7 @@ import type { NewTestimonialPayload, Testimonial } from '@/types/testimonials';
 import { subscribeToTestimonials, addTestimonial } from '@/services/testimonialsService';
 import type { Unsubscribe } from 'firebase/firestore';
 import './TestimonialsPage.scss';
+import SupportTabs from '@/components/Support/SupportTabs/SupportTabs';
 
 const TestimonialsPage: React.FC = (): React.JSX.Element => {
   const [isSubmitOpen, setIsSubmitOpen] = useState<boolean>(false);
@@ -54,10 +55,10 @@ const TestimonialsPage: React.FC = (): React.JSX.Element => {
       <div className="testimonials-container">
         <header className="testimonials-hero">
           <div className="testimonials-hero__text">
-            <div className="testimonials-hero__kicker">עדויות אמיתיות מהקהילה</div>
+            {/* <div className="testimonials-hero__kicker">עדויות אמיתיות מהקהילה</div> */}
             <h1 className="testimonials-hero__title">עדויות מהקהילה</h1>
             <p className="testimonials-hero__subtitle">
-              סיפורים קצרים (אפשר בעילום שם). כל עדות נבדקת לפני פרסום כדי לשמור על פרטיות ולהסיר פרטים מזהים.
+              עדויות אמיתיות מהקהילה. כל עדות נבדקת לפני פרסום כדי לשמור על פרטיות ולהסיר פרטים מזהים.
             </p>
           </div>
 
@@ -73,6 +74,8 @@ const TestimonialsPage: React.FC = (): React.JSX.Element => {
             <div className="testimonials-hero__note">העדות תפורסם לאחר בדיקה קצרה.</div>
           </div>
         </header>
+
+        <SupportTabs />
 
         <div className="testimonials-disclaimer">
           <strong>הערה:</strong> העדויות הן אישיות ואינן מהוות ייעוץ רפואי. אם יש חשש לסיכון מיידי – פנו לעזרה מקצועית.

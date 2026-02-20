@@ -1,125 +1,316 @@
+// ============================================================
+// Header.scss — PANS/PANDAS Israel
+// RTL, sticky, with animated dropdowns
+// ============================================================
+
+// ---- Variables (align with your existing theme) ------------
+$color-primary: #023373;
+$color-primary-lt: #1a4a9e;
+$color-accent: #38b2ac; // teal accent
+$color-cta: #25d366; // WhatsApp green
+$color-cta-hover: #1da851;
+$bg-header: rgba(255, 255, 255, 0.97);
+$bg-header-scroll: rgba(255, 255, 255, 1);
+$shadow-header: 0 2px 20px rgba(2, 51, 115, 0.1);
+$shadow-dropdown: 0 8px 32px rgba(2, 51, 115, 0.14);
+$border-radius: 10px;
+$header-height: 68px;
+$header-height-sm: 58px;
+$transition: 0.22s ease;
+$font-he: "Heebo", "Assistant", sans-serif;
+
+// ---- Base ---------------------------------------------------
 .header {
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
-  height: var(--header-height);
-  background: rgba($color-bg-white, 0.95);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid $border-light;
-  z-index: $z-fixed;
-  
+  inset-inline-start: 0;
+  inset-inline-end: 0;
+  z-index: 1200;
+  height: $header-height;
+  background: $bg-header;
+  border-bottom: 1px solid transparent;
+  transition:
+    box-shadow $transition,
+    border-color $transition,
+    background $transition;
+  font-family: $font-he;
+
+  @media (max-width: 768px) {
+    height: $header-height-sm;
+  }
+
+  &--scrolled {
+    background: $bg-header-scroll;
+    border-bottom-color: rgba($color-primary, 0.1);
+    box-shadow: $shadow-header;
+  }
+
+  // ---- Container ------------------------------------------
   &__container {
-    @include container;
+    max-width: 1400px;
     height: 100%;
+    margin: 0 auto;
+    padding: 0 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 16px;
+
+    @media (max-width: 480px) {
+      padding: 0 16px;
+    }
   }
-  
-  // Logo
+
+  // ---- Logo -----------------------------------------------
   &__logo {
     display: flex;
     align-items: center;
-    gap: $spacing-3;
+    gap: 10px;
     text-decoration: none;
-    color: $text-primary;
-    
+    flex-shrink: 0;
+
     &:hover {
-      text-decoration: none;
+      opacity: 0.88;
     }
   }
-  
+
   &__logo-icon {
-    width: 5vw;
-    line-height: 1;
+    height: 44px;
+    width: auto;
+    object-fit: contain;
+
+    @media (max-width: 768px) {
+      height: 36px;
+    }
   }
-  
+
   &__logo-text {
     display: flex;
     flex-direction: column;
-    gap: 0;
+    line-height: 1.15;
   }
-  
+
   &__logo-title {
-    font-family: $font-heading;
-    font-size: $font-size-lg;
-    font-weight: $font-weight-bold;
+    font-size: 1rem;
+    font-weight: 800;
     color: $color-primary;
-    line-height: 1.2;
+    letter-spacing: -0.01em;
+
+    @media (max-width: 380px) {
+      font-size: 0.875rem;
+    }
   }
-  
+
   &__logo-subtitle {
-    font-size: $font-size-sm;
-    color: $text-muted;
-    line-height: 1;
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: $color-accent;
+    letter-spacing: 0.04em;
   }
-  
-  // Navigation
+
+  // ---- Desktop Nav ----------------------------------------
   &__nav {
     display: flex;
     align-items: center;
-    gap: $spacing-2;
-    
-    @include max-md {
+    gap: 2px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @media (max-width: 960px) {
       display: none;
     }
   }
-  
-  &__nav-link {
-    padding: $spacing-2 $spacing-4;
-    font-size: $font-size-base;
-    font-weight: $font-weight-medium;
-    color: $text-secondary;
-    text-decoration: none;
-    border-radius: $radius-md;
-    transition: all $transition-fast;
-    
-    &:hover {
-      color: $color-primary;
-      background: rgba($color-primary, 0.05);
-      text-decoration: none;
-    }
-    
-    &--cta {
-      background: $gradient-primary;
-      color: $text-on-dark;
-      
-      &:hover {
-        box-shadow: $shadow-glow-primary;
-        transform: translateY(-1px);
-        color: $text-on-dark;
-      }
+
+  // ---- Nav Item (wrapper for dropdown) --------------------
+  &__nav-item {
+    position: relative;
+
+    &--has-dropdown {
+      // ensure dropdown can overflow
     }
   }
-  
-  // Mobile Menu Button
+
+  // ---- Nav Link -------------------------------------------
+  &__nav-link {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    font-family: $font-he;
+    color: #2d3748;
+    text-decoration: none;
+    white-space: nowrap;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition:
+      color $transition,
+      background $transition;
+    line-height: 1;
+
+    &:hover,
+    &--open {
+      color: $color-primary;
+      background: rgba($color-primary, 0.07);
+    }
+
+    // make button look like a link
+    &--btn {
+      appearance: none;
+      -webkit-appearance: none;
+    }
+  }
+
+  // active parent
+  &__nav-item--active > .header__nav-link {
+    color: $color-primary;
+  }
+
+  // ---- Chevron --------------------------------------------
+  &__nav-chevron {
+    font-size: 0.75rem;
+    transition: transform $transition;
+    flex-shrink: 0;
+
+    .header__nav-link--open & {
+      transform: rotate(180deg);
+    }
+  }
+
+  // ---- Dropdown -------------------------------------------
+  &__dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    // RTL: align to the right edge of the button
+    right: 0;
+    min-width: 210px;
+    background: #fff;
+    border-radius: $border-radius;
+    box-shadow: $shadow-dropdown;
+    border: 1px solid rgba($color-primary, 0.08);
+    padding: 6px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition:
+      opacity $transition,
+      transform $transition,
+      visibility $transition;
+    z-index: 10;
+
+    &--open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+  }
+
+  &__dropdown-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  &__dropdown-link {
+    display: block;
+    padding: 9px 14px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    font-family: $font-he;
+    color: #3a4a5c;
+    text-decoration: none;
+    border-radius: 6px;
+    transition:
+      background $transition,
+      color $transition;
+    white-space: nowrap;
+
+    &:hover {
+      background: rgba($color-primary, 0.07);
+      color: $color-primary;
+    }
+
+    &--active {
+      background: rgba($color-primary, 0.1);
+      color: $color-primary;
+      font-weight: 700;
+    }
+  }
+
+  // ---- CTA Button -----------------------------------------
+  &__cta {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    margin-right: 8px; // extra space from nav items (RTL: margin-right = margin-start)
+    border-radius: 8px;
+    background: $color-cta;
+    color: #fff;
+    font-size: 0.88rem;
+    font-weight: 700;
+    font-family: $font-he;
+    text-decoration: none;
+    white-space: nowrap;
+    transition:
+      background $transition,
+      transform $transition,
+      box-shadow $transition;
+    box-shadow: 0 2px 8px rgba(37, 211, 102, 0.28);
+
+    svg {
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    &:hover {
+      background: $color-cta-hover;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(37, 211, 102, 0.38);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  // ---- Mobile Hamburger -----------------------------------
   &__menu-btn {
     display: none;
     align-items: center;
     justify-content: center;
-    width: 44px;
-    height: 44px;
-    background: transparent;
+    width: 40px;
+    height: 40px;
     border: none;
-    border-radius: $radius-md;
-    color: $text-primary;
+    border-radius: 8px;
+    background: rgba($color-primary, 0.07);
+    color: $color-primary;
     cursor: pointer;
-    transition: all $transition-fast;
-    
-    @include max-md {
+    transition: background $transition;
+    flex-shrink: 0;
+
+    @media (max-width: 960px) {
       display: flex;
     }
-    
+
     &:hover {
-      background: rgba($color-primary, 0.05);
-      color: $color-primary;
+      background: rgba($color-primary, 0.13);
     }
-    
-    &:focus-visible {
-      outline: 2px solid $color-primary;
-      outline-offset: 2px;
-    }
+  }
+}
+
+// ---- Body offset so content doesn't hide behind fixed header
+body {
+  padding-top: $header-height;
+
+  @media (max-width: 768px) {
+    padding-top: $header-height-sm;
   }
 }

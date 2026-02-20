@@ -87,4 +87,4 @@ export interface InfoNavItem {
   subItems?: InfoNavItem[];
 }
 
-export type InfoPageId = 'overview' | 'symptoms' | 'diagnosis' | 'treatment' | 'stories';
+export type InfoPageId = 'overview' | 'symptoms' | 'diagnosis' | 'treatment' | 'stories' | 'scales';

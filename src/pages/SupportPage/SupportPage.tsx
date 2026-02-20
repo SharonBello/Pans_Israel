@@ -59,6 +59,7 @@ import {
   contactPreferenceOptions,
 } from '../../types/support.types';
 import './SupportPage.scss';
+import SupportTabs from '@/components/Support/SupportTabs/SupportTabs';
 
 const SupportPage: React.FC = () => {
   // State
@@ -125,7 +126,7 @@ const SupportPage: React.FC = () => {
     if (!formData.location.trim()) errors.location = 'שדה חובה';
     if (!formData.howToHelp.trim()) errors.howToHelp = 'שדה חובה';
     if (formData.contactPreference.length === 0) errors.contactPreference = 'בחר לפחות אפשרות אחת';
-    
+
     // At least one contact method required
     if (!formData.phone && !formData.email) {
       errors.phone = 'נדרש טלפון או אימייל';
@@ -198,6 +199,8 @@ const SupportPage: React.FC = () => {
         </Container>
       </section>
 
+      <SupportTabs />
+
       {/* Stats Section */}
       <section className="support-page__stats">
         <Container maxWidth="lg">
@@ -236,14 +239,14 @@ const SupportPage: React.FC = () => {
       {/* Volunteers Grid */}
       <section className="support-page__volunteers">
         <Container maxWidth="lg">
-          <Box className="support-page__section-header">
+          {/* <Box className="support-page__section-header">
             <Typography variant="h2" className="support-page__section-title">
               המתנדבים שלנו
             </Typography>
             <Typography className="support-page__section-subtitle">
               הורים ואנשי מקצוע שמבינים ורוצים לעזור
             </Typography>
-          </Box>
+          </Box> */}
 
           {loading ? (
             <Box className="support-page__loading">
@@ -264,7 +267,7 @@ const SupportPage: React.FC = () => {
           ) : (
             <Grid container spacing={3} className="support-page__grid">
               {volunteers.map((volunteer) => (
-                <Grid sx={{xs:12, sm:6, md:4}} key={volunteer.id}>
+                <Grid sx={{ xs: 12, sm: 6, md: 4 }} key={volunteer.id}>
                   <Card className="support-page__card">
                     <CardContent className="support-page__card-content">
                       {/* Header */}
@@ -404,7 +407,7 @@ const SupportPage: React.FC = () => {
             <CloseIcon />
           </IconButton>
         </DialogTitle>
-        
+
         <DialogContent className="support-page__dialog-content">
           <Typography className="support-page__dialog-intro">
             תודה שבחרתם להתנדב! מלאו את הפרטים הבאים ונחזור אליכם בהקדם
@@ -412,7 +415,7 @@ const SupportPage: React.FC = () => {
 
           <Grid container spacing={2}>
             {/* Personal Info */}
-            <Grid sx={{xs:12, sm:6}}>
+            <Grid sx={{ xs: 12, sm: 6 }}>
               <TextField
                 label="שם פרטי"
                 value={formData.firstName}
@@ -423,7 +426,7 @@ const SupportPage: React.FC = () => {
                 required
               />
             </Grid>
-            <Grid sx={{xs:12, sm:6}}>
+            <Grid sx={{ xs: 12, sm: 6 }}>
               <TextField
                 label="שם משפחה"
                 value={formData.lastName}
@@ -434,7 +437,7 @@ const SupportPage: React.FC = () => {
                 required
               />
             </Grid>
-            <Grid sx={{xs:12, sm:6}}>
+            <Grid sx={{ xs: 12, sm: 6 }}>
               <TextField
                 label="גיל"
                 type="number"
@@ -447,7 +450,7 @@ const SupportPage: React.FC = () => {
                 inputProps={{ min: 18 }}
               />
             </Grid>
-            <Grid sx={{xs:12, sm:6}}>
+            <Grid sx={{ xs: 12, sm: 6 }}>
               <TextField
                 select
                 label="מגדר"
@@ -467,7 +470,7 @@ const SupportPage: React.FC = () => {
             </Grid>
 
             {/* Background */}
-            <Grid sx={{xs:12, sm:6}}>
+            <Grid sx={{ xs: 12, sm: 6 }}>
               <TextField
                 select
                 label="קרבה לדת"
@@ -482,7 +485,7 @@ const SupportPage: React.FC = () => {
                 ))}
               </TextField>
             </Grid>
-            <Grid sx={{xs:12, sm:6}}>
+            <Grid sx={{ xs: 12, sm: 6 }}>
               <TextField
                 select
                 label="דת"
@@ -499,7 +502,7 @@ const SupportPage: React.FC = () => {
             </Grid>
 
             {/* Professional */}
-            <Grid sx={{xs:12, sm:6}}>
+            <Grid sx={{ xs: 12, sm: 6 }}>
               <TextField
                 label="מקצוע / תחום עיסוק"
                 value={formData.profession}
@@ -510,7 +513,7 @@ const SupportPage: React.FC = () => {
                 required
               />
             </Grid>
-            <Grid sx={{xs:12, sm:6}}>
+            <Grid sx={{ xs: 12, sm: 6 }}>
               <TextField
                 select
                 label="השכלה"
@@ -527,7 +530,7 @@ const SupportPage: React.FC = () => {
             </Grid>
 
             {/* Location */}
-            <Grid sx={{xs:12}}>
+            <Grid sx={{ xs: 12 }}>
               <TextField
                 label="מקום מגורים"
                 value={formData.location}
@@ -541,7 +544,7 @@ const SupportPage: React.FC = () => {
             </Grid>
 
             {/* How to help */}
-            <Grid sx={{xs:12}}>
+            <Grid sx={{ xs: 12 }}>
               <TextField
                 label="כיצד תרצה/י לעזור?"
                 value={formData.howToHelp}
@@ -557,7 +560,7 @@ const SupportPage: React.FC = () => {
             </Grid>
 
             {/* Contact Preferences */}
-            <Grid sx={{xs:12}}>
+            <Grid sx={{ xs: 12 }}>
               <FormControl error={!!formErrors.contactPreference} component="fieldset">
                 <FormLabel component="legend">באיזו דרך מתאים ליצור קשר? *</FormLabel>
                 <FormGroup row>
@@ -583,7 +586,7 @@ const SupportPage: React.FC = () => {
             </Grid>
 
             {/* Contact Info */}
-            <Grid sx={{xs:12, sm:6}}>
+            <Grid sx={{ xs: 12, sm: 6 }}>
               <TextField
                 label="טלפון"
                 value={formData.phone}
@@ -595,7 +598,7 @@ const SupportPage: React.FC = () => {
                 dir="ltr"
               />
             </Grid>
-            <Grid sx={{xs:12, sm:6}}>
+            <Grid sx={{ xs: 12, sm: 6 }}>
               <TextField
                 label="אימייל"
                 type="email"

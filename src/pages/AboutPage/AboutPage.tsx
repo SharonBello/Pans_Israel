@@ -9,6 +9,8 @@ interface Founder {
     role: string;
     description: string;
     image?: string;
+    imagePosition?: string;
+    imageScale?: number;
 }
 
 const founders: Founder[] = [
@@ -16,6 +18,9 @@ const founders: Founder[] = [
         name: 'שרון בלו',
         role: 'מייסדת שותפה',
         description: 'אמא לשלושה ילדים עם פאנס/פאנדס. פעילה למען הגברת המודעות והנגשת מידע להורים בישראל.',
+        image: '../../../public/images/sharon_pic.jpg',
+        // imagePosition: 'center 10%',
+        imageScale: 1.3,
     },
     {
         name: 'אורלי בר טל',
@@ -31,6 +36,9 @@ const founders: Founder[] = [
         name: 'אושר ברכה קסלסי',
         role: 'מייסדת שותפה',
         description: 'מרצה על פאנס/פאנדס במכללות ובבית ספר. מטפלת cbt שמתמחה בפאנס/פאנדס',
+        image: '../../../public/images/osher_pic.jpeg',
+        imagePosition: 'center 20%',
+        imageScale: 1,
     },
 ];
 
@@ -189,8 +197,21 @@ const AboutPage: React.FC = () => {
                     <div className="about-founders__grid">
                         {founders.map((founder, index) => (
                             <div key={index} className="about-founders__card">
-                                <div className="about-founders__avatar">
-                                    {founder.name.charAt(0)}
+                                <div className="about-founders__avatar-wrapper">
+                                    {founder.image ? (
+                                        <img
+                                            src={founder.image}
+                                            className="about-founders__avatar"
+                                            style={{
+                                                objectPosition: founder.imagePosition || 'center',
+                                                transform: `scale(${founder.imageScale || 1})`,
+                                            }} alt={founder.name}
+                                        />
+                                    ) : (
+                                        <div className="about-founders__avatar about-founders__avatar--placeholder">
+                                            {founder.name.charAt(0)}
+                                        </div>
+                                    )}
                                 </div>
                                 <h3 className="about-founders__name">{founder.name}</h3>
                                 <span className="about-founders__role">{founder.role}</span>

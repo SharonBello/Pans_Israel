@@ -3,8 +3,8 @@
 // ==========================================================================
 
 @use "sass:color";
-@import '../../styles/abstracts/variables';
-@import '../../styles/abstracts/mixins';
+@use "../../styles/abstracts/variables" as *;
+@use "../../styles/abstracts/mixins" as *;
 
 .about-page {
     background: $color-background;
@@ -22,7 +22,7 @@
     overflow: hidden;
 
     &::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
@@ -44,7 +44,7 @@
     }
 
     &__title {
-        font-family: 'Heebo', sans-serif;
+        font-family: "Heebo", sans-serif;
         font-size: clamp(2.5rem, 6vw, 3.5rem);
         font-weight: 800;
         color: #ffffff;
@@ -52,7 +52,7 @@
     }
 
     &__subtitle {
-        font-family: 'Heebo', sans-serif;
+        font-family: "Heebo", sans-serif;
         font-size: clamp(1.125rem, 2.5vw, 1.375rem);
         color: rgba(255, 255, 255, 0.9);
         font-weight: 400;
@@ -76,7 +76,7 @@
     }
 
     &__title {
-        font-family: 'Heebo', sans-serif;
+        font-family: "Heebo", sans-serif;
         font-size: clamp(1.75rem, 4vw, 2.25rem);
         font-weight: 700;
         color: $color-primary;
@@ -89,7 +89,7 @@
     }
 
     &__subtitle {
-        font-family: 'Heebo', sans-serif;
+        font-family: "Heebo", sans-serif;
         font-size: 1.125rem;
         color: $text-secondary;
         text-align: center;
@@ -97,7 +97,7 @@
     }
 
     &__text {
-        font-family: 'Heebo', sans-serif;
+        font-family: "Heebo", sans-serif;
         font-size: 1.0625rem;
         line-height: 1.8;
         color: $text-primary;
@@ -113,7 +113,7 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-family: 'Heebo', sans-serif;
+    font-family: "Heebo", sans-serif;
     font-size: 0.875rem;
     font-weight: 600;
     color: $color-accent;
@@ -184,13 +184,13 @@
     }
 
     &__stat {
-        font-family: 'Heebo', sans-serif;
+        font-family: "Heebo", sans-serif;
         font-size: 2.5rem;
         font-weight: 800;
     }
 
     &__stat-label {
-        font-family: 'Heebo', sans-serif;
+        font-family: "Heebo", sans-serif;
         font-size: 1rem;
         opacity: 0.9;
     }
@@ -220,7 +220,7 @@
         }
 
         p {
-            font-family: 'Heebo', sans-serif;
+            font-family: "Heebo", sans-serif;
             font-size: 1.0625rem;
             line-height: 1.9;
             color: $text-primary;
@@ -288,7 +288,7 @@
     }
 
     &__card-title {
-        font-family: 'Heebo', sans-serif;
+        font-family: "Heebo", sans-serif;
         font-size: 1.125rem;
         font-weight: 700;
         color: $color-primary;
@@ -296,7 +296,7 @@
     }
 
     &__card-text {
-        font-family: 'Heebo', sans-serif;
+        font-family: "Heebo", sans-serif;
         font-size: 0.9375rem;
         line-height: 1.7;
         color: $text-secondary;
@@ -341,24 +341,39 @@
         }
     }
 
+    &__avatar-wrapper {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        overflow: hidden; 
+        margin: 0 auto 20px;
+        flex-shrink: 0;
+    }
+
     &__avatar {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+
+    &--placeholder {
+        background: linear-gradient(135deg, $color-primary 0%, $color-medium 100%);
+        color: #ffffff;
+        font-family: "Heebo", sans-serif;
+        font-size: 2.5rem;
+        font-weight: 700;
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100px;
         height: 100px;
-        margin: 0 auto 20px;
-        background: linear-gradient(135deg, $color-accent 0%, color.adjust($color-primary, $lightness: -10%) 100%);
         border-radius: 50%;
-        font-family: 'Heebo', sans-serif;
-        font-size: 2.5rem;
-        font-weight: 700;
-        color: #ffffff;
-        transition: transform 0.3s ease;
+        margin: 0 auto 20px;
     }
 
     &__name {
-        font-family: 'Heebo', sans-serif;
+        font-family: "Heebo", sans-serif;
         font-size: 1.25rem;
         font-weight: 700;
         color: $color-primary;
@@ -367,7 +382,7 @@
 
     &__role {
         display: block;
-        font-family: 'Heebo', sans-serif;
+        font-family: "Heebo", sans-serif;
         font-size: 0.875rem;
         font-weight: 500;
         color: $color-accent;
@@ -375,7 +390,7 @@
     }
 
     &__bio {
-        font-family: 'Heebo', sans-serif;
+        font-family: "Heebo", sans-serif;
         font-size: 0.9375rem;
         line-height: 1.7;
         color: $text-secondary;
@@ -420,7 +435,7 @@
             }
 
             span:last-child {
-                font-family: 'Heebo', sans-serif;
+                font-family: "Heebo", sans-serif;
                 font-size: 1.0625rem;
                 line-height: 1.6;
             }
@@ -460,7 +475,7 @@
     }
 
     &__title {
-        font-family: 'Heebo', sans-serif;
+        font-family: "Heebo", sans-serif;
         font-size: clamp(1.5rem, 4vw, 2rem);
         font-weight: 700;
         color: $color-primary;
@@ -468,7 +483,7 @@
     }
 
     &__text {
-        font-family: 'Heebo', sans-serif;
+        font-family: "Heebo", sans-serif;
         font-size: 1.0625rem;
         line-height: 1.7;
         color: $text-secondary;
@@ -488,7 +503,7 @@
         gap: 10px;
         padding: 14px 28px;
         border-radius: 50px;
-        font-family: 'Heebo', sans-serif;
+        font-family: "Heebo", sans-serif;
         font-size: 1rem;
         font-weight: 600;
         text-decoration: none;
@@ -532,7 +547,7 @@
     padding: 60px 24px;
 
     &__title {
-        font-family: 'Heebo', sans-serif;
+        font-family: "Heebo", sans-serif;
         font-size: 1rem;
         font-weight: 600;
         color: $text-muted;
@@ -555,7 +570,7 @@
     }
 
     &__logo {
-        font-family: 'Heebo', sans-serif;
+        font-family: "Heebo", sans-serif;
         font-size: 1rem;
         font-weight: 600;
         color: $text-muted;

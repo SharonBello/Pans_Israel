@@ -1,7 +1,6 @@
-@use '../../../styles/abstracts/variables' as *;
-@use '../../../styles/abstracts/mixins' as *;
+@use "../../../styles/abstracts/variables" as *;
+@use "../../../styles/abstracts/mixins" as *;
 
-// Color scheme matching main resources page
 $pn-blue: #1a5276;
 $pn-blue-dark: #154360;
 $pn-coral: #e74c3c;
@@ -14,101 +13,92 @@ $pn-text-light: #5d6d7e;
   min-height: 100vh;
 
   // ==========================================
-  // HERO SECTION
+  // HERO SECTION — purple, 200px, full width
   // ==========================================
   &__hero {
     position: relative;
-    min-height: 320px;
+    height: 200px;
+    max-height: 200px;
     display: flex;
-    align-items: flex-end;
-    padding-bottom: 48px;
-    
-    @include max-md {
-      min-height: 280px;
-      padding-bottom: 32px;
+    align-items: center;
+    overflow: hidden;
+    background: linear-gradient(135deg, #4a3f8f 0%, #7b5ea7 50%, #9b72cb 100%);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    @media (max-width: 600px) {
+      height: 160px;
+      max-height: 160px;
     }
   }
 
+  // Kill the bg image element entirely
   &__hero-bg {
-    position: absolute;
-    inset: 0;
-    background-image: url('/images/resources/hero-bg.jpg');
-    background-size: cover;
-    background-position: center;
-    
-    &::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(
-        135deg,
-        rgba($pn-blue, 0.92) 0%,
-        rgba($pn-blue-dark, 0.88) 100%
-      );
-    }
+    display: none;
   }
 
   &__hero-content {
     position: relative;
     z-index: 2;
     width: 100%;
+    padding: 24px 0;
   }
 
   &__breadcrumbs {
-    margin-bottom: 24px;
-    
+    margin-bottom: 8px;
+
     .MuiBreadcrumbs-separator {
       color: rgba(255, 255, 255, 0.5);
-      margin: 0 8px;
+      margin: 0 6px;
     }
   }
 
   &__breadcrumb-link {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    color: rgba(255, 255, 255, 0.8) !important;
-    font-size: 0.9rem;
+    gap: 4px;
+    color: rgba(255, 255, 255, 0.75) !important;
+    font-size: 0.82rem;
     text-decoration: none;
-    transition: color 0.2s ease;
     background: none;
     border: none;
     cursor: pointer;
-    
+    transition: color 0.2s;
+
     &:hover {
       color: #fff !important;
     }
-    
+
     .MuiSvgIcon-root {
-      font-size: 1rem;
+      font-size: 0.9rem;
     }
   }
 
   &__breadcrumb-current {
-    color: #fff !important;
-    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.95) !important;
+    font-size: 0.82rem;
     font-weight: 500;
   }
 
   &__hero-title {
     font-family: $font-heading;
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
     font-weight: 700;
     color: #fff;
-    margin-bottom: 12px;
-    line-height: 1.2;
+    margin-bottom: 6px;
+    line-height: 1.1;
   }
 
   &__hero-subtitle {
-    font-family: $font-primary;
-    font-size: 1.125rem;
-    color: rgba(255, 255, 255, 0.85);
-    max-width: 700px;
-    line-height: 1.7;
-    
-    @include max-sm {
-      font-size: 1rem;
-    }
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.5;
   }
 
   // ==========================================
@@ -116,7 +106,7 @@ $pn-text-light: #5d6d7e;
   // ==========================================
   &__content {
     padding: 60px 0 80px;
-    
+
     @include max-md {
       padding: 40px 0 60px;
     }
@@ -127,7 +117,7 @@ $pn-text-light: #5d6d7e;
   }
 
   // ==========================================
-  // DOWNLOADS SECTION
+  // DOWNLOADS
   // ==========================================
   &__downloads {
     margin-top: 60px;
@@ -144,7 +134,7 @@ $pn-text-light: #5d6d7e;
     font-weight: 700;
     color: $pn-text;
     margin-bottom: 32px;
-    
+
     .MuiSvgIcon-root {
       color: $pn-coral;
       font-size: 1.75rem;
@@ -155,7 +145,7 @@ $pn-text-light: #5d6d7e;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
-    
+
     @include max-sm {
       grid-template-columns: 1fr;
     }
@@ -165,12 +155,12 @@ $pn-text-light: #5d6d7e;
     border: 1px solid #e5e8eb;
     border-radius: 12px;
     transition: all 0.3s ease;
-    
+
     &:hover {
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
       border-color: rgba($pn-blue, 0.3);
     }
-    
+
     .MuiCardContent-root {
       padding: 24px;
       display: flex;
@@ -188,7 +178,6 @@ $pn-text-light: #5d6d7e;
   }
 
   &__download-desc {
-    font-family: $font-primary;
     font-size: 0.9rem;
     color: $pn-text-light;
     line-height: 1.6;
@@ -205,12 +194,11 @@ $pn-text-light: #5d6d7e;
 
   &__download-btn {
     align-self: flex-start;
-    font-family: $font-primary;
     font-weight: 600;
     color: $pn-blue;
     border-color: $pn-blue;
     text-transform: none;
-    
+
     &:hover {
       background: $pn-blue;
       color: #fff;
@@ -238,7 +226,7 @@ $pn-text-light: #5d6d7e;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
-    
+
     @include max-sm {
       grid-template-columns: 1fr;
     }
@@ -251,22 +239,22 @@ $pn-text-light: #5d6d7e;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    
+
     &:hover {
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
       border-color: rgba($pn-blue, 0.3);
-      
+
       .resources-detail__related-arrow {
         opacity: 1;
         transform: translateX(-8px);
       }
     }
-    
+
     .MuiCardContent-root {
       padding: 24px;
       padding-inline-start: 48px;
     }
-    
+
     h6 {
       font-family: $font-heading;
       font-size: 1.1rem;
@@ -274,9 +262,8 @@ $pn-text-light: #5d6d7e;
       color: $pn-text;
       margin-bottom: 8px;
     }
-    
+
     .MuiTypography-body2 {
-      font-family: $font-primary;
       color: $pn-text-light;
       line-height: 1.6;
     }
@@ -302,17 +289,16 @@ $pn-text-light: #5d6d7e;
   }
 
   &__back-btn {
-    font-family: $font-primary;
     font-weight: 600;
     color: $pn-blue;
     border-color: $pn-blue;
     text-transform: none;
     padding: 10px 24px;
-    
+
     .MuiSvgIcon-root.rtl-flip {
       transform: rotate(180deg);
     }
-    
+
     &:hover {
       background: $pn-blue;
       color: #fff;
@@ -320,15 +306,11 @@ $pn-text-light: #5d6d7e;
   }
 }
 
-// ==========================================
-// RTL ADJUSTMENTS
-// ==========================================
 [dir="rtl"] {
   .resources-detail {
     &__related-arrow {
       transform: translateY(-50%);
     }
-    
     &__related-card:hover &__related-arrow {
       transform: translateY(-50%) translateX(8px);
     }

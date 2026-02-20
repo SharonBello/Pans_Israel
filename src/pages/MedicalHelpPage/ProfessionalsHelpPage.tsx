@@ -8,6 +8,7 @@ import { HolisticIcon, MedicalIcon, PlusIcon, TherapyIcon } from '../../componen
 import FilterBar from '@/components/professionals/FilterBar/FilterBar';
 import RecommendModal from '@/components/professionals/RecommendProfessionalModal/RecommendProfessionalModal';
 import ProfessionalCard from '@/components/professionals/ProfessionalCard/ProfessionalCard';
+import TreatmentTabs from '@/components/Treatment/TreatmentTabs/TreatmentTabs';
 
 const TABS: Tab[] = [
   { key: 'medical', label: 'רופאים', icon: MedicalIcon, description: 'רופאים ומומחים רפואיים עם ידע בתסמונות פאנס/פאנדס' },
@@ -77,6 +78,7 @@ const ProfessionalsHelpPage: React.FC = () => {
 
   return (
     <div className="professionals-page">
+      <TreatmentTabs />
       {/* Header */}
       <header className="page-header">
         <div className="page-header__content">

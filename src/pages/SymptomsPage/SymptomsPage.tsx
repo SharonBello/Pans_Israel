@@ -142,7 +142,7 @@ const SymptomsPage: React.FC = () => {
       {/* Header */}
       <Box className="symptoms-page__header">
         <Typography variant="h3" component="h1" gutterBottom>
-          {t('symptoms.title', 'תסמינים וסולמות אבחון')}
+          {t('symptoms.title', 'כלי הערכה')}
         </Typography>
       </Box>
 
@@ -151,7 +151,7 @@ const SymptomsPage: React.FC = () => {
         <Typography variant="body1">
           {t(
             'symptoms.disclaimer',
-            'הסולמות המוצגים כאן הם כלי עזר בלבד ואינם מהווים תחליף לאבחון רפואי מקצועי. אנא התייעצו עם רופא מומחה.'
+            'המדדים המוצגים כאן הם כלי עזר בלבד ואינם מהווים תחליף לאבחון רפואי מקצועי. אנא התייעצו עם רופא מומחה.'
           )}
         </Typography>
       </Alert>
