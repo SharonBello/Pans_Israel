@@ -39,7 +39,7 @@ const HomeSections: React.FC = (): React.JSX.Element => {
                 title: 'איך מאבחנים?',
                 description:
                     'איך לבדוק אם ייתכן פאנס/פאנדס? מדדים ותסמינים',
-                to: '/symptoms',
+                to: '/info/symptoms',
                 Icon: FaClipboardList,
                 image: '/images/home/symptoms.jpg',
                 accent: '#4A90D9',
@@ -58,7 +58,7 @@ const HomeSections: React.FC = (): React.JSX.Element => {
                 title: 'חדשות ואתרים מומלצים',
                 description:
                     'קישורים שימושיים, מאמרים, מחקרים, ואתרים מרכזיים, ועדכונים.',
-                to: '/resources',
+                to: '/professional/international',
                 Icon: FaNewspaper,
                 image: '/images/home/resources.jpg',
                 accent: '#8B6FB0',
