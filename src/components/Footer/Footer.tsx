@@ -69,11 +69,11 @@ const Footer: React.FC = () => {
                 <FaWhatsapp />
               </a>
               <a
-                href="https://www.facebook.com/groups/yourfacebookgroup"
+                href="https://www.facebook.com/share/g/1DCWNUxKhN/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer__social-link footer__social-link--facebook"
-                aria-label="הצטרפו לקבוצת הפייסבוק שלנו"
+                aria-label="הצטרפו לקבוצת הפייסבוק"
               >
                 <FaFacebook />
               </a>
