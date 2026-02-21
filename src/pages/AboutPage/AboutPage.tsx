@@ -26,6 +26,9 @@ const founders: Founder[] = [
         name: 'אורלי בר טל',
         role: 'מייסדת שותפה',
         description: 'אמא לילד עם פאנס/פאנדס. עוסקת במחקר קליני ובקישור לאנשי מקצוע בתחום.',
+        image: '/images/orli_pic.jpeg',
+        imagePosition: '50%',
+        imageScale: 1,
     },
     {
         name: 'קרין אהרון',
