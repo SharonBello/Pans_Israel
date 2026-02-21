@@ -182,14 +182,14 @@ const FlowchartInner: React.FC<FlowchartInnerProps> = ({ onClose }) => {
                 ref={modalRef}
                 role="dialog"
                 aria-modal="true"
-                aria-label="עץ ההחלטות PANS / PANDAS"
+                aria-label="עץ ההחלטות פאנס / פאנדס"
                 dir="rtl"
             >
                 {/* ── HEADER ──────────────────────────────────── */}
                 <div className="df-mheader">
                     <div className="df-mlogo">🧠</div>
                     <div style={{ flex: 1 }}>
-                        <div className="df-mtitle">עץ ההחלטות PANS / PANDAS</div>
+                        <div className="df-mtitle">עץ ההחלטות פאנס / פאנדס</div>
                         <div className="df-msub">
                             כלי אינטראקטיבי לאבחון וטיפול | מבוסס הנחיות PPN | לאנשי מקצוע רפואיים בלבד
                         </div>
@@ -353,7 +353,7 @@ const DiagnosisFlowchart: React.FC = () => {
                         '&:active': { transform: 'translateY(0)' },
                     }}
                 >
-                    פתח עץ החלטות אינטראקטיבי — אבחון וטיפול PANS/PANDAS
+                    פתח עץ החלטות אינטראקטיבי — אבחון וטיפול פאנס/פאנדס
                 </Button>
             </div>
 
