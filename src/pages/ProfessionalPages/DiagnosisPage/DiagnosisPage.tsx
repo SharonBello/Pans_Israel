@@ -95,6 +95,7 @@ export const DiagnosisPage: React.FC = () => (
             {/* ── SECTION 5: Clinical download guides ── */}
             <SectionWrapper title="מדריכים קליניים להורדה">
                 <Box className="prof-links-grid">
+                    <LinkCard title="מעבדת Shemesh — דר אור שמש" desc="מחקר פאנס/פאנדס ישראלי בפיתוח — Infectious Neuroscience, University of Pittsburgh" url="https://www.shemeshlab.com" tag="ישראל 🇮🇱" />
                     <LinkCard title="PANS/PANDAS Treatment Guidelines — Stanford" desc="המדריך הקליני המקיף ביותר — אבחון, טיפול ומעקב" url="https://med.stanford.edu/content/dam/sm/pans/documents/PANSPANDASClinicalProtocol.pdf" tag="PDF" />
                     <LinkCard title="PANDAS Physicians Network — Treatment Guide" desc="פרוטוקול טיפול מעשי מאורגן לפי שלבי חומרה" url="https://www.pandasppn.org/treatment/" tag="מדריך" />
                     <LinkCard title="Neuroimmune — Clinician Resources" desc="משאבים לרופאים כולל פרוטוקולי IVIG ופלסמהפרזה" url="https://neuroimmune.org/clinicians/pandas-medical-resources/" tag="משאבים" />

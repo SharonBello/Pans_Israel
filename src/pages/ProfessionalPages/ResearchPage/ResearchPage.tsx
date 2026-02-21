@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Container, Typography, Accordion, AccordionSummary, AccordionDetails, Chip } from '@mui/material';
+import { Box, Container, Typography, Accordion, AccordionSummary, AccordionDetails, Chip, Button } from '@mui/material';
 import {
     ExpandMore as ExpandIcon,
     OpenInNew as ExternalIcon,
@@ -56,7 +56,56 @@ export const ResearchPage: React.FC = () => (
                     </Box>
                 ))}
             </SectionWrapper>
-
+            {/* ── ISRAELI RESEARCH SPOTLIGHT ── */}
+            <SectionWrapper title="🇮🇱 מחקר ישראלי — מחקר פאנס/פאנדס בפיתוח">
+                <Box sx={{
+                    background: 'linear-gradient(135deg, rgba(2,51,115,0.04) 0%, rgba(108,166,217,0.08) 100%)',
+                    border: '1px solid rgba(2,51,115,0.12)',
+                    borderRadius: 3,
+                    p: 3,
+                    mb: 2,
+                }}>
+                    <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 2, flexWrap: 'wrap' }}>
+                        <Box sx={{ flex: 1, minWidth: 220 }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                                <Typography sx={{
+                                    fontWeight: 800,
+                                    fontSize: '1.05rem',
+                                    color: '#1a2744',
+                                    fontFamily: "'Heebo','Assistant',sans-serif",
+                                }}>
+                                    מעבדת Shemesh — Counter-Disease Engineering
+                                </Typography>
+                                <Chip label="בקרוב" size="small" sx={{ backgroundColor: '#fff3e0', color: '#e65100', fontWeight: 700, fontSize: '0.7rem' }} />
+                            </Box>
+                            <Typography sx={{ fontSize: '0.82rem', color: '#607d8b', mb: 0.5, fontFamily: "'Heebo','Assistant',sans-serif" }}>
+                                דר אור שמש — University of Pittsburgh
+                            </Typography>
+                            <Typography sx={{ fontSize: '0.88rem', color: '#455a64', lineHeight: 1.7, fontFamily: "'Heebo','Assistant',sans-serif" }}>
+                                מעבדת Shemesh עוסקת ב-Infectious Neuroscience — המחקר על תפקיד מיקרואורגניזמים (חיידקים, וירוסים ופטריות) בהתפתחות מחלות מוח. המעבדה עומדת להשיק ניסוי ייעודי בתחום פאנס/פאנדס — מחקר ישראלי פורץ דרך ראשון מסוגו.
+                            </Typography>
+                        </Box>
+                        <Button
+                            variant="outlined"
+                            size="small"
+                            href="https://www.shemeshlab.com"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            sx={{
+                                borderColor: '#023373',
+                                color: '#023373',
+                                fontFamily: "'Heebo','Assistant',sans-serif",
+                                fontWeight: 600,
+                                whiteSpace: 'nowrap',
+                                alignSelf: 'center',
+                                '&:hover': { backgroundColor: 'rgba(2,51,115,0.05)' },
+                            }}
+                        >
+                            לאתר המעבדה ←
+                        </Button>
+                    </Box>
+                </Box>
+            </SectionWrapper>
             <SectionWrapper title="כיצד להשתתף במחקר">
                 {[
                     { q: 'מי יכול להשתתף?', a: 'כל ניסוי מגדיר קריטריוני הכללה ואי-הכללה. בדרך כלל: ילדים 4–18, אבחנה מאושרת, ללא תרופות מסוימות. יש לבדוק כל ניסוי ספציפית.' },

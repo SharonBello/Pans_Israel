@@ -10,6 +10,17 @@ import { SectionWrapper } from '../SharedComponents/SectionWrapper';
 // Merged: original InternationalPage + resourcesContent websites section
 const INTL_SITES = [
     {
+        region: '🇮🇱 ישראל',
+        sites: [
+            {
+                name: 'מעבדת Shemesh — Counter-Disease Engineering',
+                desc: 'דר אור שמש, אוניברסיטת פיטסבורג — מחקר פאנס/פאנדס ישראלי ראשון מסוגו בתחום Infectious Neuroscience. ניסוי ייעודי בפאנס/פאנדס בפיתוח.',
+                url: 'https://www.shemeshlab.com',
+                tag: 'מחקר ישראלי'
+            }
+        ]
+    },
+    {
         region: '🇺🇸 ארצות הברית',
         sites: [
             { name: 'Neuroimmune Foundation', desc: 'הארגון המוביל למחקר וחינוך על PANS/PANDAS — משאבים לרופאים ומשפחות', url: 'https://neuroimmune.org', tag: 'מוביל' },
