@@ -11,6 +11,7 @@ import ProfessionalTabs from '@/components/professionals/ProfessionalTabs/Profes
 import { ProfHero } from '../SharedComponents/ProfHero';
 import { SectionWrapper } from '../SharedComponents/SectionWrapper';
 import { LinkCard } from '../SharedComponents/LinkCard';
+import DiagnosisFlowchart from '@/components/DiagnosisFlowchart/DiagnosisFlowchart';
 
 export const DiagnosisPage: React.FC = () => (
     <Box className="professional-page" dir="rtl">
@@ -42,6 +43,8 @@ export const DiagnosisPage: React.FC = () => (
                     ))}
                 </Box>
             </SectionWrapper>
+
+            <DiagnosisFlowchart />
 
             {/* ── SECTION 2: FAQ from resourcesContent clinicians ── */}
             <SectionWrapper title="שאלות נפוצות לאנשי מקצוע">

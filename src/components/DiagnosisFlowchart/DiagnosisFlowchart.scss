@@ -1,0 +1,773 @@
+@use "../../styles/abstracts/" as *;
+
+// ==========================================================================
+// DiagnosisFlowchart Modal — Light Theme
+// Uses PANS/PANDAS Israel design tokens from _variables.scss
+// ==========================================================================
+
+// ── TRIGGER BUTTON WRAPPER ─────────────────────────────────────────────
+.df-trigger-wrap {
+    margin: $spacing-8 0 $spacing-2;
+    display: flex;
+    justify-content: center;
+}
+
+// ── BACKDROP ───────────────────────────────────────────────────────────
+.df-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: $z-modal-backdrop;
+    background: rgba($color-darkest, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: $spacing-4;
+    overflow-y: auto;
+    animation: dfFadeIn 0.2s ease;
+
+    @media (max-width: $breakpoint-sm) {
+        padding: $spacing-2;
+        align-items: flex-start;
+    }
+}
+
+@keyframes dfFadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+// ── MODAL SHELL ────────────────────────────────────────────────────────
+.df-modal {
+    width: 100%;
+    max-width: 780px;
+    background: $color-bg-white;
+    border-radius: $radius-xl;
+    border: 1px solid $border-color;
+    box-shadow: $shadow-2xl;
+    overflow: hidden;
+    animation: dfSlideUp 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    margin: auto;
+
+    @media (max-width: $breakpoint-sm) {
+        border-radius: $radius-lg;
+    }
+}
+
+@keyframes dfSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// ── MODAL HEADER ───────────────────────────────────────────────────────
+.df-mheader {
+    background: $gradient-primary; // linear-gradient(135deg, #023373 0%, #6CA6D9 100%)
+    padding: $spacing-5 $spacing-6;
+    display: flex;
+    align-items: center;
+    gap: $spacing-3;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+
+    @media (max-width: $breakpoint-sm) {
+        padding: $spacing-4;
+        gap: $spacing-2;
+    }
+}
+
+.df-mlogo {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    background: rgba($color-bg-white, 0.18);
+    border: 1px solid rgba($color-bg-white, 0.28);
+    border-radius: $radius-md;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+}
+
+.df-mtitle {
+    font-family: $font-heading;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $text-on-dark;
+    flex: 1;
+    line-height: $line-height-tight;
+}
+
+.df-msub {
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    color: rgba($text-on-dark, 0.72);
+    margin-top: $spacing-1;
+}
+
+.df-mclose {
+    background: rgba($color-bg-white, 0.15);
+    border: 1px solid rgba($color-bg-white, 0.25);
+    border-radius: $radius-md;
+    color: $text-on-dark;
+    cursor: pointer;
+    width: 34px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: $transition-all;
+    flex-shrink: 0;
+
+    &:hover {
+        background: rgba($color-bg-white, 0.28);
+    }
+}
+
+// ── DISCLAIMER ─────────────────────────────────────────────────────────
+// Uses $color-accent (#E67E22) — orange — for medical warning
+.df-disc {
+    background: rgba($color-accent, 0.08);
+    border-bottom: 1px solid rgba($color-accent, 0.25);
+    padding: 0 $spacing-6;
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    color: darken($color-accent, 18%);
+    line-height: $line-height-relaxed;
+    display: flex;
+    gap: $spacing-2;
+    align-items: flex-start;
+    direction: rtl;
+
+    strong {
+        font-weight: $font-weight-bold;
+        color: darken($color-accent, 22%);
+    }
+
+    @media (max-width: $breakpoint-sm) {
+        padding: $spacing-3 $spacing-4;
+    }
+}
+
+// ── BREADCRUMB ─────────────────────────────────────────────────────────
+.df-bc {
+    padding: $spacing-2 $spacing-6;
+    display: flex;
+    gap: $spacing-1;
+    flex-wrap: wrap;
+    align-items: center;
+    direction: rtl;
+    background: $color-bg-light;
+    border-bottom: 1px solid $border-light;
+    min-height: 38px;
+
+    @media (max-width: $breakpoint-sm) {
+        padding: $spacing-2 $spacing-4;
+    }
+}
+
+// All breadcrumb buttons are clickable links back to that step
+.df-bc-btn {
+    background: none;
+    border: none;
+    color: $color-primary;
+    cursor: pointer;
+    font-size: $font-size-xs;
+    font-family: $font-primary;
+    font-weight: $font-weight-semibold;
+    padding: $spacing-1 $spacing-2;
+    border-radius: $radius-sm;
+    transition: $transition-all;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-color: rgba($color-primary, 0.35);
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+    &:hover {
+        background: rgba($color-primary, 0.08);
+        text-decoration-color: $color-primary;
+    }
+
+    &--home {
+        text-decoration: none;
+        font-weight: $font-weight-bold;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+
+.df-bc-sep {
+    font-size: $font-size-xs;
+    color: $color-light;
+    flex-shrink: 0;
+    user-select: none;
+}
+
+// Current step — not a button, muted label
+.df-bc-current {
+    font-size: $font-size-xs;
+    color: $text-muted;
+    font-family: $font-primary;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+// ── CONTENT AREA ───────────────────────────────────────────────────────
+.df-content {
+    padding: $spacing-3 $spacing-6 $spacing-6;
+    direction: rtl;
+    background: $color-bg-light; // #F2F2F2
+
+    @media (max-width: $breakpoint-sm) {
+        padding: $spacing-4;
+    }
+}
+
+// ── CARD ───────────────────────────────────────────────────────────────
+.df-card {
+    border-radius: $radius-lg;
+    padding: $spacing-6;
+    border: 1.5px solid $border-color; // #A7D5F2
+    background: $color-bg-white;
+    box-shadow: $shadow-sm;
+    animation: dfCardIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+
+    @media (max-width: $breakpoint-sm) {
+        padding: $spacing-4;
+    }
+}
+
+@keyframes dfCardIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// Severity card variants — right border accent (RTL = right is the "start" side)
+.df-card.sv-mild {
+    border-right: 4px solid $severity-3; // #FF9800 orange
+    border-color: rgba($severity-3, 0.5);
+    background: linear-gradient(to left, rgba($severity-3, 0.04) 0%, $color-bg-white 50%);
+}
+.df-card.sv-moderate {
+    border-right: 4px solid $severity-4; // #FF5722 deep orange
+    border-color: rgba($severity-4, 0.5);
+    background: linear-gradient(to left, rgba($severity-4, 0.04) 0%, $color-bg-white 50%);
+}
+.df-card.sv-severe {
+    border-right: 4px solid $severity-5; // #F44336 red
+    border-color: rgba($severity-5, 0.5);
+    background: linear-gradient(to left, rgba($severity-5, 0.04) 0%, $color-bg-white 50%);
+}
+.df-card.sv-success {
+    border-right: 4px solid $severity-0; // #4CAF50 green
+    border-color: rgba($severity-0, 0.4);
+    background: linear-gradient(to left, rgba($severity-0, 0.04) 0%, $color-bg-white 50%);
+}
+.df-card.sv-warning {
+    border-right: 4px solid $severity-2; // #FFC107 yellow
+    border-color: rgba($severity-2, 0.5);
+    background: linear-gradient(to left, rgba($severity-2, 0.04) 0%, $color-bg-white 50%);
+}
+.df-card.sv-info {
+    border-right: 4px solid $color-primary;
+    border-color: rgba($color-primary, 0.25);
+    background: linear-gradient(to left, rgba($color-primary, 0.04) 0%, $color-bg-white 50%);
+}
+
+// ── TYPE BADGE ─────────────────────────────────────────────────────────
+.df-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-1;
+    font-family: $font-primary;
+    font-size: 10.5px;
+    font-weight: $font-weight-bold;
+    letter-spacing: $letter-spacing-wider;
+    text-transform: uppercase;
+    padding: 3px $spacing-3;
+    border-radius: $radius-full;
+    margin-bottom: $spacing-3;
+
+    &.b-start,
+    &.b-question {
+        background: rgba($color-primary, 0.1); // light #023373
+        color: $color-primary;
+    }
+    &.b-action {
+        background: rgba($color-medium, 0.15); // light #6CA6D9
+        color: darken($color-medium, 25%);
+    }
+    &.b-treatment {
+        background: rgba($severity-3, 0.12); // light orange
+        color: darken($severity-3, 10%);
+    }
+    &.b-outcome {
+        background: rgba($severity-0, 0.12); // light green
+        color: darken($severity-0, 15%);
+    }
+    &.b-followup {
+        background: rgba($color-accent, 0.12); // light #E67E22
+        color: darken($color-accent, 10%);
+    }
+}
+
+// ── TITLE ──────────────────────────────────────────────────────────────
+.df-title {
+    font-family: $font-heading;
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    line-height: $line-height-snug;
+    margin-bottom: $spacing-2;
+    color: $text-primary; // #0E0D26 deep navy
+}
+
+// ── BODY TEXT ──────────────────────────────────────────────────────────
+.df-body-text {
+    font-family: $font-primary;
+    color: $text-secondary; // #023373
+    font-size: $font-size-sm;
+    line-height: $line-height-relaxed;
+    margin-bottom: $spacing-4;
+}
+
+// ── NOTES BULLET LIST ──────────────────────────────────────────────────
+.df-notes {
+    background: rgba($color-primary, 0.04);
+    border: 1px solid rgba($color-primary, 0.14);
+    border-radius: $radius-md;
+    padding: $spacing-3 $spacing-4;
+    margin-bottom: $spacing-4;
+    list-style: none;
+
+    li {
+        font-family: $font-primary;
+        font-size: $font-size-sm;
+        color: $text-secondary; // #023373
+        padding: $spacing-2 0;
+        border-bottom: 1px solid $border-light;
+        display: flex;
+        align-items: flex-start;
+        gap: $spacing-2;
+        line-height: $line-height-relaxed;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &::before {
+            content: "◦";
+            color: $color-medium; // #6CA6D9
+            flex-shrink: 0;
+            margin-top: 3px;
+            font-size: 15px;
+        }
+    }
+}
+
+// ── NUMBERED ACTION LIST ───────────────────────────────────────────────
+.df-actions {
+    background: rgba($color-primary, 0.04);
+    border: 1px solid rgba($color-primary, 0.14);
+    border-radius: $radius-md;
+    padding: $spacing-3 $spacing-4;
+    margin-bottom: $spacing-4;
+    list-style: none;
+    counter-reset: ac;
+
+    li {
+        font-family: $font-primary;
+        font-size: $font-size-sm;
+        color: $text-primary; // #0E0D26
+        padding: $spacing-2 0;
+        border-bottom: 1px solid $border-light;
+        display: flex;
+        align-items: flex-start;
+        gap: $spacing-3;
+        line-height: $line-height-relaxed;
+        counter-increment: ac;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &::before {
+            content: counter(ac);
+            background: $color-primary; // #023373
+            color: $text-on-dark; // #FFFFFF
+            font-size: 10.5px;
+            font-weight: $font-weight-bold;
+            min-width: 22px;
+            height: 22px;
+            border-radius: $radius-full;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+    }
+}
+
+// ── COMORBID SYMPTOM BOX ───────────────────────────────────────────────
+// Uses $warning (#FFC107) — clear yellow for attention
+.df-comorbid {
+    background: rgba($warning, 0.07);
+    border: 1.5px solid rgba($warning, 0.4);
+    border-radius: $radius-md;
+    padding: $spacing-4 $spacing-5;
+    margin-bottom: $spacing-4;
+
+    &__title {
+        font-family: $font-primary;
+        font-size: 10.5px;
+        font-weight: $font-weight-bold;
+        color: darken($warning, 28%);
+        letter-spacing: $letter-spacing-wider;
+        text-transform: uppercase;
+        margin-bottom: $spacing-2;
+    }
+
+    &__intro {
+        font-family: $font-primary;
+        font-size: $font-size-xs;
+        color: darken($warning, 32%);
+        line-height: $line-height-relaxed;
+        margin-bottom: $spacing-3;
+
+        strong {
+            color: darken($warning, 38%);
+        }
+    }
+
+    &__list {
+        padding-right: $spacing-5;
+        margin: 0;
+
+        li {
+            font-family: $font-primary;
+            font-size: $font-size-xs;
+            color: $text-primary;
+            padding: $spacing-1 0;
+            line-height: $line-height-relaxed;
+        }
+    }
+}
+
+// ── SEVERITY SCALE BAR ─────────────────────────────────────────────────
+.df-severity {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-3;
+    margin-bottom: $spacing-5;
+
+    @media (max-width: $breakpoint-sm) {
+        grid-template-columns: 1fr;
+        gap: $spacing-2;
+    }
+
+    &__item {
+        border-radius: $radius-md;
+        padding: $spacing-3 $spacing-4;
+        border: 1.5px solid;
+    }
+
+    &__mild {
+        background: rgba($severity-3, 0.07); // orange tint
+        border-color: rgba($severity-3, 0.35);
+        .df-sev-title {
+            color: darken($severity-3, 8%);
+        }
+    }
+
+    &__moderate {
+        background: rgba($severity-4, 0.07); // deep orange tint
+        border-color: rgba($severity-4, 0.35);
+        .df-sev-title {
+            color: darken($severity-4, 5%);
+        }
+    }
+
+    &__severe {
+        background: rgba($severity-5, 0.07); // red tint
+        border-color: rgba($severity-5, 0.35);
+        .df-sev-title {
+            color: darken($severity-5, 5%);
+        }
+    }
+}
+
+.df-sev-title {
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-bold;
+    margin-bottom: $spacing-1;
+}
+
+.df-sev-desc {
+    font-family: $font-primary;
+    font-size: 11.5px;
+    color: $text-secondary; // #023373
+    line-height: $line-height-relaxed;
+}
+
+// ── OPTION BUTTONS ─────────────────────────────────────────────────────
+.df-opts {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-2;
+    margin-top: $spacing-4;
+}
+
+.df-opt {
+    background: $color-bg-white;
+    border: 1.5px solid $border-color; // #A7D5F2
+    border-radius: $radius-md;
+    padding: $spacing-4 $spacing-5;
+    color: $text-primary; // #0E0D26
+    font-size: $font-size-sm;
+    font-family: $font-primary;
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    text-align: right;
+    transition: $transition-all;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-3;
+    line-height: $line-height-snug;
+    box-shadow: $shadow-sm;
+
+    &:hover {
+        background: rgba($color-primary, 0.05);
+        border-color: $color-primary; // #023373
+        color: $color-primary;
+        transform: translateY(-1px);
+        box-shadow: $shadow-md;
+
+        .df-opt-arr {
+            color: $color-primary;
+        }
+    }
+
+    // Severity color variants on hover
+    &.c-red:hover {
+        background: rgba($severity-5, 0.06);
+        border-color: $severity-5;
+        color: darken($severity-5, 5%);
+        .df-opt-arr {
+            color: $severity-5;
+        }
+    }
+    &.c-green:hover {
+        background: rgba($severity-0, 0.06);
+        border-color: darken($severity-0, 5%);
+        color: darken($severity-0, 15%);
+        .df-opt-arr {
+            color: darken($severity-0, 15%);
+        }
+    }
+    &.c-yellow:hover {
+        background: rgba($severity-3, 0.06);
+        border-color: $severity-3;
+        color: darken($severity-3, 8%);
+        .df-opt-arr {
+            color: darken($severity-3, 8%);
+        }
+    }
+    &.c-orange:hover {
+        background: rgba($severity-4, 0.06);
+        border-color: $severity-4;
+        color: darken($severity-4, 5%);
+        .df-opt-arr {
+            color: darken($severity-4, 5%);
+        }
+    }
+}
+
+.df-opt-arr {
+    font-size: 12px;
+    color: $text-muted; // #6CA6D9
+    flex-shrink: 0;
+    transition: $transition-color;
+}
+
+// ── BACK / RESET CONTROLS ──────────────────────────────────────────────
+.df-ctrl {
+    display: flex;
+    gap: $spacing-3;
+    justify-content: center;
+    margin-top: $spacing-5;
+    flex-wrap: wrap;
+}
+
+.df-ctrlbtn {
+    background: $color-bg-white;
+    border: 1.5px solid $border-color;
+    color: $text-secondary;
+    padding: $spacing-2 $spacing-5;
+    border-radius: $radius-md;
+    font-size: $font-size-xs;
+    font-family: $font-primary;
+    font-weight: $font-weight-medium;
+    cursor: pointer;
+    transition: $transition-all;
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    box-shadow: $shadow-sm;
+
+    &:hover {
+        background: rgba($color-primary, 0.06);
+        border-color: $color-primary;
+        color: $color-primary;
+        box-shadow: $shadow-md;
+    }
+}
+
+// ── LEGEND — shown only on start node ──────────────────────────────────
+.df-legend {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: $spacing-2 $spacing-4;
+    padding: $spacing-3 $spacing-6 $spacing-4;
+    border-top: 1px solid $border-light;
+    background: $color-bg-light;
+    direction: rtl;
+
+    @media (max-width: $breakpoint-sm) {
+        padding: $spacing-3 $spacing-4;
+        gap: $spacing-2 $spacing-3;
+    }
+
+    &__label {
+        font-family: $font-primary;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-bold;
+        color: $text-primary;
+        flex-shrink: 0;
+    }
+
+    // Link to original PPN flowchart
+    &__ppn-link {
+        display: inline-flex;
+        align-items: center;
+        gap: $spacing-1;
+        font-family: $font-primary;
+        font-size: $font-size-xs;
+        font-weight: $font-weight-semibold;
+        color: $color-primary;
+        text-decoration: none;
+        margin-right: auto; // pushes to left edge in RTL
+        padding: 2px $spacing-2;
+        border-radius: $radius-sm;
+        border: 1px solid rgba($color-primary, 0.2);
+        transition: $transition-all;
+
+        &:hover {
+            background: rgba($color-primary, 0.06);
+            border-color: $color-primary;
+        }
+    }
+}
+
+.df-leg {
+    display: flex;
+    align-items: center;
+    gap: $spacing-2;
+    font-family: $font-primary;
+    font-size: $font-size-xs;
+    color: $text-secondary;
+}
+
+.df-leg-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: $radius-full;
+    flex-shrink: 0;
+}
+
+// ── FOOTNOTES — shown only on start node ───────────────────────────────
+.df-fn {
+    padding: 0 $spacing-6 $spacing-5;
+    font-family: $font-primary;
+    font-size: 11.5px;
+    color: $text-muted;
+    line-height: $line-height-relaxed;
+    border-top: 1px solid $border-light;
+    background: $color-bg-light;
+    direction: rtl;
+
+    p {
+        margin-bottom: $spacing-2;
+        font-size: 0.8rem !important;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    // Inline links within footnotes
+    &-link {
+        color: $color-primary;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        font-weight: $font-weight-medium;
+        transition: $transition-color;
+
+        &:hover {
+            color: darken($color-primary, 8%);
+        }
+    }
+}
+
+// Inline disclaimer link
+.df-disc-link {
+    color: darken($color-accent, 20%);
+    font-weight: $font-weight-semibold;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+
+    &:hover {
+        color: darken($color-accent, 28%);
+    }
+}
+
+// ── MOBILE CATCH-ALL ───────────────────────────────────────────────────
+@media (max-width: $breakpoint-xs) {
+    .df-backdrop {
+        padding: $spacing-1;
+    }
+    .df-modal {
+        border-radius: $radius-md;
+    }
+    .df-opt {
+        font-size: 13px;
+        padding: $spacing-3 $spacing-4;
+    }
+    .df-title {
+        font-size: $font-size-lg;
+    }
+}
