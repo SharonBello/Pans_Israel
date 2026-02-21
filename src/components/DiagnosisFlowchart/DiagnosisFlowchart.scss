@@ -7,7 +7,7 @@
 
 // ── TRIGGER BUTTON WRAPPER ─────────────────────────────────────────────
 .df-trigger-wrap {
-    margin: $spacing-8 0 $spacing-2;
+    margin: $spacing-10 0;
     display: flex;
     justify-content: center;
 }
@@ -142,7 +142,7 @@
     padding: 0 $spacing-6;
     font-family: $font-primary;
     font-size: $font-size-xs;
-    color: darken($color-accent, 18%);
+    color: #a0550c;
     line-height: $line-height-relaxed;
     display: flex;
     gap: $spacing-2;
@@ -151,7 +151,7 @@
 
     strong {
         font-weight: $font-weight-bold;
-        color: darken($color-accent, 22%);
+        color: #8f4a0a;
     }
 
     @media (max-width: $breakpoint-sm) {
@@ -317,19 +317,19 @@
     }
     &.b-action {
         background: rgba($color-medium, 0.15); // light #6CA6D9
-        color: darken($color-medium, 25%);
+        color: #2a6096;
     }
     &.b-treatment {
         background: rgba($severity-3, 0.12); // light orange
-        color: darken($severity-3, 10%);
+        color: #cc7a00;
     }
     &.b-outcome {
         background: rgba($severity-0, 0.12); // light green
-        color: darken($severity-0, 15%);
+        color: #2e7d32;
     }
     &.b-followup {
         background: rgba($color-accent, 0.12); // light #E67E22
-        color: darken($color-accent, 10%);
+        color: #c0621a;
     }
 }
 
@@ -443,7 +443,7 @@
         font-family: $font-primary;
         font-size: 10.5px;
         font-weight: $font-weight-bold;
-        color: darken($warning, 28%);
+        color: #7a5c00 ;
         letter-spacing: $letter-spacing-wider;
         text-transform: uppercase;
         margin-bottom: $spacing-2;
@@ -452,12 +452,12 @@
     &__intro {
         font-family: $font-primary;
         font-size: $font-size-xs;
-        color: darken($warning, 32%);
+        color: #6b5000 ;
         line-height: $line-height-relaxed;
         margin-bottom: $spacing-3;
 
         strong {
-            color: darken($warning, 38%);
+            color: #5a4200;
         }
     }
 
@@ -497,7 +497,7 @@
         background: rgba($severity-3, 0.07); // orange tint
         border-color: rgba($severity-3, 0.35);
         .df-sev-title {
-            color: darken($severity-3, 8%);
+            color: #c06e00 ;
         }
     }
 
@@ -505,7 +505,7 @@
         background: rgba($severity-4, 0.07); // deep orange tint
         border-color: rgba($severity-4, 0.35);
         .df-sev-title {
-            color: darken($severity-4, 5%);
+            color: #d44000;
         }
     }
 
@@ -513,7 +513,7 @@
         background: rgba($severity-5, 0.07); // red tint
         border-color: rgba($severity-5, 0.35);
         .df-sev-title {
-            color: darken($severity-5, 5%);
+            color: #d32f2f;
         }
     }
 }
@@ -575,33 +575,33 @@
     &.c-red:hover {
         background: rgba($severity-5, 0.06);
         border-color: $severity-5;
-        color: darken($severity-5, 5%);
+        color: #d32f2f;
         .df-opt-arr {
             color: $severity-5;
         }
     }
     &.c-green:hover {
         background: rgba($severity-0, 0.06);
-        border-color: darken($severity-0, 5%);
-        color: darken($severity-0, 15%);
+        border-color: #43a047;
+        color: #2e7d32;
         .df-opt-arr {
-            color: darken($severity-0, 15%);
+            color: #2e7d32;
         }
     }
     &.c-yellow:hover {
         background: rgba($severity-3, 0.06);
         border-color: $severity-3;
-        color: darken($severity-3, 8%);
+        color: #c06e00 ;
         .df-opt-arr {
-            color: darken($severity-3, 8%);
+            color: #c06e00 ;
         }
     }
     &.c-orange:hover {
         background: rgba($severity-4, 0.06);
         border-color: $severity-4;
-        color: darken($severity-4, 5%);
+        color: #d44000;
         .df-opt-arr {
-            color: darken($severity-4, 5%);
+            color: #d44000;
         }
     }
 }
@@ -738,20 +738,20 @@
         transition: $transition-color;
 
         &:hover {
-            color: darken($color-primary, 8%);
+            color: #011f4d;
         }
     }
 }
 
 // Inline disclaimer link
 .df-disc-link {
-    color: darken($color-accent, 20%);
+    color: #924d0f;
     font-weight: $font-weight-semibold;
     text-decoration: underline;
     text-underline-offset: 2px;
 
     &:hover {
-        color: darken($color-accent, 28%);
+        color: #7a3f0b;
     }
 }
 

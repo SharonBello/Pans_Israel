@@ -3,7 +3,7 @@ import type { FlowNode } from "../FlowType";
 export const nodes: Record<string, FlowNode> = {
     start: {
         id: 'start', type: 'start',
-        title: 'נקודת כניסה — תסמינים ראשוניים',
+        title: 'תסמינים ראשוניים',
         content: 'האם המטופל מציג אחד מהתסמינים הבאים בהופעה חדה ופתאומית?',
         notes: [
             'הופעה פתאומית ודרמטית של אובססיות ו/או התנהגויות כפייתיות (OCD)',
