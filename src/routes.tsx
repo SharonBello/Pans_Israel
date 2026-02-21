@@ -33,7 +33,7 @@ import ResourcesPage from './pages/ResourcesPage/ResourcesPage.tsx';
 import ResourcesDetailPage from './pages/ResourcesPage/ResourcesDetailPage/ResourcesDetailPage.tsx';
 import SupportPage from './pages/SupportPage/SupportPage.tsx';
 import HolisticPage from './pages/HolisticPage/HolisticPage.tsx';
-import VideosPage from './pages/Videospage/Videospage.tsx';
+import VideosPage from './pages/VideosPage/VideosPage.tsx';
 
 // ── Professional pages (fix: default imports, not named {}) ──────────────────
 import DiagnosisPage from './pages/ProfessionalPages/DiagnosisPage/DiagnosisPage.tsx';
