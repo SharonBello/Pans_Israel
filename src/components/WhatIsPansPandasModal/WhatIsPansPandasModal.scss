@@ -3,8 +3,8 @@
 // ==========================================================================
 
 @use "sass:color";
-@import '../../styles/abstracts/variables';
-@import '../../styles/abstracts/mixins';
+@use '../../styles/abstracts/variables';
+@use '../../styles/abstracts/mixins';
 
 .pans-pandas-modal {
   // Paper/Dialog container

@@ -7,46 +7,59 @@ import logoPng from '../../styles/assets/logo.png';
 const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
-  const navigationLinks = [
-    { title: 'דף הבית', path: '/' },
-    { title: 'אודות', path: '/about' },
-    { title: 'מידע', path: '/info' },
-    { title: 'תמיכה', path: '/support' },
-    { title: 'משאבים', path: '/resources' },
-    { title: 'סקרים', path: '/surveys' },
+  // ── Column 1: mirrors "תסמינים ואבחון" + "אפשרויות טיפול" from header ──
+  const infoLinks = [
+    { title: 'מה זה פאנס/פאנדס?', path: '/info' },
+    { title: 'תסמינים נפוצים', path: '/info/symptoms' },
+    { title: 'אבחון', path: '/info/diagnosis' },
+    { title: 'כלי הערכה', path: '/info/scales' },
+    { title: 'דרכי טיפול', path: '/info/treatment' },
   ];
 
-  // Minimal links for mobile (most important pages only)
+  // ── Column 2: mirrors "תמיכה וקהילה" from header ──
+  const supportLinks = [
+    { title: 'משאבים להורים', path: '/resources' },
+    { title: 'תמיכה וקהילה', path: '/support' },
+    { title: 'עדויות הורים', path: '/testimonials' },
+    { title: 'סרטונים ווובינרים', path: '/resources/videos' },
+    { title: 'רשימת רופאים ומטפלים', path: '/Professionals-help' },
+  ];
+
+  // ── Column 3: mirrors "מידע מקצועי" from header ──
+  const professionalLinks = [
+    { title: 'אבחון וטיפול', path: '/professional/diagnosis' },
+    { title: 'מידע לצוות חינוכי', path: '/professional/education' },
+    { title: 'מאמרים מדעיים', path: '/professional/articles' },
+    { title: 'מחקרים קליניים', path: '/professional/research' },
+    { title: 'אתרים בינלאומיים', path: '/professional/international' },
+    { title: 'סקרים', path: '/professional/surveys' },
+  ];
+
+  // ── Mobile: only the most critical pages ──
   const mobileEssentialLinks = [
     { title: 'דף הבית', path: '/' },
     { title: 'מידע', path: '/info' },
     { title: 'תמיכה', path: '/support' },
-    { title: 'צור קשר', path: '/contact' },
+    { title: 'אודות', path: '/about' },
   ];
 
-  const infoLinks = [
-    { title: 'מה זה PANS/PANDAS?', path: '/info' },
-    { title: 'סימנים ותסמינים', path: '/info/symptoms' },
-    { title: 'אבחון', path: '/info/diagnosis' },
-    { title: 'טיפול', path: '/info/treatment' },
-  ];
-
-  const supportLinks = [
-    { title: 'עדויות הורים', path: '/testimonials' },
-    { title: 'אנשי מקצוע', path: '/professionals-help' },
-    { title: 'זכויות וסיוע', path: '/support' },
-    { title: 'קהילה', path: '/support#community' },
-  ];
+  const WHATSAPP_URL =
+    'https://wa.me/972544767146?text=' +
+    encodeURIComponent(
+      'שלום,\nאני יוצר/ת קשר דרך אתר פאנס/פאנדס - העמותה הישראלית לאנספיליטיס אוטואימוני.\nאשמח לשוחח בנושא:'
+    );
 
   return (
     <footer className="footer" dir="rtl">
       <div className="footer__container">
-        {/* Top Section */}
+
+        {/* ── TOP SECTION ─────────────────────────────────────────────── */}
         <div className="footer__top">
-          {/* Logo & Description */}
+
+          {/* Brand / Logo / Description / Social */}
           <div className="footer__brand">
             <div className="footer__logo">
-              <img src={logoPng} alt="PANS/PANDAS Israel Logo" className="footer__logo-img" />
+              <img src={logoPng} alt="פאנס/פאנדס Israel Logo" className="footer__logo-img" />
               <div className="footer__logo-text">
                 <span className="footer__logo-title">פאנס/פאנדס</span>
                 <span className="footer__logo-subtitle">ישראל</span>
@@ -55,12 +68,11 @@ const Footer: React.FC = () => {
             <p className="footer__description">
               העמותה הישראלית לאנצפליטיס אוטואימוני של גרעיני הבסיס במוח.
               <br />
-              תמיכה, מידע ומשאבים למשפחות המתמודדות עם PANS/PANDAS.
+              תמיכה, מידע ומשאבים למשפחות המתמודדות עם פאנס/פאנדס.
             </p>
-            {/* Social Links */}
             <div className="footer__social">
               <a
-                href="https://wa.me/972544767146"
+                href={WHATSAPP_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer__social-link footer__social-link--whatsapp"
@@ -80,66 +92,61 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Desktop/Tablet Navigation - 3 columns */}
+          {/* ── DESKTOP: 3 link columns ─────────────────────────────── */}
           <div className="footer__links footer__links--desktop">
-            <div className="footer__links-column">
-              <h3 className="footer__links-title">ניווט</h3>
-              <ul className="footer__links-list">
-                {navigationLinks.map((link) => (
-                  <li key={link.path}>
-                    <Link to={link.path} className="footer__link">
-                      {link.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
 
             <div className="footer__links-column">
-              <h3 className="footer__links-title">מידע</h3>
+              <h3 className="footer__links-title">מידע ואבחון</h3>
               <ul className="footer__links-list">
                 {infoLinks.map((link) => (
                   <li key={link.path}>
-                    <Link to={link.path} className="footer__link">
-                      {link.title}
-                    </Link>
+                    <Link to={link.path} className="footer__link">{link.title}</Link>
                   </li>
                 ))}
               </ul>
             </div>
 
             <div className="footer__links-column">
-              <h3 className="footer__links-title">תמיכה</h3>
+              <h3 className="footer__links-title">תמיכה וקהילה</h3>
               <ul className="footer__links-list">
                 {supportLinks.map((link) => (
                   <li key={link.path}>
-                    <Link to={link.path} className="footer__link">
-                      {link.title}
-                    </Link>
+                    <Link to={link.path} className="footer__link">{link.title}</Link>
                   </li>
                 ))}
               </ul>
             </div>
+
+            <div className="footer__links-column">
+              <h3 className="footer__links-title">מידע מקצועי</h3>
+              <ul className="footer__links-list">
+                {professionalLinks.map((link) => (
+                  <li key={link.path}>
+                    <Link to={link.path} className="footer__link">{link.title}</Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
           </div>
 
-          {/* Mobile Navigation - Minimal essential links only */}
+          {/* ── MOBILE: condensed single column ─────────────────────── */}
           <div className="footer__links footer__links--mobile">
             <div className="footer__links-column">
               <h3 className="footer__links-title">קישורים חשובים</h3>
               <ul className="footer__links-list">
                 {mobileEssentialLinks.map((link) => (
                   <li key={link.path}>
-                    <Link to={link.path} className="footer__link">
-                      {link.title}
-                    </Link>
+                    <Link to={link.path} className="footer__link">{link.title}</Link>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
+
         </div>
 
-        {/* Bottom Section */}
+        {/* ── BOTTOM SECTION ──────────────────────────────────────────── */}
         <div className="footer__bottom">
           <div className="footer__bottom-content">
             <p className="footer__copyright">
@@ -157,7 +164,7 @@ const Footer: React.FC = () => {
               </a>
               {' '}@{' '}
               <a
-                href=""
+                href="https://www.sigmaxltd.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer__developer-link"
@@ -167,6 +174,7 @@ const Footer: React.FC = () => {
             </p>
           </div>
         </div>
+
       </div>
     </footer>
   );
