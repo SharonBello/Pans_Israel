@@ -34,6 +34,9 @@ const founders: Founder[] = [
         name: 'קרין אהרון',
         role: 'מייסדת שותפה',
         description: 'אמא לילד עם פאנס/פאנדס. מובילה את פעילות הקהילה והתמיכה ההדדית בין ההורים.',
+        image: '/images/karin_pic.jpg',
+        imagePosition: 'center 10%',
+        imageScale: 1.1,
     },
     {
         name: 'אושר ברכה קסלסי',
