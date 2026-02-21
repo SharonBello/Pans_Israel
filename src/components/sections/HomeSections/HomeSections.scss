@@ -63,7 +63,7 @@
     border-radius: $radius-xl;
     padding: 2.5rem;
     margin-bottom: 2rem;
-    // background: linear-gradient(135deg, $color-darkest 0%, $color-primary 60%, darken($color-medium, 8%) 100%);
+    background: linear-gradient(135deg, #011a4f 0%, #023373 55%, #2d6a7e 100%);
     border: 1px solid rgba($color-medium, 0.15);
 
     &__glow {
@@ -365,7 +365,7 @@
         --card-accent: #{$color-primary};
 
         .hs-card__bg {
-            // background: linear-gradient(145deg, darken($color-primary, 5%) 0%, $color-medium 100%);
+            background: linear-gradient(135deg, #011a4f 0%, #023373 55%, #2d6a7e 100%);
         }
     }
 
