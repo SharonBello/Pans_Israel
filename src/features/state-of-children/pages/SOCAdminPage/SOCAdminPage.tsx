@@ -26,6 +26,7 @@ import { socCategories } from '../../data/socQuestions';
 import type { BaseSurveyResponse } from '../../../shared/types/baseSurveyTypes';
 import { Timestamp } from 'firebase/firestore';
 import './SOCAdminPage.scss';
+import AdminLogoutButton from '@/pages/AdminLoginPage/AdminLogoutButton';
 
 // --------------------------------------------------------------------------
 // Component
@@ -46,7 +47,7 @@ const SOCAdminPage: React.FC = () => {
     const [dateTo, setDateTo] = useState('');
 
     // Question labels for export
-    const questionLabels = useMemo(() => 
+    const questionLabels = useMemo(() =>
         getQuestionLabelsFromCategories(socCategories), []);
 
     // --------------------------------------------------------------------------
@@ -87,8 +88,8 @@ const SOCAdminPage: React.FC = () => {
         if (dateFrom) {
             const fromDate = new Date(dateFrom);
             filtered = filtered.filter(r => {
-                const submittedAt = r.submittedAt instanceof Timestamp 
-                    ? r.submittedAt.toDate() 
+                const submittedAt = r.submittedAt instanceof Timestamp
+                    ? r.submittedAt.toDate()
                     : new Date();
                 return submittedAt >= fromDate;
             });
@@ -98,8 +99,8 @@ const SOCAdminPage: React.FC = () => {
             const toDate = new Date(dateTo);
             toDate.setHours(23, 59, 59, 999);
             filtered = filtered.filter(r => {
-                const submittedAt = r.submittedAt instanceof Timestamp 
-                    ? r.submittedAt.toDate() 
+                const submittedAt = r.submittedAt instanceof Timestamp
+                    ? r.submittedAt.toDate()
                     : new Date();
                 return submittedAt <= toDate;
             });
@@ -116,11 +117,11 @@ const SOCAdminPage: React.FC = () => {
         try {
             setExporting(true);
             setError(null);
-            
+
             const csvContent = exportToCSV(filteredResponses, questionLabels, includeSerial);
             const filename = `soc_survey_${new Date().toISOString().split('T')[0]}.csv`;
             downloadFile(csvContent, filename, 'text/csv;charset=utf-8');
-            
+
             setSuccess(`יוצאו ${filteredResponses.length} תשובות לקובץ CSV`);
             setTimeout(() => setSuccess(null), 3000);
         } catch (err) {
@@ -135,16 +136,16 @@ const SOCAdminPage: React.FC = () => {
         try {
             setExporting(true);
             setError(null);
-            
+
             const excelBlob = await exportToExcel(
-                filteredResponses, 
-                SOC_SURVEY_ID, 
-                questionLabels, 
+                filteredResponses,
+                SOC_SURVEY_ID,
+                questionLabels,
                 includeSerial
             );
             const filename = `soc_survey_${new Date().toISOString().split('T')[0]}.xlsx`;
             downloadFile(excelBlob, filename, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            
+
             setSuccess(`יוצאו ${filteredResponses.length} תשובות לקובץ Excel`);
             setTimeout(() => setSuccess(null), 3000);
         } catch (err) {
@@ -159,11 +160,11 @@ const SOCAdminPage: React.FC = () => {
         try {
             setExporting(true);
             setError(null);
-            
+
             const jsonContent = JSON.stringify(filteredResponses, null, 2);
             const filename = `soc_survey_${new Date().toISOString().split('T')[0]}.json`;
             downloadFile(jsonContent, filename, 'application/json');
-            
+
             setSuccess(`יוצאו ${filteredResponses.length} תשובות לקובץ JSON`);
             setTimeout(() => setSuccess(null), 3000);
         } catch (err) {
@@ -205,6 +206,7 @@ const SOCAdminPage: React.FC = () => {
                     <Typography className="soc-admin__subtitle">
                         צפייה בתשובות וייצוא נתונים
                     </Typography>
+                    <AdminLogoutButton />
                 </Box>
 
                 {/* Stats Summary */}
@@ -347,9 +349,9 @@ const SOCAdminPage: React.FC = () => {
                                             <TableCell>{index + 1}</TableCell>
                                             {includeSerial && (
                                                 <TableCell>
-                                                    <Chip 
-                                                        label={response.serial} 
-                                                        size="small" 
+                                                    <Chip
+                                                        label={response.serial}
+                                                        size="small"
                                                         variant="outlined"
                                                     />
                                                 </TableCell>
@@ -358,27 +360,27 @@ const SOCAdminPage: React.FC = () => {
                                             <TableCell>{formatDate(response.submittedAt)}</TableCell>
                                             <TableCell>
                                                 {response.answers.child_gender === 'male' ? 'זכר' :
-                                                 response.answers.child_gender === 'female' ? 'נקבה' : '-'}
+                                                    response.answers.child_gender === 'female' ? 'נקבה' : '-'}
                                             </TableCell>
                                             <TableCell>{response.answers.child_onset_age || '-'}</TableCell>
                                             <TableCell>
                                                 {response.answers.primary_trigger === 'strep' ? 'סטרפטוקוק' :
-                                                 response.answers.primary_trigger === 'mycoplasma' ? 'מיקופלזמה' :
-                                                 response.answers.primary_trigger || '-'}
+                                                    response.answers.primary_trigger === 'mycoplasma' ? 'מיקופלזמה' :
+                                                        response.answers.primary_trigger || '-'}
                                             </TableCell>
                                             <TableCell>
                                                 <Chip
                                                     label={
                                                         response.answers.symptoms_remitted === 'full_remission' ? 'הפוגה' :
-                                                        response.answers.symptoms_remitted === 'mostly_managed' ? 'מנוהל' :
-                                                        response.answers.symptoms_remitted === 'still_struggling' ? 'מתמודד' :
-                                                        'לא ידוע'
+                                                            response.answers.symptoms_remitted === 'mostly_managed' ? 'מנוהל' :
+                                                                response.answers.symptoms_remitted === 'still_struggling' ? 'מתמודד' :
+                                                                    'לא ידוע'
                                                     }
                                                     size="small"
                                                     color={
                                                         response.answers.symptoms_remitted === 'full_remission' ? 'success' :
-                                                        response.answers.symptoms_remitted === 'mostly_managed' ? 'info' :
-                                                        'default'
+                                                            response.answers.symptoms_remitted === 'mostly_managed' ? 'info' :
+                                                                'default'
                                                     }
                                                 />
                                             </TableCell>

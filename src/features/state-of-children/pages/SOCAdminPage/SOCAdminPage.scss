@@ -5,13 +5,13 @@
 @use "sass:color";
 
 $color-primary: #023373;
-$color-accent: #E67E22;
-$color-medium: #6CA6D9;
-$color-light: #A7D5F2;
-$color-background: #F2F2F2;
-$text-primary: #0E0D26;
+$color-accent: #e67e22;
+$color-medium: #6ca6d9;
+$color-light: #a7d5f2;
+$color-background: #f2f2f2;
+$text-primary: #0e0d26;
 $text-secondary: #023373;
-$success: #4CAF50;
+$success: #4caf50;
 
 .soc-admin {
     min-height: 100vh;
@@ -28,10 +28,13 @@ $success: #4CAF50;
 
     &__header {
         margin-bottom: 32px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
     }
 
     &__title {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: clamp(1.5rem, 4vw, 2rem) !important;
         font-weight: 700 !important;
         color: $color-primary !important;
@@ -39,7 +42,7 @@ $success: #4CAF50;
     }
 
     &__subtitle {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 1rem !important;
         color: $text-secondary !important;
         opacity: 0.8;
@@ -66,14 +69,14 @@ $success: #4CAF50;
     }
 
     &__stat-value {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 2rem !important;
         font-weight: 800 !important;
         color: $color-primary !important;
     }
 
     &__stat-label {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 0.875rem !important;
         color: $text-secondary !important;
         opacity: 0.8;
@@ -86,7 +89,7 @@ $success: #4CAF50;
     &__alert {
         margin-bottom: 24px !important;
         border-radius: 12px !important;
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
     }
 
     // ==========================================================================
@@ -113,7 +116,7 @@ $success: #4CAF50;
     }
 
     &__section-title {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 1rem !important;
         font-weight: 600 !important;
         color: $color-primary !important;
@@ -138,12 +141,12 @@ $success: #4CAF50;
         min-width: 150px;
 
         .MuiOutlinedInput-root {
-            font-family: 'Heebo', sans-serif;
+            font-family: "Heebo", sans-serif;
             border-radius: 8px;
         }
 
         .MuiInputLabel-root {
-            font-family: 'Heebo', sans-serif;
+            font-family: "Heebo", sans-serif;
         }
     }
 
@@ -154,7 +157,7 @@ $success: #4CAF50;
     }
 
     &__export-btn {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-weight: 600 !important;
         text-transform: none !important;
         border-radius: 8px !important;
@@ -196,7 +199,7 @@ $success: #4CAF50;
         gap: 16px;
 
         .MuiTypography-root {
-            font-family: 'Heebo', sans-serif;
+            font-family: "Heebo", sans-serif;
             color: $text-secondary;
         }
     }
@@ -206,7 +209,7 @@ $success: #4CAF50;
             .MuiTableCell-root {
                 background: $color-primary;
                 color: #ffffff;
-                font-family: 'Heebo', sans-serif;
+                font-family: "Heebo", sans-serif;
                 font-weight: 600;
                 font-size: 0.875rem;
                 white-space: nowrap;
@@ -215,7 +218,7 @@ $success: #4CAF50;
 
         .MuiTableBody-root {
             .MuiTableCell-root {
-                font-family: 'Heebo', sans-serif;
+                font-family: "Heebo", sans-serif;
                 font-size: 0.875rem;
                 color: $text-primary;
             }
@@ -228,7 +231,7 @@ $success: #4CAF50;
         }
 
         .MuiChip-root {
-            font-family: 'Heebo', sans-serif;
+            font-family: "Heebo", sans-serif;
             font-size: 0.75rem;
         }
     }
@@ -245,7 +248,7 @@ $success: #4CAF50;
         border: 1px dashed rgba($color-primary, 0.2);
 
         .MuiTypography-root {
-            font-family: 'Heebo', sans-serif !important;
+            font-family: "Heebo", sans-serif !important;
             font-size: 0.8125rem !important;
             color: $text-secondary !important;
             opacity: 0.8;
