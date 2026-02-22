@@ -21,31 +21,33 @@ import CBIScalePage from './pages/SymptomsPage/scales/CbiScale/CBIScalePage/CBIS
 import CBIResultsPage from './pages/SymptomsPage/scales/CbiScale/CBIResultsPage/CBIResultsPage.tsx';
 import AboutPage from './pages/AboutPage/AboutPage.tsx';
 import { SOCAdminPage, SOCResultsPage, SOCSurveyPage } from './features/index.ts';
-
-// ── Surveys ──────────────────────────────────────────────────────────────────
-// /surveys → original surveys page (no hero/tabs)
-// import SurveysPage from './pages/ProfessionalPages/SurveysPage/SurveysPage.tsx';
-// /professional/surveys → new page with ProfHero + ProfessionalTabs
 import ProfessionalSurveysPage from './pages/ProfessionalPages/ProfessionalSurveysPage/ProfessionalSurveysPage.tsx';
-
 import InfoPage from './pages/InfoPage/InfoPage.tsx';
 import ResourcesPage from './pages/ResourcesPage/ResourcesPage.tsx';
 import ResourcesDetailPage from './pages/ResourcesPage/ResourcesDetailPage/ResourcesDetailPage.tsx';
 import SupportPage from './pages/SupportPage/SupportPage.tsx';
 import HolisticPage from './pages/HolisticPage/HolisticPage.tsx';
 import VideosPage from './pages/VideosPage/VideosPage.tsx';
-
-// ── Professional pages (fix: default imports, not named {}) ──────────────────
 import DiagnosisPage from './pages/ProfessionalPages/DiagnosisPage/DiagnosisPage.tsx';
 import EducationPage from './pages/ProfessionalPages/EducationPage/EducationPage.tsx';
 import ArticlesPage from './pages/ProfessionalPages/ArticlesPage/ArticlesPage.tsx';
 import InternationalPage from './pages/ProfessionalPages/InternationalPage/InternationalPage.tsx';
 import ResearchPage from './pages/ProfessionalPages/ResearchPage/ResearchPage.tsx';
 
+// ── Admin Auth ────────────────────────────────────────────────────────────────
+import AdminLoginPage from './pages/AdminLoginPage/AdminLoginPage.tsx';
+import ProtectedRoute from './Auth/ProtectedRoute.tsx';
+
+// ─────────────────────────────────────────────────────────────────────────────
+
 type AppRoute = {
   path: string;
   component: React.ReactElement;
 };
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Public routes
+// ─────────────────────────────────────────────────────────────────────────────
 
 const AppRoutes: AppRoute[] = [
   { path: '/', component: <HomePage /> },
@@ -77,11 +79,10 @@ const AppRoutes: AppRoute[] = [
   { path: '/scales/cbi/form', component: <CBIScalePage /> },
   { path: '/scales/cbi/results', component: <CBIResultsPage /> },
 
-  // Surveys — /surveys uses OLD page, /professional/surveys uses NEW page
+  // Surveys
   { path: '/surveys', component: <ProfessionalSurveysPage /> },
   { path: '/surveys/state-of-children', component: <SOCSurveyPage /> },
   { path: '/surveys/state-of-children/results', component: <SOCResultsPage /> },
-  { path: '/admin/surveys/state-of-children', component: <SOCAdminPage /> },
 
   { path: '/holistic', component: <HolisticPage /> },
   { path: '/info/overview-professional', component: <InfoPage /> },
@@ -94,6 +95,20 @@ const AppRoutes: AppRoute[] = [
   { path: '/professional/international', component: <InternationalPage /> },
   { path: '/professional/research', component: <ResearchPage /> },
   { path: '/professional/surveys', component: <ProfessionalSurveysPage /> },
+
+  // ── Admin routes (no nav links to these anywhere in the app) ───────────────
+  {
+    path: '/admin/login',
+    component: <AdminLoginPage />,
+  },
+  {
+    path: '/admin/surveys/state-of-children',
+    component: (
+      <ProtectedRoute>
+        <SOCAdminPage />
+      </ProtectedRoute>
+    ),
+  },
 ];
 
 export default AppRoutes;

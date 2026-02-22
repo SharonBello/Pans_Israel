@@ -5,14 +5,14 @@
 @use "sass:color";
 
 $color-primary: #023373;
-$color-accent: #E67E22;
-$color-medium: #6CA6D9;
-$color-light: #A7D5F2;
-$color-background: #F2F2F2;
-$text-primary: #0E0D26;
+$color-accent: #e67e22;
+$color-medium: #6ca6d9;
+$color-light: #a7d5f2;
+$color-background: #f2f2f2;
+$text-primary: #0e0d26;
 $text-secondary: #023373;
-$success: #4CAF50;
-$error: #F44336;
+$success: #4caf50;
+$error: #f44336;
 
 .soc-survey {
     min-height: 100vh;
@@ -34,7 +34,7 @@ $error: #F44336;
     }
 
     &__title {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: clamp(2rem, 5vw, 3rem) !important;
         font-weight: 800 !important;
         color: $color-primary !important;
@@ -43,7 +43,7 @@ $error: #F44336;
     }
 
     &__description {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 1.125rem !important;
         color: $text-secondary !important;
         line-height: 1.7 !important;
@@ -75,7 +75,7 @@ $error: #F44336;
     }
 
     &__info-text {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 0.9375rem !important;
         color: $text-primary !important;
         font-weight: 500 !important;
@@ -95,7 +95,7 @@ $error: #F44336;
     }
 
     &__email-label {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 1.125rem !important;
         font-weight: 600 !important;
         color: $text-primary !important;
@@ -103,7 +103,7 @@ $error: #F44336;
     }
 
     &__email-note {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 0.875rem !important;
         color: $text-secondary !important;
         opacity: 0.8;
@@ -123,7 +123,7 @@ $error: #F44336;
         margin: 0 auto 20px !important;
 
         .MuiOutlinedInput-root {
-            font-family: 'Heebo', sans-serif;
+            font-family: "Heebo", sans-serif;
             border-radius: 12px;
             font-size: 1.125rem;
 
@@ -151,11 +151,11 @@ $error: #F44336;
         max-width: 500px;
         margin: 0 auto 20px !important;
         border-radius: 12px !important;
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
     }
 
     &__start-btn {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 1.125rem !important;
         font-weight: 600 !important;
         padding: 14px 48px !important;
@@ -177,7 +177,7 @@ $error: #F44336;
     }
 
     &__disclaimer {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 0.8125rem !important;
         color: $text-secondary !important;
         opacity: 0.7;
@@ -205,7 +205,7 @@ $error: #F44336;
     }
 
     &__category-title {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: clamp(1.5rem, 4vw, 2rem) !important;
         font-weight: 700 !important;
         color: $color-primary !important;
@@ -213,7 +213,7 @@ $error: #F44336;
     }
 
     &__category-description {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 1rem !important;
         color: $text-secondary !important;
         opacity: 0.85;
@@ -228,7 +228,7 @@ $error: #F44336;
         max-width: 800px;
         margin: 0 auto 24px !important;
         border-radius: 12px !important;
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
     }
 
     // ==========================================================================
@@ -253,7 +253,7 @@ $error: #F44336;
     }
 
     &__nav-btn {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 1rem !important;
         font-weight: 600 !important;
         padding: 12px 28px !important;
@@ -292,7 +292,7 @@ $error: #F44336;
     }
 
     &__nav-info {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 0.9375rem !important;
         color: $text-secondary !important;
         font-weight: 500 !important;
@@ -345,7 +345,7 @@ $error: #F44336;
     }
 
     &__success-title {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: clamp(1.75rem, 4vw, 2.25rem) !important;
         font-weight: 700 !important;
         color: $color-primary !important;
@@ -353,7 +353,7 @@ $error: #F44336;
     }
 
     &__success-text {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 1.0625rem !important;
         color: $text-secondary !important;
         line-height: 1.7 !important;
@@ -368,7 +368,7 @@ $error: #F44336;
     }
 
     &__success-btn {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 1rem !important;
         font-weight: 600 !important;
         padding: 12px 32px !important;
@@ -408,7 +408,7 @@ $error: #F44336;
     }
 
     &__dialog-title {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 1.5rem !important;
         font-weight: 700 !important;
         color: $color-primary !important;
@@ -416,7 +416,7 @@ $error: #F44336;
     }
 
     &__dialog-text {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 1rem !important;
         color: $text-primary !important;
         line-height: 1.7 !important;
@@ -424,7 +424,7 @@ $error: #F44336;
     }
 
     &__dialog-stats {
-        font-family: 'Heebo', sans-serif !important;
+        font-family: "Heebo", sans-serif !important;
         font-size: 0.9375rem !important;
         color: $text-secondary !important;
         text-align: center;
@@ -440,7 +440,7 @@ $error: #F44336;
         padding: 16px 24px 24px !important;
 
         .MuiButton-root {
-            font-family: 'Heebo', sans-serif !important;
+            font-family: "Heebo", sans-serif !important;
             font-weight: 600 !important;
             text-transform: none !important;
             border-radius: 50px !important;
@@ -451,4 +451,47 @@ $error: #F44336;
             background: linear-gradient(135deg, $color-primary, $color-medium) !important;
         }
     }
+}
+
+// Captcha wrapper — sits between email field and start button
+.soc-survey__captcha {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 8px 0 16px;
+
+    // This is the only way to affect an iframe background from outside —
+    // use a hue-rotate(0) filter to force the iframe to repaint on white
+    > div {
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid rgba(#023373, 0.15);
+        box-shadow: none !important;
+
+        // Brighten the grey (#f9f9f9) to white using CSS filter
+        filter: brightness(1.04) contrast(0.98);
+    }
+
+    iframe {
+        display: block; // removes phantom bottom gap
+    }
+
+    @media (max-width: 380px) {
+        transform: scale(0.88);
+        transform-origin: center top;
+    }
+}
+
+.soc-survey__captcha-error {
+    color: #d32f2f;
+    font-size: 0.8rem;
+    margin-top: 6px;
+    text-align: center;
+}
+
+.rc-anchor-light {
+    background: #ffffff !important;
+    border: 1px solid #e0e0e0 !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
 }

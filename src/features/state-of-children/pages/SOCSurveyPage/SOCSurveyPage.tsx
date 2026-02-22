@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, useEffect } from 'react';
+import React, { useState, useCallback, useMemo, useEffect, useRef } from 'react';
 import {
     Box,
     Typography,
@@ -14,12 +14,15 @@ import {
 } from '@mui/material';
 import { FiArrowRight, FiArrowLeft, FiSend, FiCheck, FiInfo } from 'react-icons/fi';
 import { useNavigate } from 'react-router-dom';
+import ReCAPTCHA from 'react-google-recaptcha';
 import SurveyQuestion from '../../../shared/components/SurveyQuestion/SurveyQuestion';
 import SurveyProgress from '../../../shared/components/SurveyProgress/SurveyProgress';
 import { socCategories, socSurveyDefinition, getAllQuestions } from '../../data/socQuestions';
 import { SOC_SURVEY_ID } from '../../types/socTypes';
 import { submitSurveyResponse, getEmailSubmissionInfo } from '../../../shared/services/surveyService';
 import './SOCSurveyPage.scss';
+
+const RECAPTCHA_SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY as string;
 
 // --------------------------------------------------------------------------
 // Types
@@ -56,19 +59,9 @@ const initialState: SurveyState = {
 // --------------------------------------------------------------------------
 
 const isAnswerProvided = (answer: string | number | boolean | string[] | undefined): boolean => {
-    // undefined or null means no answer
     if (answer === undefined || answer === null) return false;
-
-    // Empty string means no answer
     if (answer === '') return false;
-
-    // Empty array means no selection
     if (Array.isArray(answer) && answer.length === 0) return false;
-
-    // IMPORTANT: 0 is a valid answer for scale/number questions
-    // false is a valid answer for yes/no questions
-    // These pass through as valid (not caught by checks above)
-
     return true;
 };
 
@@ -83,14 +76,17 @@ const SOCSurveyPage: React.FC = () => {
     const [showConfirmDialog, setShowConfirmDialog] = useState(false);
     const [submitError, setSubmitError] = useState<string | null>(null);
 
+    // ── reCAPTCHA ────────────────────────────────────────────────────────────
+    const [captchaToken, setCaptchaToken] = useState<string | null>(null);
+    const recaptchaRef = useRef<ReCAPTCHA>(null);
+    // ─────────────────────────────────────────────────────────────────────────
+
     const allQuestions = useMemo(() => getAllQuestions(), []);
     const currentCategory = socCategories[state.currentCategoryIndex];
 
-    // Get visible questions (handle conditional logic)
     const visibleQuestions = useMemo(() => {
         return currentCategory.questions.filter((question) => {
             if (!question.dependsOn) return true;
-
             const dependsOnValue = state.answers[question.dependsOn.questionId];
             return question.dependsOn.values.some(v => {
                 if (typeof v === 'boolean') {
@@ -101,22 +97,14 @@ const SOCSurveyPage: React.FC = () => {
         });
     }, [currentCategory, state.answers]);
 
-    // --------------------------------------------------------------------------
-    // FIX: Initialize scale questions with their minimum value when visible
-    // This ensures sliders that display "0" actually have "0" in state
-    // --------------------------------------------------------------------------
-
+    // Initialize scale questions with their minimum value when visible
     useEffect(() => {
         const scaleDefaults: Record<string, number> = {};
-
         visibleQuestions.forEach((question) => {
-            // Only initialize if: scale type AND not yet answered
             if (question.type === 'scale' && state.answers[question.id] === undefined) {
                 scaleDefaults[question.id] = question.scaleMin ?? 0;
             }
         });
-
-        // Only update if there are defaults to set
         if (Object.keys(scaleDefaults).length > 0) {
             setState(prev => ({
                 ...prev,
@@ -125,7 +113,6 @@ const SOCSurveyPage: React.FC = () => {
         }
     }, [visibleQuestions, state.currentCategoryIndex]);
 
-    // Count answered questions (using helper that handles 0 correctly)
     const answeredCount = useMemo(() => {
         return allQuestions.filter(q => isAnswerProvided(state.answers[q.id])).length;
     }, [state.answers, allQuestions]);
@@ -136,7 +123,6 @@ const SOCSurveyPage: React.FC = () => {
 
     const checkEmail = useCallback(async (email: string) => {
         if (!email || !email.includes('@')) return;
-
         try {
             const info = await getEmailSubmissionInfo(email);
             setEmailInfo({ hasSubmitted: info.hasSubmitted, count: info.submissionCount });
@@ -158,12 +144,14 @@ const SOCSurveyPage: React.FC = () => {
     };
 
     const handleEmailBlur = () => {
-        if (state.email) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (state.email && emailRegex.test(state.email)) {  // ← only call if valid format
             checkEmail(state.email);
         }
     };
 
     const handleStartSurvey = () => {
+        // Validate email
         if (!state.email || !state.email.includes('@')) {
             setState(prev => ({
                 ...prev,
@@ -171,6 +159,16 @@ const SOCSurveyPage: React.FC = () => {
             }));
             return;
         }
+
+        // Validate captcha
+        if (!captchaToken) {
+            setState(prev => ({
+                ...prev,
+                errors: { ...prev.errors, captcha: 'אנא אשר שאינך רובוט' },
+            }));
+            return;
+        }
+
         setState(prev => ({ ...prev, hasStarted: true, errors: {} }));
     };
 
@@ -184,12 +182,9 @@ const SOCSurveyPage: React.FC = () => {
 
     const validateCategory = useCallback((): boolean => {
         const newErrors: Record<string, string> = {};
-
         visibleQuestions.forEach((question) => {
             if (question.required) {
                 const answer = state.answers[question.id];
-
-                // Use helper function that handles 0 and false correctly
                 if (!isAnswerProvided(answer)) {
                     if (question.type === 'multiple_choice') {
                         newErrors[question.id] = 'נא לבחור לפחות אפשרות אחת';
@@ -199,28 +194,24 @@ const SOCSurveyPage: React.FC = () => {
                 }
             }
         });
-
         setState(prev => ({ ...prev, errors: newErrors }));
         return Object.keys(newErrors).length === 0;
     }, [visibleQuestions, state.answers]);
 
     const handleNext = useCallback(() => {
         if (!validateCategory()) {
-            // Small delay to ensure errors are set before scrolling
             setTimeout(() => {
-                const errorKeys = Object.keys(state.errors);
-                // Re-check for errors since state may have updated
                 const currentErrors: string[] = [];
                 visibleQuestions.forEach((q) => {
                     if (q.required && !isAnswerProvided(state.answers[q.id])) {
                         currentErrors.push(q.id);
                     }
                 });
-                const firstErrorKey = currentErrors[0] || errorKeys[0];
+                const firstErrorKey = currentErrors[0];
                 if (firstErrorKey) {
                     document.getElementById(`question-${firstErrorKey}`)?.scrollIntoView({
                         behavior: 'smooth',
-                        block: 'center'
+                        block: 'center',
                     });
                 }
             }, 100);
@@ -237,7 +228,7 @@ const SOCSurveyPage: React.FC = () => {
         } else {
             setShowConfirmDialog(true);
         }
-    }, [validateCategory, state.currentCategoryIndex, state.errors, state.answers, visibleQuestions]);
+    }, [validateCategory, state.currentCategoryIndex, state.answers, visibleQuestions]);
 
     const handlePrevious = useCallback(() => {
         if (state.currentCategoryIndex > 0) {
@@ -251,7 +242,6 @@ const SOCSurveyPage: React.FC = () => {
     }, [state.currentCategoryIndex]);
 
     const handleGoToCategory = useCallback((index: number) => {
-        // Only allow going to previous or current categories
         if (index <= state.currentCategoryIndex) {
             setState(prev => ({
                 ...prev,
@@ -277,7 +267,7 @@ const SOCSurveyPage: React.FC = () => {
 
             if (result.success) {
                 setState(prev => ({ ...prev, isComplete: true, isSubmitting: false }));
-                navigate('/surveys/state-of-children/results')
+                navigate('/surveys/state-of-children/results');
             } else {
                 setSubmitError(result.error || 'אירעה שגיאה בשליחת הסקר. נסו שוב.');
                 setState(prev => ({ ...prev, isSubmitting: false }));
@@ -290,7 +280,7 @@ const SOCSurveyPage: React.FC = () => {
     };
 
     // --------------------------------------------------------------------------
-    // Render: Email Registration
+    // Render: Email + Captcha (intro screen)
     // --------------------------------------------------------------------------
 
     if (!state.hasStarted) {
@@ -355,11 +345,36 @@ const SOCSurveyPage: React.FC = () => {
                                 </Alert>
                             )}
 
+                            {/* ── reCAPTCHA — sits between email and button ── */}
+                            <Box className="soc-survey__captcha">
+                                <ReCAPTCHA
+                                    ref={recaptchaRef}
+                                    sitekey={RECAPTCHA_SITE_KEY}
+                                    onChange={(token) => {
+                                        setCaptchaToken(token);
+                                        // Clear captcha error if it was shown
+                                        setState(prev => ({
+                                            ...prev,
+                                            errors: { ...prev.errors, captcha: '' },
+                                        }));
+                                    }}
+                                    onExpired={() => setCaptchaToken(null)}
+                                    hl="he"
+                                />
+                                {state.errors.captcha && (
+                                    <Typography className="soc-survey__captcha-error">
+                                        {state.errors.captcha}
+                                    </Typography>
+                                )}
+                            </Box>
+                            {/* ─────────────────────────────────────────────── */}
+
                             <Button
                                 variant="contained"
                                 onClick={handleStartSurvey}
                                 className="soc-survey__start-btn"
                                 endIcon={<FiArrowLeft />}
+                                disabled={!captchaToken}
                             >
                                 התחל את הסקר
                             </Button>
@@ -423,7 +438,6 @@ const SOCSurveyPage: React.FC = () => {
     return (
         <Box className="soc-survey" dir="rtl">
             <Container maxWidth="lg">
-                {/* Progress */}
                 <SurveyProgress
                     currentCategoryIndex={state.currentCategoryIndex}
                     totalCategories={socCategories.length}
@@ -433,7 +447,6 @@ const SOCSurveyPage: React.FC = () => {
                     onCategoryClick={handleGoToCategory}
                 />
 
-                {/* Category Header */}
                 <Box className="soc-survey__category-header">
                     <Typography className="soc-survey__category-icon">
                         {currentCategory.icon}
@@ -448,7 +461,6 @@ const SOCSurveyPage: React.FC = () => {
                     )}
                 </Box>
 
-                {/* Questions */}
                 <Box className="soc-survey__questions">
                     {visibleQuestions.map((question) => (
                         <Box key={question.id} id={`question-${question.id}`}>
@@ -463,14 +475,12 @@ const SOCSurveyPage: React.FC = () => {
                     ))}
                 </Box>
 
-                {/* Error Alert */}
                 {submitError && (
                     <Alert severity="error" className="soc-survey__error-alert">
                         {submitError}
                     </Alert>
                 )}
 
-                {/* Navigation */}
                 <Box className="soc-survey__navigation">
                     <Button
                         variant="outlined"
@@ -506,7 +516,6 @@ const SOCSurveyPage: React.FC = () => {
                 </Box>
             </Container>
 
-            {/* Confirm Dialog */}
             <Dialog
                 open={showConfirmDialog}
                 onClose={() => setShowConfirmDialog(false)}
@@ -521,9 +530,6 @@ const SOCSurveyPage: React.FC = () => {
                         האם אתם בטוחים שברצונכם לשלוח את הסקר?
                         לא ניתן לערוך את התשובות לאחר השליחה.
                     </Typography>
-                    {/* <Typography className="soc-survey__dialog-stats">
-                        ענית על {answeredCount} מתוך {allQuestions.length} שאלות
-                    </Typography> */}
                 </DialogContent>
                 <DialogActions className="soc-survey__dialog-actions">
                     <Button onClick={() => setShowConfirmDialog(false)}>
