@@ -21,28 +21,52 @@
 
     &--featured {
         border-top: 3px solid #023373;
+        align-items: stretch; // ← both sides same height
+
         @media (min-width: 768px) {
             flex-direction: row;
+            max-height: 340px; // ← cap the card height
+
             .article-card__image-wrap {
-                width: 40%;
+                width: 38%;
                 flex-shrink: 0;
+                height: 100%; // ← fill the capped height
+                min-height: unset; // ← remove min-height
             }
+
             .article-card__body {
                 flex: 1;
+                overflow: hidden; // ← prevent body overflow
+                justify-content: flex-start; // ← content from top
             }
+        }
+
+        .article-card__image-wrap {
+            @media (max-width: 767px) {
+                height: 220px;
+            }
+        }
+
+        // Clamp summary to fewer lines on featured
+        .article-card__summary {
+            -webkit-line-clamp: 4;
         }
     }
 
     &__image-wrap {
         width: 100%;
-        // height: 200px;
+        height: 200px;
         overflow: hidden;
-    }
+        flex-shrink: 0;
+    } // ← this closing brace was missing
+
     &__image {
         width: 100%;
         height: 100%;
         object-fit: cover;
+        object-position: center 20%;
         transition: transform 0.35s ease;
+
         .article-card:hover & {
             transform: scale(1.04);
         }
@@ -74,6 +98,7 @@
         line-height: 1.45;
         margin: 0;
         font-family: "Heebo", "Assistant", sans-serif;
+
         &--featured {
             font-size: 1.25rem;
         }
@@ -106,6 +131,7 @@
         align-items: center;
         gap: 0.3rem;
     }
+
     &__author-role {
         color: #a0aec0;
     }
@@ -141,6 +167,7 @@
         margin-top: auto;
         font-family: "Heebo", "Assistant", sans-serif;
         transition: gap 0.2s ease;
+
         &:hover {
             gap: 0.7rem;
         }
