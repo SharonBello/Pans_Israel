@@ -58,7 +58,7 @@
         height: 200px;
         overflow: hidden;
         flex-shrink: 0;
-    } // ← this closing brace was missing
+    }
 
     &__image {
         width: 100%;
