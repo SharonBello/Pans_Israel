@@ -37,6 +37,8 @@ import ResearchPage from './pages/ProfessionalPages/ResearchPage/ResearchPage.ts
 // ── Admin Auth ────────────────────────────────────────────────────────────────
 import AdminLoginPage from './pages/AdminLoginPage/AdminLoginPage.tsx';
 import ProtectedRoute from './Auth/ProtectedRoute.tsx';
+import BlogListPage from './pages/CommunityBlog/BlogListPage/BlogListPage.tsx';
+import BlogArticlePage from './pages/CommunityBlog/BlogArticlePage/BlogArticlePage.tsx';
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -95,6 +97,10 @@ const AppRoutes: AppRoute[] = [
   { path: '/professional/international', component: <InternationalPage /> },
   { path: '/professional/research', component: <ResearchPage /> },
   { path: '/professional/surveys', component: <ProfessionalSurveysPage /> },
+
+
+  { path: '/community/articles', component: <BlogListPage /> },
+  { path: '/community/articles/:id', component: <BlogArticlePage /> },
 
   // ── Admin routes (no nav links to these anywhere in the app) ───────────────
   {
