@@ -24,7 +24,9 @@ type ImageMode = 'url' | 'file';
 
 const empty: ArticleSubmission = {
     title: '', summary: '', content: '',
-    category: 'כללי', author: '', authorRole: '', coverImage: '', tags: [],
+    category: 'כללי', author: '', authorRole: '',
+    authorEmail: '',
+    coverImage: '', tags: [],
 };
 
 const SubmitArticleModal: React.FC<Props> = ({ open, onClose }) => {
@@ -157,6 +159,19 @@ const SubmitArticleModal: React.FC<Props> = ({ open, onClose }) => {
                                         {errors.author && <span className="submit-modal__error">{errors.author}</span>}
                                     </div>
                                     <div className="submit-modal__field">
+                                        <label className="submit-modal__label">
+                                            דואר אלקטרוני <span className="submit-modal__hint">(אופציונלי — לעדכון לאחר פרסום)</span>
+                                        </label>
+                                        <input
+                                            className="submit-modal__input"
+                                            value={form.authorEmail}
+                                            onChange={e => set('authorEmail', e.target.value)}
+                                            placeholder="your@email.com"
+                                            type="email"
+                                            dir="ltr"
+                                        />
+                                    </div>
+                                    <div className="submit-modal__field">
                                         <label className="submit-modal__label">אני *</label>
                                         <div className="submit-modal__role-grid">
                                             {AUTHOR_ROLES.map(role => (
@@ -274,6 +289,7 @@ const SubmitArticleModal: React.FC<Props> = ({ open, onClose }) => {
                                     <div className="submit-modal__preview-row"><span>כותרת:</span><strong>{form.title}</strong></div>
                                     <div className="submit-modal__preview-row"><span>קטגוריה:</span><strong>{form.category}</strong></div>
                                     <div className="submit-modal__preview-row"><span>מחבר/ת:</span><strong>{form.author} · {form.authorRole}</strong></div>
+                                    {form.authorEmail && (<div className="submit-modal__preview-row"><span>אימייל:</span><strong dir="ltr">{form.authorEmail}</strong></div>)}
                                     <div className="submit-modal__preview-row"><span>תקציר:</span><p>{form.summary}</p></div>
                                     {(form.tags ?? []).length > 0 && (
                                         <div className="submit-modal__preview-row">
