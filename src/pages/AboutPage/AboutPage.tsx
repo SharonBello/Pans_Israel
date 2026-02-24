@@ -82,17 +82,24 @@ const AboutPage: React.FC = () => {
     return (
         <div className="about-page" dir="rtl">
             {/* Hero Section */}
-            <section className="about-hero">
-                <div className="about-hero__container">
+            <header className="about-hero">
+                <div className="about-hero__text">
+
+                    {/* Icon box — absolute top-left (RTL = visual top-right) */}
+                    <div className="about-hero__icon">
+                        <FaUsers />
+                    </div>
+
+                    <div className="about-hero__label">הקהילה שלנו</div>
                     <h1 className="about-hero__title">אודות</h1>
                     <p className="about-hero__subtitle">
                         קהילת הורים לילדים עם פאנס/פאנדס בישראל
                     </p>
                 </div>
-            </section>
+            </header >
 
             {/* Mission Section */}
-            <section className="about-section about-mission">
+            < section className="about-section about-mission" >
                 <div className="about-section__container">
                     <div className="about-mission__content">
                         <div className="about-mission__text">
@@ -123,10 +130,10 @@ const AboutPage: React.FC = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </ section>
 
             {/* Our Story Section */}
-            <section className="about-section about-story">
+            < section className="about-section about-story" >
                 <div className="about-section__container">
                     <div className="section-label section-label--center">
                         <FaHeart />
@@ -159,10 +166,10 @@ const AboutPage: React.FC = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </ section>
 
             {/* Values Section */}
-            <section className="about-section about-values">
+            <section className="about-section about-values" >
                 <div className="about-section__container">
                     <div className="section-label section-label--center">
                         <FiTarget />
@@ -184,10 +191,10 @@ const AboutPage: React.FC = () => {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Founders Section */}
-            <section className="about-section about-founders">
+            <section className="about-section about-founders" >
                 <div className="about-section__container">
                     <div className="section-label section-label--center">
                         <FaUsers />
@@ -226,10 +233,10 @@ const AboutPage: React.FC = () => {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Vision Section */}
-            <section className="about-section about-vision">
+            <section className="about-section about-vision" >
                 <div className="about-section__container">
                     <div className="about-vision__content">
                         <div className="section-label">
@@ -262,10 +269,10 @@ const AboutPage: React.FC = () => {
                         </ul>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* CTA Section */}
-            <section className="about-section about-cta">
+            <section className="about-section about-cta" >
                 <div className="about-section__container">
                     <div className="about-cta__content">
                         <h2 className="about-cta__title">רוצים להצטרף אלינו?</h2>
@@ -296,10 +303,10 @@ const AboutPage: React.FC = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Partners Section (Placeholder) */}
-            <section className="about-section about-partners">
+            <section className="about-section about-partners" >
                 <div className="about-section__container">
                     <h3 className="about-partners__title">בשיתוף פעולה עם</h3>
                     <div className="about-partners__logos">
@@ -322,7 +329,7 @@ const AboutPage: React.FC = () => {
                     </div>
                 </div>
             </section>
-        </div>
+        </div >
     );
 };
 
