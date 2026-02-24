@@ -39,6 +39,7 @@ import AdminLoginPage from './pages/AdminLoginPage/AdminLoginPage.tsx';
 import ProtectedRoute from './Auth/ProtectedRoute.tsx';
 import BlogListPage from './pages/CommunityBlog/BlogListPage/BlogListPage.tsx';
 import BlogArticlePage from './pages/CommunityBlog/BlogArticlePage/BlogArticlePage.tsx';
+import PdfAdminPage from './pages/PdfAdminPage/PdfAdminPage.tsx';
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -112,6 +113,18 @@ const AppRoutes: AppRoute[] = [
     component: (
       <ProtectedRoute>
         <SOCAdminPage />
+      </ProtectedRoute>
+    ),
+  },
+   {
+    path: '/admin/login',
+    component: <AdminLoginPage />,
+  },
+  {
+    path: '/professional/articles/admin/pdf',                                                  // ← NEW
+    component: (
+      <ProtectedRoute>
+        <PdfAdminPage />
       </ProtectedRoute>
     ),
   },

@@ -1,0 +1,352 @@
+// ==========================================
+// PDF SECTION
+// ==========================================
+.prof-pdf-section {
+    margin-bottom: 48px;
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 16px;
+    }
+
+    &__title {
+        font-size: 0.78rem !important;
+        font-weight: 700 !important;
+        color: #5d6d7e;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+    }
+
+    &__add-btn {
+        font-size: 0.8rem !important;
+        font-weight: 600 !important;
+        color: #023373 !important;
+        border-color: #023373 !important;
+        text-transform: none !important;
+        padding: 4px 14px !important;
+        border-radius: 6px !important;
+
+        &:hover {
+            background: #023373 !important;
+            color: #fff !important;
+        }
+    }
+}
+
+.prof-pdf-empty {
+    padding: 24px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border: 1px dashed #cdd4db;
+    text-align: center;
+    color: #5d6d7e;
+    font-size: 0.9rem;
+}
+
+.prof-pdf-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+// ==========================================
+// PDF CARD
+// ==========================================
+.prof-pdf-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #fff;
+    border: 1px solid #e5e8eb;
+    border-radius: 12px;
+    padding: 16px 20px;
+    transition: all 0.2s ease;
+
+    &:hover {
+        border-color: rgba(#023373, 0.3);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    @media (max-width: 600px) {
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    // Skeleton state
+    &--skeleton {
+        height: 100px;
+        background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: pdf-skeleton-shimmer 1.4s infinite;
+        border: none;
+    }
+
+    @keyframes pdf-skeleton-shimmer {
+        0% {
+            background-position: 200% 0;
+        }
+        100% {
+            background-position: -200% 0;
+        }
+    }
+
+    // ── Thumbnail ──────────────────────────
+    &__thumb-wrap {
+        width: 75px;
+        height: 105px;
+        flex-shrink: 0;
+        border-radius: 6px;
+        overflow: hidden;
+        border: 1px solid #e0e4e8;
+        background: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 2px 3px 10px rgba(0, 0, 0, 0.1);
+
+        @media (max-width: 600px) {
+            width: 55px;
+            height: 78px;
+        }
+    }
+
+    &__canvas {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+        display: block;
+    }
+
+    &__thumb-skeleton {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: pdf-skeleton-shimmer 1.4s infinite;
+    }
+
+    &__thumb-fallback {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f0f4f8;
+
+        .MuiSvgIcon-root {
+            font-size: 2rem;
+            color: #b0bec5;
+        }
+    }
+
+    // ── Info ───────────────────────────────
+    &__info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    &__title {
+        font-weight: 700 !important;
+        font-size: 0.95rem !important;
+        color: #2c3e50;
+        margin-bottom: 4px !important;
+        line-height: 1.4 !important;
+    }
+
+    &__meta {
+        font-size: 0.78rem !important;
+        color: #95a5a6;
+        margin-bottom: 6px !important;
+        font-style: italic;
+    }
+
+    &__desc {
+        font-size: 0.875rem !important;
+        color: #5d6d7e;
+        line-height: 1.55 !important;
+    }
+
+    // ── Actions ────────────────────────────
+    &__actions {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        flex-shrink: 0;
+        align-items: stretch;
+
+        @media (max-width: 600px) {
+            flex-direction: row;
+            width: 100%;
+        }
+    }
+
+    &__btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        padding: 7px 16px;
+        border-radius: 6px;
+        font-size: 0.82rem;
+        font-weight: 600;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: all 0.2s ease;
+        cursor: pointer;
+
+        @media (max-width: 600px) {
+            flex: 1;
+        }
+
+        &--view {
+            background: #023373;
+            color: #fff;
+
+            &:hover {
+                background: #01255a;
+            }
+        }
+
+        &--download {
+            border: 1.5px solid #023373;
+            color: #023373;
+            background: transparent;
+
+            &:hover {
+                background: #023373;
+                color: #fff;
+            }
+        }
+    }
+
+    &__delete-btn {
+        color: #e74c3c !important;
+        padding: 4px !important;
+        align-self: center;
+
+        &:hover {
+            background: rgba(#e74c3c, 0.08) !important;
+        }
+    }
+}
+
+// ==========================================
+// ADD PDF MODAL
+// ==========================================
+.add-pdf-modal {
+    border-radius: 16px !important;
+
+    &__title {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        font-weight: 700 !important;
+        font-size: 1.1rem !important;
+        padding: 20px 24px 12px !important;
+        border-bottom: 1px solid #e5e8eb;
+        color: #2c3e50;
+    }
+
+    &__close {
+        color: #95a5a6 !important;
+    }
+
+    &__content {
+        padding: 20px 24px !important;
+    }
+
+    &__dropzone {
+        border: 2px dashed #cdd4db;
+        border-radius: 10px;
+        padding: 28px 20px;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        background: #f8f9fa;
+        margin-bottom: 4px;
+
+        &:hover {
+            border-color: #023373;
+            background: rgba(#023373, 0.03);
+        }
+
+        &--error {
+            border-color: #e74c3c;
+            background: rgba(#e74c3c, 0.03);
+        }
+
+        &--filled {
+            border-color: #2e7d32;
+            background: rgba(#2e7d32, 0.03);
+        }
+    }
+
+    &__dropzone-icon {
+        font-size: 2.5rem !important;
+        color: #95a5a6;
+        margin-bottom: 8px;
+
+        &--pdf {
+            color: #e74c3c;
+        }
+    }
+
+    &__dropzone-label {
+        font-size: 0.95rem !important;
+        font-weight: 600 !important;
+        color: #2c3e50;
+        margin-bottom: 4px !important;
+    }
+
+    &__dropzone-filename {
+        font-size: 0.9rem !important;
+        font-weight: 600 !important;
+        color: #2c3e50;
+        margin-bottom: 4px !important;
+        word-break: break-all;
+    }
+
+    &__dropzone-size {
+        font-size: 0.8rem !important;
+        color: #95a5a6;
+    }
+
+    &__dropzone-hint {
+        font-size: 0.8rem !important;
+        color: #95a5a6;
+    }
+
+    &__field-error {
+        font-size: 0.75rem !important;
+        color: #e74c3c !important;
+        margin-top: 4px !important;
+        margin-right: 14px !important;
+    }
+
+    &__actions {
+        padding: 12px 24px 20px !important;
+        gap: 12px;
+        border-top: 1px solid #e5e8eb;
+    }
+
+    &__cancel-btn {
+        color: #5d6d7e !important;
+        text-transform: none !important;
+        font-weight: 600 !important;
+    }
+
+    &__submit-btn {
+        background: #023373 !important;
+        text-transform: none !important;
+        font-weight: 600 !important;
+        padding: 8px 24px !important;
+        border-radius: 8px !important;
+
+        &:hover {
+            background: #01255a !important;
+        }
+    }
+}
