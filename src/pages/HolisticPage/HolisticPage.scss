@@ -1,25 +1,100 @@
-@use "../../styles/shared/page-hero" as hero;
+// HolisticPage.scss — 🟢 Treatment Group (Forest Green)
+// Replaces the @use "page-hero" mixin approach
 
 .holistic-page {
     min-height: 100vh;
 
+    // ── Hero ─────────────────────────────────────────────────────────────────
     &__hero {
-        @include hero.page-hero();
+        position: relative;
+        min-height: 220px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        // 🟢 Treatment — Forest Green
+        background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 55%, #388e3c 100%);
+
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 10% 50%, rgba(255, 255, 255, 0.06) 0%, transparent 55%),
+                radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0.04) 0%, transparent 40%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23fff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        @media (max-width: 600px) {
+            min-height: 180px;
+        }
+    }
+
+    // hero-bg div in JSX — not needed, hide it
+    &__hero-bg {
+        display: none;
     }
 
     &__hero-content {
-        @include hero.page-hero-content();
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        // RTL: flex-end = right side
+        align-items: flex-start;
+        text-align: right;
+        padding: 36px 24px;
+        gap: 6px;
+        width: 100%;
     }
 
+    // ── Icon box ──────────────────────────────────────────────────────────────
+    &__hero-icon-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.18);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        margin-bottom: 10px;
+
+        .MuiSvgIcon-root {
+            font-size: 1.7rem;
+            color: #fff;
+        }
+    }
+
+    // ── Label — small caps ────────────────────────────────────────────────────
     &__hero-label {
-        @include hero.page-hero-label();
+        font-size: 0.68rem !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.2em !important;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.52) !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+        line-height: 1 !important;
+        margin-bottom: 2px !important;
     }
 
+    // ── Title ─────────────────────────────────────────────────────────────────
     &__hero-title {
-        @include hero.page-hero-title();
+        font-size: clamp(2rem, 5vw, 3rem) !important;
+        font-weight: 800 !important;
+        color: #fff !important;
+        line-height: 1.05 !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+        margin: 0 !important;
     }
 
+    // ── Description ───────────────────────────────────────────────────────────
     &__hero-description {
-        @include hero.page-hero-desc();
+        font-size: clamp(0.82rem, 1.4vw, 0.95rem) !important;
+        color: rgba(255, 255, 255, 0.72) !important;
+        line-height: 1.65 !important;
+        max-width: 520px;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+        margin-top: 4px !important;
     }
 }

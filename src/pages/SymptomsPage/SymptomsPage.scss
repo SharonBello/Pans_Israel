@@ -1,29 +1,88 @@
 // SymptomsPage.scss
-// Styles for Symptoms page with scales and tabbed community charts
 
 .symptoms-page {
-    padding: 2rem 1rem;
+    // ── Changed: removed padding (hero is now full-width above) ────────────
     min-height: 100vh;
     direction: rtl;
+    background: #f5f6fa;
 
-    // Header
-    &__header {
-        text-align: center;
-        margin-bottom: 2rem;
+    // ── NEW: Hero ──────────────────────────────────────────────────────────
+    &__hero {
+        position: relative;
+        min-height: 200px;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+        // 🔵 Symptoms group — Deep Medical Blue
+        background: linear-gradient(135deg, #0d47a1 0%, #1565c0 55%, #1976d2 100%);
 
-        h1 {
-            color: #2d3436;
-            font-weight: 700;
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 10% 50%, rgba(255, 255, 255, 0.06) 0%, transparent 55%),
+                radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0.04) 0%, transparent 40%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23fff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        @media (max-width: 600px) {
+            min-height: 160px;
         }
     }
 
-    // Disclaimer
+    &__hero-inner {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end; // RTL — text on right
+        padding: 32px 24px;
+        text-align: right;
+        gap: 4px;
+        width: 100%;
+    }
+
+    &__hero-label {
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        color: rgba(255, 255, 255, 0.55);
+        font-family: "Heebo", "Assistant", sans-serif;
+        text-transform: uppercase;
+    }
+
+    &__hero-title {
+        font-size: clamp(1.8rem, 4.5vw, 2.8rem) !important;
+        font-weight: 800 !important;
+        color: #fff !important;
+        line-height: 1.1 !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
+        margin: 0 !important;
+    }
+
+    &__hero-desc {
+        font-size: clamp(0.82rem, 1.4vw, 0.95rem);
+        color: rgba(255, 255, 255, 0.78);
+        line-height: 1.6;
+        max-width: 560px;
+        font-family: "Heebo", "Assistant", sans-serif;
+        margin: 0;
+    }
+
+    // ── Existing: header hidden (replaced by hero) ─────────────────────────
+    &__header {
+        display: none;
+    }
+
+    // ── Existing: Disclaimer — unchanged ───────────────────────────────────
     &__disclaimer {
         margin-bottom: 2rem;
         border-radius: 12px;
     }
 
-    // Scale Cards Grid
+    // ── Existing: Scale Cards Grid — unchanged ─────────────────────────────
     &__grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -36,7 +95,7 @@
     }
 }
 
-// Scale Card Styles
+// ── Existing: Scale Card — unchanged ──────────────────────────────────────────
 .scale-card {
     display: flex;
     flex-direction: column;
@@ -50,7 +109,6 @@
 
     &--disabled {
         opacity: 0.7;
-
         &:hover {
             transform: none;
             box-shadow: none;
@@ -66,20 +124,14 @@
 
     &__icon {
         font-size: 2.5rem;
-
         &--locked {
             color: #bdc3c7;
-        }
-
-        &--active {
-            // Color set inline
         }
     }
 
     &__status {
         font-size: 0.7rem;
     }
-
     &__content {
         flex: 1;
     }
@@ -88,6 +140,7 @@
         font-weight: 600;
         margin-bottom: 0.5rem;
         color: #2d3436;
+        font-family: "Heebo", "Assistant", sans-serif;
     }
 
     &__description {
@@ -100,13 +153,14 @@
     }
 
     &__button {
-        border-radius: 8px;
-        font-weight: 600;
-        text-transform: none;
+        border-radius: 8px !important;
+        font-weight: 600 !important;
+        text-transform: none !important;
+        font-family: "Heebo", "Assistant", sans-serif !important;
     }
 }
 
-// Chart Tabs Section
+// ── Existing: Chart Tabs — unchanged ──────────────────────────────────────────
 .chart-tab-content {
     min-height: 400px;
     background: #fafafa;
@@ -118,21 +172,17 @@
     }
 }
 
-// MUI Tabs RTL adjustments
+// ── Existing: MUI Tabs RTL — unchanged ────────────────────────────────────────
 .MuiTabs-root {
     direction: rtl;
-
     .MuiTabs-scroller {
         direction: rtl;
     }
-
     .MuiTabs-flexContainer {
         direction: rtl;
     }
-
     .MuiTab-root {
         direction: rtl;
-
         .MuiTab-iconWrapper {
             margin-left: 8px;
             margin-right: 0;
@@ -140,75 +190,57 @@
     }
 }
 
-// Scrollable tabs on mobile
 @media (max-width: 600px) {
-    .MuiTabs-root {
-        .MuiTab-root {
-            min-width: auto;
-            padding: 12px 12px;
-            font-size: 0.8rem;
-
-            .MuiTab-iconWrapper {
-                margin-left: 4px;
-            }
+    .MuiTabs-root .MuiTab-root {
+        min-width: auto;
+        padding: 12px;
+        font-size: 0.8rem;
+        .MuiTab-iconWrapper {
+            margin-left: 4px;
         }
     }
 }
 
-// Community Results (legacy support)
+// ── Existing: Community results — unchanged ────────────────────────────────────
 .community-results {
     margin-bottom: 2rem;
 }
 
-// Responsive adjustments
+// ── Existing: Responsive — unchanged ──────────────────────────────────────────
 @media (max-width: 900px) {
-    .symptoms-page {
-        &__grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
+    .symptoms-page__grid {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (max-width: 600px) {
     .symptoms-page {
-        padding: 1rem 0.5rem;
-
-        &__grid {
-            grid-template-columns: 1fr;
-            gap: 1rem;
-        }
+        padding: 0;
     }
-
-    .scale-card {
-        &__icon {
-            font-size: 2rem;
-        }
-
-        &__title {
-            font-size: 1.1rem;
-        }
+    .symptoms-page__grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    .scale-card__icon {
+        font-size: 2rem;
+    }
+    .scale-card__title {
+        font-size: 1.1rem;
     }
 }
 
-// Print styles
+// ── Existing: Print — unchanged ────────────────────────────────────────────────
 @media print {
-    .symptoms-page {
-        &__grid {
-            display: block;
-
-            .scale-card {
-                break-inside: avoid;
-                margin-bottom: 1rem;
-                box-shadow: none;
-                border: 1px solid #e0e0e0;
-            }
+    .symptoms-page__grid {
+        display: block;
+        .scale-card {
+            break-inside: avoid;
+            margin-bottom: 1rem;
+            box-shadow: none;
+            border: 1px solid #e0e0e0;
         }
     }
-
-    .MuiTabs-root {
-        display: none;
-    }
-
+    .MuiTabs-root,
     .chart-tab-content {
         display: none;
     }

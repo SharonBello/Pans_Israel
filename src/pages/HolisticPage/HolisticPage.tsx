@@ -82,15 +82,27 @@ const HolisticPage: React.FC = () => {
             <Box className="holistic-page__hero">
                 <Box className="holistic-page__hero-bg" />
                 <Container maxWidth="lg" className="holistic-page__hero-content">
-                    {/* <Typography variant="overline" className="holistic-page__hero-label">
+
+                    {/* Icon box — matches tab 2 icon (HolisticIcon = Spa) */}
+                    <Box className="holistic-page__hero-icon-wrap">
+                        <SpaIcon />
+                    </Box>
+
+                    {/* Label — was commented out before, now uncommented */}
+                    <Typography variant="overline" className="holistic-page__hero-label">
                         אפשרויות טיפול
-                    </Typography> */}
+                    </Typography>
+
+                    {/* Title — unchanged */}
                     <Typography variant="h1" className="holistic-page__hero-title">
                         רפואה משלימה
                     </Typography>
+
+                    {/* Description — unchanged */}
                     <Typography variant="body1" className="holistic-page__hero-description">
                         גישות משלימות לתמיכה בילדים עם פאנס/פאנדס לצד הטיפול הרפואי הקונבנציונלי
                     </Typography>
+
                 </Container>
             </Box>
 

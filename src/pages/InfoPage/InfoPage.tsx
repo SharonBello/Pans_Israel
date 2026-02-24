@@ -18,13 +18,17 @@ import {
 } from '@mui/material';
 import {
   KeyboardArrowUp as ScrollTopIcon,
-  Assessment,
   Lock,
   Science,
   Timeline,
   Verified as VerifiedIcon,
   Favorite as HeartIcon,
   ArrowForward as ArrowForwardIcon,
+  Healing as TreatmentIcon,
+  Info as OverviewIcon,
+  Psychology as SymptomsIcon,
+  Biotech as DiagnosisIcon,
+  Assessment,
 } from '@mui/icons-material';
 import InfoTabs from '../../components/Info/InfoTabs/InfoTabs';
 import TreatmentTabs from '../../components/Treatment/TreatmentTabs/TreatmentTabs';
@@ -147,22 +151,53 @@ const InfoPage: React.FC = () => {
 
   const handleRelatedPageClick = (slug: string) => navigate(`/info/${slug}`);
 
+  const getPageIcon = (pageId: string): React.ReactNode => {
+    switch (pageId) {
+      case 'overview':
+        return <OverviewIcon />;
+      case 'symptoms':
+        return <SymptomsIcon />;
+      case 'diagnosis':
+        return <DiagnosisIcon />;
+      case 'scales':
+        return <Assessment />;
+      case 'treatment':
+        return <TreatmentIcon />;
+      default:
+        return <OverviewIcon />;
+    }
+  };
+
+  const getPageLabel = (pageId: string): string => {
+    switch (pageId) {
+      case 'treatment': return 'אפשרויות טיפול';
+      default: return 'מידע על התסמונות';
+    }
+  };
+
   return (
     <Box className="info-page" dir="rtl">
 
       {/* Hero */}
-      <Box className="info-page__hero">
+      <Box className={`info-page__hero info-page__hero--${currentPageId}`}>
         <Box className="info-page__hero-background">
           <Box className="info-page__hero-gradient" />
           <Box className="info-page__hero-pattern" />
         </Box>
         <Container maxWidth="lg" className="info-page__hero-content">
-          {/* <Typography variant="overline" className="info-page__hero-label">
+          {/* ✅ Icon box — new */}
+          <Box className="info-page__hero-icon-wrap">
+            {getPageIcon(currentPageId)}
+          </Box>
+          {/* ✅ Small caps label — new */}
+          <Typography className="info-page__hero-label">
             מידע על התסמונות
-          </Typography> */}
+          </Typography>
+          {/* Existing title */}
           <Typography variant="h1" className="info-page__hero-title">
             {currentSection.title}
           </Typography>
+          {/* Existing description */}
           <Typography variant="body1" className="info-page__hero-description">
             {currentSection.description}
           </Typography>

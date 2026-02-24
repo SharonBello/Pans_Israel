@@ -2,6 +2,7 @@ import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import type { ProfessionalCategory, ProfessionalFilters, Professional, NewProfessionalPayload, Tab } from '../../types/professionals';
 import { MEDICAL_FIELDS, HOLISTIC_FIELDS, THERAPY_FIELDS, LOCATIONS, filterProfessionals } from '../../data/professionalsData';
 import './ProfessionalsHelpPage.scss';
+import { MedicalServices as MedicalServicesIcon } from '@mui/icons-material';
 import { addProfessional, subscribeToProfessionals } from '../../services/professionalsService';
 import type { Unsubscribe } from 'firebase/firestore';
 import { HolisticIcon, MedicalIcon, PlusIcon, TherapyIcon } from '../../components/icons';
@@ -80,14 +81,26 @@ const ProfessionalsHelpPage: React.FC = () => {
     <div className="professionals-page">
       <TreatmentTabs />
       {/* Header */}
+
       <header className="page-header">
         <div className="page-header__content">
+
+          {/* Icon box — MedicalServices matches tab 1 (DoctorsIcon) in TreatmentTabs */}
+          <div className="page-header__icon-wrap">
+            <MedicalServicesIcon />
+          </div>
+
+          {/* Small caps label */}
+          <span className="page-header__label">אפשרויות טיפול</span>
+
+          {/* Existing — unchanged */}
           <h1>אנשי מקצוע וגורמי תמיכה</h1>
           <p>מאגר אנשי מקצוע המכירים ומטפלים בתסמונות פאנס/פאנדס</p>
           <button className="page-header__btn" onClick={() => setIsModalOpen(true)}>
             <PlusIcon />
             <span>המליצו על איש מקצוע</span>
           </button>
+
         </div>
       </header>
 

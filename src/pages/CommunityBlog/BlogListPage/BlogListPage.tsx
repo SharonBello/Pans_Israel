@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { FiSearch } from 'react-icons/fi';
 import { getPublishedArticles } from '../../../services/blogService';
 import type { Article, ArticleCategory } from '../../../types/blog';
+import { Article as ArticleIcon } from '@mui/icons-material';
 import ArticleCard from '../../../components/blog/ArticleCard/ArticleCard';
 import { FiEdit } from 'react-icons/fi';
 import SubmitArticleModal from '../../../components/blog/SubmitArticleModal/SubmitArticleModal';
 import './BlogListPage.scss';
+import SupportTabs from '@/components/Support/SupportTabs/SupportTabs';
 
 const CATEGORIES: Array<ArticleCategory | 'הכל'> = [
     'הכל', 'חוויות הורים', 'מידע רפואי', 'תמיכה רגשית', 'זכויות וסיוע', 'חדשות וחקר', 'כללי',
@@ -48,6 +50,11 @@ const BlogListPage: React.FC = () => {
         <div className="blog-list-page" dir="rtl">
             <header className="blog-list-page__hero">
                 <div className="blog-list-page__hero-inner">
+
+                    <div className="blog-list-page__hero-icon-wrap">
+                        <ArticleIcon />
+                    </div>
+                    <span className="blog-list-page__hero-label">תמיכה וקהילה</span>
                     <h1 className="blog-list-page__hero-title">מאמרים ממשפחות הקהילה</h1>
                     <p className="blog-list-page__hero-subtitle">
                         מאמרים, חוויות ועצות מהורים שחיים את המסע — עבור הורים שמתחילים אותו.
@@ -63,6 +70,9 @@ const BlogListPage: React.FC = () => {
                 </div>
                 <SubmitArticleModal open={submitOpen} onClose={() => setSubmitOpen(false)} />
             </header>
+
+
+            <SupportTabs />
 
             <div className="blog-list-page__container">
                 <div className="blog-list-page__search-wrap">

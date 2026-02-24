@@ -64,46 +64,34 @@ const ResourcesDetailPage: React.FC = () => {
   return (
     <Box className="resources-detail" dir="rtl">
       {/* Hero Section */}
-      <section className="resources-detail__hero">
-        <div className="resources-detail__hero-bg" />
-        <div className="resources-detail__hero-content">
-          <Container maxWidth="lg">
-            {/* Breadcrumbs */}
-            {/* <Breadcrumbs
-              className="resources-detail__breadcrumbs"
-              separator="‹"
-            > */}
-              {/* <Link
-                component="button"
-                onClick={() => navigate('/')}
-                className="resources-detail__breadcrumb-link"
-              >
-                <HomeIcon fontSize="small" />
-                דף הבית
-              </Link>
-              <Link
-                component="button"
-                onClick={() => navigate('/resources')}
-                className="resources-detail__breadcrumb-link"
-              >
-                משאבים
-              </Link>
-              <Typography className="resources-detail__breadcrumb-current">
-                {currentSection.title}
-              </Typography> */}
-            {/* </Breadcrumbs> */}
+      {/* Hero Section */}
+      <header className="resources-detail__hero">
+        <div className="resources-detail__hero-text">
 
-            <Typography variant="h1" className="resources-detail__hero-title">
+          {/* Icon box — absolute top-left (RTL = visual top-right) */}
+          <div className="resources-detail__hero-icon">
+            <DownloadIcon />
+          </div>
+
+          {/* <div className="resources-detail__hero-content"> */}
+            {/* Kicker */}
+            <div className="resources-detail__hero-label">
+              משאבים להורים
+            </div>
+
+            <h1 className="resources-detail__hero-title">
               {currentSection.title}
-            </Typography>
+            </h1>
+
             {currentSection.description && (
-              <Typography className="resources-detail__hero-subtitle">
+              <p className="resources-detail__hero-subtitle">
                 {currentSection.description}
-              </Typography>
+              </p>
             )}
-          </Container>
+
+          {/* </div> */}
         </div>
-      </section>
+      </header>
 
       {/* Tabs Navigation */}
       {SUPPORT_PAGES.includes(currentPageId || '')

@@ -2,60 +2,94 @@
     min-height: 100vh;
     background: #f5f6fa;
 
+    // ── Hero — community purple ───────────────────────────────────────────────
     &__hero {
         position: relative;
-        height: 200px;
-        max-height: 200px;
+        min-height: 200px;
         display: flex;
         align-items: center;
         overflow: hidden;
-        background: linear-gradient(135deg, #4a3f8f 0%, #7b5ea7 50%, #9b72cb 100%);
+        // 🟣 Community — Warm Purple (was wrong #4a3f8f before)
+        background: linear-gradient(135deg, #4a148c 0%, #6a1b9a 55%, #7b1fa2 100%);
 
         &::before {
             content: "";
             position: absolute;
             inset: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            background:
+                radial-gradient(circle at 10% 50%, rgba(255, 255, 255, 0.06) 0%, transparent 55%),
+                radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0.04) 0%, transparent 40%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
             pointer-events: none;
         }
 
         @media (max-width: 600px) {
-            height: 160px;
-            max-height: 160px;
+            min-height: 160px;
         }
     }
 
     &__hero-content {
         position: relative;
         z-index: 1;
+        display: flex;
+        flex-direction: column;
+        // RTL — right aligned
+        align-items: flex-start;
         text-align: right;
+        padding: 36px 24px;
+        gap: 6px;
+        width: 100%;
+    }
+
+    // ── Icon box ──────────────────────────────────────────────────────────────
+    &__hero-icon-wrap {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.18);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        margin-bottom: 10px;
+
+        .MuiSvgIcon-root {
+            font-size: 1.7rem;
+            color: #fff;
+        }
     }
 
     &__hero-label {
         display: block;
-        font-size: 0.7rem !important;
+        font-size: 0.68rem !important;
         font-weight: 700 !important;
-        letter-spacing: 0.18em !important;
-        color: rgba(255, 255, 255, 0.65) !important;
-        margin-bottom: 6px;
+        letter-spacing: 0.2em !important;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, 0.52) !important;
         font-family: "Heebo", "Assistant", sans-serif !important;
+        line-height: 1 !important;
+        margin-bottom: 2px !important;
     }
 
     &__hero-title {
         font-size: clamp(2rem, 5vw, 3rem) !important;
         font-weight: 800 !important;
         color: #fff !important;
-        line-height: 1.1 !important;
-        margin-bottom: 8px !important;
+        line-height: 1.05 !important;
+        margin: 0 !important;
         font-family: "Heebo", "Assistant", sans-serif !important;
     }
 
     &__hero-desc {
-        font-size: clamp(0.85rem, 1.5vw, 1rem) !important;
-        color: rgba(255, 255, 255, 0.82) !important;
+        font-size: clamp(0.82rem, 1.4vw, 0.95rem) !important;
+        color: rgba(255, 255, 255, 0.72) !important;
+        line-height: 1.65 !important;
+        max-width: 520px;
         font-family: "Heebo", "Assistant", sans-serif !important;
+        margin-top: 4px !important;
     }
 
+    // ── Filter bar — unchanged ────────────────────────────────────────────────
     &__filter-bar {
         background: #fff;
         border-bottom: 1px solid rgba(0, 0, 0, 0.07);
@@ -91,18 +125,21 @@
             min-width: 90px;
 
             &:hover {
-                color: #4a3f8f;
-                background: rgba(74, 63, 143, 0.04);
+                // 🟣 updated to community purple
+                color: #6a1b9a;
+                background: rgba(106, 27, 154, 0.04);
             }
             &.Mui-selected {
-                color: #4a3f8f;
+                // 🟣 updated to community purple
+                color: #6a1b9a;
                 font-weight: 700;
             }
         }
 
         .MuiTabs-indicator {
             height: 3px;
-            background: linear-gradient(90deg, #4a3f8f, #9b72cb);
+            // 🟣 updated to community purple gradient
+            background: linear-gradient(90deg, #4a148c, #7b1fa2);
             border-radius: 3px 3px 0 0;
         }
     }
@@ -116,6 +153,7 @@
         flex-shrink: 0;
     }
 
+    // ── Grid — unchanged ──────────────────────────────────────────────────────
     &__grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -154,7 +192,8 @@
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        color: #4a3f8f;
+        // 🟣 updated link color to community purple
+        color: #6a1b9a;
         text-decoration: none;
         font-size: 0.9rem;
         font-family: "Heebo", "Assistant", sans-serif;
@@ -167,7 +206,7 @@
             opacity: 0.6;
         }
         &:hover {
-            color: #9b72cb;
+            color: #4a148c;
             text-decoration: underline;
         }
     }

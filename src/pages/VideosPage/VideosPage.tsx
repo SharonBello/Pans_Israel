@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Container, Typography, Tabs, Tab } from '@mui/material';
-import { PlayCircle as PlayIcon, OpenInNew as ExternalIcon } from '@mui/icons-material';
+import { PlayCircle as PlayIcon, OpenInNew as ExternalIcon, VideoLibrary as VideoIcon } from '@mui/icons-material';
 import SupportTabs from '../../components/Support/SupportTabs/SupportTabs';
 import './VideosPage.scss';
 
@@ -296,15 +296,27 @@ const VideosPage: React.FC = () => {
         <Box className="videos-page" dir="rtl">
             <Box className="videos-page__hero">
                 <Container maxWidth="lg" className="videos-page__hero-content">
+
+                    {/* Icon box — matches SupportTabs tab 4 (VideoLibrary) */}
+                    <Box className="videos-page__hero-icon-wrap">
+                        <VideoIcon />
+                    </Box>
+
+                    {/* Label — unchanged */}
                     <Typography variant="overline" className="videos-page__hero-label">
                         תמיכה וקהילה
                     </Typography>
+
+                    {/* Title — unchanged */}
                     <Typography variant="h1" className="videos-page__hero-title">
                         סרטונים ווובינרים
                     </Typography>
+
+                    {/* Desc — unchanged */}
                     <Typography className="videos-page__hero-desc">
                         הרצאות מומחים, עדויות משפחות וסרטוני הדרכה על PANS/PANDAS — חינמיים ופתוחים לכולם
                     </Typography>
+
                 </Container>
             </Box>
 

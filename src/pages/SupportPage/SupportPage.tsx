@@ -180,24 +180,27 @@ const SupportPage: React.FC = () => {
   return (
     <Box className="support-page" dir="rtl">
       {/* Hero Section */}
-      <section className="support-page__hero">
-        <div className="support-page__hero-bg" />
-        <div className="support-page__hero-overlay" />
-        <Container maxWidth="lg" className="support-page__hero-content">
-          <Box className="support-page__hero-icon">
+      <header className="support-page__hero">
+        <div className="support-hero__text">
+
+          {/* Icon box — absolutely positioned top-left (RTL = visual top-right) */}
+          <div className="support-page__hero-icon">
             <HeartIcon />
-          </Box>
-          <Typography variant="h1" className="support-page__hero-title">
+          </div>
+
+          {/* <Container maxWidth="lg" className="support-page__hero-content"> */}
+          <div className="support-page__hero-label">
+            תמיכה וקהילה
+          </div>
+          <h1 className="support-page__hero-title">
             אתם לא לבד
-          </Typography>
-          <Typography className="support-page__hero-subtitle">
+          </h1>
+          <p className="support-page__hero-subtitle">
             כל שאלה והתלבטות - אנחנו כאן בשבילכם
-          </Typography>
-          <p className="support-page__hero-description">
-            קהילת הורים ואנשי מקצוע שעברו את הדרך ומוכנים לתמוך, להקשיב ולעזור
           </p>
-        </Container>
-      </section>
+          {/* </Container> */}
+        </div>
+      </header>
 
       <SupportTabs />
 

@@ -5,6 +5,7 @@ import SubmitTestimonialModal from '@/components/testimonials/SubmitTestimonialM
 import TestimonialReadModal from '@/components/testimonials/TestimonialReadModal/TestimonialReadModal';
 import type { NewTestimonialPayload, Testimonial } from '@/types/testimonials';
 import { subscribeToTestimonials, addTestimonial } from '@/services/testimonialsService';
+import { RecordVoiceOver as TestimonialsIcon } from '@mui/icons-material';
 import type { Unsubscribe } from 'firebase/firestore';
 import './TestimonialsPage.scss';
 import SupportTabs from '@/components/Support/SupportTabs/SupportTabs';
@@ -55,25 +56,25 @@ const TestimonialsPage: React.FC = (): React.JSX.Element => {
       <div className="testimonials-container">
         <header className="testimonials-hero">
           <div className="testimonials-hero__text">
-            {/* <div className="testimonials-hero__kicker">עדויות אמיתיות מהקהילה</div> */}
+
+            {/* Icon box — matches SupportTabs tab 3 (RecordVoiceOver) */}
+            <div className="testimonials-hero__icon-wrap">
+              <TestimonialsIcon />
+            </div>
+
+            {/* Kicker — was commented out before, now active as label */}
+            <div className="testimonials-hero__kicker">תמיכה וקהילה</div>
+
+            {/* Title — unchanged */}
             <h1 className="testimonials-hero__title">עדויות מהקהילה</h1>
+
+            {/* Subtitle — unchanged */}
             <p className="testimonials-hero__subtitle">
               עדויות אמיתיות מהקהילה. כל עדות נבדקת לפני פרסום כדי לשמור על פרטיות ולהסיר פרטים מזהים.
             </p>
           </div>
-
-          <div className="testimonials-hero__actions">
-            <button
-              type="button"
-              className="testimonials-hero__btn"
-              onClick={() => setIsSubmitOpen(true)}
-            >
-              <PlusIcon />
-              <span>שתפו עדות</span>
-            </button>
-            <div className="testimonials-hero__note">העדות תפורסם לאחר בדיקה קצרה.</div>
-          </div>
         </header>
+
 
         <SupportTabs />
 

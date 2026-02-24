@@ -1,5 +1,7 @@
 // SupportTabs.scss — self-contained, no external @use dependencies
 
+// 🟣 Community: #4a148c → #6a1b9a → #7b1fa2
+
 .support-tabs {
     position: sticky;
     top: 64px;
@@ -34,7 +36,6 @@
         }
     }
 
-    // Tab height + font — identical to TreatmentTabs and InfoTabs
     .MuiTab-root {
         min-height: 56px;
         padding: 0 24px;
@@ -43,24 +44,24 @@
         font-weight: 500;
         color: #607d8b;
         text-transform: none;
-        transition:
-            color 0.2s ease,
-            background 0.2s ease;
+        transition: color 0.2s ease, background 0.2s ease;
         gap: 6px;
 
         .MuiSvgIcon-root {
             font-size: 1.1rem;
         }
 
+        // 🟣 hover — community purple
         &:hover {
-            color: #023373;
-            background: rgba(2, 51, 115, 0.04);
+            color: #6a1b9a;
+            background: rgba(106, 27, 154, 0.04);
         }
 
+        // 🟣 selected — community purple
         &.Mui-selected {
-            color: #023373;
+            color: #6a1b9a;
             font-weight: 600;
-            background: rgba(2, 51, 115, 0.05);
+            background: rgba(106, 27, 154, 0.05);
         }
 
         @media (max-width: 900px) {
@@ -74,9 +75,10 @@
         }
     }
 
+    // 🟣 indicator — community purple gradient
     .MuiTabs-indicator {
         height: 3px;
-        background: linear-gradient(90deg, #023373, #1565c0);
+        background: linear-gradient(90deg, #4a148c, #7b1fa2);
         border-radius: 3px 3px 0 0;
     }
 
@@ -84,6 +86,11 @@
         height: 1px;
         background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.07), transparent);
     }
+}
+
+[dir="rtl"] .support-tabs .MuiTab-root .MuiSvgIcon-root {
+    margin-left: 6px;
+    margin-right: 0;
 }
 
 // RTL icon spacing

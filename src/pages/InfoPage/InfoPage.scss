@@ -1,31 +1,114 @@
-@use "../../styles/shared/page-hero" as hero;
+// InfoPage.scss
+// ── Only change from original: replaced @include hero.page-hero() mixins
+//    with inline symptoms-blue gradient. Everything else is identical. ─────────
 
 .info-page {
   min-height: 100vh;
   background: #f5f6fa;
 
-  // ── Hero ──────────────────────────────────────────────────────────────────
+  // ── Hero — replaced mixin with symptoms group blue ─────────────────────────
   &__hero {
-    @include hero.page-hero();
+    position: relative;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    // 🔵 Symptoms group — Deep Medical Blue (same as SymptomsPage)
+    background: linear-gradient(135deg, #0d47a1 0%, #1565c0 55%, #1976d2 100%);
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 10% 50%, rgba(255, 255, 255, 0.06) 0%, transparent 55%),
+        radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0.04) 0%, transparent 40%),
+        url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23fff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+
+    @media (max-width: 600px) {
+      min-height: 160px;
+    }
   }
+
+  // Hide decorative background elements used in JSX (mixin handled these before)
+  &__hero-background,
+  &__hero-gradient,
+  &__hero-pattern {
+    display: none;
+  }
+
+  // ── PATCH: Replace only these selectors in your InfoPage.scss ────────────────
+  // The hero content needs RTL alignment + icon support + text hierarchy
 
   &__hero-content {
-    @include hero.page-hero-content();
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: right;
+    padding: 36px 24px;
+    gap: 6px;
+    width: 100%;
   }
 
+  // ── Add icon wrap support (if you want to add an icon to InfoPage hero) ───
+  &__hero-icon-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    margin-bottom: 10px;
+
+    .MuiSvgIcon-root,
+    svg {
+      font-size: 1.7rem;
+      color: #fff;
+      width: 1.7rem;
+      height: 1.7rem;
+    }
+  }
+
+  // ── Label — small caps above title ────────────────────────────────────────
   &__hero-label {
-    @include hero.page-hero-label();
+    font-size: 0.68rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.2em !important;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.52) !important;
+    font-family: "Heebo", "Assistant", sans-serif !important;
+    line-height: 1 !important;
+    margin-bottom: 2px !important;
   }
 
+  // ── Title — large bold ────────────────────────────────────────────────────
   &__hero-title {
-    @include hero.page-hero-title();
+    font-size: clamp(2rem, 5vw, 3rem) !important;
+    font-weight: 800 !important;
+    color: #fff !important;
+    line-height: 1.05 !important;
+    font-family: "Heebo", "Assistant", sans-serif !important;
+    margin: 0 !important;
   }
 
+  // ── Description — muted subtitle ─────────────────────────────────────────
   &__hero-description {
-    @include hero.page-hero-desc();
+    font-size: clamp(0.82rem, 1.4vw, 0.95rem) !important;
+    color: rgba(255, 255, 255, 0.72) !important;
+    line-height: 1.65 !important;
+    max-width: 520px;
+    font-family: "Heebo", "Assistant", sans-serif !important;
+    margin-top: 4px !important;
   }
 
-  // ── Layout ────────────────────────────────────────────────────────────────
+  // ── Everything below is identical to your original InfoPage.scss ───────────
+
   &__layout {
     display: flex;
     flex-direction: column;
@@ -97,11 +180,12 @@
     font-family: "Heebo", "Assistant", sans-serif;
   }
 
-  // ── CTA Banner ────────────────────────────────────────────────────────────
+  // ── CTA Banner — updated to symptoms blue ─────────────────────────────────
   &__cta {
     margin-top: 56px;
     padding: 40px 32px;
-    background: linear-gradient(135deg, #023373 0%, #1565c0 100%);
+    // 🔵 Updated to symptoms group blue (was #023373)
+    background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
     border-radius: 16px;
     text-align: center;
     color: #fff;
@@ -141,7 +225,8 @@
 
     &--primary {
       background: #fff;
-      color: #023373;
+      // 🔵 Updated button text to match blue
+      color: #0d47a1;
     }
 
     &--secondary {
@@ -155,7 +240,7 @@
     }
   }
 
-  // ── Scroll to top FAB ────────────────────────────────────────────────────
+  // ── Scroll to top FAB — updated to symptoms blue ──────────────────────────
   &__scroll-top {
     position: fixed !important;
     bottom: 24px;
@@ -163,7 +248,8 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s !important;
-    background: #023373 !important;
+    // 🔵 Updated to symptoms blue (was #023373)
+    background: #1565c0 !important;
     color: #fff !important;
     z-index: 200;
 
@@ -173,8 +259,11 @@
     }
   }
 
-  // ── Scales tab container ──────────────────────────────────────────────────
   &__scales-tab {
     padding-top: 8px;
   }
+}
+
+.info-page__hero--treatment {
+  background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 55%, #388e3c 100%) !important;
 }

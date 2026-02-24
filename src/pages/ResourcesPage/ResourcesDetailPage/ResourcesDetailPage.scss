@@ -8,46 +8,99 @@ $pn-gray-bg: #f8f9fa;
 $pn-text: #2c3e50;
 $pn-text-light: #5d6d7e;
 
+.resources-detail__hero {
+  // Full bleed — break out of container
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  width: 100vw;
+  max-width: 100vw;
+  min-height: 220px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  // align-items: center;
+  align-items: flex-start;
+  overflow: hidden;
+  border-radius: 0;
+  border: none;
+  // 🟣 Community Purple (was wrong #4a3f8f before)
+  background: linear-gradient(135deg, #4a148c 0%, #6a1b9a 55%, #7b1fa2 100%);
+  padding: 0 calc(50vw - 550px + 1.25rem);
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 10% 50%, rgba(255, 255, 255, 0.06) 0%, transparent 55%),
+      radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0.04) 0%, transparent 40%),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  @media (max-width: 900px) {
+    padding: 0 1.25rem;
+  }
+
+  @media (max-width: 600px) {
+    min-height: 180px;
+    padding: 0 3rem;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
 .resources-detail {
   background: #fff;
   min-height: 100vh;
 
-  // ==========================================
-  // HERO SECTION — purple, 200px, full width
-  // ==========================================
-  &__hero {
+  // Kill the bg image element entirely
+  .resources-detail__hero-text {
+    flex: 1;
+    min-width: 0;
     position: relative;
-    height: 200px;
-    max-height: 200px;
+    z-index: 1;
+    // ✅ RTL — right-aligned (was default LTR flow before)
     display: flex;
-    align-items: center;
-    overflow: hidden;
-    background: linear-gradient(135deg, #4a3f8f 0%, #7b5ea7 50%, #9b72cb 100%);
-
-    &::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-      pointer-events: none;
-    }
-
-    @media (max-width: 600px) {
-      height: 160px;
-      max-height: 160px;
-    }
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: right;
+    gap: 6px;
+    padding: 36px 0;
   }
 
-  // Kill the bg image element entirely
-  &__hero-bg {
-    display: none;
+  // Icon box — absolute top-left (RTL = visual top-right)
+  &__hero-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    margin-bottom: 10px;
+    flex-shrink: 0;
+
+    svg {
+      width: 1.7rem;
+      height: 1.7rem;
+      color: #fff;
+      fill: #fff;
+    }
   }
 
   &__hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 1;
+    // ✅ RTL — right-aligned (was text-align: center before)
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    // text-align: right;
+    padding: 36px 24px;
+    gap: 6px;
     width: 100%;
-    padding: 24px 0;
   }
 
   &__breadcrumbs {
@@ -86,19 +139,43 @@ $pn-text-light: #5d6d7e;
     font-weight: 500;
   }
 
-  &__hero-title {
-    font-family: $font-heading;
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
+  &__hero-label {
+    font-size: 0.68rem;
     font-weight: 700;
-    color: #fff;
-    margin-bottom: 6px;
-    line-height: 1.1;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.52);
+    font-family: "Heebo", "Assistant", sans-serif;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+
+  &__hero-title {
+    margin: 0;
+    font-size: clamp(2rem, 5vw, 3rem) !important;
+    line-height: 1.05;
+    color: #ffffff;
+    font-weight: 800 !important;
+    font-family: "Heebo", "Assistant", sans-serif !important;
   }
 
   &__hero-subtitle {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.82);
-    line-height: 1.5;
+    margin: 0;
+    color: rgba(255, 255, 255, 0.72);
+    font-size: clamp(0.82rem, 1.4vw, 0.95rem);
+    line-height: 1.65;
+    max-width: 520px;
+    font-family: "Heebo", "Assistant", sans-serif;
+  }
+
+  .MuiContainer-root {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: right;
+    padding-top: 36px;
+    padding-bottom: 36px;
+    gap: 6px;
   }
 
   // ==========================================

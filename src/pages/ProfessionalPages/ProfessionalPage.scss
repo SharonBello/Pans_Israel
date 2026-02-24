@@ -1,11 +1,13 @@
-// ─── Hero ──────────────────────────────────────────────────────────────────────
+// ─── Hero base ────────────────────────────────────────────────────────────────
 .prof-hero {
     position: relative;
     min-height: 200px;
     display: flex;
     align-items: center;
     overflow: hidden;
-    background: linear-gradient(135deg, #023373 0%, #1565c0 60%, #1976d2 100%);
+
+    // Default: Professional (Dark Navy)
+    background: linear-gradient(135deg, #0a1628 0%, #023373 60%, #0d47a1 100%);
 
     &::before {
         content: "";
@@ -15,10 +17,37 @@
             radial-gradient(circle at 10% 50%, rgba(255, 255, 255, 0.06) 0%, transparent 55%),
             radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0.04) 0%, transparent 40%),
             url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23fff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        pointer-events: none;
     }
 
     @media (max-width: 600px) {
         min-height: 160px;
+    }
+
+    // ── Variants ────────────────────────────────────────────────────────────
+    // 🔵 Symptoms / Info / Scales — Deep Medical Blue
+    &--symptoms {
+        background: linear-gradient(135deg, #0d47a1 0%, #1565c0 55%, #1976d2 100%);
+    }
+
+    // 🟢 Treatment / Holistic — Forest Green
+    &--treatment {
+        background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 55%, #388e3c 100%) !important;
+    }
+
+    // 🟣 Community / Support / Testimonials / Resources — Warm Purple
+    &--community {
+        background: linear-gradient(135deg, #4a148c 0%, #6a1b9a 55%, #7b1fa2 100%);
+    }
+
+    // 🔴 About / NGO — Burgundy Red
+    &--about {
+        background: linear-gradient(135deg, #7b1113 0%, #b71c1c 55%, #c62828 100%);
+    }
+
+    // 🌑 Professional (default) — Dark Navy
+    &--professional {
+        background: linear-gradient(135deg, #0a1628 0%, #023373 60%, #0d47a1 100%);
     }
 
     &__inner {
@@ -26,7 +55,7 @@
         z-index: 1;
         display: flex;
         flex-direction: column;
-        align-items: flex-start; // RTL
+        align-items: flex-start;
         padding: 32px 24px;
         text-align: right;
         gap: 4px;
@@ -487,7 +516,7 @@
     }
 }
 
-// ─── Stats grid ──────────────────────────────────────────────────────────────
+// ─── Stats grid ───────────────────────────────────────────────────────────────
 .prof-stat-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -582,7 +611,6 @@
         text-decoration: none;
         font-family: "Heebo", "Assistant", sans-serif;
         transition: opacity 0.2s;
-
         &:hover {
             opacity: 0.88;
         }
@@ -594,7 +622,6 @@
         gap: 5px;
         height: 80px;
         flex-shrink: 0;
-
         @media (max-width: 600px) {
             display: none;
         }
