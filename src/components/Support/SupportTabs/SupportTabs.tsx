@@ -14,7 +14,7 @@ import './SupportTabs.scss';
 const SUPPORT_TABS = [
     { id: 'parents', label: 'משאבים להורים', icon: <ParentsIcon />, path: '/resources/parents' },
     { id: 'community_articles', label: 'מאמרים מהקהילה', icon: <ArticleIcon />, path: '/community/articles' },
-    { id: 'media_coverage', label: 'כתבות בתקשורת', icon: <NewspaperIcon />, path: '/resources/media-coverage' },
+    { id: 'media_coverage', label: 'פורסם בתקשורת', icon: <NewspaperIcon />, path: '/resources/media-coverage' },
     { id: 'support', label: 'תמיכה וקהילה', icon: <SupportIcon />, path: '/support' },
     { id: 'testimonials', label: 'עדויות הורים', icon: <TestimonialsIcon />, path: '/testimonials' },
     { id: 'videos', label: 'סרטונים', icon: <VideoIcon />, path: '/resources/videos' },

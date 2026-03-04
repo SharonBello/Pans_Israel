@@ -606,3 +606,28 @@ $transition: 0.22s cubic-bezier(0.4, 0, 0.2, 1);
         transform: rotate(360deg);
     }
 }
+
+.mcp__card--pdf {
+    border-top: 3px solid #e53e3e;
+}
+
+.mcp__card-thumb-fallback--pdf {
+    background: linear-gradient(135deg, #e53e3e, #c53030);
+    svg {
+        font-size: 3.5rem;
+        color: rgba(255, 255, 255, 0.85);
+    }
+}
+
+.mcp__card-pdf-badge {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    padding: 2px 8px;
+    background: #e53e3e;
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    border-radius: 4px;
+}

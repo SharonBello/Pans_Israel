@@ -1,5 +1,5 @@
 // ==========================================================================
-// FeaturedMediaWidget.tsx — הומפג׳ widget: כתבות בתקשורת
+// FeaturedMediaWidget.tsx — הומפג׳ widget: פורסם בתקשורת
 // Add to your HomeSections or wherever your homepage sections live
 // ==========================================================================
 import React, { useEffect, useState } from 'react';
@@ -56,12 +56,12 @@ const FeaturedMediaWidget: React.FC = () => {
                         <MdNewspaper />
                     </div>
                     <div>
-                        <h2 className="fmw__title">PANS/PANDAS בתקשורת</h2>
+                        <h2 className="fmw__title">פאנס/פאנדס בתקשורת</h2>
                         <p className="fmw__subtitle">כתבות נבחרות מהתקשורת הישראלית</p>
                     </div>
                 </div>
                 <button className="fmw__see-all" onClick={() => navigate('/resources/media-coverage')}>
-                    כל הכתבות <FiArrowLeft />
+                    כל הפרסומים <FiArrowLeft />
                 </button>
             </div>
 

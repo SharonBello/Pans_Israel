@@ -88,7 +88,7 @@ const MENU_ITEMS: MenuItem[] = [
     children: [
       { label: 'משאבים להורים', path: '/resources/parents', icon: <GroupsIcon fontSize="small" /> },
       { label: 'מאמרים מהקהילה', path: '/community/articles', icon: <ArticleIcon fontSize="small" /> },
-      { label: 'כתבות בתקשורת', path: '/resources/media-coverage', icon: <NewspaperIcon fontSize="small" /> },
+      { label: 'פורסם בתקשורת', path: '/resources/media-coverage', icon: <NewspaperIcon fontSize="small" /> },
       { label: 'תמיכה וקהילה', path: '/support', icon: <FavoriteIcon fontSize="small" /> },
       { label: 'עדויות הורים', path: '/testimonials', icon: <ForumIcon fontSize="small" /> },
       { label: 'סרטונים ווובינרים', path: '/resources/videos', icon: <VideoIcon fontSize="small" /> },

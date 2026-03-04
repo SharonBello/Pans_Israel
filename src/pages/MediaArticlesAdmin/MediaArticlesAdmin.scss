@@ -1,5 +1,5 @@
 // ==========================================================================
-// MediaArticlesAdmin.scss — Admin panel for כתבות בתקשורת
+// MediaArticlesAdmin.scss — Admin panel for פורסם בתקשורת
 // ==========================================================================
 
 $color-primary: #023373;
@@ -739,6 +739,7 @@ $transition: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 // ── Media type selector ───────────────────────────────────────────────────────
+// ── Media type selector ───────────────────────────────────────────────────────
 .mca-type-selector {
     display: flex;
     gap: 8px;
@@ -781,4 +782,88 @@ $transition: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
     font-size: 0.75rem;
     font-weight: 600;
     margin-right: 4px;
+}
+
+// ── PDF drop zone ─────────────────────────────────────────────────────────────
+.mca-pdf-drop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 28px 20px;
+    border: 2px dashed rgba(229, 62, 62, 0.35);
+    border-radius: 10px;
+    background: rgba(229, 62, 62, 0.03);
+    cursor: pointer;
+    transition: all 0.18s ease;
+    text-align: center;
+    min-height: 110px;
+
+    &:hover {
+        border-color: #e53e3e;
+        background: rgba(229, 62, 62, 0.06);
+    }
+
+    &--selected {
+        border-color: #e53e3e;
+        border-style: solid;
+        background: rgba(229, 62, 62, 0.05);
+    }
+
+    &__icon {
+        font-size: 2rem;
+        color: #a0aec0;
+
+        &--ready {
+            color: #e53e3e;
+        }
+    }
+
+    &__label {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #2d3748;
+    }
+
+    &__name {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #e53e3e;
+        word-break: break-all;
+    }
+
+    &__size,
+    &__hint {
+        font-size: 0.75rem;
+        color: #a0aec0;
+    }
+}
+
+// ── Upload progress bar ───────────────────────────────────────────────────────
+.mca-upload-progress {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    &__bar {
+        height: 6px;
+        background: rgba(229, 62, 62, 0.15);
+        border-radius: 3px;
+        overflow: hidden;
+    }
+
+    &__fill {
+        height: 100%;
+        background: #e53e3e;
+        border-radius: 3px;
+        transition: width 0.2s ease;
+    }
+
+    &__label {
+        font-size: 0.75rem;
+        color: #718096;
+        text-align: center;
+    }
 }

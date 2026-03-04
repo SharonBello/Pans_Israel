@@ -1,5 +1,5 @@
 // ==========================================================================
-// mediaArticleService.ts — Firestore CRUD for כתבות בתקשורת
+// mediaArticleService.ts — Firestore CRUD for פורסם בתקשורת
 // ==========================================================================
 import {
     collection,

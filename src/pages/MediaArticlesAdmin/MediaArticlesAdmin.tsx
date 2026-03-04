@@ -1,5 +1,5 @@
 // ==========================================================================
-// MediaArticlesAdmin.tsx — Admin panel for כתבות בתקשורת
+// MediaArticlesAdmin.tsx — Admin panel for פורסם בתקשורת
 // Route: /admin/media-articles  (protect with your existing ProtectedRoute)
 // ==========================================================================
 import React, { useEffect, useState } from 'react';
@@ -24,7 +24,7 @@ import FormModal from './FormModal';
 
 // ── Empty form state ──────────────────────────────────────────────────────────
 const EMPTY_FORM: MediaArticleFormData = {
-    mediaType: 'article',   // ← ADD THIS LINE
+    mediaType: 'article',
     title: '',
     url: '',
     thumbnailUrl: '',
@@ -192,7 +192,7 @@ const MediaArticlesAdmin: React.FC = () => {
 
     const formInitial: MediaArticleFormData = editTarget
         ? {
-            mediaType: editTarget.mediaType || 'article',  // ← ADD THIS
+            mediaType: editTarget.mediaType || 'article',
             title: editTarget.title,
             url: editTarget.url,
             thumbnailUrl: editTarget.thumbnailUrl || '',
@@ -221,8 +221,8 @@ const MediaArticlesAdmin: React.FC = () => {
                 <div className="mca__header-left">
                     <div className="mca__header-icon"><MdNewspaper /></div>
                     <div>
-                        <h1 className="mca__header-title">ניהול כתבות בתקשורת</h1>
-                        <p className="mca__header-sub">ניהול כתבות מיוחדות לעמוד התקשורת</p>
+                        <h1 className="mca__header-title">ניהול פורסם בתקשורת</h1>
+                        <p className="mca__header-sub">ניהול פורסם מיוחדות לעמוד התקשורת</p>
                     </div>
                 </div>
                 <button className="mca-btn mca-btn--primary" onClick={openCreate}>
@@ -234,11 +234,11 @@ const MediaArticlesAdmin: React.FC = () => {
             <div className="mca__stats">
                 <div className="mca__stat">
                     <span className="mca__stat-num">{articles.length}</span>
-                    <span className="mca__stat-label">סה"כ כתבות</span>
+                    <span className="mca__stat-label">סה"כ פרסומים</span>
                 </div>
                 <div className="mca__stat">
                     <span className="mca__stat-num mca__stat-num--green">{published}</span>
-                    <span className="mca__stat-label">מפורסמות</span>
+                    <span className="mca__stat-label">פורסמו</span>
                 </div>
                 <div className="mca__stat">
                     <span className="mca__stat-num mca__stat-num--gold">{featured}</span>

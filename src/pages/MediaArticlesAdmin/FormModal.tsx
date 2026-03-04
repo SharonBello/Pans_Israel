@@ -1,15 +1,52 @@
-// ==========================================================================
-// FormModal.tsx — standalone modal for MediaArticlesAdmin
-// Place at: src/pages/MediaArticlesAdmin/FormModal.tsx
-// ==========================================================================
-import React, { useState } from 'react';
-import { FiX, FiSave, FiChevronDown, FiLink } from 'react-icons/fi';
-import { MdNewspaper } from 'react-icons/md';
+import React, { useState, useRef } from 'react';
+import { FiX, FiSave, FiChevronDown, FiLink, FiUpload } from 'react-icons/fi';
+import { MdNewspaper, MdPictureAsPdf } from 'react-icons/md';
 import { FaYoutube, FaFacebook, FaTiktok } from 'react-icons/fa';
-import type { MediaArticleFormData, MediaArticleCategory, MediaType } from '../../types/mediaArticle';
-import { CATEGORY_LABELS } from '../../types/mediaArticle';
+import { type MediaArticleFormData, type MediaArticleCategory, type MediaType, CATEGORY_LABELS } from '../../types/mediaArticle';
 import { fetchUrlMetadata } from '../../utils/fetchUrlMetadata';
 import { detectMediaType } from '../MediaCoveragePage/MediaArticleFormData';
+
+// ── Cloudinary config (same as your existing pdf_articles setup) ──────────────
+const CLOUD_NAME = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME || 'dcbbqlssh';
+const UPLOAD_PRESET = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET || 'mlfsfbrz';
+
+const uploadPdfToCloudinary = async (
+    file: File,
+    onProgress: (pct: number) => void,
+): Promise<{ url: string; thumbUrl: string }> => {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', UPLOAD_PRESET);
+    formData.append('resource_type', 'auto');
+    formData.append('folder', 'pdfs/articles');
+
+    return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`);
+
+        xhr.upload.onprogress = e => {
+            if (e.lengthComputable) onProgress(Math.round((e.loaded / e.total) * 100));
+        };
+
+        xhr.onload = () => {
+            try {
+                const data = JSON.parse(xhr.responseText);
+                if (xhr.status === 200 && data.secure_url) {
+                    const url = data.secure_url as string;
+                    const thumbUrl = url
+                        .replace('/auto/upload/', '/image/upload/w_400,f_jpg,pg_1/')
+                        .replace(/\.pdf$/i, '.jpg');
+                    resolve({ url, thumbUrl });
+                } else {
+                    reject(new Error(data.error?.message || 'שגיאה בהעלאה'));
+                }
+            } catch { reject(new Error('שגיאה בהעלאה')); }
+        };
+
+        xhr.onerror = () => reject(new Error('שגיאת רשת בהעלאה'));
+        xhr.send(formData);
+    });
+};
 
 // ── Props ─────────────────────────────────────────────────────────────────────
 export interface FormModalProps {
@@ -19,42 +56,29 @@ export interface FormModalProps {
     saving: boolean;
 }
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
 const getPublication = (url: string): string => {
     try {
         const { hostname } = new URL(url);
         const map: Record<string, string> = {
-            'www.ynet.co.il': 'ynet',
-            'ynet.co.il': 'ynet',
-            'www.mako.co.il': 'מאקו',
-            'mako.co.il': 'מאקו',
-            'www.haaretz.co.il': 'הארץ',
-            'haaretz.co.il': 'הארץ',
-            'www.walla.co.il': 'וואלה',
-            'walla.co.il': 'וואלה',
+            'www.ynet.co.il': 'ynet', 'ynet.co.il': 'ynet',
+            'www.mako.co.il': 'מאקו', 'mako.co.il': 'מאקו',
+            'www.haaretz.co.il': 'הארץ', 'haaretz.co.il': 'הארץ',
+            'www.walla.co.il': 'וואלה', 'walla.co.il': 'וואלה',
             'www.israelhayom.co.il': 'ישראל היום',
-            'israelhayom.co.il': 'ישראל היום',
-            'www.kan.org.il': 'כאן',
-            'kan.org.il': 'כאן',
+            'www.kan.org.il': 'כאן', 'kan.org.il': 'כאן',
             'www.timesofisrael.com': 'Times of Israel',
-            'timesofisrael.com': 'Times of Israel',
         };
         return map[hostname] || hostname.replace(/^www\./, '');
     } catch { return ''; }
 };
 
-// ── Media type options ────────────────────────────────────────────────────────
-const MEDIA_TYPE_OPTIONS: {
-    value: MediaType;
-    label: string;
-    color: string;
-    icon: React.ReactNode;
-}[] = [
-        { value: 'article', label: 'כתבה / מאמר', color: '#023373', icon: <MdNewspaper /> },
-        { value: 'youtube', label: 'YouTube', color: '#FF0000', icon: <FaYoutube /> },
-        { value: 'facebook', label: 'Facebook', color: '#1877F2', icon: <FaFacebook /> },
-        { value: 'tiktok', label: 'TikTok', color: '#010101', icon: <FaTiktok /> },
-    ];
+const MEDIA_TYPE_OPTIONS: { value: MediaType; label: string; color: string; icon: React.ReactNode }[] = [
+    { value: 'article', label: 'כתבה', color: '#023373', icon: <MdNewspaper /> },
+    { value: 'youtube', label: 'YouTube', color: '#FF0000', icon: <FaYoutube /> },
+    { value: 'facebook', label: 'Facebook', color: '#1877F2', icon: <FaFacebook /> },
+    { value: 'tiktok', label: 'TikTok', color: '#010101', icon: <FaTiktok /> },
+    { value: 'pdf', label: 'PDF', color: '#E53E3E', icon: <MdPictureAsPdf /> },
+];
 
 // ── Component ─────────────────────────────────────────────────────────────────
 const FormModal: React.FC<FormModalProps> = ({ initial, onSave, onClose, saving }) => {
@@ -63,30 +87,78 @@ const FormModal: React.FC<FormModalProps> = ({ initial, onSave, onClose, saving 
     const [fetching, setFetching] = useState(false);
     const [fetchError, setFetchError] = useState('');
     const [fetchSuccess, setFetchSuccess] = useState(false);
+    const [pdfFile, setPdfFile] = useState<File | null>(null);
+    const [uploading, setUploading] = useState(false);
+    const [uploadProgress, setUploadProgress] = useState(0);
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     const set = (field: keyof MediaArticleFormData, value: any) => {
         setForm(prev => ({ ...prev, [field]: value }));
         setErrors(prev => ({ ...prev, [field]: undefined }));
     };
 
-    // Auto-detect type when URL changes
     const handleUrlChange = (url: string) => {
         set('url', url);
         if (url.length > 10) {
-            const detected = detectMediaType(url);
-            set('mediaType', detected);
+            set('mediaType', detectMediaType(url));
             setFetchError('');
         }
     };
 
+    // ── PDF file picker ───────────────────────────────────────────────────────
+    const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const f = e.target.files?.[0];
+        if (!f) return;
+        if (f.type !== 'application/pdf') {
+            setErrors(prev => ({ ...prev, url: 'ניתן להעלות קבצי PDF בלבד' }));
+            return;
+        }
+        if (f.size > 20 * 1024 * 1024) {
+            setErrors(prev => ({ ...prev, url: 'הקובץ גדול מדי — מקסימום 20MB' }));
+            return;
+        }
+        setPdfFile(f);
+        // Use filename (without extension) as default title if empty
+        if (!form.title) {
+            set('title', f.name.replace(/\.pdf$/i, '').replace(/_/g, ' '));
+        }
+        setErrors(prev => ({ ...prev, url: undefined }));
+    };
+
+    // ── Upload PDF then save ──────────────────────────────────────────────────
+    const handlePdfUploadAndSave = async () => {
+        if (!pdfFile) {
+            setErrors(prev => ({ ...prev, url: 'יש לבחור קובץ PDF' }));
+            return;
+        }
+        if (!form.title.trim()) {
+            setErrors(prev => ({ ...prev, title: 'שדה חובה' }));
+            return;
+        }
+        if (!form.datePublished) {
+            setErrors(prev => ({ ...prev, datePublished: 'שדה חובה' }));
+            return;
+        }
+        setUploading(true);
+        setFetchError('');
+        try {
+            const { url, thumbUrl } = await uploadPdfToCloudinary(pdfFile, setUploadProgress);
+            await onSave({ ...form, url, thumbnailUrl: thumbUrl, mediaType: 'pdf' });
+        } catch (err: any) {
+            setFetchError(err.message || 'שגיאה בהעלאת הקובץ');
+        } finally {
+            setUploading(false);
+            setUploadProgress(0);
+        }
+    };
+
+    // ── Fetch metadata (for articles) ─────────────────────────────────────────
     const handleFetchMetadata = async () => {
         if (!form.url.trim()) {
             setErrors(prev => ({ ...prev, url: 'הכנס כתובת URL תחילה' }));
             return;
         }
         const type = form.mediaType || detectMediaType(form.url);
-
-        // For social embeds — just extract publication from URL
         if (type !== 'article') {
             const pub = getPublication(form.url);
             if (pub) set('publication', pub);
@@ -94,10 +166,7 @@ const FormModal: React.FC<FormModalProps> = ({ initial, onSave, onClose, saving 
             setTimeout(() => setFetchSuccess(false), 2000);
             return;
         }
-
-        setFetching(true);
-        setFetchError('');
-        setFetchSuccess(false);
+        setFetching(true); setFetchError(''); setFetchSuccess(false);
         try {
             const meta = await fetchUrlMetadata(form.url.trim());
             setForm(prev => ({
@@ -108,24 +177,20 @@ const FormModal: React.FC<FormModalProps> = ({ initial, onSave, onClose, saving 
                 publication: meta.publication || prev.publication,
                 datePublished: meta.datePublished || prev.datePublished,
             }));
-            if (meta.title) {
-                setFetchSuccess(true);
-                setTimeout(() => setFetchSuccess(false), 3000);
-            } else if (meta.publication) {
-                setFetchError('שם המקור מולא אוטומטית. הוסיפו כותרת ותקציר ידנית.');
-            }
+            if (meta.title) { setFetchSuccess(true); setTimeout(() => setFetchSuccess(false), 3000); }
+            else if (meta.publication) setFetchError('שם המקור מולא. הוסיפו כותרת ותקציר ידנית.');
         } catch (err: any) {
             setFetchError(err.message || 'שגיאה בשליפת הפרטים');
-        } finally {
-            setFetching(false);
-        }
+        } finally { setFetching(false); }
     };
 
     const validate = (): boolean => {
         const e: typeof errors = {};
         const type = form.mediaType || 'article';
-        if (!form.url.trim()) e.url = 'שדה חובה';
-        else if (!/^https?:\/\/.+/.test(form.url)) e.url = 'כתובת URL לא תקינה';
+        if (type !== 'pdf') {
+            if (!form.url.trim()) e.url = 'שדה חובה';
+            else if (!/^https?:\/\/.+/.test(form.url)) e.url = 'כתובת URL לא תקינה';
+        }
         if (type === 'article' && !form.title.trim()) e.title = 'שדה חובה';
         if (type === 'article' && !form.publication.trim()) e.publication = 'שדה חובה';
         if (type === 'article' && !form.summary.trim()) e.summary = 'שדה חובה';
@@ -135,31 +200,32 @@ const FormModal: React.FC<FormModalProps> = ({ initial, onSave, onClose, saving 
     };
 
     const handleSubmit = async () => {
+        if (form.mediaType === 'pdf') { await handlePdfUploadAndSave(); return; }
         if (!validate()) return;
         await onSave(form);
     };
 
     const currentType = form.mediaType || 'article';
     const isArticle = currentType === 'article';
+    const isPdf = currentType === 'pdf';
     const typeOption = MEDIA_TYPE_OPTIONS.find(o => o.value === currentType);
+
+    const thumbPreview = isPdf && pdfFile
+        ? URL.createObjectURL(pdfFile)   // local preview — just shows filename
+        : form.thumbnailUrl;
 
     return (
         <div className="mca-modal-overlay" onClick={e => e.target === e.currentTarget && onClose()}>
             <div className="mca-modal" dir="rtl">
 
-                {/* Header */}
                 <div className="mca-modal__header">
-                    <h2 className="mca-modal__title">
-                        {initial.title ? 'עריכת תוכן' : 'הוספת תוכן חדש'}
-                    </h2>
-                    <button className="mca-modal__close" onClick={onClose} aria-label="סגור">
-                        <FiX />
-                    </button>
+                    <h2 className="mca-modal__title">{initial.title ? 'עריכת תוכן' : 'הוספת תוכן חדש'}</h2>
+                    <button className="mca-modal__close" onClick={onClose} aria-label="סגור"><FiX /></button>
                 </div>
 
                 <div className="mca-modal__body">
 
-                    {/* ── Media type selector ── */}
+                    {/* ── Type selector ── */}
                     <div className="mca-field">
                         <label className="mca-field__label">סוג תוכן</label>
                         <div className="mca-type-selector">
@@ -169,9 +235,9 @@ const FormModal: React.FC<FormModalProps> = ({ initial, onSave, onClose, saving 
                                     type="button"
                                     className={`mca-type-btn ${currentType === opt.value ? 'mca-type-btn--active' : ''}`}
                                     style={currentType === opt.value
-                                        ? { borderColor: opt.color, color: opt.color, background: `${opt.color}10` }
+                                        ? { borderColor: opt.color, color: opt.color, background: `${opt.color}12` }
                                         : {}}
-                                    onClick={() => set('mediaType', opt.value)}
+                                    onClick={() => { set('mediaType', opt.value); setPdfFile(null); setFetchError(''); }}
                                 >
                                     {opt.icon} {opt.label}
                                 </button>
@@ -179,52 +245,95 @@ const FormModal: React.FC<FormModalProps> = ({ initial, onSave, onClose, saving 
                         </div>
                     </div>
 
-                    {/* ── URL + fetch ── */}
-                    <div className="mca-field">
-                        <label className="mca-field__label">
-                            קישור
-                            {typeOption && (
-                                <span className="mca-field__label-hint" style={{ color: typeOption.color }}>
-                                    ({typeOption.label})
-                                </span>
-                            )} *
-                        </label>
-                        <div className="mca-field__url-row">
+                    {/* ── PDF upload zone ── */}
+                    {isPdf ? (
+                        <div className="mca-field">
+                            <label className="mca-field__label">קובץ PDF *</label>
                             <input
-                                className={`mca-field__input mca-field__input--url ${errors.url ? 'mca-field__input--error' : ''}`}
-                                value={form.url}
-                                onChange={e => handleUrlChange(e.target.value)}
-                                placeholder={
-                                    currentType === 'youtube' ? 'https://www.youtube.com/watch?v=...' :
-                                        currentType === 'facebook' ? 'https://www.facebook.com/...' :
-                                            currentType === 'tiktok' ? 'https://www.tiktok.com/@.../video/...' :
-                                                'https://www.ynet.co.il/...'
-                                }
-                                dir="ltr"
-                                onKeyDown={e => e.key === 'Enter' && handleFetchMetadata()}
+                                ref={fileInputRef}
+                                type="file"
+                                accept="application/pdf"
+                                onChange={handleFileChange}
+                                style={{ display: 'none' }}
                             />
-                            <button
-                                type="button"
-                                className={`mca-fetch-btn ${fetching ? 'mca-fetch-btn--loading' : ''} ${fetchSuccess ? 'mca-fetch-btn--success' : ''}`}
-                                onClick={handleFetchMetadata}
-                                disabled={fetching || !form.url.trim()}
+                            <div
+                                className={`mca-pdf-drop ${pdfFile ? 'mca-pdf-drop--selected' : ''}`}
+                                onClick={() => fileInputRef.current?.click()}
                             >
-                                {fetching
-                                    ? <span className="mca-fetch-btn__spinner" />
-                                    : fetchSuccess
-                                        ? <>✓ <span>עודכן!</span></>
-                                        : <><FiLink /> <span>שלוף פרטים</span></>
-                                }
-                            </button>
-                        </div>
-                        {errors.url && <span className="mca-field__error">{errors.url}</span>}
-                        {fetchError && <div className="mca-fetch-error">⚠️ {fetchError}</div>}
-                        {fetchSuccess && !fetchError && (
-                            <div className="mca-fetch-success">✓ הפרטים נשלפו — בדקו ותקנו לפי הצורך</div>
-                        )}
-                    </div>
+                                {pdfFile ? (
+                                    <>
+                                        <MdPictureAsPdf className="mca-pdf-drop__icon mca-pdf-drop__icon--ready" />
+                                        <span className="mca-pdf-drop__name">{pdfFile.name}</span>
+                                        <span className="mca-pdf-drop__size">
+                                            {(pdfFile.size / 1024 / 1024).toFixed(1)} MB — לחצו להחלפה
+                                        </span>
+                                    </>
+                                ) : (
+                                    <>
+                                        <FiUpload className="mca-pdf-drop__icon" />
+                                        <span className="mca-pdf-drop__label">לחצו לבחירת קובץ PDF</span>
+                                        <span className="mca-pdf-drop__hint">מקסימום 20MB</span>
+                                    </>
+                                )}
+                            </div>
+                            {errors.url && <span className="mca-field__error">{errors.url}</span>}
 
-                    {/* ── Date — always shown ── */}
+                            {/* Upload progress */}
+                            {uploading && (
+                                <div className="mca-upload-progress">
+                                    <div className="mca-upload-progress__bar">
+                                        <div className="mca-upload-progress__fill" style={{ width: `${uploadProgress}%` }} />
+                                    </div>
+                                    <span className="mca-upload-progress__label">מעלה... {uploadProgress}%</span>
+                                </div>
+                            )}
+
+                            {fetchError && <div className="mca-fetch-error">⚠️ {fetchError}</div>}
+                        </div>
+                    ) : (
+                        /* ── URL + fetch (non-PDF) ── */
+                        <div className="mca-field">
+                            <label className="mca-field__label">
+                                קישור{typeOption && (
+                                    <span className="mca-field__label-hint" style={{ color: typeOption.color }}>
+                                        {' '}({typeOption.label})
+                                    </span>
+                                )} *
+                            </label>
+                            <div className="mca-field__url-row">
+                                <input
+                                    className={`mca-field__input mca-field__input--url ${errors.url ? 'mca-field__input--error' : ''}`}
+                                    value={form.url}
+                                    onChange={e => handleUrlChange(e.target.value)}
+                                    placeholder={
+                                        currentType === 'youtube' ? 'https://www.youtube.com/watch?v=...' :
+                                            currentType === 'facebook' ? 'https://www.facebook.com/...' :
+                                                currentType === 'tiktok' ? 'https://www.tiktok.com/@.../video/...' :
+                                                    'https://www.ynet.co.il/...'
+                                    }
+                                    dir="ltr"
+                                    onKeyDown={e => e.key === 'Enter' && handleFetchMetadata()}
+                                />
+                                <button
+                                    type="button"
+                                    className={`mca-fetch-btn ${fetching ? 'mca-fetch-btn--loading' : ''} ${fetchSuccess ? 'mca-fetch-btn--success' : ''}`}
+                                    onClick={handleFetchMetadata}
+                                    disabled={fetching || !form.url.trim()}
+                                >
+                                    {fetching ? <span className="mca-fetch-btn__spinner" /> :
+                                        fetchSuccess ? <>✓ <span>עודכן!</span></> :
+                                            <><FiLink /> <span>שלוף פרטים</span></>}
+                                </button>
+                            </div>
+                            {errors.url && <span className="mca-field__error">{errors.url}</span>}
+                            {fetchError && <div className="mca-fetch-error">⚠️ {fetchError}</div>}
+                            {fetchSuccess && !fetchError && (
+                                <div className="mca-fetch-success">✓ הפרטים נשלפו — בדקו ותקנו לפי הצורך</div>
+                            )}
+                        </div>
+                    )}
+
+                    {/* ── Date ── */}
                     <div className="mca-field">
                         <label className="mca-field__label">תאריך *</label>
                         <input
@@ -236,10 +345,10 @@ const FormModal: React.FC<FormModalProps> = ({ initial, onSave, onClose, saving 
                         {errors.datePublished && <span className="mca-field__error">{errors.datePublished}</span>}
                     </div>
 
-                    {/* ── Title — always shown, required only for articles ── */}
+                    {/* ── Title ── */}
                     <div className="mca-field">
                         <label className="mca-field__label">
-                            כותרת {isArticle ? '*' : '(אופציונלי)'}
+                            כותרת {(isArticle || isPdf) ? '*' : '(אופציונלי)'}
                         </label>
                         <input
                             className={`mca-field__input ${errors.title ? 'mca-field__input--error' : ''}`}
@@ -272,7 +381,6 @@ const FormModal: React.FC<FormModalProps> = ({ initial, onSave, onClose, saving 
                                     </datalist>
                                     {errors.publication && <span className="mca-field__error">{errors.publication}</span>}
                                 </div>
-
                                 <div className="mca-field">
                                     <label className="mca-field__label">קטגוריה</label>
                                     <div className="mca-field__select-wrap">
@@ -297,8 +405,7 @@ const FormModal: React.FC<FormModalProps> = ({ initial, onSave, onClose, saving 
                                     value={form.summary}
                                     onChange={e => set('summary', e.target.value)}
                                     placeholder="תיאור קצר שיופיע בכרטיסייה"
-                                    dir="rtl"
-                                    rows={3}
+                                    dir="rtl" rows={3}
                                 />
                                 {errors.summary && <span className="mca-field__error">{errors.summary}</span>}
                             </div>
@@ -314,11 +421,8 @@ const FormModal: React.FC<FormModalProps> = ({ initial, onSave, onClose, saving 
                                 />
                                 {form.thumbnailUrl && (
                                     <div className="mca-field__thumb-preview">
-                                        <img
-                                            src={form.thumbnailUrl}
-                                            alt="תצוגה מקדימה"
-                                            onError={e => (e.currentTarget.style.display = 'none')}
-                                        />
+                                        <img src={form.thumbnailUrl} alt="תצוגה מקדימה"
+                                            onError={e => (e.currentTarget.style.display = 'none')} />
                                     </div>
                                 )}
                             </div>
@@ -341,17 +445,15 @@ const FormModal: React.FC<FormModalProps> = ({ initial, onSave, onClose, saving 
 
                 </div>
 
-                {/* Footer */}
                 <div className="mca-modal__footer">
-                    <button className="mca-btn mca-btn--ghost" onClick={onClose} disabled={saving}>
+                    <button className="mca-btn mca-btn--ghost" onClick={onClose} disabled={saving || uploading}>
                         ביטול
                     </button>
-                    <button className="mca-btn mca-btn--primary" onClick={handleSubmit} disabled={saving}>
-                        {saving ? <span className="mca-btn__spinner" /> : <FiSave />}
-                        {saving ? 'שומר...' : 'שמור'}
+                    <button className="mca-btn mca-btn--primary" onClick={handleSubmit} disabled={saving || uploading}>
+                        {(saving || uploading) ? <span className="mca-btn__spinner" /> : <FiSave />}
+                        {uploading ? `מעלה... ${uploadProgress}%` : saving ? 'שומר...' : 'שמור'}
                     </button>
                 </div>
-
             </div>
         </div>
     );

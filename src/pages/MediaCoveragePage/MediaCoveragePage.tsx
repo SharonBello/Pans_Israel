@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { FiExternalLink, FiSearch, FiFilter } from 'react-icons/fi';
-import { MdNewspaper } from 'react-icons/md';
+import { MdNewspaper, MdPictureAsPdf } from 'react-icons/md';
 import { FaYoutube, FaFacebook, FaTiktok } from 'react-icons/fa';
 import { getPublishedArticles } from '../../services/mediaArticleService';
 import type { MediaArticle, MediaArticleCategory, MediaType } from '../../types/mediaArticle';
 import { CATEGORY_LABELS, CATEGORY_COLORS, MEDIA_TYPE_COLORS, } from '../../types/mediaArticle';
 import SupportTabs from '../../components/Support/SupportTabs/SupportTabs';
 import './MediaCoveragePage.scss';
-import { detectMediaType, getFacebookEmbedUrl, getTikTokEmbedUrl, getYouTubeEmbedUrl } from './MediaArticleFormData';
+import { detectMediaType, getCloudinaryThumb, getFacebookEmbedUrl, getTikTokEmbedUrl, getYouTubeEmbedUrl } from './MediaArticleFormData';
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 const formatDateHebrew = (iso: string): string => {
@@ -32,6 +32,50 @@ const MediaTypeIcon: React.FC<{ type: MediaType; size?: string }> = ({ type, siz
         case 'tiktok': return <FaTiktok style={style} />;
         default: return <MdNewspaper style={style} />;
     }
+};
+
+const PdfCard: React.FC<{ article: MediaArticle }> = ({ article }) => {
+    const thumb = article.thumbnailUrl || getCloudinaryThumb(article.url);
+
+    return (
+        <a
+            className="mcp__card mcp__card--pdf"
+            href={article.url}
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            <div className="mcp__card-thumb">
+                {thumb ? (
+                    <img
+                        src={thumb}
+                        alt={article.title}
+                        loading="lazy"
+                        onError={e => {
+                            // fallback to PDF icon if thumb fails
+                            e.currentTarget.style.display = 'none';
+                            e.currentTarget.nextElementSibling?.removeAttribute('style');
+                        }}
+                    />
+                ) : null}
+                <div className="mcp__card-thumb-fallback mcp__card-thumb-fallback--pdf"
+                    style={{ display: thumb ? 'none' : 'flex' }}>
+                    <MdPictureAsPdf />
+                </div>
+                <span className="mcp__card-pdf-badge">PDF</span>
+            </div>
+            <div className="mcp__card-body">
+                <div className="mcp__card-meta">
+                    <span className="mcp__card-type" style={{ color: '#E53E3E' }}>
+                        <MdPictureAsPdf /> מסמך PDF
+                    </span>
+                    <span className="mcp__card-date">{formatDateHebrew(article.datePublished)}</span>
+                </div>
+                <h3 className="mcp__card-title">{article.title}</h3>
+                {article.summary && <p className="mcp__card-summary">{article.summary}</p>}
+                <span className="mcp__card-link">פתח מסמך <FiExternalLink /></span>
+            </div>
+        </a>
+    );
 };
 
 // ── YouTube Card ─────────────────────────────────────────────────────────────
@@ -180,6 +224,7 @@ const ArticleCard: React.FC<{ article: MediaArticle }> = ({ article }) => {
 const MediaCard: React.FC<{ article: MediaArticle }> = ({ article }) => {
     const type = article.mediaType || detectMediaType(article.url);
     switch (type) {
+        case 'pdf': return <PdfCard article={article} />;
         case 'youtube': return <YouTubeCard article={article} />;
         case 'tiktok': return <TikTokCard article={article} />;
         case 'facebook': return <FacebookCard article={article} />;
@@ -190,6 +235,7 @@ const MediaCard: React.FC<{ article: MediaArticle }> = ({ article }) => {
 // ── Type filter buttons config ────────────────────────────────────────────────
 const TYPE_FILTERS: { id: MediaType | 'all'; label: string; icon: React.ReactNode }[] = [
     { id: 'all', label: 'הכל', icon: null },
+    { id: 'pdf', label: 'PDF', icon: <MdPictureAsPdf /> },
     { id: 'article', label: 'כתבות', icon: <MdNewspaper /> },
     { id: 'youtube', label: 'YouTube', icon: <FaYoutube /> },
     { id: 'facebook', label: 'Facebook', icon: <FaFacebook /> },
@@ -259,10 +305,10 @@ const MediaCoveragePage: React.FC = () => {
                 <div className="mcp__hero-glow mcp__hero-glow--2" />
                 <div className="mcp__hero-inner">
                     <div className="mcp__hero-icon-wrap"><MdNewspaper /></div>
-                    <span className="mcp__hero-label">PANS / PANDAS בתקשורת</span>
+                    <span className="mcp__hero-label">פאנס/פאנדס בתקשורת</span>
                     <h1 className="mcp__hero-title">מדיה וכתבות</h1>
                     <p className="mcp__hero-subtitle">
-                        כתבות, סרטונים ותכנים מהתקשורת הישראלית והרשתות החברתיות על PANS ו-PANDAS
+                        פרסומים, סרטונים ותכנים מהתקשורת הישראלית והרשתות החברתיות על פאנס ופאנדס
                     </p>
                 </div>
             </section>
@@ -339,6 +385,18 @@ const MediaCoveragePage: React.FC = () => {
                     <>
                         <p className="mcp__count">{filtered.length} פריטים</p>
 
+                        {/* Articles section */}
+                        {articleItems.length > 0 && (
+                            <div className="mcp__section">
+                                {(activeType === 'all') && embedItems.length > 0 && (
+                                    <h2 className="mcp__section-title">פורסם בתקשורת</h2>
+                                )}
+                                <div className="mcp__grid">
+                                    {articleItems.map(a => <MediaCard key={a.id} article={a} />)}
+                                </div>
+                            </div>
+                        )}
+
                         {/* Embeds section (YouTube / TikTok / Facebook) */}
                         {embedItems.length > 0 && (
                             <div className="mcp__section">
@@ -347,18 +405,6 @@ const MediaCoveragePage: React.FC = () => {
                                 )}
                                 <div className="mcp__embed-grid">
                                     {embedItems.map(a => <MediaCard key={a.id} article={a} />)}
-                                </div>
-                            </div>
-                        )}
-
-                        {/* Articles section */}
-                        {articleItems.length > 0 && (
-                            <div className="mcp__section">
-                                {(activeType === 'all') && embedItems.length > 0 && (
-                                    <h2 className="mcp__section-title">כתבות בתקשורת</h2>
-                                )}
-                                <div className="mcp__grid">
-                                    {articleItems.map(a => <MediaCard key={a.id} article={a} />)}
                                 </div>
                             </div>
                         )}

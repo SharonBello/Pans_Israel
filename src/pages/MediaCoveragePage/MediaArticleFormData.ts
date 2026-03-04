@@ -54,7 +54,11 @@ export const detectMediaType = (url: string): MediaType => {
     return 'article';
 };
 
-
+export const getCloudinaryThumb = (pdfUrl: string): string =>
+    pdfUrl
+        .replace('/auto/upload/', '/image/upload/w_400,f_jpg,pg_1/')
+        .replace('/raw/upload/', '/image/upload/w_400,f_jpg,pg_1/')
+        .replace(/\.pdf$/i, '.jpg');
 
 
 

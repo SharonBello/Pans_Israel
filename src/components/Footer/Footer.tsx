@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
   const supportLinks = [
     { title: 'משאבים להורים', path: '/resources' },
     { title: 'מאמרים מהקהילה', path: '/community/articles' },
-    { title: 'כתבות בתקשורת', path: '/resources/media-coverage' },
+    { title: 'פורסם בתקשורת', path: '/resources/media-coverage' },
     { title: 'תמיכה וקהילה', path: '/support' },
     { title: 'עדויות הורים', path: '/testimonials' },
     { title: 'סרטונים ווובינרים', path: '/resources/videos' },
