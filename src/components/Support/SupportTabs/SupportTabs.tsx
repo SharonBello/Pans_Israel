@@ -7,12 +7,14 @@ import {
     RecordVoiceOver as TestimonialsIcon,
     VideoLibrary as VideoIcon,
     Article as ArticleIcon,
+    Newspaper as NewspaperIcon,
 } from '@mui/icons-material';
 import './SupportTabs.scss';
 
 const SUPPORT_TABS = [
     { id: 'parents', label: 'משאבים להורים', icon: <ParentsIcon />, path: '/resources/parents' },
     { id: 'community_articles', label: 'מאמרים מהקהילה', icon: <ArticleIcon />, path: '/community/articles' },
+    { id: 'media_coverage', label: 'כתבות בתקשורת', icon: <NewspaperIcon />, path: '/resources/media-coverage' },
     { id: 'support', label: 'תמיכה וקהילה', icon: <SupportIcon />, path: '/support' },
     { id: 'testimonials', label: 'עדויות הורים', icon: <TestimonialsIcon />, path: '/testimonials' },
     { id: 'videos', label: 'סרטונים', icon: <VideoIcon />, path: '/resources/videos' },
@@ -28,9 +30,10 @@ const SupportTabs: React.FC = () => {
         const path = location.pathname;
         if (path === '/resources/parents') return 0;
         if (path === '/community/articles') return 1;
-        if (path === '/support') return 2;
-        if (path === '/testimonials') return 3;
-        if (path === '/resources/videos') return 4;
+        if (path === '/resources/media-coverage') return 2;
+        if (path === '/support') return 3;
+        if (path === '/testimonials') return 4;
+        if (path === '/resources/videos') return 5;
         return 0;
     };
 

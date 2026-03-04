@@ -40,6 +40,8 @@ import ProtectedRoute from './Auth/ProtectedRoute.tsx';
 import BlogListPage from './pages/CommunityBlog/BlogListPage/BlogListPage.tsx';
 import BlogArticlePage from './pages/CommunityBlog/BlogArticlePage/BlogArticlePage.tsx';
 import PdfAdminPage from './pages/PdfAdminPage/PdfAdminPage.tsx';
+import MediaCoveragePage from './pages/MediaCoveragePage/MediaCoveragePage.tsx';
+import MediaArticlesAdmin from './pages/MediaArticlesAdmin/MediaArticlesAdmin.tsx';
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -116,15 +118,26 @@ const AppRoutes: AppRoute[] = [
       </ProtectedRoute>
     ),
   },
-   {
+  {
     path: '/admin/login',
     component: <AdminLoginPage />,
   },
   {
-    path: '/professional/articles/admin/pdf',                                                  // ← NEW
+    path: '/professional/articles/admin/pdf',
     component: (
       <ProtectedRoute>
         <PdfAdminPage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/resources/media-coverage',
+    component: <MediaCoveragePage />
+  },
+  {
+    path: '/admin/media-articles', component: (
+      <ProtectedRoute>
+        <MediaArticlesAdmin />
       </ProtectedRoute>
     ),
   },

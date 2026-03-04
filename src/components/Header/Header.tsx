@@ -44,6 +44,7 @@ const NAV_ITEMS: NavItem[] = [
     children: [
       { label: 'משאבים להורים', path: '/resources/parents' },
       { label: 'מאמרים מהקהילה', path: '/community/articles' },
+      { label: 'כתבות בתקשורת', path: '/resources/media-coverage' },
       { label: 'תמיכה וקהילה', path: '/support' },
       { label: 'עדויות הורים', path: '/testimonials' },
       { label: 'סרטונים ווובינרים', path: '/resources/videos' },
