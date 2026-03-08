@@ -291,11 +291,17 @@ const AboutPage: React.FC = () => {
                                 הצטרפו לקהילה
                             </a>
                             <a
-                                href="https://wa.me/972544767146"
+                                href="https://wa.me/972544222683"
                                 className="about-cta__btn about-cta__btn--primary"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
+                                {/* <a
+                                href="https://wa.me/972544767146"
+                                className="about-cta__btn about-cta__btn--primary"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            > */}
                                 <FaWhatsapp />
                                 <span>צרו קשר</span>
                             </a>

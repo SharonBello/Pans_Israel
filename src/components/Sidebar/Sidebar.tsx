@@ -24,7 +24,7 @@ import {
   ContentPaste as SurveyIcon,
   Info as InfoIcon,
   SupportAgent as SupportIcon,
-  NewspaperOutlined as NewspaperIcon, 
+  NewspaperOutlined as NewspaperIcon,
 } from '@mui/icons-material';
 import { FaWhatsapp } from 'react-icons/fa';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -52,10 +52,15 @@ interface MenuItem {
 }
 
 const WHATSAPP_URL =
-  'https://wa.me/972544767146?text=' +
+  'https://wa.me/972544222683?text=' +
   encodeURIComponent(
     'שלום,\nאני יוצר/ת קשר דרך אתר פאנס/פאנדס - העמותה הישראלית לאנספיליטיס אוטואימוני.\nאשמח לשוחח בנושא:'
   );
+// const WHATSAPP_URL =
+//   'https://wa.me/972544767146?text=' +
+//   encodeURIComponent(
+//     'שלום,\nאני יוצר/ת קשר דרך אתר פאנס/פאנדס - העמותה הישראלית לאנספיליטיס אוטואימוני.\nאשמח לשוחח בנושא:'
+//   );
 
 const MENU_ITEMS: MenuItem[] = [
   {

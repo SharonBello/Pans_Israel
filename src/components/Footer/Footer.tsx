@@ -46,10 +46,15 @@ const Footer: React.FC = () => {
   ];
 
   const WHATSAPP_URL =
-    'https://wa.me/972544767146?text=' +
+    'https://wa.me/972544222683?text=' +
     encodeURIComponent(
       'שלום,\nאני יוצר/ת קשר דרך אתר פאנס/פאנדס - העמותה הישראלית לאנספיליטיס אוטואימוני.\nאשמח לשוחח בנושא:'
     );
+  // const WHATSAPP_URL =
+  //   'https://wa.me/972544767146?text=' +
+  //   encodeURIComponent(
+  //     'שלום,\nאני יוצר/ת קשר דרך אתר פאנס/פאנדס - העמותה הישראלית לאנספיליטיס אוטואימוני.\nאשמח לשוחח בנושא:'
+  //   );
 
   return (
     <footer className="footer" dir="rtl">

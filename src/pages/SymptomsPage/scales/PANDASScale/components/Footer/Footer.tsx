@@ -9,7 +9,8 @@ const Footer: React.FC = () => {
   return (
     <Box component="footer" className="footer-container">
         <Typography variant="body2">
-          <Link href="mailto:sharonbellotech@gmail.com" underline="hover">
+          {/* <Link href="mailto:sharonbellotech@gmail.com" underline="hover"> */}
+          <Link href="mailto:orlybartal5@gmail.com" underline="hover">
             {t('footer.contactEmail')} {/* e.g. "Gmail" */}
           </Link>
         </Typography>

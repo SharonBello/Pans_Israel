@@ -68,10 +68,15 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 const WHATSAPP_URL =
-  'https://wa.me/972544767146?text=' +
+  'https://wa.me/972544222683?text=' +
   encodeURIComponent(
     'שלום,\nאני יוצר/ת קשר דרך אתר פאנס/פאנדס - העמותה הישראלית לאנספיליטיס אוטואימוני.\nאשמח לשוחח בנושא:'
   );
+// const WHATSAPP_URL =
+//   'https://wa.me/972544767146?text=' +
+//   encodeURIComponent(
+//     'שלום,\nאני יוצר/ת קשר דרך אתר פאנס/פאנדס - העמותה הישראלית לאנספיליטיס אוטואימוני.\nאשמח לשוחח בנושא:'
+//   );
 
 const Header: React.FC<HeaderProps> = ({ onMenuToggle, isMenuOpen = false }) => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
