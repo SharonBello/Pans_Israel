@@ -154,7 +154,7 @@ const Footer: React.FC = () => {
             <p className="footer__copyright">
               © {currentYear} פאנס/פאנדס ישראל. כל הזכויות שמורות.
             </p>
-            <p className="footer__developer">
+            {/* <p className="footer__developer">
               פותח על ידי{' '}
               <a
                 href="https://www.linkedin.com/in/sharon-bello"
@@ -173,7 +173,7 @@ const Footer: React.FC = () => {
               >
                 Sigmax Ltd
               </a>
-            </p>
+            </p> */}
           </div>
         </div>
 

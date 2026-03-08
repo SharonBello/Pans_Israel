@@ -13,9 +13,10 @@ const Footer: React.FC = () => {
             {t('footer.contactEmail')} {/* e.g. "Gmail" */}
           </Link>
         </Typography>
-        <Typography variant="body2">
-          {t('footer.copy')} {/* e.g. "© 2025 Sharon Bello" */}
-        </Typography>
+        {/* <Typography variant="body2"> */}
+          {/* {t('footer.copy')}  */}
+          {/* e.g. "© 2025 Sharon Bello" */}
+        {/* </Typography> */}
     </Box>
   );
 };

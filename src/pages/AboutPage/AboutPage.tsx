@@ -14,14 +14,14 @@ interface Founder {
 }
 
 const founders: Founder[] = [
-    {
-        name: 'שרון בלו',
-        role: 'מייסדת שותפה',
-        description: 'אמא לשלושה ילדים עם פאנס/פאנדס. פעילה למען הגברת המודעות והנגשת מידע להורים בישראל.',
-        image: '/images/sharon_pic.jpg',
-        // imagePosition: 'center 10%',
-        imageScale: 1.3,
-    },
+    // {
+    //     name: 'שרון בלו',
+    //     role: 'מייסדת שותפה',
+    //     description: 'אמא לשלושה ילדים עם פאנס/פאנדס. פעילה למען הגברת המודעות והנגשת מידע להורים בישראל.',
+    //     image: '/images/sharon_pic.jpg',
+    //     // imagePosition: 'center 10%',
+    //     imageScale: 1.3,
+    // },
     {
         name: 'אורלי בר טל',
         role: 'מייסדת שותפה',
@@ -204,7 +204,7 @@ const AboutPage: React.FC = () => {
                         המייסדות
                     </h2>
                     <p className="about-section__subtitle">
-                        ארבע אמהות שהחליטו לעשות שינוי
+                        שלוש אמהות שהחליטו לעשות שינוי
                     </p>
 
                     <div className="about-founders__grid">
