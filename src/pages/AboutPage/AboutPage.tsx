@@ -14,14 +14,14 @@ interface Founder {
 }
 
 const founders: Founder[] = [
-    // {
-    //     name: 'שרון בלו',
-    //     role: 'מייסדת שותפה',
-    //     description: 'אמא לשלושה ילדים עם פאנס/פאנדס. פעילה למען הגברת המודעות והנגשת מידע להורים בישראל.',
-    //     image: '/images/sharon_pic.jpg',
-    //     // imagePosition: 'center 10%',
-    //     imageScale: 1.3,
-    // },
+    {
+        name: 'שרון בלו',
+        role: 'מייסדת שותפה',
+        description: 'אמא לשלושה ילדים עם פאנס/פאנדס. פעילה למען הגברת המודעות והנגשת מידע להורים בישראל.',
+        image: '/images/sharon_pic.jpg',
+        // imagePosition: 'center 10%',
+        imageScale: 1.3,
+    },
     {
         name: 'אורלי בר טל',
         role: 'מייסדת שותפה',
