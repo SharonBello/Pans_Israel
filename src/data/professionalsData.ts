@@ -55,6 +55,7 @@ export const LOCATIONS: Location[] = [
     { key: 'petah-tikva', label: 'פתח תקווה', region: 'מרכז' },
     { key: 'rishon-lezion', label: 'ראשון לציון', region: 'מרכז' },
     { key: 'netanya', label: 'נתניה', region: 'שרון' },
+    { key: 'emek-hefer', label: 'עמק חפר', region: 'שרון' },
     { key: 'ashdod', label: 'אשדוד', region: 'דרום' },
     { key: 'herzliya', label: 'הרצליה', region: 'שרון' },
     { key: 'kfar-saba', label: 'כפר סבא', region: 'שרון' },
