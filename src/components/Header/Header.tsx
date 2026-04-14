@@ -43,7 +43,7 @@ const NAV_ITEMS: NavItem[] = [
     label: 'תמיכה וקהילה',
     children: [
       { label: 'משאבים להורים', path: '/resources/parents' },
-      { label: 'מאמרים מהקהילה', path: '/community/articles' },
+      { label: 'מאמרים מהקהילה ומטפלים', path: '/community/articles' },
       { label: 'פורסם בתקשורת', path: '/resources/media-coverage' },
       { label: 'תמיכה וקהילה', path: '/support' },
       { label: 'עדויות הורים', path: '/testimonials' },

@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
   // ── Column 2: mirrors "תמיכה וקהילה" from header ──
   const supportLinks = [
     { title: 'משאבים להורים', path: '/resources' },
-    { title: 'מאמרים מהקהילה', path: '/community/articles' },
+    { title: 'מאמרים מהקהילה ומטפלים', path: '/community/articles' },
     { title: 'פורסם בתקשורת', path: '/resources/media-coverage' },
     { title: 'תמיכה וקהילה', path: '/support' },
     { title: 'עדויות הורים', path: '/testimonials' },

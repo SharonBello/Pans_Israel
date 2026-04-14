@@ -92,7 +92,7 @@ const MENU_ITEMS: MenuItem[] = [
     icon: <SupportIcon />,
     children: [
       { label: 'משאבים להורים', path: '/resources/parents', icon: <GroupsIcon fontSize="small" /> },
-      { label: 'מאמרים מהקהילה', path: '/community/articles', icon: <ArticleIcon fontSize="small" /> },
+      { label: 'מאמרים מהקהילה ומטפלים', path: '/community/articles', icon: <ArticleIcon fontSize="small" /> },
       { label: 'פורסם בתקשורת', path: '/resources/media-coverage', icon: <NewspaperIcon fontSize="small" /> },
       { label: 'תמיכה וקהילה', path: '/support', icon: <FavoriteIcon fontSize="small" /> },
       { label: 'עדויות הורים', path: '/testimonials', icon: <ForumIcon fontSize="small" /> },
