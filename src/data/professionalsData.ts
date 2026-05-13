@@ -47,6 +47,7 @@ export const LOCATIONS: Location[] = [
     { key: 'zur-yigal', label: 'צור יגאל', region: 'מרכז' },
     { key: 'jerusalem', label: 'ירושלים', region: 'ירושלים' },
     { key: 'haifa', label: 'חיפה', region: 'צפון' },
+    { key: 'zichron', label: 'זכרון-יעקב', region: 'צפון' },
     { key: 'pardes-hana-karkur', label: 'פרדס-חנה כרכור', region: 'שרון' },
     { key: 'kiryat-tivon', label: 'קרית טבעון', region: 'צפון' },
     { key: 'megadim', label: 'מגדים', region: 'חיפה' },
