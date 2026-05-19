@@ -24,7 +24,7 @@ const Footer: React.FC = () => {
     { title: 'תמיכה וקהילה', path: '/support' },
     { title: 'עדויות הורים', path: '/testimonials' },
     { title: 'סרטונים ווובינרים', path: '/resources/videos' },
-    { title: 'רשימת רופאים ומטפלים', path: '/Professionals-help' },
+    { title: 'רשימת רופאים ומטפלים', path: '/professionals-help' },
   ];
 
   // ── Column 3: mirrors "מידע מקצועי" from header ──

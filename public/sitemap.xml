@@ -1,173 +1,185 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <!-- ── CORE PAGES ─────────────────────────────────────────────────── -->
+  <!-- CORE PAGES -->
   <url>
     <loc>https://panspandasil.org/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
   <url>
     <loc>https://panspandasil.org/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
   <url>
     <loc>https://panspandasil.org/info</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
   <url>
     <loc>https://panspandasil.org/symptoms</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
-  <!-- FIXED: was /Professionals-help (capital P) — use lowercase to match standard URL conventions -->
   <url>
-    <loc>https://panspandasil.org/Professionals-help</loc>
+    <loc>https://panspandasil.org/professionals-help</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
   <url>
     <loc>https://panspandasil.org/resources</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
   <url>
     <loc>https://panspandasil.org/support</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
   <url>
     <loc>https://panspandasil.org/testimonials</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
-  <!-- NEW: holistic page was missing -->
   <url>
     <loc>https://panspandasil.org/holistic</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
-  <!-- NEW: videos page was missing -->
+  <!-- RESOURCE PAGES -->
   <url>
     <loc>https://panspandasil.org/resources/videos</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
-  <!-- ── SCALES ─────────────────────────────────────────────────────── -->
+  <url>
+    <loc>https://panspandasil.org/resources/media-coverage</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-05-19</lastmod>
+  </url>
+
+  <!-- SCALES -->
   <url>
     <loc>https://panspandasil.org/scales/pandas</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
   <url>
     <loc>https://panspandasil.org/scales/kovacevic</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
   <url>
     <loc>https://panspandasil.org/scales/ptec</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
   <url>
     <loc>https://panspandasil.org/scales/pans31</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
   <url>
     <loc>https://panspandasil.org/scales/cbi</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
-  <!-- ── SURVEYS ────────────────────────────────────────────────────── -->
+  <!-- SURVEYS -->
   <url>
     <loc>https://panspandasil.org/surveys</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
   <url>
     <loc>https://panspandasil.org/surveys/state-of-children</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
-  <!-- ── PROFESSIONAL PAGES (all missing from old sitemap) ─────────── -->
+  <!-- PROFESSIONAL PAGES -->
   <url>
     <loc>https://panspandasil.org/professional/diagnosis</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
   <url>
     <loc>https://panspandasil.org/professional/education</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
   <url>
     <loc>https://panspandasil.org/professional/articles</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
   <url>
     <loc>https://panspandasil.org/professional/international</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
   <url>
     <loc>https://panspandasil.org/professional/research</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
   <url>
     <loc>https://panspandasil.org/professional/surveys</loc>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
-    <lastmod>2026-02-21</lastmod>
+    <lastmod>2026-05-19</lastmod>
+  </url>
+
+  <!-- COMMUNITY PAGES -->
+  <url>
+    <loc>https://panspandasil.org/community/articles</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+    <lastmod>2026-05-19</lastmod>
   </url>
 
 </urlset>

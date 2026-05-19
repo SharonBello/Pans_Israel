@@ -1,5 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AppRoutes from './routes';
+import type { AppRoute } from './routes';
+import { SeoRoute } from './components/SEO/SeoRoute';
 import { useState } from 'react';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
@@ -47,11 +49,32 @@ function App() {
           <AccessibilityBar />
 
           <main style={{ flex: '1 0 auto' }} className="main-content">
-            <ScrollToTop /> 
+            <ScrollToTop />
             <Routes>
-              {AppRoutes.map((route) => (
-                <Route key={route.path} element={route.component} path={route.path} />
-              ))}
+              {AppRoutes.map((route: AppRoute) => {
+                const canonicalPath: string = route.seo?.canonicalPath ?? route.path;
+
+                const element: React.ReactElement = route.seo ? (
+                  <SeoRoute
+                    title={route.seo.title}
+                    description={route.seo.description}
+                    path={canonicalPath}
+                    noIndex={route.seo.noIndex}
+                  >
+                    {route.component}
+                  </SeoRoute>
+                ) : (
+                  route.component
+                );
+
+                return (
+                  <Route
+                    key={route.path}
+                    element={element}
+                    path={route.path}
+                  />
+                );
+              })}
             </Routes>
           </main>
           {/* Footer */}

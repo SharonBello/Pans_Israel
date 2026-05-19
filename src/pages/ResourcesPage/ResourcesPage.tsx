@@ -115,7 +115,7 @@ const ResourcesPage: React.FC = () => {
             </div>
               <Button
                 className="resources-page__link-btn"
-                onClick={() => navigate('/Professionals-help')}
+                onClick={() => navigate('/professionals-help')}
               >
                 {/* מצא עזרה &gt; */}
                 <img src={doctors} alt="מצא רופא" />

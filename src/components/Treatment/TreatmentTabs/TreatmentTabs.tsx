@@ -10,7 +10,7 @@ import './TreatmentTabs.scss';
 
 const TREATMENT_TABS = [
     { id: 'treatment', label: 'דרכי טיפול', icon: <TreatmentIcon />, path: '/info/treatment' },
-    { id: 'professionals', label: 'רופאים ומטפלים', icon: <DoctorsIcon />, path: '/Professionals-help' },
+    { id: 'professionals', label: 'רופאים ומטפלים', icon: <DoctorsIcon />, path: '/professionals-help' },
     { id: 'holistic', label: 'רפואה משלימה', icon: <HolisticIcon />, path: '/holistic' },
 ] as const;
 
@@ -21,8 +21,8 @@ const TreatmentTabs: React.FC = () => {
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
     const getCurrentIndex = (): number => {
-        // Match /Professionals-help (with or without ?tab=...)
-        if (location.pathname.startsWith('/Professionals-help')) return 1;
+        // Match /professionals-help (with or without ?tab=...)
+        if (location.pathname.startsWith('/professionals-help')) return 1;
         if (location.pathname === '/holistic') return 2;
         if (location.pathname === '/info/treatment') return 0;
         return 0;

@@ -46,8 +46,8 @@ const DiagnosedPanel: React.FC<{ onBack: () => void }> = ({ onBack }) => {
     const navigate = useNavigate();
     const options = [
         { Icon: TreatmentIcon, title: 'דרכי טיפול', desc: 'טיפולים מקובלים ופרוטוקולים', path: '/info/treatment', color: 'navy' },
-        { Icon: DoctorsIcon, title: 'רופאים ומטפלים', desc: 'מצאו מומחה בקרבתכם', path: '/Professionals-help', color: 'blue' },
-        { Icon: HolisticIcon, title: 'רפואה משלימה', desc: 'גישות אינטגרטיביות', path: '/Professionals-help?tab=holistic', color: 'teal' },
+        { Icon: DoctorsIcon, title: 'רופאים ומטפלים', desc: 'מצאו מומחה בקרבתכם', path: '/professionals-help', color: 'blue' },
+        { Icon: HolisticIcon, title: 'רפואה משלימה', desc: 'גישות אינטגרטיביות', path: '/professionals-help?tab=holistic', color: 'teal' },
         { Icon: SupportIcon, title: 'תמיכה וקהילה', desc: 'הורים שעברו את זה לפניכם', path: '/support', color: 'warm' },
     ];
     return (
