@@ -474,7 +474,7 @@ const AppRoutes: AppRoute[] = [
     },
   },
 
-  // ── Admin routes (no nav links to these anywhere in the app) ───────────────
+  // ── Admin routes (no nav links to these anywhere in the app) ──────────────
   {
     path: '/admin/login',
     component: <AdminLoginPage />,
