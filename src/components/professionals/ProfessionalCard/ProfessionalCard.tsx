@@ -94,19 +94,26 @@ const ProfessionalCard: React.FC<ProfessionalCardProps> = ({ professional }) => 
         {phone && (
           <a href={`tel:${phone}`} className="pro-card__btn pro-card__btn--phone">
             <PhoneIcon />
-            <span>{phone}</span>
+            <span className="pro-card__btn-text">{phone}</span>
           </a>
         )}
+
         {email && (
           <a href={`mailto:${email}`} className="pro-card__btn pro-card__btn--email">
             <EmailIcon />
-            <span>אימייל</span>
+            <span className="pro-card__btn-text">אימייל</span>
           </a>
         )}
         {website && (
-          <a href={website} target="_blank" rel="noopener noreferrer" className="pro-card__btn pro-card__btn--web">
+          <a
+            href={website}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pro-card__btn pro-card__btn--web"
+            title={website}
+          >
             <WebIcon />
-            <span>אתר</span>
+            <span className="pro-card__btn-text">אתר</span>
           </a>
         )}
       </div>

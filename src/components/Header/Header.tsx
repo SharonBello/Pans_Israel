@@ -36,7 +36,7 @@ const NAV_ITEMS: NavItem[] = [
     children: [
       { label: 'דרכי טיפול', path: '/info/treatment' },
       { label: 'רשימת רופאים ומטפלים', path: '/professionals-help' },
-      { label: 'רפואה משלימה', path: '/professionals-help?tab=holistic' },
+      { label: 'רפואה משלימה', path: '/holistic' },
     ],
   },
   {

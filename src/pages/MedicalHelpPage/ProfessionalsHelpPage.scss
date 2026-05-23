@@ -456,6 +456,9 @@ $transition-slow: 0.3s ease;
     color: #475569;
     margin: 0;
     flex-grow: 1;
+    padding-inline: 5px;
+    overflow-wrap: anywhere;
+    word-break: break-word;
   }
 
   &__status {

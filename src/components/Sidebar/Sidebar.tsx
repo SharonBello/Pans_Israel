@@ -84,7 +84,7 @@ const MENU_ITEMS: MenuItem[] = [
     children: [
       { label: 'דרכי טיפול', path: '/info/treatment', icon: <HealingIcon fontSize="small" /> },
       { label: 'רשימת רופאים ומטפלים', path: '/professionals-help', icon: <MedicalIcon fontSize="small" /> },
-      { label: 'רפואה משלימה', path: '/professionals-help?tab=holistic', icon: <HealingIcon fontSize="small" /> },
+      { label: 'רפואה משלימה', path: '/holistic', icon: <HealingIcon fontSize="small" /> },
     ],
   },
   {
