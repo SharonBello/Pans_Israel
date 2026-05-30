@@ -53,6 +53,7 @@ export const LOCATIONS: Location[] = [
     { key: 'megadim', label: 'מגדים', region: 'חיפה' },
     { key: 'beer-sheva', label: 'באר שבע', region: 'דרום' },
     { key: 'ramat-gan', label: 'רמת גן', region: 'מרכז' },
+    { key: 'lev-hasharon', label: 'לב השרון', region: 'מרכז' },
     { key: 'petah-tikva', label: 'פתח תקווה', region: 'מרכז' },
     { key: 'rishon-lezion', label: 'ראשון לציון', region: 'מרכז' },
     { key: 'netanya', label: 'נתניה', region: 'שרון' },
