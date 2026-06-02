@@ -65,6 +65,7 @@ export const LOCATIONS: Location[] = [
     { key: 'modiin', label: 'מודיעין', region: 'מרכז' },
     { key: 'rehovot', label: 'רחובות', region: 'מרכז' },
     { key: 'nazareth', label: 'נצרת', region: 'צפון' },
+    { key: 'ramat-yishai', label: 'רמת ישי,', region: 'צפון' },
     { key: 'yagur', label: 'יגור', region: 'חיפה' },
     { key: 'online', label: 'מקוון (אונליין)', region: 'כל הארץ' },
     { key: 'n/a', label: 'יישוב לא ברשימה', region: 'לא ידוע' },
