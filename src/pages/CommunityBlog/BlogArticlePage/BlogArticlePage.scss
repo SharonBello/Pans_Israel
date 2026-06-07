@@ -241,6 +241,18 @@
     }
 }
 
+.blog-article-page__container--wide {
+    max-width: 1220px;
+}
+
+.blog-article-page__body--designed {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    border-radius: 0;
+}
+
 .blog-article-page__content--designed {
     .pans-article-db,
     .series-article,
