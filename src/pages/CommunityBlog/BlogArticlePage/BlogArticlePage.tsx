@@ -35,6 +35,11 @@ const BlogArticlePage: React.FC = () => {
         </div>
     );
 
+    const isDesignedArticle: boolean =
+        article.content.includes('pans-article-db') ||
+        article.content.includes('series-article') ||
+        article.content.includes('consensus-article-db');
+
     return (
         <div className="blog-article-page" dir="rtl">
             {article.coverImage && (
@@ -43,7 +48,10 @@ const BlogArticlePage: React.FC = () => {
                     <div className="blog-article-page__cover-overlay" />
                 </div>
             )}
-            <div className="blog-article-page__container">
+            <div
+                className={`blog-article-page__container ${isDesignedArticle ? 'blog-article-page__container--wide' : ''
+                    }`}
+            >
                 <button type="button" className="blog-article-page__back" onClick={() => navigate('/community/articles')}>
                     <FiArrowRight size={16} />כל המאמרים
                 </button>
@@ -63,8 +71,15 @@ const BlogArticlePage: React.FC = () => {
                         </div>
                     )}
                 </header>
-                <article className="blog-article-page__body">
-                    <div className="blog-article-page__content" dangerouslySetInnerHTML={{ __html: article.content }} />
+                <article
+                    className={`blog-article-page__body ${isDesignedArticle ? 'blog-article-page__body--designed' : ''
+                        }`}
+                >
+                    <div
+                        className={`blog-article-page__content ${isDesignedArticle ? 'blog-article-page__content--designed' : ''
+                            }`}
+                        dangerouslySetInnerHTML={{ __html: article.content }}
+                    />
                 </article>
                 <CommentSection articleId={article.id} articleTitle={article.title} />
             </div>
