@@ -204,7 +204,7 @@ const AboutPage: React.FC = () => {
                         המייסדות
                     </h2>
                     <p className="about-section__subtitle">
-                        שלוש אמהות שהחליטו לעשות שינוי
+                        ארבע אמהות שהחליטו לעשות שינוי
                     </p>
 
                     <div className="about-founders__grid">
