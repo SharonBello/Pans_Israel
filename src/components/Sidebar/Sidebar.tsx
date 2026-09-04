@@ -25,6 +25,7 @@ import {
   Info as InfoIcon,
   SupportAgent as SupportIcon,
   NewspaperOutlined as NewspaperIcon,
+  Event as EventIcon,
 } from '@mui/icons-material';
 import { FaWhatsapp } from 'react-icons/fa';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -96,6 +97,7 @@ const MENU_ITEMS: MenuItem[] = [
       { label: 'פורסם בתקשורת', path: '/resources/media-coverage', icon: <NewspaperIcon fontSize="small" /> },
       { label: 'תמיכה וקהילה', path: '/support', icon: <FavoriteIcon fontSize="small" /> },
       { label: 'עדויות הורים', path: '/testimonials', icon: <ForumIcon fontSize="small" /> },
+      { label: 'פעילויות ואירועים', path: '/activities', icon: <EventIcon fontSize="small" /> },
       { label: 'סרטונים ווובינרים', path: '/resources/videos', icon: <VideoIcon fontSize="small" /> },
     ],
   },

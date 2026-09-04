@@ -25,10 +25,11 @@ const LatestArticleWidget: React.FC = () => {
     return (
         <section className="latest-article-widget" dir="rtl" aria-label="מאמר מומלץ">
             <div className="latest-article-widget__inner">
-                {/* <div className="latest-article-widget__label">
+                <div className="latest-article-widget__glow" aria-hidden="true" />
+                <div className="latest-article-widget__label">
                     <span className="latest-article-widget__dot" />
                     מאמר מומלץ מהקהילה
-                </div> */}
+                </div>
                 <div
                     className="latest-article-widget__card"
                     onClick={() => navigate(`/community/articles/${article.id}`)}

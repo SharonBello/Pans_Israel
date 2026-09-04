@@ -1,0 +1,178 @@
+.event-card {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid rgba(31, 78, 121, 0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow:
+    0 1px 2px rgba(31, 78, 121, 0.04),
+    0 14px 32px -18px rgba(31, 78, 121, 0.2);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow:
+      0 1px 2px rgba(31, 78, 121, 0.04),
+      0 22px 44px -20px rgba(31, 78, 121, 0.28);
+  }
+
+  @media (hover: none) {
+    &:hover {
+      transform: none;
+    }
+  }
+
+  // ── Media ──────────────────────────────────────────────
+  &__media {
+    position: relative;
+    aspect-ratio: 1 / 1; // set to your invite template's ratio (e.g. 4 / 5 for 1080×1350)
+    overflow: hidden;
+    background: linear-gradient(135deg, #e8f0fa 0%, #f5f1ec 100%);
+    display: grid;
+    place-items: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+  }
+
+  &__date {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1.25rem 1.75rem;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.85);
+    color: #1f4e79;
+    box-shadow: 0 8px 24px -12px rgba(31, 78, 121, 0.3);
+  }
+
+  &__day {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  &__month {
+    font-size: 1rem;
+    opacity: 0.75;
+    margin-top: 0.25rem;
+  }
+
+  &__badge {
+    position: absolute;
+    top: 12px;
+    inset-inline-end: 12px;
+    padding: 0.25rem 0.75rem;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(6px);
+    color: #b85c1a;
+    font-size: 0.75rem;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  // posters carry their own badge — hide ours
+  &__media--has-image .event-card__badge {
+    display: none;
+  }
+
+  // ── Body ───────────────────────────────────────────────
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: 1.5rem 1.6rem 1.75rem;
+    flex: 1;
+  }
+
+  &__title {
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #1c2b3a;
+    margin: 0;
+  }
+
+  &__subtitle {
+    font-size: 0.875rem;
+    color: #6b7a89;
+    margin: 0;
+  }
+
+  &__meta {
+    list-style: none;
+    padding: 0;
+    margin: 0.25rem 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      color: #415161;
+
+      svg {
+        color: #4a90d9;
+        flex-shrink: 0;
+      }
+    }
+  }
+
+  &__desc {
+    font-size: 0.925rem;
+    line-height: 1.75;
+    color: #3d4a57;
+    margin: 0.25rem 0 0.75rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__btn {
+    align-self: flex-start;
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1.15rem;
+    border: 0;
+    border-radius: 999px;
+    background: #1f4e79;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      background 0.2s,
+      gap 0.2s;
+
+    &:hover,
+    &:focus-visible {
+      background: #2a6096;
+      gap: 0.75rem;
+    }
+
+    &--disabled {
+      background: transparent;
+      color: #6b7a89;
+      border: 1px dashed #c9d3dd;
+      cursor: default;
+    }
+  }
+}

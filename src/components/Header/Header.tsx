@@ -47,6 +47,7 @@ const NAV_ITEMS: NavItem[] = [
       { label: 'פורסם בתקשורת', path: '/resources/media-coverage' },
       { label: 'תמיכה וקהילה', path: '/support' },
       { label: 'עדויות הורים', path: '/testimonials' },
+      { label: 'פעילויות ואירועים', path: '/activities' },
       { label: 'סרטונים ווובינרים', path: '/resources/videos' },
     ],
   },

@@ -4,8 +4,9 @@ import { MdNewspaper, MdPictureAsPdf } from 'react-icons/md';
 import { FaYoutube, FaFacebook, FaTiktok } from 'react-icons/fa';
 import { getPublishedArticles } from '../../services/mediaArticleService';
 import type { MediaArticle, MediaArticleCategory, MediaType } from '../../types/mediaArticle';
-import { CATEGORY_LABELS, CATEGORY_COLORS, MEDIA_TYPE_COLORS, } from '../../types/mediaArticle';
+import { CATEGORY_LABELS, CATEGORY_COLORS, MEDIA_TYPE_COLORS } from '../../types/mediaArticle';
 import SupportTabs from '../../components/Support/SupportTabs/SupportTabs';
+import SupportPageHero from '../../components/Support/SupportPageHero/SupportPageHero';
 import './MediaCoveragePage.scss';
 import { detectMediaType, getCloudinaryThumb, getFacebookEmbedUrl, getTikTokEmbedUrl, getYouTubeEmbedUrl } from './MediaArticleFormData';
 
@@ -38,12 +39,7 @@ const PdfCard: React.FC<{ article: MediaArticle }> = ({ article }) => {
     const thumb = article.thumbnailUrl || getCloudinaryThumb(article.url);
 
     return (
-        <a
-            className="mcp__card mcp__card--pdf"
-            href={article.url}
-            target="_blank"
-            rel="noopener noreferrer"
-        >
+        <a className="mcp__card mcp__card--pdf" href={article.url} target="_blank" rel="noopener noreferrer">
             <div className="mcp__card-thumb">
                 {thumb ? (
                     <img
@@ -51,7 +47,6 @@ const PdfCard: React.FC<{ article: MediaArticle }> = ({ article }) => {
                         alt={article.title}
                         loading="lazy"
                         onError={e => {
-                            // fallback to PDF icon if thumb fails
                             e.currentTarget.style.display = 'none';
                             e.currentTarget.nextElementSibling?.removeAttribute('style');
                         }}
@@ -268,7 +263,6 @@ const MediaCoveragePage: React.FC = () => {
         return Array.from(cats) as MediaArticleCategory[];
     }, [articles]);
 
-    // Count per type for badges
     const typeCounts = useMemo(() => {
         const counts: Record<string, number> = { all: articles.length };
         articles.forEach(a => {
@@ -292,7 +286,6 @@ const MediaCoveragePage: React.FC = () => {
         });
     }, [articles, activeType, activeCategory, search]);
 
-    // Separate embeds from articles for layout
     const articleItems = filtered.filter(a => (a.mediaType || detectMediaType(a.url)) === 'article');
     const embedItems = filtered.filter(a => (a.mediaType || detectMediaType(a.url)) !== 'article');
 
@@ -300,18 +293,11 @@ const MediaCoveragePage: React.FC = () => {
         <div className="mcp" dir="rtl">
 
             {/* ── Hero ── */}
-            <section className="mcp__hero">
-                <div className="mcp__hero-glow mcp__hero-glow--1" />
-                <div className="mcp__hero-glow mcp__hero-glow--2" />
-                <div className="mcp__hero-inner">
-                    <div className="mcp__hero-icon-wrap"><MdNewspaper /></div>
-                    <span className="mcp__hero-label">פאנס/פאנדס בתקשורת</span>
-                    <h1 className="mcp__hero-title">מדיה וכתבות</h1>
-                    <p className="mcp__hero-subtitle">
-                        פרסומים, סרטונים ותכנים מהתקשורת הישראלית והרשתות החברתיות על פאנס ופאנדס
-                    </p>
-                </div>
-            </section>
+            <SupportPageHero
+                icon={<MdNewspaper />}
+                title="פאנס/פאנדס בתקשורת"
+                subtitle="פרסומים, סרטונים ותכנים מהתקשורת הישראלית והרשתות החברתיות על פאנס ופאנדס"
+            />
 
             <SupportTabs />
 
@@ -385,7 +371,6 @@ const MediaCoveragePage: React.FC = () => {
                     <>
                         <p className="mcp__count">{filtered.length} פריטים</p>
 
-                        {/* Articles section */}
                         {articleItems.length > 0 && (
                             <div className="mcp__section">
                                 {(activeType === 'all') && embedItems.length > 0 && (
@@ -397,7 +382,6 @@ const MediaCoveragePage: React.FC = () => {
                             </div>
                         )}
 
-                        {/* Embeds section (YouTube / TikTok / Facebook) */}
                         {embedItems.length > 0 && (
                             <div className="mcp__section">
                                 {(activeType === 'all') && (

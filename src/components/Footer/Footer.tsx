@@ -24,6 +24,7 @@ const Footer: React.FC = () => {
     { title: 'תמיכה וקהילה', path: '/support' },
     { title: 'עדויות הורים', path: '/testimonials' },
     { title: 'סרטונים ווובינרים', path: '/resources/videos' },
+    { title: 'פעילויות ואירועים', path: '/activities' },
     { title: 'רשימת רופאים ומטפלים', path: '/professionals-help' },
   ];
 

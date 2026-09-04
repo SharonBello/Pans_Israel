@@ -33,7 +33,6 @@ import {
   VideoCall as ZoomIcon,
   Person as PersonIcon,
   LocationOn as LocationIcon,
-  Work as WorkIcon,
   School as SchoolIcon,
   Favorite as HeartIcon,
   Add as AddIcon,
@@ -58,8 +57,9 @@ import {
   educationOptions,
   contactPreferenceOptions,
 } from '../../types/support.types';
-import './SupportPage.scss';
 import SupportTabs from '@/components/Support/SupportTabs/SupportTabs';
+import SupportPageHero from '@/components/Support/SupportPageHero/SupportPageHero';
+import './SupportPage.scss';
 
 const SupportPage: React.FC = () => {
   // State
@@ -180,27 +180,11 @@ const SupportPage: React.FC = () => {
   return (
     <Box className="support-page" dir="rtl">
       {/* Hero Section */}
-      <header className="support-page__hero">
-        <div className="support-hero__text">
-
-          {/* Icon box — absolutely positioned top-left (RTL = visual top-right) */}
-          <div className="support-page__hero-icon">
-            <HeartIcon />
-          </div>
-
-          {/* <Container maxWidth="lg" className="support-page__hero-content"> */}
-          <div className="support-page__hero-label">
-            תמיכה וקהילה
-          </div>
-          <h1 className="support-page__hero-title">
-            אתם לא לבד
-          </h1>
-          <p className="support-page__hero-subtitle">
-            כל שאלה והתלבטות - אנחנו כאן בשבילכם
-          </p>
-          {/* </Container> */}
-        </div>
-      </header>
+      <SupportPageHero
+        icon={<HeartIcon />}
+        title="אתם לא לבד"
+        subtitle="כל שאלה והתלבטות - אנחנו כאן בשבילכם"
+      />
 
       <SupportTabs />
 
@@ -242,15 +226,6 @@ const SupportPage: React.FC = () => {
       {/* Volunteers Grid */}
       <section className="support-page__volunteers">
         <Container maxWidth="lg">
-          {/* <Box className="support-page__section-header">
-            <Typography variant="h2" className="support-page__section-title">
-              המתנדבים שלנו
-            </Typography>
-            <Typography className="support-page__section-subtitle">
-              הורים ואנשי מקצוע שמבינים ורוצים לעזור
-            </Typography>
-          </Box> */}
-
           {loading ? (
             <Box className="support-page__loading">
               <CircularProgress />

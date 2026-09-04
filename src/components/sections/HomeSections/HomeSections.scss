@@ -9,14 +9,14 @@
 
 .home-sections {
     width: 100%;
-    padding: 0 0 4rem;
+    padding: clamp(2.5rem, 6vw, 4.5rem) clamp(16px, 3vw, 24px);
+    padding-top: 0;
     background: $color-background;
     margin-top: 4vh;
 
     &__container {
         max-width: 1200px;
         margin: 0 auto;
-        padding: 0 1.5rem;
 
         @media (max-width: $breakpoint-sm) {
             padding: 0 1rem;
@@ -39,7 +39,7 @@
     &__divider {
         height: 1px;
         background: linear-gradient(to left, transparent, $border-light 30%, $border-light 70%, transparent);
-        margin: 3.5rem 0;
+        margin: 1.5rem 0;
 
         @media (max-width: $breakpoint-md) {
             visibility: hidden;
@@ -49,8 +49,13 @@
 
     /* ──────────── FAQ wrapper ──────────── */
     &__faq {
-        max-width: 900px;
+        // max-width: 900px;
         margin: 0 auto;
+
+        .faq {
+        border-radius: 16px;
+
+        }
     }
 }
 

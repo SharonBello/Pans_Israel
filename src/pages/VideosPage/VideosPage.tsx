@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Box, Container, Typography, Tabs, Tab } from '@mui/material';
-import { PlayCircle as PlayIcon, OpenInNew as ExternalIcon, VideoLibrary as VideoIcon } from '@mui/icons-material';
+import { PlayCircle as PlayIcon, OpenInNew as ExternalIcon, VideoLibrary as VideoIcon, YouTube as YouTubeIcon } from '@mui/icons-material';
 import SupportTabs from '../../components/Support/SupportTabs/SupportTabs';
+import SupportPageHero from '../../components/Support/SupportPageHero/SupportPageHero';
 import './VideosPage.scss';
+
+const YOUTUBE_CHANNEL_URL = 'https://www.youtube.com/@PansPandasIsrael';
 
 type AudienceType = 'parents' | 'clinicians' | 'educators';
 
@@ -22,8 +25,6 @@ interface VideoItem {
 }
 
 // ── Vimeo oEmbed thumbnail hook ───────────────────────────────────────────────
-// Uses Vimeo's official public oEmbed API (no key needed, CORS-enabled)
-// For private videos with hash, pass the full share URL
 const useVimeoThumb = (video: VideoItem) => {
     const [thumb, setThumb] = useState<string | null>(null);
 
@@ -31,7 +32,6 @@ const useVimeoThumb = (video: VideoItem) => {
         if (video.type !== 'vimeo' || !video.videoId) return;
         let cancelled = false;
 
-        // Build the video URL — include hash for private videos
         const vimeoUrl = video.vimeoHash
             ? `https://vimeo.com/${video.videoId}/${video.vimeoHash}`
             : `https://vimeo.com/${video.videoId}`;
@@ -40,7 +40,6 @@ const useVimeoThumb = (video: VideoItem) => {
             .then((r) => r.json())
             .then((data) => {
                 if (!cancelled && data.thumbnail_url) {
-                    // Strip size suffix to get the base URL, then request 640-wide
                     const base = data.thumbnail_url.replace(/_\d+x\d+$/, '');
                     setThumb(`${base}_640`);
                 }
@@ -54,12 +53,7 @@ const useVimeoThumb = (video: VideoItem) => {
 };
 
 // ── Video data ─────────────────────────────────────────────────────────────────
-// Sources:
-//  - YouTube: f-rzmlrnfaA  (verified live from pandasnetwork.org)
-//  - Vimeo IDs from Neuroimmune Foundation (public share links, thumbnails work via oEmbed)
-//  - PANDAS Network private Vimeo videos: linked to PANDAS Network page, not vimeo.com directly
 const VIDEOS: VideoItem[] = [
-    // ── YouTube (1 confirmed working) ──────────────────────────────────────────
     {
         id: 'v1',
         type: 'youtube',
@@ -72,8 +66,6 @@ const VIDEOS: VideoItem[] = [
         url: 'https://www.youtube.com/watch?v=f-rzmlrnfaA',
         description: 'שולחן עגול רב-תחומי על חוטים משותפים בין מחלות דלקת-מוחית אוטואימונית הנגרמות מזיהומים',
     },
-
-    // ── Neuroimmune Foundation webinars — real Vimeo IDs with hash (share links) ─
     {
         id: 'v2',
         type: 'vimeo',
@@ -152,7 +144,6 @@ const VIDEOS: VideoItem[] = [
         url: 'https://player.vimeo.com/video/841746672?h=903395ffec',
         description: 'המדע שמאחורי טיפול EMDR לטיפול בטראומת הורים — מה זה, איך זה עובד ולמה זה רלוונטי',
     },
-    // ── Israeli Hebrew webinar ─────────────────────────────────────────────────
     {
         id: 'v8',
         type: 'other',
@@ -165,7 +156,6 @@ const VIDEOS: VideoItem[] = [
         description: 'ווובינר ישראלי! ד"ר שפריר מהנוירולוגיה עם ד"ר גרטל קריביל — התערבויות רפואיות ופסיכולוגיות ב-PANDAS',
         isHebrew: true,
     },
-    // ── PANDAS Network — old private Vimeo → link to archive page ─────────────
     {
         id: 'v9',
         type: 'youtube',
@@ -201,7 +191,7 @@ const VIDEOS: VideoItem[] = [
         audience: ['educators', 'parents'],
         url: 'https://www.youtube.com/watch?v=jqFX9Y6ndEM',
         description: 'מצגת על PANS/PANDAS בהקשר חינוכי ויישומי בהכשרת צוותי חינוך',
-    }
+    },
 ];
 
 const AUDIENCE_LABELS: Record<AudienceType, string> = {
@@ -216,6 +206,14 @@ const AUDIENCE_TABS = [
     { value: 'clinicians', label: 'לאנשי מקצוע' },
     { value: 'educators', label: 'למחנכים' },
 ] as const;
+
+const MORE_LINKS = [
+    { label: 'ערוץ היוטיוב של פאנס/פאנדס ישראל', url: YOUTUBE_CHANNEL_URL },
+    { label: 'Neuroimmune Foundation — ווובינרים למשפחות', url: 'https://neuroimmune.org/patient-and-family-resources/pans-pandas-webinars/' },
+    { label: 'PANDAS Network — ארכיון סרטונים ווובינרים', url: 'https://pandasnetwork.org/resources/archive/videos/' },
+    { label: 'PPN — Presentations & Videos', url: 'https://www.pandasppn.org/presentations/' },
+    { label: 'ASPIRE — Webinar Library', url: 'https://aspire.care/resources/aspire-pans-pandas-webinars/' },
+];
 
 // ── Video Card ────────────────────────────────────────────────────────────────
 const VideoCard: React.FC<{ video: VideoItem }> = ({ video }) => {
@@ -294,31 +292,17 @@ const VideosPage: React.FC = () => {
 
     return (
         <Box className="videos-page" dir="rtl">
-            <Box className="videos-page__hero">
-                <Container maxWidth="lg" className="videos-page__hero-content">
-
-                    {/* Icon box — matches SupportTabs tab 4 (VideoLibrary) */}
-                    <Box className="videos-page__hero-icon-wrap">
-                        <VideoIcon />
-                    </Box>
-
-                    {/* Label — unchanged */}
-                    <Typography variant="overline" className="videos-page__hero-label">
-                        תמיכה וקהילה
-                    </Typography>
-
-                    {/* Title — unchanged */}
-                    <Typography variant="h1" className="videos-page__hero-title">
-                        סרטונים ווובינרים
-                    </Typography>
-
-                    {/* Desc — unchanged */}
-                    <Typography className="videos-page__hero-desc">
-                        הרצאות מומחים, עדויות משפחות וסרטוני הדרכה על PANS/PANDAS — חינמיים ופתוחים לכולם
-                    </Typography>
-
-                </Container>
-            </Box>
+            <SupportPageHero
+                icon={<VideoIcon />}
+                title="סרטונים ווובינרים"
+                subtitle="הרצאות מומחים, עדויות משפחות וסרטוני הדרכה על PANS/PANDAS — חינמיים ופתוחים לכולם"
+                action={
+                    <a href={YOUTUBE_CHANNEL_URL} target="_blank" rel="noopener noreferrer" className="support-hero__action">
+                        <YouTubeIcon />
+                        <span>לערוץ היוטיוב שלנו</span>
+                    </a>
+                }
+            />
 
             <SupportTabs />
 
@@ -330,7 +314,6 @@ const VideosPage: React.FC = () => {
                         variant="scrollable"
                         scrollButtons="auto"
                         allowScrollButtonsMobile
-                        centered
                         className="videos-page__filter-tabs"
                     >
                         {AUDIENCE_TABS.map((t) => (
@@ -349,12 +332,7 @@ const VideosPage: React.FC = () => {
                 <div className="videos-page__more">
                     <Typography variant="h5" className="videos-page__more-title">מאגרים נוספים</Typography>
                     <div className="videos-page__more-links">
-                        {[
-                            { label: 'Neuroimmune Foundation — ווובינרים למשפחות', url: 'https://neuroimmune.org/patient-and-family-resources/pans-pandas-webinars/' },
-                            { label: 'PANDAS Network — ארכיון סרטונים ווובינרים', url: 'https://pandasnetwork.org/resources/archive/videos/' },
-                            { label: 'PPN — Presentations & Videos', url: 'https://www.pandasppn.org/presentations/' },
-                            { label: 'ASPIRE — Webinar Library', url: 'https://aspire.care/resources/aspire-pans-pandas-webinars/' },
-                        ].map((link) => (
+                        {MORE_LINKS.map((link) => (
                             <a key={link.url} href={link.url} target="_blank" rel="noopener noreferrer" className="videos-page__more-link">
                                 <ExternalIcon />
                                 <span>{link.label}</span>

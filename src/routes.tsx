@@ -33,6 +33,7 @@ import EducationPage from './pages/ProfessionalPages/EducationPage/EducationPage
 import ArticlesPage from './pages/ProfessionalPages/ArticlesPage/ArticlesPage.tsx';
 import InternationalPage from './pages/ProfessionalPages/InternationalPage/InternationalPage.tsx';
 import ResearchPage from './pages/ProfessionalPages/ResearchPage/ResearchPage.tsx';
+import ActivitiesPage from './pages/ActivitiesPage/ActivitiesPage.tsx';
 
 // ── Admin Auth ────────────────────────────────────────────────────────────────
 import AdminLoginPage from './pages/AdminLoginPage/AdminLoginPage.tsx';
@@ -161,6 +162,16 @@ const AppRoutes: AppRoute[] = [
       description:
         'מידע על אפשרויות תמיכה, קהילה, ליווי ומשאבים למשפחות המתמודדות עם פאנס ופאנדס.',
       canonicalPath: '/support',
+    },
+  },
+  {
+    path: '/activities',
+    component: <ActivitiesPage />,
+    seo: {
+      title: 'פעילויות ואירועים | פאנס/פאנדס ישראל',
+      description:
+        'וובינרים, מפגשים, הרצאות וכנסים של קהילת פאנס/פאנדס ישראל להורים, משפחות ואנשי מקצוע — כולל הכנס הרפואי הראשון בישראל לנוירואימונולוגיה ו-PANS/PANDAS.',
+      canonicalPath: '/activities',
     },
   },
   {

@@ -1,30 +1,24 @@
 import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import {
-  Box,
-  Typography,
-  Container,
-  Button,
-  // Breadcrumbs,
-  Link,
-  Card,
-  CardContent,
-} from '@mui/material';
-import {
-  Home as HomeIcon,
-  ArrowBack as ArrowIcon,
-  Download as DownloadIcon,
-} from '@mui/icons-material';
+import { Box, Typography, Container, Button, Card, CardContent } from '@mui/material';
+import { ArrowBack as ArrowIcon, Download as DownloadIcon } from '@mui/icons-material';
 import { resourceSections, downloadableResources } from '../../../data/resourcesContent';
 import ResourcesContentRenderer from '../../../components/Resources/ResourcesSection/ResourcesContentRenderer';
 import ResourcesTabs from '../../../components/Resources/ResourcesTabs/ResourcesTabs';
-import './ResourcesDetailPage.scss';
 import SupportTabs from '@/components/Support/SupportTabs/SupportTabs';
+import SupportPageHero from '@/components/Support/SupportPageHero/SupportPageHero';
+import './ResourcesDetailPage.scss';
+
+/** Resource sections that belong to the "תמיכה וקהילה" group (purple hero + support tabs). */
+const SUPPORT_PAGES = ['parents', 'videos'] as const;
+type SupportPageId = (typeof SUPPORT_PAGES)[number];
+
+const isSupportPageId = (id: string | null): id is SupportPageId =>
+  id !== null && (SUPPORT_PAGES as readonly string[]).includes(id);
 
 const ResourcesDetailPage: React.FC = () => {
   const { pageId } = useParams<{ pageId: string }>();
   const navigate = useNavigate();
-  const SUPPORT_PAGES = ['parents', 'videos'];
 
   // Scroll to top when page changes
   useEffect(() => {
@@ -34,6 +28,7 @@ const ResourcesDetailPage: React.FC = () => {
   // Validate pageId - check if section exists
   const currentPageId = pageId && resourceSections[pageId] ? pageId : null;
   const currentSection = currentPageId ? resourceSections[currentPageId] : null;
+  const isSupportPage = isSupportPageId(currentPageId);
 
   // Page not found
   if (!currentSection) {
@@ -49,11 +44,7 @@ const ResourcesDetailPage: React.FC = () => {
           <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
             עמודים זמינים: {Object.keys(resourceSections).join(', ')}
           </Typography>
-          <Button
-            variant="contained"
-            onClick={() => navigate('/resources')}
-            sx={{ mt: 2 }}
-          >
+          <Button variant="contained" onClick={() => navigate('/resources')} sx={{ mt: 2 }}>
             חזרה לעמוד המשאבים
           </Button>
         </Container>
@@ -63,47 +54,35 @@ const ResourcesDetailPage: React.FC = () => {
 
   return (
     <Box className="resources-detail" dir="rtl">
-      {/* Hero Section */}
-      {/* Hero Section */}
-      <header className="resources-detail__hero">
-        <div className="resources-detail__hero-text">
-
-          {/* Icon box — absolute top-left (RTL = visual top-right) */}
-          <div className="resources-detail__hero-icon">
-            <DownloadIcon />
-          </div>
-
-          {/* <div className="resources-detail__hero-content"> */}
-            {/* Kicker */}
-            <div className="resources-detail__hero-label">
-              משאבים להורים
+      {/* Hero */}
+      {isSupportPage ? (
+        <SupportPageHero
+          icon={<DownloadIcon />}
+          title={currentSection.title}
+          subtitle={currentSection.description}
+        />
+      ) : (
+        <header className="resources-detail__hero">
+          <div className="resources-detail__hero-text">
+            <div className="resources-detail__hero-icon">
+              <DownloadIcon />
             </div>
-
-            <h1 className="resources-detail__hero-title">
-              {currentSection.title}
-            </h1>
-
+            <div className="resources-detail__hero-label">משאבים</div>
+            <h1 className="resources-detail__hero-title">{currentSection.title}</h1>
             {currentSection.description && (
-              <p className="resources-detail__hero-subtitle">
-                {currentSection.description}
-              </p>
+              <p className="resources-detail__hero-subtitle">{currentSection.description}</p>
             )}
-
-          {/* </div> */}
-        </div>
-      </header>
+          </div>
+        </header>
+      )}
 
       {/* Tabs Navigation */}
-      {SUPPORT_PAGES.includes(currentPageId || '')
-        ? <SupportTabs />
-        : <ResourcesTabs currentPage={currentPageId || ''} />
-      }
+      {isSupportPage ? <SupportTabs /> : <ResourcesTabs currentPage={currentPageId ?? ''} />}
 
       {/* Main Content */}
       <section className="resources-detail__content">
         <Container maxWidth="lg">
           <div className="resources-detail__main">
-            {/* Render dynamic content */}
             {currentSection.content && currentSection.content.length > 0 ? (
               <ResourcesContentRenderer content={currentSection.content as any} />
             ) : (
@@ -112,7 +91,7 @@ const ResourcesDetailPage: React.FC = () => {
               </Typography>
             )}
 
-            {/* Downloadable Resources - Show on parents page */}
+            {/* Downloadable Resources - parents page only */}
             {currentPageId === 'parents' && downloadableResources.length > 0 && (
               <div className="resources-detail__downloads">
                 <Typography variant="h3" className="resources-detail__downloads-title">

@@ -1,0 +1,45 @@
+.activities-page {
+    min-height: 100vh;
+    background: #f7f9fc;
+
+    &__container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 1rem 1.25rem 4rem;
+
+        @media (min-width: 768px) {
+            padding: 1.5rem 2rem 5rem;
+        }
+    }
+
+    &__calendar {
+        padding-top: 1rem;
+    }
+
+    &__calendar-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #1a2744;
+        margin: 0 0 1.25rem;
+        font-family: "Heebo", "Assistant", sans-serif;
+        border-right: 3px solid #6a1b9a;
+        padding-right: 0.75rem;
+    }
+
+    &__frame {
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid rgba(74, 20, 140, 0.1);
+
+        iframe {
+            display: block;
+            width: 100%;
+            border: 0;
+            height: 600px;
+
+            @media (max-width: 600px) {
+                height: 520px;
+            }
+        }
+    }
+}

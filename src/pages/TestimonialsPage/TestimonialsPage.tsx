@@ -7,8 +7,9 @@ import type { NewTestimonialPayload, Testimonial } from '@/types/testimonials';
 import { subscribeToTestimonials, addTestimonial } from '@/services/testimonialsService';
 import { RecordVoiceOver as TestimonialsIcon } from '@mui/icons-material';
 import type { Unsubscribe } from 'firebase/firestore';
-import './TestimonialsPage.scss';
 import SupportTabs from '@/components/Support/SupportTabs/SupportTabs';
+import SupportPageHero from '@/components/Support/SupportPageHero/SupportPageHero';
+import './TestimonialsPage.scss';
 
 const TestimonialsPage: React.FC = (): React.JSX.Element => {
   const [isSubmitOpen, setIsSubmitOpen] = useState<boolean>(false);
@@ -52,32 +53,26 @@ const TestimonialsPage: React.FC = (): React.JSX.Element => {
   }, []);
 
   return (
-    <div className="testimonials-page">
+    <div className="testimonials-page" dir="rtl">
+      <SupportPageHero
+        icon={<TestimonialsIcon />}
+        title="עדויות מהקהילה"
+        subtitle="עדויות אמיתיות מהקהילה. כל עדות נבדקת לפני פרסום כדי לשמור על פרטיות ולהסיר פרטים מזהים."
+        action={
+          <button
+            type="button"
+            className="support-hero__action"
+            onClick={() => setIsSubmitOpen(true)}
+          >
+            <PlusIcon />
+            <span>שליחת עדות</span>
+          </button>
+        }
+      />
+
+      <SupportTabs />
+
       <div className="testimonials-container">
-        <header className="testimonials-hero">
-          <div className="testimonials-hero__text">
-
-            {/* Icon box — matches SupportTabs tab 3 (RecordVoiceOver) */}
-            <div className="testimonials-hero__icon-wrap">
-              <TestimonialsIcon />
-            </div>
-
-            {/* Kicker — was commented out before, now active as label */}
-            <div className="testimonials-hero__kicker">תמיכה וקהילה</div>
-
-            {/* Title — unchanged */}
-            <h1 className="testimonials-hero__title">עדויות מהקהילה</h1>
-
-            {/* Subtitle — unchanged */}
-            <p className="testimonials-hero__subtitle">
-              עדויות אמיתיות מהקהילה. כל עדות נבדקת לפני פרסום כדי לשמור על פרטיות ולהסיר פרטים מזהים.
-            </p>
-          </div>
-        </header>
-
-
-        <SupportTabs />
-
         <div className="testimonials-disclaimer">
           <strong>הערה:</strong> העדויות הן אישיות ואינן מהוות ייעוץ רפואי. אם יש חשש לסיכון מיידי – פנו לעזרה מקצועית.
         </div>
