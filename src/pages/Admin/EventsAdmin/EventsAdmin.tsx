@@ -4,7 +4,7 @@ import { getAllEvents, createEvent, updateEvent, deleteEvent, togglePublished } 
 import type { EventItem, EventFormData } from '@/types/event';
 import { EMPTY_EVENT_FORM, FORMAT_LABELS, formatEventDateLabel } from '@/types/event';
 import EventFormModal from './EventFormModal';
-import './EventsAdmin.scss';
+import '../admin-shared.scss';
 
 const todayIso = () => new Date().toISOString().split('T')[0];
 
@@ -102,36 +102,36 @@ const EventsAdmin: React.FC = () => {
     const upcoming = events.filter((e) => e.published && e.date >= todayIso()).length;
 
     return (
-        <div className="eva" dir="rtl">
-            {toast && <div className={`eva-toast eva-toast--${toast.type}`}>{toast.msg}</div>}
+        <div className="adm" dir="rtl">
+            {toast && <div className={`adm-toast adm-toast--${toast.type}`}>{toast.msg}</div>}
 
-            <div className="eva__header">
-                <div className="eva__header-left">
-                    <div className="eva__header-icon"><FiCalendar /></div>
+            <div className="adm__header">
+                <div className="adm__header-left">
+                    <div className="adm__header-icon"><FiCalendar /></div>
                     <div>
-                        <h1 className="eva__header-title">פעילויות ואירועים</h1>
-                        <p className="eva__header-sub">וובינרים, מפגשים וכנסים המוצגים בעמוד הבית ובעמוד הפעילויות</p>
+                        <h1 className="adm__header-title">פעילויות ואירועים</h1>
+                        <p className="adm__header-sub">וובינרים, מפגשים וכנסים המוצגים בעמוד הבית ובעמוד הפעילויות</p>
                     </div>
                 </div>
-                <button className="eva-btn eva-btn--primary" onClick={openCreate}>
+                <button className="adm-btn adm-btn--primary" onClick={openCreate}>
                     <FiPlus /> אירוע חדש
                 </button>
             </div>
 
-            <div className="eva__stats">
-                <div className="eva__stat"><span className="eva__stat-num">{events.length}</span><span className="eva__stat-label">סה"כ</span></div>
-                <div className="eva__stat"><span className="eva__stat-num eva__stat-num--green">{published}</span><span className="eva__stat-label">מפורסמים</span></div>
-                <div className="eva__stat"><span className="eva__stat-num eva__stat-num--blue">{upcoming}</span><span className="eva__stat-label">קרובים באתר</span></div>
-                <div className="eva__stat"><span className="eva__stat-num eva__stat-num--gray">{events.length - published}</span><span className="eva__stat-label">טיוטות</span></div>
+            <div className="adm__stats">
+                <div className="adm__stat"><span className="adm__stat-num">{events.length}</span><span className="adm__stat-label">סה"כ</span></div>
+                <div className="adm__stat"><span className="adm__stat-num adm__stat-num--green">{published}</span><span className="adm__stat-label">מפורסמים</span></div>
+                <div className="adm__stat"><span className="adm__stat-num adm__stat-num--blue">{upcoming}</span><span className="adm__stat-label">קרובים באתר</span></div>
+                <div className="adm__stat"><span className="adm__stat-num adm__stat-num--gray">{events.length - published}</span><span className="adm__stat-label">טיוטות</span></div>
             </div>
 
-            <div className="eva__table-wrap">
+            <div className="adm__table-wrap">
                 {loading ? (
-                    <div className="eva__loading"><div className="eva__spinner" /> טוען…</div>
+                    <div className="adm__loading"><div className="adm__spinner" /> טוען…</div>
                 ) : events.length === 0 ? (
-                    <div className="eva__empty"><FiCalendar className="eva__empty-icon" /><p>אין אירועים עדיין. לחצו "אירוע חדש" כדי להתחיל.</p></div>
+                    <div className="adm__empty"><FiCalendar className="adm__empty-icon" /><p>אין אירועים עדיין. לחצו "אירוע חדש" כדי להתחיל.</p></div>
                 ) : (
-                    <table className="eva-table">
+                    <table className="adm-table">
                         <thead>
                             <tr>
                                 <th>אירוע</th>
@@ -145,43 +145,43 @@ const EventsAdmin: React.FC = () => {
                             {events.map((e) => {
                                 const past = e.date < todayIso();
                                 return (
-                                    <tr key={e.id} className={`eva-table__row${!e.published ? ' eva-table__row--draft' : ''}${past ? ' eva-table__row--past' : ''}`}>
+                                    <tr key={e.id} className={`adm-table__row${!e.published ? ' adm-table__row--draft' : ''}${past ? ' adm-table__row--past' : ''}`}>
                                         <td>
-                                            <div className="eva-table__event">
+                                            <div className="adm-table__event">
                                                 {e.imageUrl
-                                                    ? <img src={e.imageUrl} alt="" className="eva-table__thumb" />
-                                                    : <span className="eva-table__thumb eva-table__thumb--empty" style={{ background: e.accent }} />}
+                                                    ? <img src={e.imageUrl} alt="" className="adm-table__thumb" />
+                                                    : <span className="adm-table__thumb adm-table__thumb--empty" style={{ background: e.accent }} />}
                                                 <div>
-                                                    <span className="eva-table__title">{e.title}</span>
-                                                    <span className="eva-table__sub">{e.badge}{e.subtitle ? ` · ${e.subtitle}` : ''}</span>
+                                                    <span className="adm-table__title">{e.title}</span>
+                                                    <span className="adm-table__muted">{e.badge}{e.subtitle ? ` · ${e.subtitle}` : ''}</span>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             {formatEventDateLabel(e.date, e.time)}
-                                            {past && <span className="eva-table__past">עבר</span>}
+                                            {past && <span className="adm-table__past">עבר</span>}
                                         </td>
                                         <td>
                                             {FORMAT_LABELS[e.format] ?? e.format}
                                             <br />
-                                            <span className="eva-table__muted">{e.location}</span>
+                                            <span className="adm-table__muted">{e.location}</span>
                                         </td>
                                         <td>
                                             {e.registrationUrl ? (
-                                                <a href={e.registrationUrl} target="_blank" rel="noopener noreferrer" className="eva-table__link">
+                                                <a href={e.registrationUrl} target="_blank" rel="noopener noreferrer" className="adm-table__link">
                                                     פתוחה <FiExternalLink />
                                                 </a>
                                             ) : (
-                                                <span className="eva-table__muted">בקרוב</span>
+                                                <span className="adm-table__muted">בקרוב</span>
                                             )}
                                         </td>
-                                        <td className="eva-table__actions">
-                                            <button className={`eva-icon-btn${e.published ? ' eva-icon-btn--active' : ''}`}
+                                        <td className="adm-table__actions">
+                                            <button className={`adm-icon-btn${e.published ? ' adm-icon-btn--active' : ''}`}
                                                 title={e.published ? 'הסתר מהאתר' : 'פרסם'} onClick={() => handleToggle(e)}>
                                                 {e.published ? <FiEye /> : <FiEyeOff />}
                                             </button>
-                                            <button className="eva-icon-btn" title="עריכה" onClick={() => openEdit(e)}><FiEdit2 /></button>
-                                            <button className="eva-icon-btn eva-icon-btn--danger" title="מחיקה" onClick={() => handleDelete(e)}><FiTrash2 /></button>
+                                            <button className="adm-icon-btn" title="עריכה" onClick={() => openEdit(e)}><FiEdit2 /></button>
+                                            <button className="adm-icon-btn adm-icon-btn--danger" title="מחיקה" onClick={() => handleDelete(e)}><FiTrash2 /></button>
                                         </td>
                                     </tr>
                                 );

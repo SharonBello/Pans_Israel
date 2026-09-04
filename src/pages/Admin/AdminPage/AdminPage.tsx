@@ -4,6 +4,7 @@ import { getAuth, signOut } from 'firebase/auth';
 import { FiLogOut, FiMenu, FiX, FiExternalLink } from 'react-icons/fi';
 import { useAuth } from '@/Auth/AuthContext';
 import { ADMIN_SECTIONS, DEFAULT_TAB, type AdminTabId } from '../adminSections';
+import { usePendingCounts } from '../usePendingCounts';
 import './AdminPage.scss';
 
 const isTab = (v: string | null): v is AdminTabId =>
@@ -19,6 +20,9 @@ const AdminPage: React.FC = () => {
     const activeId: AdminTabId = isTab(tabParam) ? tabParam : DEFAULT_TAB;
     const active = ADMIN_SECTIONS.find((s) => s.id === activeId) ?? ADMIN_SECTIONS[0];
     const ActivePanel = active.component;
+
+    // pending counts for the nav badges — re-fetched whenever the tab changes
+    const { counts } = usePendingCounts(activeId);
 
     const selectTab = (id: AdminTabId) => {
         setParams({ tab: id }, { replace: true });
@@ -64,6 +68,7 @@ const AdminPage: React.FC = () => {
                         >
                             <Icon />
                             <span>{label}</span>
+                            {counts[id] ? <span className="admin__badge">{counts[id]}</span> : null}
                         </button>
                     ))}
                 </nav>

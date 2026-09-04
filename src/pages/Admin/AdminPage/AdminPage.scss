@@ -1,18 +1,16 @@
 $admin-nav-w: 250px;
 $admin-primary: #023373;
-$site-header-h: 68px;
-$site-header-h-sm: 58px;
+$topbar-h: 48px; // admin's own mobile top bar
 
 .admin {
     display: grid;
     grid-template-columns: $admin-nav-w 1fr;
-    min-height: calc(100vh - #{$site-header-h});
+    min-height: 100vh;
     background: #f5f7fa;
     font-family: "Heebo", "Assistant", sans-serif;
 
     @media (max-width: 900px) {
         grid-template-columns: 1fr;
-        min-height: calc(100vh - #{$site-header-h-sm});
     }
 
     // ── mobile top bar ─────────────────────────────────────
@@ -20,9 +18,13 @@ $site-header-h-sm: 58px;
         display: none;
         align-items: center;
         gap: 12px;
-        padding: 10px 16px;
+        height: $topbar-h;
+        padding: 0 16px;
         background: #fff;
         border-bottom: 1px solid rgba($admin-primary, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1230;
 
         @media (max-width: 900px) {
             display: flex;
@@ -56,16 +58,16 @@ $site-header-h-sm: 58px;
         border-inline-end: 1px solid rgba($admin-primary, 0.1);
         padding: 20px 14px;
         position: sticky;
-        top: $site-header-h;
-        height: calc(100vh - #{$site-header-h});
+        top: 0;
+        height: 100vh;
         overflow-y: auto;
 
         @media (max-width: 900px) {
             position: fixed;
-            top: $site-header-h-sm;
+            top: $topbar-h;
             inset-inline-start: 0;
             width: $admin-nav-w;
-            height: calc(100vh - #{$site-header-h-sm});
+            height: calc(100vh - #{$topbar-h});
             transform: translateX(100%); // off-screen (RTL: to the right)
             transition: transform 0.22s ease;
             z-index: 1250;
@@ -171,6 +173,20 @@ $site-header-h-sm: 58px;
                 color: #c53030;
             }
         }
+    }
+
+    &__badge {
+        margin-inline-start: auto;
+        min-width: 22px;
+        height: 22px;
+        padding: 0 7px;
+        border-radius: 999px;
+        background: #e67e22;
+        color: #fff;
+        font-size: 0.72rem;
+        font-weight: 700;
+        display: inline-grid;
+        place-items: center;
     }
 
     &__nav-footer {

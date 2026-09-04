@@ -1,6 +1,6 @@
 import {
-    collection, doc, addDoc, getDoc, getDocs, updateDoc,
-    query, where, orderBy, limit, increment, Timestamp, serverTimestamp,
+    collection, doc, addDoc, getDoc, getDocs, updateDoc, deleteDoc,
+    query, where, orderBy, increment, Timestamp, serverTimestamp,
 } from 'firebase/firestore';
 import emailjs from '@emailjs/browser';
 import { db } from '../config/firebase';
@@ -14,6 +14,7 @@ const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID ?? '';
 const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY ?? '';
 const EMAILJS_ARTICLE_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_ARTICLE_TEMPLATE_ID ?? '';
 
+// ── Public reads ─────────────────────────────────────────────────────────────
 export const getPublishedArticles = async (): Promise<Article[]> => {
     const q = query(
         collection(db, ARTICLES_COL),
@@ -25,8 +26,7 @@ export const getPublishedArticles = async (): Promise<Article[]> => {
 };
 
 export const getArticleById = async (id: string): Promise<Article | null> => {
-    const ref = doc(db, ARTICLES_COL, id);
-    const snap = await getDoc(ref);
+    const snap = await getDoc(doc(db, ARTICLES_COL, id));
     if (!snap.exists()) return null;
     return { id: snap.id, ...snap.data() } as Article;
 };
@@ -36,10 +36,11 @@ export const getFeaturedArticle = async (): Promise<Article | null> => {
     const all = snap.docs.map(d => ({ id: d.id, ...d.data() } as Article));
     const featured = all
         .filter(a => a.published && a.featured)
-        .sort((a, b) => b.createdAt?.seconds - a.createdAt?.seconds);
+        .sort((a, b) => (b.createdAt?.seconds ?? 0) - (a.createdAt?.seconds ?? 0));
     return featured[0] ?? null;
 };
 
+// ── Writes used by the app ───────────────────────────────────────────────────
 export const createArticle = async (data: ArticleFormData): Promise<string> => {
     const ref = await addDoc(collection(db, ARTICLES_COL), {
         ...data,
@@ -57,6 +58,7 @@ export const updateArticle = async (id: string, data: Partial<ArticleFormData>):
     });
 };
 
+// ── Comments ─────────────────────────────────────────────────────────────────
 export const getComments = async (articleId: string): Promise<Comment[]> => {
     const q = query(
         collection(db, COMMENTS_COL),
@@ -73,19 +75,18 @@ export const submitComment = async (
     data: CommentFormData,
 ): Promise<Comment> => {
     try {
-        // 1. Save comment
         const ref = await addDoc(collection(db, COMMENTS_COL), {
             articleId,
             ...data,
             createdAt: serverTimestamp(),
         });
 
-        // 2. Increment counter — fire and forget, don't let it block
+        // counter — fire and forget
         updateDoc(doc(db, ARTICLES_COL, articleId), {
             commentCount: increment(1),
         }).catch(err => console.warn('Counter update failed:', err));
 
-        // 3. Email notification — fire and forget
+        // email — fire and forget
         if (EMAILJS_SERVICE_ID && EMAILJS_TEMPLATE_ID && EMAILJS_PUBLIC_KEY) {
             emailjs.send(
                 EMAILJS_SERVICE_ID,
@@ -101,16 +102,14 @@ export const submitComment = async (
         }
 
         return { id: ref.id, articleId, ...data, createdAt: Timestamp.now() };
-
     } catch (err) {
-        console.error('❌ submitComment error:', err);
+        console.error('submitComment error:', err);
         throw err;
     }
 };
 
-export const submitArticleForReview = async (
-    data: ArticleSubmission,
-): Promise<string> => {
+// ── Public submission (lands unpublished) ────────────────────────────────────
+export const submitArticleForReview = async (data: ArticleSubmission): Promise<string> => {
     try {
         const ref = await addDoc(collection(db, ARTICLES_COL), {
             ...data,
@@ -120,9 +119,7 @@ export const submitArticleForReview = async (
             createdAt: serverTimestamp(),
             updatedAt: serverTimestamp(),
         });
-        console.log('✅ Article saved:', ref.id);
 
-        // Email (fire and forget)
         if (EMAILJS_SERVICE_ID && EMAILJS_ARTICLE_TEMPLATE_ID && EMAILJS_PUBLIC_KEY) {
             emailjs.send(
                 EMAILJS_SERVICE_ID,
@@ -139,7 +136,25 @@ export const submitArticleForReview = async (
 
         return ref.id;
     } catch (err) {
-        console.error('❌ submitArticleForReview error:', err);
+        console.error('submitArticleForReview error:', err);
         throw err;
     }
+};
+
+// ── Admin ────────────────────────────────────────────────────────────────────
+export const getAllArticlesAdmin = async (): Promise<Article[]> => {
+    const q = query(collection(db, ARTICLES_COL), orderBy('createdAt', 'desc'));
+    const snap = await getDocs(q);
+    return snap.docs.map(d => ({ id: d.id, ...d.data() } as Article));
+};
+
+export const setArticleFlags = async (
+    id: string,
+    flags: Partial<Pick<Article, 'published' | 'featured'>>,
+): Promise<void> => {
+    await updateDoc(doc(db, ARTICLES_COL, id), { ...flags, updatedAt: serverTimestamp() });
+};
+
+export const deleteArticle = async (id: string): Promise<void> => {
+    await deleteDoc(doc(db, ARTICLES_COL, id));
 };

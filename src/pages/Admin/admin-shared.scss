@@ -1,6 +1,7 @@
 $p: #023373;
 
-.eva {
+// ── Panel layout ─────────────────────────────────────────────────────────────
+.adm {
     font-family: "Heebo", "Assistant", sans-serif;
     color: #1a2744;
 
@@ -12,11 +13,13 @@ $p: #023373;
         flex-wrap: wrap;
         margin-bottom: 20px;
     }
+
     &__header-left {
         display: flex;
         align-items: center;
         gap: 12px;
     }
+
     &__header-icon {
         display: grid;
         place-items: center;
@@ -27,16 +30,56 @@ $p: #023373;
         color: $p;
         font-size: 1.3rem;
     }
+
     &__header-title {
         font-size: 1.35rem;
         font-weight: 800;
         margin: 0;
         color: $p;
     }
+
     &__header-sub {
         font-size: 0.85rem;
         color: #6b7a89;
         margin: 2px 0 0;
+    }
+
+    &__tabs {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+        margin-bottom: 16px;
+    }
+
+    &__tab {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 7px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba($p, 0.15);
+        background: #fff;
+        color: #4a5568;
+        font-family: inherit;
+        font-size: 0.85rem;
+        font-weight: 600;
+        cursor: pointer;
+
+        &:hover {
+            border-color: $p;
+            color: $p;
+        }
+
+        &--active {
+            background: $p;
+            border-color: $p;
+            color: #fff;
+        }
+    }
+
+    &__tab-count {
+        font-size: 0.75rem;
+        opacity: 0.8;
     }
 
     &__stats {
@@ -45,6 +88,7 @@ $p: #023373;
         gap: 12px;
         margin-bottom: 20px;
     }
+
     &__stat {
         background: #fff;
         border: 1px solid rgba($p, 0.1);
@@ -54,11 +98,13 @@ $p: #023373;
         flex-direction: column;
         gap: 2px;
     }
+
     &__stat-num {
         font-size: 1.6rem;
         font-weight: 800;
         color: $p;
         line-height: 1;
+
         &--green {
             color: #2f855a;
         }
@@ -69,6 +115,7 @@ $p: #023373;
             color: #8a97a4;
         }
     }
+
     &__stat-label {
         font-size: 0.8rem;
         color: #6b7a89;
@@ -80,6 +127,7 @@ $p: #023373;
         border-radius: 12px;
         overflow: auto;
     }
+
     &__loading,
     &__empty {
         display: flex;
@@ -91,32 +139,36 @@ $p: #023373;
         color: #6b7a89;
         text-align: center;
     }
+
     &__empty-icon {
         font-size: 2.2rem;
         color: #c9d3dd;
     }
+
     &__spinner {
         width: 26px;
         height: 26px;
         border-radius: 50%;
         border: 3px solid rgba($p, 0.15);
         border-top-color: $p;
-        animation: eva-spin 0.8s linear infinite;
+        animation: adm-spin 0.8s linear infinite;
     }
 }
 
-.eva-table {
+// ── Table ────────────────────────────────────────────────────────────────────
+.adm-table {
     width: 100%;
     border-collapse: collapse;
     font-size: 0.9rem;
-    min-width: 760px;
+    min-width: 720px;
 
     th,
     td {
         padding: 12px 14px;
         text-align: start;
-        vertical-align: middle;
+        vertical-align: top;
     }
+
     th {
         font-size: 0.78rem;
         font-weight: 700;
@@ -124,8 +176,10 @@ $p: #023373;
         background: #f7f9fc;
         border-bottom: 1px solid rgba($p, 0.1);
     }
+
     tbody tr {
         border-bottom: 1px solid rgba($p, 0.06);
+
         &:last-child {
             border-bottom: 0;
         }
@@ -134,9 +188,21 @@ $p: #023373;
     &__row--draft td {
         opacity: 0.65;
     }
-    &__row--past .eva-table__title {
+
+    &__row--past .adm-table__title {
         text-decoration: line-through;
         color: #8a97a4;
+    }
+
+    &__title {
+        display: block;
+        font-weight: 700;
+    }
+
+    &__muted {
+        display: block;
+        font-size: 0.78rem;
+        color: #6b7a89;
     }
 
     &__event {
@@ -144,6 +210,7 @@ $p: #023373;
         align-items: center;
         gap: 12px;
     }
+
     &__thumb {
         width: 48px;
         height: 48px;
@@ -151,26 +218,19 @@ $p: #023373;
         object-fit: cover;
         flex-shrink: 0;
         display: block;
+
         &--empty {
             opacity: 0.6;
         }
     }
-    &__title {
-        display: block;
-        font-weight: 700;
-    }
-    &__sub,
-    &__muted {
-        display: block;
-        font-size: 0.78rem;
-        color: #6b7a89;
-    }
+
     &__past {
         margin-inline-start: 8px;
         font-size: 0.72rem;
         color: #c53030;
         font-weight: 700;
     }
+
     &__link {
         display: inline-flex;
         align-items: center;
@@ -178,16 +238,41 @@ $p: #023373;
         color: #2b6cb0;
         text-decoration: none;
         font-weight: 600;
+
         &:hover {
             text-decoration: underline;
         }
     }
+
     &__actions {
         white-space: nowrap;
+        vertical-align: middle;
     }
 }
 
-.eva-icon-btn {
+// ── Badges / buttons / toast ─────────────────────────────────────────────────
+.adm-badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 700;
+
+    &--pending {
+        background: #fff5e6;
+        color: #b7791f;
+    }
+    &--approved {
+        background: #e6f6ee;
+        color: #2f855a;
+    }
+    &--rejected {
+        background: #fdecec;
+        color: #c53030;
+    }
+}
+
+.adm-icon-btn {
     display: inline-grid;
     place-items: center;
     width: 34px;
@@ -203,14 +288,29 @@ $p: #023373;
         background 0.18s,
         color 0.18s,
         border-color 0.18s;
+
     &:hover {
         background: rgba($p, 0.06);
         color: $p;
     }
+
     &--active {
         color: #2f855a;
         border-color: rgba(47, 133, 90, 0.4);
     }
+
+    &--approve:hover {
+        background: rgba(47, 133, 90, 0.1);
+        color: #2f855a;
+        border-color: rgba(47, 133, 90, 0.4);
+    }
+
+    &--reject:hover {
+        background: rgba(183, 121, 31, 0.1);
+        color: #b7791f;
+        border-color: rgba(183, 121, 31, 0.4);
+    }
+
     &--danger:hover {
         background: rgba(197, 48, 48, 0.08);
         color: #c53030;
@@ -218,7 +318,7 @@ $p: #023373;
     }
 }
 
-.eva-btn {
+.adm-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
@@ -229,16 +329,18 @@ $p: #023373;
     font-size: 0.9rem;
     font-weight: 700;
     cursor: pointer;
+
     &--primary {
         background: $p;
         color: #fff;
+
         &:hover {
             background: #1a4a9e;
         }
     }
 }
 
-.eva-toast {
+.adm-toast {
     position: fixed;
     bottom: 24px;
     inset-inline-start: 50%;
@@ -249,6 +351,7 @@ $p: #023373;
     font-weight: 600;
     z-index: 2000;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+
     &--success {
         background: #2f855a;
     }
@@ -257,7 +360,7 @@ $p: #023373;
     }
 }
 
-@keyframes eva-spin {
+@keyframes adm-spin {
     to {
         transform: rotate(360deg);
     }

@@ -1,4 +1,4 @@
-@use './styles/abstracts' as *;
+@use "./styles/abstracts" as *;
 
 .app {
   min-height: 100vh;
@@ -8,4 +8,9 @@
 .main-content {
   // No padding-top needed - Hero handles its own spacing
   min-height: 100vh;
+}
+
+// Admin: no fixed site header, so remove the body offset added by Header.scss
+body:has(.app--admin) {
+  padding-top: 0;
 }
