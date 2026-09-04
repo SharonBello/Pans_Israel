@@ -1,6 +1,7 @@
 // ==========================================================================
 // MediaArticlesAdmin.scss — Admin panel for פורסם בתקשורת
 // ==========================================================================
+@use "sass:color";
 
 $color-primary: #023373;
 $color-teal: #5b9a8b;
@@ -323,7 +324,7 @@ $transition: 0.18s cubic-bezier(0.4, 0, 0.2, 1);
         border-color: $color-primary;
 
         &:hover:not(:disabled) {
-            background: darken($color-primary, 6%);
+            background: color.adjust($color-primary, $lightness: -6%);
         }
 
         &:disabled {
