@@ -1,0 +1,199 @@
+$admin-nav-w: 250px;
+$admin-primary: #023373;
+$site-header-h: 68px;
+$site-header-h-sm: 58px;
+
+.admin {
+    display: grid;
+    grid-template-columns: $admin-nav-w 1fr;
+    min-height: calc(100vh - #{$site-header-h});
+    background: #f5f7fa;
+    font-family: "Heebo", "Assistant", sans-serif;
+
+    @media (max-width: 900px) {
+        grid-template-columns: 1fr;
+        min-height: calc(100vh - #{$site-header-h-sm});
+    }
+
+    // ── mobile top bar ─────────────────────────────────────
+    &__topbar {
+        display: none;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 16px;
+        background: #fff;
+        border-bottom: 1px solid rgba($admin-primary, 0.1);
+
+        @media (max-width: 900px) {
+            display: flex;
+        }
+    }
+
+    &__burger {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border: 0;
+        border-radius: 8px;
+        background: rgba($admin-primary, 0.07);
+        color: $admin-primary;
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+
+    &__topbar-title {
+        font-weight: 700;
+        color: $admin-primary;
+    }
+
+    // ── side nav ───────────────────────────────────────────
+    &__nav {
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        border-inline-end: 1px solid rgba($admin-primary, 0.1);
+        padding: 20px 14px;
+        position: sticky;
+        top: $site-header-h;
+        height: calc(100vh - #{$site-header-h});
+        overflow-y: auto;
+
+        @media (max-width: 900px) {
+            position: fixed;
+            top: $site-header-h-sm;
+            inset-inline-start: 0;
+            width: $admin-nav-w;
+            height: calc(100vh - #{$site-header-h-sm});
+            transform: translateX(100%); // off-screen (RTL: to the right)
+            transition: transform 0.22s ease;
+            z-index: 1250;
+            box-shadow: -8px 0 24px rgba(0, 0, 0, 0.12);
+
+            &--open {
+                transform: translateX(0);
+            }
+        }
+    }
+
+    &__backdrop {
+        display: none;
+
+        @media (max-width: 900px) {
+            display: block;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.35);
+            z-index: 1240;
+        }
+    }
+
+    &__brand {
+        display: flex;
+        flex-direction: column;
+        padding: 4px 10px 18px;
+        border-bottom: 1px solid rgba($admin-primary, 0.1);
+        margin-bottom: 12px;
+    }
+
+    &__brand-title {
+        font-weight: 800;
+        color: $admin-primary;
+    }
+
+    &__brand-sub {
+        font-size: 0.75rem;
+        color: #6b7a89;
+    }
+
+    &__menu {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        flex: 1;
+    }
+
+    &__link {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 8px;
+        border: 0;
+        background: none;
+        color: #2d3748;
+        font-family: inherit;
+        font-size: 0.9rem;
+        font-weight: 500;
+        text-align: start;
+        text-decoration: none;
+        cursor: pointer;
+        transition:
+            background 0.18s,
+            color 0.18s;
+
+        svg {
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            color: #607d8b;
+        }
+
+        &:hover {
+            background: rgba($admin-primary, 0.06);
+            color: $admin-primary;
+        }
+
+        &--active {
+            background: rgba($admin-primary, 0.1);
+            color: $admin-primary;
+            font-weight: 700;
+
+            svg {
+                color: $admin-primary;
+            }
+        }
+
+        &--muted {
+            color: #6b7a89;
+        }
+
+        &--logout {
+            color: #c53030;
+
+            svg {
+                color: #c53030;
+            }
+
+            &:hover {
+                background: rgba(197, 48, 48, 0.08);
+                color: #c53030;
+            }
+        }
+    }
+
+    &__nav-footer {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        padding-top: 12px;
+        border-top: 1px solid rgba($admin-primary, 0.1);
+    }
+
+    &__user {
+        font-size: 0.75rem;
+        color: #8a97a4;
+        padding: 6px 12px;
+        direction: ltr;
+        text-align: end;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    // ── content ────────────────────────────────────────────
+    &__content {
+        padding: clamp(16px, 3vw, 32px);
+        min-width: 0;
+    }
+}

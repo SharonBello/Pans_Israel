@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaWhatsapp, FaFacebook } from 'react-icons/fa';
+import { FaWhatsapp, FaFacebook, FaYoutube } from 'react-icons/fa';
 import './Footer.scss';
 import logoPng from '../../styles/assets/logo.png';
 
@@ -57,6 +57,8 @@ const Footer: React.FC = () => {
   //     'שלום,\nאני יוצר/ת קשר דרך אתר פאנס/פאנדס - העמותה הישראלית לאנספיליטיס אוטואימוני.\nאשמח לשוחח בנושא:'
   //   );
 
+  const YOUTUBE_URL = 'https://www.youtube.com/@PansPandasIsrael';
+
   return (
     <footer className="footer" dir="rtl">
       <div className="footer__container">
@@ -96,6 +98,16 @@ const Footer: React.FC = () => {
                 aria-label="הצטרפו לקבוצת הפייסבוק"
               >
                 <FaFacebook />
+              </a>
+
+              <a
+                href={YOUTUBE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer__social-link footer__social-link--youtube"
+                aria-label="ערוץ היוטיוב שלנו"
+              >
+                <FaYoutube />
               </a>
             </div>
           </div>

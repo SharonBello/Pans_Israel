@@ -1,21 +1,34 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import EventCard from '@/components/Events/EventCard/EventCard';
 import EventRow from '@/components/Events/EventRow/EventRow';
 import EventRegistrationModal from '@/components/Events/EventRegistrationModal/EventRegistrationModal';
-import { getUpcomingEvents } from '@/utils/events';
-import type { FeaturedEvent } from '@/data/eventsData';
+import { getUpcomingEvents } from '@/services/eventService';
+import type { EventItem } from '@/types/event';
 import './ActivitiesSection.scss';
 
 interface ActivitiesSectionProps {
-    /** 'cards' = full grid (activities page); 'list' = compact editorial rows (home page) */
+    /** 'cards' = full grid (activities page); 'list' = compact rows (home page) */
     variant?: 'cards' | 'list';
 }
 
 const ActivitiesSection: React.FC<ActivitiesSectionProps> = ({ variant = 'cards' }) => {
-    const events = useMemo(() => getUpcomingEvents(), []);
-    const [activeEvent, setActiveEvent] = useState<FeaturedEvent | null>(null);
+    const [events, setEvents] = useState<EventItem[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [activeEvent, setActiveEvent] = useState<EventItem | null>(null);
     const isList = variant === 'list';
+
+    useEffect(() => {
+        let cancelled = false;
+        getUpcomingEvents()
+            .then((data) => { if (!cancelled) setEvents(data); })
+            .catch((err) => console.error('getUpcomingEvents failed:', err))
+            .finally(() => { if (!cancelled) setLoading(false); });
+        return () => { cancelled = true; };
+    }, []);
+
+    // On the home page, hide the whole section when there's nothing to show
+    if (!loading && events.length === 0 && isList) return null;
 
     return (
         <section className={`activities activities--${variant}`} aria-labelledby="activities-title">
@@ -26,7 +39,9 @@ const ActivitiesSection: React.FC<ActivitiesSectionProps> = ({ variant = 'cards'
                     וובינרים, מפגשים וכנסים לקהילת ההורים ולאנשי המקצוע — הצטרפו אלינו.
                 </p>
 
-                {events.length === 0 ? (
+                {loading ? (
+                    <p className="activities__empty">טוען פעילויות…</p>
+                ) : events.length === 0 ? (
                     <p className="activities__empty">אין פעילויות מתוכננות כרגע — עקבו אחרינו לעדכונים.</p>
                 ) : isList ? (
                     <div className="activities__rows">

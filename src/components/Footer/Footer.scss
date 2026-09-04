@@ -167,6 +167,11 @@
         color: white;
       }
     }
+    
+    &--youtube:hover {
+      background: #ff0000;
+      color: #fff;
+    }
 
     @include max-sm {
       width: 38px;

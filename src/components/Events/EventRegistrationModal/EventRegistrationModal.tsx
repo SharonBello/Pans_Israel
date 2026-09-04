@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, IconButton, CircularProgress, useMediaQuery, useTheme } from '@mui/material';
 import { Close as CloseIcon, OpenInNew as OpenInNewIcon } from '@mui/icons-material';
-import type { FeaturedEvent } from '@/data/eventsData';
+import type { EventItem } from '@/types/event';
 import './EventRegistrationModal.scss';
 
 interface EventRegistrationModalProps {
-    event: FeaturedEvent | null;
+    event: EventItem | null;
     open: boolean;
     onClose: () => void;
 }

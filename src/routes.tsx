@@ -1,4 +1,5 @@
 import React from 'react';
+import { Navigate } from 'react-router-dom';
 
 import HomePage from './pages/HomePage/HomePage.tsx';
 import SymptomsPage from './pages/SymptomsPage/SymptomsPage.tsx';
@@ -20,7 +21,7 @@ import CBIHomePage from './pages/SymptomsPage/scales/CbiScale/CBIHomePage/CBIHom
 import CBIScalePage from './pages/SymptomsPage/scales/CbiScale/CBIScalePage/CBIScalePage.tsx';
 import CBIResultsPage from './pages/SymptomsPage/scales/CbiScale/CBIResultsPage/CBIResultsPage.tsx';
 import AboutPage from './pages/AboutPage/AboutPage.tsx';
-import { SOCAdminPage, SOCResultsPage, SOCSurveyPage } from './features/index.ts';
+import { SOCResultsPage, SOCSurveyPage } from './features/index.ts';
 import ProfessionalSurveysPage from './pages/ProfessionalPages/ProfessionalSurveysPage/ProfessionalSurveysPage.tsx';
 import InfoPage from './pages/InfoPage/InfoPage.tsx';
 import ResourcesPage from './pages/ResourcesPage/ResourcesPage.tsx';
@@ -34,15 +35,14 @@ import ArticlesPage from './pages/ProfessionalPages/ArticlesPage/ArticlesPage.ts
 import InternationalPage from './pages/ProfessionalPages/InternationalPage/InternationalPage.tsx';
 import ResearchPage from './pages/ProfessionalPages/ResearchPage/ResearchPage.tsx';
 import ActivitiesPage from './pages/ActivitiesPage/ActivitiesPage.tsx';
-
-// ── Admin Auth ────────────────────────────────────────────────────────────────
-import AdminLoginPage from './pages/AdminLoginPage/AdminLoginPage.tsx';
-import ProtectedRoute from './Auth/ProtectedRoute.tsx';
 import BlogListPage from './pages/CommunityBlog/BlogListPage/BlogListPage.tsx';
 import BlogArticlePage from './pages/CommunityBlog/BlogArticlePage/BlogArticlePage.tsx';
-import PdfAdminPage from './pages/PdfAdminPage/PdfAdminPage.tsx';
 import MediaCoveragePage from './pages/MediaCoveragePage/MediaCoveragePage.tsx';
-import MediaArticlesAdmin from './pages/MediaArticlesAdmin/MediaArticlesAdmin.tsx';
+
+// ── Admin ─────────────────────────────────────────────────────────────────────
+import AdminLoginPage from './pages/AdminLoginPage/AdminLoginPage.tsx';
+import ProtectedRoute from './Auth/ProtectedRoute.tsx';
+import AdminPage from './pages/Admin/AdminPage/AdminPage.tsx';
 
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -184,7 +184,7 @@ const AppRoutes: AppRoute[] = [
       canonicalPath: '/testimonials',
     },
   },
-  // Scales
+
   // Scales
   {
     path: '/scales/pandas',
@@ -338,7 +338,6 @@ const AppRoutes: AppRoute[] = [
   },
 
   // Surveys
-  // Surveys
   {
     path: '/surveys',
     component: <ProfessionalSurveysPage />,
@@ -398,6 +397,16 @@ const AppRoutes: AppRoute[] = [
       description:
         'סרטונים, הרצאות ותכנים מצולמים בנושא פאנס ופאנדס עבור הורים, משפחות, אנשי חינוך ואנשי מקצוע.',
       canonicalPath: '/resources/videos',
+    },
+  },
+  {
+    path: '/resources/media-coverage',
+    component: <MediaCoveragePage />,
+    seo: {
+      title: 'פאנס ופאנדס בתקשורת | פאנס/פאנדס ישראל',
+      description:
+        'כתבות, פרסומים ואזכורים בתקשורת בנושא פאנס ופאנדס והעלאת מודעות ציבורית בישראל.',
+      canonicalPath: '/resources/media-coverage',
     },
   },
 
@@ -463,7 +472,7 @@ const AppRoutes: AppRoute[] = [
     },
   },
 
-
+  // Community
   {
     path: '/community/articles',
     component: <BlogListPage />,
@@ -485,7 +494,9 @@ const AppRoutes: AppRoute[] = [
     },
   },
 
-  // ── Admin routes (no nav links to these anywhere in the app) ──────────────
+  // ───────────────────────────────────────────────────────────────────────────
+  // Admin — single page, panels switch via ?tab=
+  // ───────────────────────────────────────────────────────────────────────────
   {
     path: '/admin/login',
     component: <AdminLoginPage />,
@@ -497,57 +508,24 @@ const AppRoutes: AppRoute[] = [
     },
   },
   {
-    path: '/admin/surveys/state-of-children',
+    path: '/admin',
     component: (
       <ProtectedRoute>
-        <SOCAdminPage />
+        <AdminPage />
       </ProtectedRoute>
     ),
     seo: {
-      title: 'ניהול סקר מצב הילדים | פאנס/פאנדס ישראל',
-      description: 'עמוד ניהול פנימי לסקר מצב הילדים.',
-      canonicalPath: '/admin/surveys/state-of-children',
+      title: 'ניהול האתר | פאנס/פאנדס ישראל',
+      description: 'מערכת ניהול פנימית.',
+      canonicalPath: '/admin',
       noIndex: true,
     },
   },
-  {
-    path: '/professional/articles/admin/pdf',
-    component: (
-      <ProtectedRoute>
-        <PdfAdminPage />
-      </ProtectedRoute>
-    ),
-    seo: {
-      title: 'ניהול קבצי PDF | פאנס/פאנדס ישראל',
-      description: 'עמוד ניהול פנימי לקבצי PDF.',
-      canonicalPath: '/professional/articles/admin/pdf',
-      noIndex: true,
-    },
-  },
-  {
-    path: '/resources/media-coverage',
-    component: <MediaCoveragePage />,
-    seo: {
-      title: 'פאנס ופאנדס בתקשורת | פאנס/פאנדס ישראל',
-      description:
-        'כתבות, פרסומים ואזכורים בתקשורת בנושא פאנס ופאנדס והעלאת מודעות ציבורית בישראל.',
-      canonicalPath: '/resources/media-coverage',
-    },
-  },
-  {
-    path: '/admin/media-articles',
-    component: (
-      <ProtectedRoute>
-        <MediaArticlesAdmin />
-      </ProtectedRoute>
-    ),
-    seo: {
-      title: 'ניהול כתבות תקשורת | פאנס/פאנדס ישראל',
-      description: 'עמוד ניהול פנימי לכתבות ואזכורים בתקשורת.',
-      canonicalPath: '/admin/media-articles',
-      noIndex: true,
-    },
-  },
+
+  // Redirects from the old admin URLs
+  { path: '/admin/media-articles', component: <Navigate to="/admin?tab=media" replace /> },
+  { path: '/admin/surveys/state-of-children', component: <Navigate to="/admin?tab=surveys" replace /> },
+  { path: '/professional/articles/admin/pdf', component: <Navigate to="/admin?tab=pdf" replace /> },
 ];
 
 export default AppRoutes;

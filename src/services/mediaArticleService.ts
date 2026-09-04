@@ -23,10 +23,10 @@ const colRef = () => collection(db, COLLECTION);
 
 // ── Fetch all published articles ─────────────────────────────────────────────
 export const getPublishedArticles = async (): Promise<MediaArticle[]> => {
-    const snap = await getDocs(collection(db, 'mediaArticles'));
+    const q = query(colRef(), where('published', '==', true));
+    const snap = await getDocs(q);
     return snap.docs
         .map(d => ({ id: d.id, ...d.data() } as MediaArticle))
-        .filter(a => a.published)
         .sort((a, b) => (b.datePublished > a.datePublished ? 1 : -1));
 };
 
