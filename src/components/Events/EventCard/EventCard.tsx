@@ -3,6 +3,7 @@ import { FiCalendar, FiClock, FiMapPin, FiArrowLeft, FiZoomIn } from 'react-icon
 import type { EventItem } from '@/types/event';
 import { FORMAT_LABELS, eventAnchorId } from '@/types/event';
 import { getEventDateParts, getEventTimeLabel } from '@/utils/eventDisplay';
+import EventProgram from '@/components/Events/EventProgram/EventProgram';
 import './EventCard.scss';
 
 interface EventCardProps {
@@ -121,6 +122,11 @@ const EventCard: React.FC<EventCardProps> = ({ event, past = false, onRegister, 
           )}
         </div>
       </div>
+
+      {/* ── Program & speaker bios (only when the event has one) ── */}
+      {event.program && event.program.length > 0 && (
+        <EventProgram program={event.program} idPrefix={anchorId} />
+      )}
     </article>
   );
 };

@@ -1,0 +1,365 @@
+// ==========================================================================
+// EventProgram — collapsible agenda + speaker bios at the bottom of an EventCard.
+// Colours come from the card's --card-accent-* custom properties.
+// ==========================================================================
+
+$program-border: #e3e8ef;
+$program-soft: #f6f8fa;
+$program-text: #33475b;
+$program-muted: #5b6b7b;
+
+.event-program {
+    border-top: 1px solid $program-border;
+
+    // ── Toggle bar ──────────────────────────────────────────
+    &__toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        width: 100%;
+        min-height: 68px;
+        padding: 10px 18px;
+        border: 0;
+        background: $program-soft;
+        font-family: inherit;
+        text-align: start;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        @include md {
+            min-height: 72px;
+            padding: 10px 28px;
+        }
+
+        &:hover {
+            background: #eef2f6;
+        }
+
+        &:focus-visible {
+            outline: 3px solid var(--card-accent-strong);
+            outline-offset: -3px;
+        }
+    }
+
+    &__toggle-main {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-width: 0;
+    }
+
+    &__toggle-icon {
+        flex-shrink: 0;
+        display: none;
+        place-items: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: var(--card-accent-tint);
+        color: var(--card-accent-strong);
+        font-size: 1.15rem;
+
+        @include sm {
+            display: grid;
+        }
+    }
+
+    &__toggle-text {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+    }
+
+    &__toggle-title {
+        font-family: $font-heading;
+        font-size: 1.0625rem;
+        font-weight: 800;
+        color: $color-darkest;
+
+        @include md {
+            font-size: 1.125rem;
+        }
+    }
+
+    &__toggle-meta {
+        font-size: 0.875rem;
+        color: $program-muted;
+    }
+
+    // "פתיחה / על המרצה" + chevron (text hidden on phones)
+    &__more {
+        flex-shrink: 0;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: $color-primary;
+    }
+
+    &__more-text {
+        display: none;
+
+        @include sm {
+            display: inline;
+        }
+    }
+
+    &__chevron {
+        flex-shrink: 0;
+        font-size: 1.25rem;
+        transition: transform 0.2s ease;
+
+        &--open {
+            transform: rotate(180deg);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            transition: none;
+        }
+    }
+
+    // ── Panel + timeline ───────────────────────────────────
+    &__panel {
+        padding: 22px 14px 24px;
+        border-top: 1px solid $program-border;
+
+        @include md {
+            padding: 32px 28px 36px;
+        }
+    }
+
+    &__sessions {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    // Phones: rail on the side, time chip above the title.
+    // Tablet up: time column | rail | content.
+    &__session {
+        display: grid;
+        grid-template-columns: 20px minmax(0, 1fr);
+        grid-template-areas:
+            "rail time"
+            "rail body";
+        column-gap: 12px;
+
+        @include md {
+            grid-template-columns: 116px 28px minmax(0, 1fr);
+            grid-template-areas: "time rail body";
+            column-gap: 16px;
+        }
+    }
+
+    &__time {
+        grid-area: time;
+        justify-self: start;
+        padding: 3px 10px;
+        border-radius: 999px;
+        background: #eef2f6;
+        color: $color-primary;
+        font-size: 0.8125rem;
+        font-weight: 700;
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+
+        @include md {
+            justify-self: stretch;
+            padding: 1px 0 0;
+            background: none;
+            font-size: 0.9375rem;
+            text-align: right;
+        }
+    }
+
+    // Dot + connecting line down to the next session
+    &__rail {
+        grid-area: rail;
+        position: relative;
+        display: flex;
+        justify-content: center;
+
+        &::before {
+            content: "";
+            position: relative;
+            z-index: 1;
+            width: 12px;
+            height: 12px;
+            margin-top: 6px;
+            border-radius: 50%;
+            background: var(--card-accent);
+            border: 3px solid var(--card-accent-tint);
+        }
+
+        &::after {
+            content: "";
+            position: absolute;
+            top: 24px;
+            bottom: -4px;
+            width: 2px;
+            background: $program-border;
+        }
+    }
+
+    &__session:last-child &__rail::after {
+        display: none;
+    }
+
+    // Sessions without speakers (registration, breaks): small hollow dot
+    &__session--plain &__rail::before {
+        width: 8px;
+        height: 8px;
+        margin-top: 8px;
+        background: #fff;
+        border: 2px solid #9aa8b6;
+    }
+
+    &__body {
+        grid-area: body;
+        min-width: 0;
+        padding: 8px 0 22px;
+
+        @include md {
+            padding: 0 0 26px;
+        }
+    }
+
+    &__session:last-child &__body {
+        padding-bottom: 0;
+    }
+
+    &__title {
+        margin: 0;
+        font-family: $font-heading;
+        font-size: 1rem;
+        line-height: 1.45;
+        font-weight: 700;
+        color: $color-darkest;
+
+        @include md {
+            font-size: 1.125rem;
+            line-height: 1.4;
+        }
+    }
+
+    &__subtitle {
+        margin: 4px 0 0;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        color: $program-muted;
+    }
+
+    // ── Speakers ────────────────────────────────────────────
+    &__speakers {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 12px 0 0;
+        padding: 0;
+    }
+
+    &__speaker {
+        border: 1px solid $program-border;
+        border-radius: 14px;
+        background: #fff;
+        overflow: hidden;
+    }
+
+    &__speaker-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        width: 100%;
+        min-height: 64px;
+        padding: 10px 12px;
+        border: 0;
+        background: transparent;
+        font-family: inherit;
+        text-align: start;
+        cursor: pointer;
+
+        @include md {
+            gap: 14px;
+            padding: 12px 16px;
+        }
+
+        &:hover {
+            background: #fafbfc;
+        }
+
+        &:focus-visible {
+            outline: 3px solid var(--card-accent-strong);
+            outline-offset: -3px;
+        }
+
+        &--static {
+            cursor: default;
+
+            &:hover {
+                background: transparent;
+            }
+        }
+    }
+
+    &__avatar {
+        flex-shrink: 0;
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: var(--card-accent-tint);
+        color: var(--card-accent-strong);
+        font-size: 0.9375rem;
+        font-weight: 700;
+        object-fit: cover;
+    }
+
+    &__who {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+    }
+
+    &__name {
+        font-size: 1rem;
+        font-weight: 700;
+        color: $color-darkest;
+    }
+
+    &__role {
+        font-size: 0.875rem;
+        line-height: 1.4;
+        color: var(--card-accent-strong);
+    }
+
+    &__bio {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        padding: 12px 14px 16px;
+        border-top: 1px dashed $program-border;
+
+        @include md {
+            padding: 14px 16px 18px;
+            padding-inline-start: 74px; // lines up with the speaker's name
+        }
+
+        &[hidden] {
+            display: none;
+        }
+
+        p {
+            margin: 0;
+            font-size: 0.9375rem;
+            line-height: 1.75;
+            color: $program-text;
+        }
+    }
+}
