@@ -1,22 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import EventCard from '@/components/Events/EventCard/EventCard';
 import EventRow from '@/components/Events/EventRow/EventRow';
 import EventRegistrationModal from '@/components/Events/EventRegistrationModal/EventRegistrationModal';
 import { getUpcomingEvents } from '@/services/eventService';
 import type { EventItem } from '@/types/event';
 import './ActivitiesSection.scss';
 
-interface ActivitiesSectionProps {
-    /** 'cards' = full grid (activities page); 'list' = compact rows (home page) */
-    variant?: 'cards' | 'list';
-}
-
-const ActivitiesSection: React.FC<ActivitiesSectionProps> = ({ variant = 'cards' }) => {
+/** Home-page teaser: compact rows of upcoming events + a link to /activities */
+const ActivitiesSection: React.FC = () => {
     const [events, setEvents] = useState<EventItem[]>([]);
     const [loading, setLoading] = useState(true);
     const [activeEvent, setActiveEvent] = useState<EventItem | null>(null);
-    const isList = variant === 'list';
 
     useEffect(() => {
         let cancelled = false;
@@ -27,11 +21,11 @@ const ActivitiesSection: React.FC<ActivitiesSectionProps> = ({ variant = 'cards'
         return () => { cancelled = true; };
     }, []);
 
-    // On the home page, hide the whole section when there's nothing to show
-    if (!loading && events.length === 0 && isList) return null;
+    // Hide the whole section when there's nothing to show
+    if (!loading && events.length === 0) return null;
 
     return (
-        <section className={`activities activities--${variant}`} aria-labelledby="activities-title">
+        <section className="activities activities--list" aria-labelledby="activities-title">
             <div className="activities__inner">
                 <p className="activities__eyebrow">קהילה ואירועים</p>
                 <h2 id="activities-title" className="activities__title">הפעילויות הקרובות שלנו</h2>
@@ -41,25 +35,15 @@ const ActivitiesSection: React.FC<ActivitiesSectionProps> = ({ variant = 'cards'
 
                 {loading ? (
                     <p className="activities__empty">טוען פעילויות…</p>
-                ) : events.length === 0 ? (
-                    <p className="activities__empty">אין פעילויות מתוכננות כרגע — עקבו אחרינו לעדכונים.</p>
-                ) : isList ? (
+                ) : (
                     <div className="activities__rows">
                         {events.map((event) => (
                             <EventRow key={event.id} event={event} onRegister={setActiveEvent} />
                         ))}
                     </div>
-                ) : (
-                    <div className="activities__list">
-                        {events.map((event) => (
-                            <EventCard key={event.id} event={event} onRegister={setActiveEvent} />
-                        ))}
-                    </div>
                 )}
 
-                {isList && (
-                    <Link to="/activities" className="activities__all">לכל האירועים והכנסים ←</Link>
-                )}
+                <Link to="/activities" className="activities__all">לכל האירועים והכנסים ←</Link>
             </div>
 
             <EventRegistrationModal

@@ -1,178 +1,391 @@
+// ==========================================================================
+// EventCard — activities page (upcoming + compact past variant)
+// Per-event colour comes from --card-accent, set inline from event.accent.
+// Fills under white text use the darker --card-accent-strong for contrast.
+// ==========================================================================
+
+$card-border: #e3e8ef;
+$card-soft: #f6f8fa;
+$card-text: #33475b;
+$card-muted: #5b6b7b;
+
 .event-card {
-  display: flex;
-  flex-direction: column;
+  --card-accent: #4a90d9;
+  --card-accent-strong: color-mix(in srgb, var(--card-accent) 68%, #000);
+  --card-accent-tint: color-mix(in srgb, var(--card-accent) 13%, #fff);
+
   background: #fff;
-  border: 1px solid rgba(31, 78, 121, 0.08);
+  border: 1px solid $card-border;
   border-radius: 20px;
+  box-shadow: 0 18px 40px -28px rgba(2, 51, 115, 0.35);
   overflow: hidden;
-  box-shadow:
-    0 1px 2px rgba(31, 78, 121, 0.04),
-    0 14px 32px -18px rgba(31, 78, 121, 0.2);
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
+  text-align: start;
 
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow:
-      0 1px 2px rgba(31, 78, 121, 0.04),
-      0 22px 44px -20px rgba(31, 78, 121, 0.28);
-  }
+  // ── Layout ──────────────────────────────────────────────
+  &__main {
+    display: grid;
+    gap: 18px;
+    padding: 12px 12px 20px;
 
-  @media (hover: none) {
-    &:hover {
-      transform: none;
+    @include md {
+      grid-template-columns: 260px minmax(0, 1fr);
+      gap: 28px;
+      padding: 24px;
+    }
+
+    @include xl {
+      grid-template-columns: 340px minmax(0, 1fr);
+      gap: 36px;
+      padding: 28px;
     }
   }
 
-  // ── Media ──────────────────────────────────────────────
+  // ── Poster ──────────────────────────────────────────────
   &__media {
     position: relative;
-    aspect-ratio: 1 / 1; // set to your invite template's ratio (e.g. 4 / 5 for 1080×1350)
+    aspect-ratio: 4 / 3;
+    border-radius: 14px;
     overflow: hidden;
-    background: linear-gradient(135deg, #e8f0fa 0%, #f5f1ec 100%);
-    display: grid;
-    place-items: center;
+    background: #0b2a3f;
+
+    @include md {
+      aspect-ratio: auto;
+      min-height: 320px;
+      max-height: 460px;
+    }
 
     img {
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center top;
+      object-position: top;
       display: block;
     }
   }
 
-  &__date {
-    position: relative;
+  // ── Date tile (events without a poster) ────────────────
+  &__date-tile {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 1.25rem 1.75rem;
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.85);
-    color: #1f4e79;
-    box-shadow: 0 8px 24px -12px rgba(31, 78, 121, 0.3);
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: center;
+    gap: 4px 12px;
+    padding: 18px;
+    border-radius: 14px;
+    background: var(--card-accent-tint);
+    text-align: center;
+
+    @include md {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: center;
+      gap: 6px;
+      min-height: 320px;
+    }
+  }
+
+  &__weekday {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--card-accent-strong);
   }
 
   &__day {
-    font-size: 3rem;
-    font-weight: 700;
+    font-family: $font-heading;
+    font-size: clamp(3.25rem, 2.5rem + 3vw, 6rem);
     line-height: 1;
+    font-weight: 800;
+    color: var(--card-accent-strong);
+    font-variant-numeric: tabular-nums;
   }
 
   &__month {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: $color-darkest;
+  }
+
+  &__year {
     font-size: 1rem;
-    opacity: 0.75;
-    margin-top: 0.25rem;
+    color: $card-muted;
   }
 
-  &__badge {
-    position: absolute;
-    top: 12px;
-    inset-inline-end: 12px;
-    padding: 0.25rem 0.75rem;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(6px);
-    color: #b85c1a;
-    font-size: 0.75rem;
-    font-weight: 600;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-
-  // posters carry their own badge — hide ours
-  &__media--has-image .event-card__badge {
-    display: none;
-  }
-
-  // ── Body ───────────────────────────────────────────────
+  // ── Body ────────────────────────────────────────────────
   &__body {
     display: flex;
     flex-direction: column;
-    gap: 0.55rem;
-    padding: 1.5rem 1.6rem 1.75rem;
-    flex: 1;
+    gap: 16px;
+    min-width: 0;
+    padding: 0 6px;
+
+    @include md {
+      gap: 18px;
+      padding: 4px 0 0;
+    }
+  }
+
+  &__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  &__chip {
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: #eef2f6;
+    color: #34475b;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    line-height: 1.4;
+
+    &--accent {
+      background: var(--card-accent-tint);
+      color: var(--card-accent-strong);
+      font-weight: 700;
+    }
+
+    &--muted {
+      background: #eef1f4;
+      color: #415161;
+      font-weight: 700;
+    }
   }
 
   &__title {
-    font-size: 1.15rem;
-    font-weight: 600;
-    line-height: 1.4;
-    color: #1c2b3a;
     margin: 0;
+    font-family: $font-heading;
+    font-size: clamp(1.375rem, 1.1rem + 1vw, 1.875rem);
+    line-height: 1.25;
+    font-weight: 800;
+    color: $color-darkest;
   }
 
   &__subtitle {
-    font-size: 0.875rem;
-    color: #6b7a89;
-    margin: 0;
+    margin: 6px 0 0;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    color: var(--card-accent-strong);
   }
 
-  &__meta {
-    list-style: none;
-    padding: 0;
-    margin: 0.25rem 0 0;
+  // ── Facts (date / time / location) ─────────────────────
+  &__facts {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 8px 12px;
+  }
+
+  &__fact {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem 1rem;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: $card-soft;
 
-    li {
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      font-size: 0.85rem;
-      color: #415161;
-
-      svg {
-        color: #4a90d9;
-        flex-shrink: 0;
-      }
+    @include md {
+      align-items: flex-start;
+      padding: 14px;
     }
+
+    dt {
+      margin: 0 0 2px;
+      font-size: 0.75rem;
+      color: $card-muted;
+    }
+
+    dd {
+      margin: 0;
+      font-size: 0.9375rem;
+      line-height: 1.45;
+      font-weight: 600;
+      color: $color-darkest;
+      overflow-wrap: anywhere;
+    }
+  }
+
+  &__fact-icon {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    background: var(--card-accent-tint);
+    color: var(--card-accent-strong);
+    font-size: 1.1rem;
   }
 
   &__desc {
-    font-size: 0.925rem;
+    margin: 0;
+    font-size: 1rem;
     line-height: 1.75;
-    color: #3d4a57;
-    margin: 0.25rem 0 0.75rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    color: $card-text;
+    white-space: pre-line;
+  }
+
+  // ── Actions ─────────────────────────────────────────────
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 4px;
   }
 
   &__btn {
-    align-self: flex-start;
-    margin-top: auto;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.55rem 1.15rem;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    min-height: 48px;
+    padding: 0 26px;
     border: 0;
     border-radius: 999px;
-    background: #1f4e79;
+    background: var(--card-accent-strong);
     color: #fff;
     font-family: inherit;
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 700;
     cursor: pointer;
-    transition:
-      background 0.2s,
-      gap 0.2s;
+    transition: background-color 0.2s ease;
 
-    &:hover,
-    &:focus-visible {
-      background: #2a6096;
-      gap: 0.75rem;
+    @include sm {
+      width: auto;
     }
 
-    &--disabled {
-      background: transparent;
-      color: #6b7a89;
-      border: 1px dashed #c9d3dd;
+    &:hover {
+      background: color-mix(in srgb, var(--card-accent) 52%, #000);
+    }
+
+    &:focus-visible {
+      outline: 3px solid var(--card-accent);
+      outline-offset: 3px;
+    }
+
+    svg {
+      flex-shrink: 0;
+    }
+
+    &--disabled,
+    &--disabled:hover {
+      background: #eef1f4;
+      color: #415161;
       cursor: default;
+    }
+  }
+
+  // ── Past variant: compact archive row ──────────────────
+  &--past {
+    border-radius: 18px;
+    box-shadow: none;
+
+    .event-card__main {
+      grid-template-columns: 96px minmax(0, 1fr);
+      align-items: center;
+      gap: 14px;
+      padding: 14px;
+
+      @include md {
+        grid-template-columns: 168px minmax(0, 1fr);
+        gap: 28px;
+        padding: 22px 24px;
+      }
+    }
+
+    .event-card__media,
+    .event-card__date-tile {
+      aspect-ratio: 1 / 1;
+      min-height: 0;
+      max-height: none;
+      border-radius: 12px;
+    }
+
+    .event-card__date-tile {
+      flex-direction: column;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      padding: 8px;
+    }
+
+    .event-card__weekday {
+      display: none;
+    }
+
+    .event-card__day {
+      font-size: clamp(1.75rem, 1.4rem + 1.5vw, 2.75rem);
+    }
+
+    .event-card__month {
+      font-size: 0.875rem;
+    }
+
+    .event-card__year {
+      font-size: 0.75rem;
+    }
+
+    .event-card__body {
+      gap: 8px;
+      padding: 0;
+    }
+
+    .event-card__chip {
+      padding: 3px 10px;
+      font-size: 0.75rem;
+    }
+
+    .event-card__title {
+      font-size: clamp(1.0625rem, 0.95rem + 0.5vw, 1.375rem);
+      font-weight: 700;
+    }
+
+    .event-card__subtitle {
+      margin-top: 4px;
+      font-size: 0.9375rem;
+      font-weight: 400;
+      color: $card-muted;
+    }
+
+    .event-card__facts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 18px;
+    }
+
+    .event-card__fact {
+      align-items: center;
+      gap: 6px;
+      padding: 0;
+      background: none;
+
+      dt {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+
+      dd {
+        font-size: 0.875rem;
+        font-weight: 400;
+        color: #415161;
+      }
+    }
+
+    .event-card__fact-icon {
+      width: auto;
+      height: auto;
+      background: none;
+      color: #415161;
+      font-size: 0.95rem;
     }
   }
 }

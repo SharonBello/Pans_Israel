@@ -21,12 +21,25 @@ const toEvent = (id: string, data: Record<string, unknown>): EventItem =>
 
 const todayIso = (): string => new Date().toISOString().split('T')[0];
 
-// ── Public: published events whose date hasn't passed, soonest first ─────────
+// ── Public (home page): published events whose date hasn't passed, soonest first ──
 export const getUpcomingEvents = async (): Promise<EventItem[]> => {
     const q = query(
         colRef(),
         where('published', '==', true),
         where('date', '>=', todayIso()),
+        orderBy('date', 'asc'),
+    );
+    const snap = await getDocs(q);
+    return snap.docs.map((d) => toEvent(d.id, d.data()));
+};
+
+// ── Public (activities page): every published event, oldest first ────────────
+// The page splits the result into upcoming / past. Uses the same composite
+// index (published + date) as getUpcomingEvents, so no new index is needed.
+export const getPublishedEvents = async (): Promise<EventItem[]> => {
+    const q = query(
+        colRef(),
+        where('published', '==', true),
         orderBy('date', 'asc'),
     );
     const snap = await getDocs(q);

@@ -11,8 +11,7 @@ const HomePage: React.FC = (): React.JSX.Element => {
     <>
       <Hero />
       <UserJourney />
-      {/* ═══════════════ Upcoming Activities ═══════════════ */}
-      <ActivitiesSection variant="list" />
+      <ActivitiesSection />
       <LatestArticleWidget />
       <FeaturedMediaWidget />
       <HomeSections />

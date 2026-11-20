@@ -2,6 +2,25 @@ import type { Timestamp } from 'firebase/firestore';
 
 export type EventFormat = 'online' | 'in-person' | 'hybrid';
 
+/** Lecturer / panelist in an event program */
+export interface EventSpeaker {
+    id: string;
+    name: string;               // 'ד״ר יובל שפריר'
+    role: string;               // 'נוירולוגיית ילדים, ארצות הברית'
+    bio: string;                // paragraphs separated by a blank line
+    imageUrl: string;           // optional headshot (Cloudinary / external URL), '' if none
+}
+
+/** One slot in an event program (agenda) */
+export interface EventSession {
+    id: string;
+    startTime: string;          // 'HH:mm'
+    endTime: string;            // 'HH:mm', '' if open-ended
+    title: string;
+    subtitle: string;           // e.g. 'עמותת PANDAS ישראל', '' if none
+    speakers: EventSpeaker[];   // [] for registration, breaks, etc.
+}
+
 /** Stored in Firestore `events` collection */
 export interface EventItem {
     id: string;
@@ -15,9 +34,10 @@ export interface EventItem {
     description: string;
     registrationUrl?: string;   // empty/undefined until registration opens
     registrationLabel?: string; // default 'להרשמה'
-    imageUrl?: string;          // poster (Storage download URL or external)
+    imageUrl?: string;          // poster / invite (Cloudinary or external URL)
     imageAlt?: string;
-    accent: string;             // hex colour for the home-page row stripe
+    accent: string;             // hex colour for stripes, date tiles and buttons
+    program?: EventSession[];   // optional — the program section shows only when non-empty
     published: boolean;
     createdAt?: Timestamp;
     updatedAt?: Timestamp;
@@ -40,6 +60,7 @@ export const EMPTY_EVENT_FORM: EventFormData = {
     imageUrl: '',
     imageAlt: '',
     accent: '#4a90d9',
+    program: [],
     published: false,
 };
 
@@ -57,3 +78,6 @@ export const formatEventDateLabel = (date: string, time?: string): string => {
     const label = d.toLocaleDateString('he-IL', { day: 'numeric', month: 'long', year: 'numeric' });
     return time ? `${label} · ${time}` : label;
 };
+
+/** DOM id of an event's card on /activities — used for #anchor links from the home page */
+export const eventAnchorId = (id: string): string => `event-${id}`;

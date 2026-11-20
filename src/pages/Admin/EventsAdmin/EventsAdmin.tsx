@@ -22,8 +22,15 @@ const toForm = (e: EventItem): EventFormData => ({
     imageUrl: e.imageUrl ?? '',
     imageAlt: e.imageAlt ?? '',
     accent: e.accent ?? '#4a90d9',
+    program: e.program ?? [],
     published: e.published ?? false,
 });
+
+/** 'בקרוב · להורים ולאנשי מקצוע · תוכנית: 8 מושבים' — skips empty parts */
+const eventSubLine = (e: EventItem): string =>
+    [e.badge, e.subtitle, e.program?.length ? `תוכנית: ${e.program.length} מושבים` : '']
+        .filter(Boolean)
+        .join(' · ');
 
 const EventsAdmin: React.FC = () => {
     const [events, setEvents] = useState<EventItem[]>([]);
@@ -153,7 +160,7 @@ const EventsAdmin: React.FC = () => {
                                                     : <span className="adm-table__thumb adm-table__thumb--empty" style={{ background: e.accent }} />}
                                                 <div>
                                                     <span className="adm-table__title">{e.title}</span>
-                                                    <span className="adm-table__muted">{e.badge}{e.subtitle ? ` · ${e.subtitle}` : ''}</span>
+                                                    <span className="adm-table__muted">{eventSubLine(e)}</span>
                                                 </div>
                                             </div>
                                         </td>

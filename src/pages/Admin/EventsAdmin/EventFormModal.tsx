@@ -4,8 +4,9 @@ import {
     FormControlLabel, Switch, IconButton, CircularProgress, Box, Typography,
 } from '@mui/material';
 import { Close as CloseIcon } from '@mui/icons-material';
-import type { EventFormData, EventFormat } from '@/types/event';
+import type { EventFormData, EventFormat, EventSession } from '@/types/event';
 import { FORMAT_LABELS, ACCENT_PRESETS } from '@/types/event';
+import ProgramEditor from './ProgramEditor';
 
 interface Props {
     open: boolean;
@@ -16,6 +17,38 @@ interface Props {
     onClose: () => void;
 }
 
+const URL_RE = /^https?:\/\//;
+
+/** Trim every text field and order sessions by start time before saving */
+const cleanProgram = (program: EventSession[]): EventSession[] =>
+    program
+        .map((s) => ({
+            ...s,
+            startTime: s.startTime.trim(),
+            endTime: s.endTime.trim(),
+            title: s.title.trim(),
+            subtitle: s.subtitle.trim(),
+            speakers: s.speakers.map((sp) => ({
+                ...sp,
+                name: sp.name.trim(),
+                role: sp.role.trim(),
+                bio: sp.bio.trim(),
+                imageUrl: sp.imageUrl.trim(),
+            })),
+        }))
+        .sort((a, b) => a.startTime.localeCompare(b.startTime));
+
+/** Returns a Hebrew error message, or '' when the program is valid */
+const validateProgram = (program: EventSession[]): string => {
+    const incompleteSession = program.some((s) => !s.startTime.trim() || !s.title.trim());
+    const namelessSpeaker = program.some((s) => s.speakers.some((sp) => !sp.name.trim()));
+    const badImage = program.some((s) => s.speakers.some((sp) => sp.imageUrl.trim() && !URL_RE.test(sp.imageUrl.trim())));
+    if (incompleteSession) return 'בכל מושב חובה למלא שעת התחלה וכותרת';
+    if (namelessSpeaker) return 'לכל מרצה חובה למלא שם';
+    if (badImage) return 'קישור לתמונת מרצה חייב להתחיל ב-http';
+    return '';
+};
+
 const EventFormModal: React.FC<Props> = ({ open, initial, saving, isEdit, onSave, onClose }) => {
     const [form, setForm] = useState<EventFormData>(initial);
     const [errors, setErrors] = useState<Partial<Record<keyof EventFormData, string>>>({});
@@ -25,14 +58,20 @@ const EventFormModal: React.FC<Props> = ({ open, initial, saving, isEdit, onSave
         setErrors((e) => ({ ...e, [key]: undefined }));
     };
 
+    // Program edits keep the error visible until the next save attempt,
+    // so the red highlights stay on while the admin fixes them.
+    const setProgram = (program: EventSession[]) => setForm((f) => ({ ...f, program }));
+
     const validate = (): boolean => {
         const e: typeof errors = {};
         if (!form.title.trim()) e.title = 'שדה חובה';
         if (!form.date) e.date = 'שדה חובה';
         if (!form.location.trim()) e.location = 'שדה חובה';
         if (!form.description.trim()) e.description = 'שדה חובה';
-        if (form.registrationUrl && !/^https?:\/\//.test(form.registrationUrl)) e.registrationUrl = 'כתובת חייבת להתחיל ב-http';
-        if (form.imageUrl && !/^https?:\/\//.test(form.imageUrl)) e.imageUrl = 'כתובת חייבת להתחיל ב-http';
+        if (form.registrationUrl && !URL_RE.test(form.registrationUrl)) e.registrationUrl = 'כתובת חייבת להתחיל ב-http';
+        if (form.imageUrl && !URL_RE.test(form.imageUrl)) e.imageUrl = 'כתובת חייבת להתחיל ב-http';
+        const programError = validateProgram(form.program ?? []);
+        if (programError) e.program = programError;
         setErrors(e);
         return Object.keys(e).length === 0;
     };
@@ -44,6 +83,7 @@ const EventFormModal: React.FC<Props> = ({ open, initial, saving, isEdit, onSave
             registrationUrl: form.registrationUrl?.trim() || '',
             imageUrl: form.imageUrl?.trim() || '',
             time: form.time?.trim() || '',
+            program: cleanProgram(form.program ?? []),
         });
     };
 
@@ -134,6 +174,9 @@ const EventFormModal: React.FC<Props> = ({ open, initial, saving, isEdit, onSave
                                 style={{ width: 34, height: 28, border: 0, background: 'none' }} aria-label="צבע מותאם" />
                         </Box>
                     </Box>
+
+                    {/* Program & speakers (optional) */}
+                    <ProgramEditor value={form.program ?? []} onChange={setProgram} error={errors.program} />
 
                     <FormControlLabel sx={{ gridColumn: '1 / -1' }}
                         control={<Switch checked={form.published} onChange={(e) => set('published', e.target.checked)} />}

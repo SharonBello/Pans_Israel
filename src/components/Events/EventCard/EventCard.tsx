@@ -1,61 +1,108 @@
 import React from 'react';
-import { FiCalendar, FiMapPin, FiArrowLeft } from 'react-icons/fi';
+import { FiCalendar, FiClock, FiMapPin, FiArrowLeft } from 'react-icons/fi';
 import type { EventItem } from '@/types/event';
-import { formatEventDateLabel } from '@/types/event';
+import { FORMAT_LABELS, eventAnchorId } from '@/types/event';
+import { getEventDateParts, getEventTimeLabel } from '@/utils/eventDisplay';
 import './EventCard.scss';
 
 interface EventCardProps {
   event: EventItem;
-  onRegister: (event: EventItem) => void;
+  /** Past events render as a compact archive card, without description or registration */
+  past?: boolean;
+  onRegister?: (event: EventItem) => void;
 }
 
-const EventCard: React.FC<EventCardProps> = ({ event, onRegister }) => {
-  const d = new Date(`${event.date}T00:00:00`);
-  const day = d.getDate();
-  const month = d.toLocaleDateString('he-IL', { month: 'long' });
-  const titleId = `${event.id}-title`;
+const EventCard: React.FC<EventCardProps> = ({ event, past = false, onRegister }) => {
+  const anchorId = eventAnchorId(event.id);
+  const titleId = `${anchorId}-title`;
+  const date = getEventDateParts(event.date);
+  const timeLabel = getEventTimeLabel(event);
+  const accentStyle = { '--card-accent': event.accent || '#4a90d9' } as React.CSSProperties;
 
   return (
-    <article className="event-card" aria-labelledby={titleId}>
-      <div className={`event-card__media${event.imageUrl ? ' event-card__media--has-image' : ''}`}>
+    <article
+      id={anchorId}
+      className={`event-card${past ? ' event-card--past' : ''}`}
+      aria-labelledby={titleId}
+      style={accentStyle}
+    >
+      <div className="event-card__main">
+        {/* ── Poster, or a date tile when there is none ── */}
         {event.imageUrl ? (
-          <img src={event.imageUrl} alt={event.imageAlt ?? ''} loading="lazy" />
+          <div className="event-card__media">
+            <img
+              src={event.imageUrl}
+              alt={event.imageAlt || `הזמנה: ${event.title}`}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
         ) : (
-          <div className="event-card__date" aria-hidden="true">
-            <span className="event-card__day">{day}</span>
-            <span className="event-card__month">{month}</span>
+          <div className="event-card__date-tile" aria-hidden="true">
+            <span className="event-card__weekday">{date.weekday}</span>
+            <span className="event-card__day">{date.day}</span>
+            <span className="event-card__month">ב{date.month}</span>
+            <span className="event-card__year">{date.year}</span>
           </div>
         )}
-        {event.badge && <span className="event-card__badge">{event.badge}</span>}
-      </div>
 
-      <div className="event-card__body">
-        <h3 id={titleId} className="event-card__title">{event.title}</h3>
-        {event.subtitle && <p className="event-card__subtitle">{event.subtitle}</p>}
+        {/* ── Details ── */}
+        <div className="event-card__body">
+          <div className="event-card__chips">
+            {past ? (
+              <span className="event-card__chip event-card__chip--muted">התקיים</span>
+            ) : (
+              event.badge && <span className="event-card__chip event-card__chip--accent">{event.badge}</span>
+            )}
+            <span className="event-card__chip">{FORMAT_LABELS[event.format] ?? event.format}</span>
+          </div>
 
-        <ul className="event-card__meta">
-          <li>
-            <FiCalendar aria-hidden="true" />
-            <time dateTime={event.date}>{formatEventDateLabel(event.date, event.time)}</time>
-          </li>
-          <li>
-            <FiMapPin aria-hidden="true" />
-            <span>{event.location}</span>
-          </li>
-        </ul>
+          <div>
+            <h3 id={titleId} className="event-card__title">{event.title}</h3>
+            {event.subtitle && <p className="event-card__subtitle">{event.subtitle}</p>}
+          </div>
 
-        <p className="event-card__desc">{event.description}</p>
+          <dl className="event-card__facts">
+            <div className="event-card__fact">
+              <span className="event-card__fact-icon" aria-hidden="true"><FiCalendar /></span>
+              <div>
+                <dt>תאריך</dt>
+                <dd><time dateTime={event.date}>{date.long}</time></dd>
+              </div>
+            </div>
+            {timeLabel && (
+              <div className="event-card__fact">
+                <span className="event-card__fact-icon" aria-hidden="true"><FiClock /></span>
+                <div>
+                  <dt>{timeLabel.includes('–') ? 'שעות' : 'שעה'}</dt>
+                  <dd><span dir="ltr">{timeLabel}</span></dd>
+                </div>
+              </div>
+            )}
+            <div className="event-card__fact">
+              <span className="event-card__fact-icon" aria-hidden="true"><FiMapPin /></span>
+              <div>
+                <dt>מיקום</dt>
+                <dd>{event.location}</dd>
+              </div>
+            </div>
+          </dl>
 
-        {event.registrationUrl ? (
-          <button type="button" className="event-card__btn" onClick={() => onRegister(event)}>
-            <span>{event.registrationLabel || 'להרשמה'}</span>
-            <FiArrowLeft aria-hidden="true" />
-          </button>
-        ) : (
-          <span className="event-card__btn event-card__btn--disabled" aria-disabled="true">
-            ההרשמה תיפתח בקרוב
-          </span>
-        )}
+          {!past && event.description && <p className="event-card__desc">{event.description}</p>}
+
+          {!past && (
+            <div className="event-card__actions">
+              {event.registrationUrl && onRegister ? (
+                <button type="button" className="event-card__btn" onClick={() => onRegister(event)}>
+                  <span>{event.registrationLabel || 'להרשמה'}</span>
+                  <FiArrowLeft aria-hidden="true" />
+                </button>
+              ) : (
+                <span className="event-card__btn event-card__btn--disabled">ההרשמה תיפתח בקרוב</span>
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </article>
   );
