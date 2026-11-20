@@ -41,27 +41,27 @@ $card-muted: #5b6b7b;
   }
 
   // ── Poster ──────────────────────────────────────────────
+  // The image keeps its own proportions at the column width, so an invite is
+  // never cut at the sides. Very tall posters (a full program) are capped and
+  // cut at the bottom only — the full invite opens in the lightbox.
   &__media {
     position: relative;
-    aspect-ratio: 4 / 3;
+    align-self: start;
     border-radius: 14px;
     overflow: hidden;
-    background: #0b2a3f;
-
-    @include md {
-      aspect-ratio: auto;
-      min-height: 320px;
-      max-height: 460px;
-    }
+    background: #eef2f6;
 
     img {
-      position: absolute;
-      inset: 0;
+      display: block;
       width: 100%;
-      height: 100%;
+      height: auto;
+      max-height: 420px;
       object-fit: cover;
       object-position: top;
-      display: block;
+
+      @include md {
+        max-height: 460px;
+      }
     }
   }
 
@@ -77,12 +77,14 @@ $card-muted: #5b6b7b;
     background: var(--card-accent-tint);
     text-align: center;
 
+    // Square tile at the top of the column (doesn't stretch with long descriptions)
     @include md {
+      align-self: start;
+      aspect-ratio: 1 / 1;
       flex-direction: column;
       flex-wrap: nowrap;
       align-items: center;
       gap: 6px;
-      min-height: 320px;
     }
   }
 
@@ -299,10 +301,17 @@ $card-muted: #5b6b7b;
 
     .event-card__media,
     .event-card__date-tile {
+      align-self: center;
       aspect-ratio: 1 / 1;
-      min-height: 0;
-      max-height: none;
       border-radius: 12px;
+    }
+
+    // Past thumbnails are square crops
+    .event-card__media img {
+      position: absolute;
+      inset: 0;
+      height: 100%;
+      max-height: none;
     }
 
     .event-card__date-tile {
