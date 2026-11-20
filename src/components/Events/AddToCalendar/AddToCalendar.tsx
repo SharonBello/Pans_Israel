@@ -31,6 +31,7 @@ const AddToCalendar: React.FC<AddToCalendarProps> = ({ event }) => {
     const [anchor, setAnchor] = useState<HTMLElement | null>(null);
     const open = Boolean(anchor);
     const menuId = `${eventAnchorId(event.id)}-calendar`;
+    const googleUrl = googleCalendarUrl(event, eventPageUrl(event));
     const close = () => setAnchor(null);
 
     return (
@@ -59,7 +60,7 @@ const AddToCalendar: React.FC<AddToCalendarProps> = ({ event }) => {
             >
                 <MenuItem
                     component="a"
-                    href={open ? googleCalendarUrl(event, eventPageUrl(event)) : undefined}
+                    href={googleUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={close}

@@ -5,7 +5,7 @@ $row-radius: 16px;
 
     position: relative;
     display: grid;
-    grid-template-columns: 96px 1fr auto;
+    grid-template-columns: 96px minmax(0, 1fr) 200px; // fixed action column → buttons line up across rows
     gap: 0 28px;
     align-items: center;
     padding: 24px 24px 24px 20px;
@@ -172,17 +172,14 @@ $row-radius: 16px;
         z-index: 2;
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: stretch; // button fills the column, same width on every row
         gap: 6px;
         white-space: nowrap;
         pointer-events: none;
 
+        // Phones: under the text, button full width (like the activity cards)
         @media (max-width: 640px) {
             grid-column: 2;
-            flex-direction: row;
-            flex-wrap: wrap;
-            align-items: center;
-            gap: 4px 16px;
             margin-top: 12px;
         }
     }
@@ -190,6 +187,7 @@ $row-radius: 16px;
     &__details {
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         gap: 2px;
         padding: 4px 2px;
         font-size: 0.875rem;
