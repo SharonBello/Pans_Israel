@@ -4,6 +4,7 @@ import type { EventItem } from '@/types/event';
 import { FORMAT_LABELS, eventAnchorId } from '@/types/event';
 import { getEventDateParts, getEventTimeLabel } from '@/utils/eventDisplay';
 import EventProgram from '@/components/Events/EventProgram/EventProgram';
+import AddToCalendar from '@/components/Events/AddToCalendar/AddToCalendar';
 import './EventCard.scss';
 
 interface EventCardProps {
@@ -128,6 +129,7 @@ const EventCard: React.FC<EventCardProps> = ({
               ) : (
                 <span className="event-card__btn event-card__btn--disabled">ההרשמה תיפתח בקרוב</span>
               )}
+              <AddToCalendar event={event} />
             </div>
           )}
         </div>

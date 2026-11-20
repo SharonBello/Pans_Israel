@@ -1,0 +1,62 @@
+// ==========================================================================
+// AddToCalendar — outline button next to "להרשמה" + its menu
+// ==========================================================================
+
+.add-to-calendar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    min-height: 48px;
+    padding: 0 20px;
+    border: 1px solid #cbd5e0;
+    border-radius: 999px;
+    background: #fff;
+    color: $color-primary;
+    font-family: inherit;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    @include sm {
+        width: auto;
+    }
+
+    &:hover {
+        background: #f0f4f8;
+    }
+
+    &:focus-visible {
+        outline: 3px solid $color-medium;
+        outline-offset: 2px;
+    }
+
+    svg {
+        flex-shrink: 0;
+        font-size: 1.1rem;
+    }
+
+    &__chevron {
+        transition: transform 0.2s ease;
+    }
+
+    &[aria-expanded="true"] &__chevron {
+        transform: rotate(180deg);
+    }
+
+    // Menu items (the menu renders in a portal, outside the card)
+    &__menu .MuiMenuItem-root {
+        gap: 10px;
+        min-height: 44px;
+        font-family: inherit;
+        font-size: 0.9375rem;
+        color: $color-darkest;
+
+        svg {
+            flex-shrink: 0;
+            color: $color-primary;
+        }
+    }
+}
