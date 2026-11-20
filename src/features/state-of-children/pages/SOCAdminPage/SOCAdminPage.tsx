@@ -18,8 +18,16 @@ import {
     Checkbox,
     TextField,
 } from '@mui/material';
-import { FiDownload, FiRefreshCw, FiFilter, FiFileText, FiGrid } from 'react-icons/fi';
-import { getSurveyResponses, getSurveyResponseCount, getUniqueFamilyCount } from '../../../shared/services/surveyService';
+import { FiDownload, FiRefreshCw, FiFilter, FiFileText, FiGrid, FiUploadCloud } from 'react-icons/fi';
+import {
+    getSurveyResponses,
+    getSurveyResponseCount,
+    getUniqueFamilyCount,
+    getPublishedSurveyStats,
+    publishSurveyStats,
+} from '../../../shared/services/surveyService';
+import { buildSOCStats } from '../../utils/socStats';
+import type { SOCPublicStats } from '../../utils/socStats';
 import { exportToCSV, exportToExcel, downloadFile, getQuestionLabelsFromCategories } from '../../../shared/services/surveyExportService';
 import { SOC_SURVEY_ID } from '../../types/socTypes';
 import { socCategories } from '../../data/socQuestions';
@@ -41,6 +49,10 @@ const SOCAdminPage: React.FC = () => {
     const [totalCount, setTotalCount] = useState(0);
     const [familyCount, setFamilyCount] = useState(0);
 
+    // What the public results page currently shows
+    const [published, setPublished] = useState<SOCPublicStats | null>(null);
+    const [publishing, setPublishing] = useState(false);
+
     // Export options
     const [includeSerial, setIncludeSerial] = useState(false);
     const [dateFrom, setDateFrom] = useState('');
@@ -58,14 +70,16 @@ const SOCAdminPage: React.FC = () => {
         try {
             setLoading(true);
             setError(null);
-            const [responsesData, total, families] = await Promise.all([
+            const [responsesData, total, families, publishedStats] = await Promise.all([
                 getSurveyResponses(SOC_SURVEY_ID),
                 getSurveyResponseCount(SOC_SURVEY_ID),
                 getUniqueFamilyCount(SOC_SURVEY_ID),
+                getPublishedSurveyStats<SOCPublicStats>(SOC_SURVEY_ID),
             ]);
             setResponses(responsesData);
             setTotalCount(total);
             setFamilyCount(families);
+            setPublished(publishedStats);
         } catch (err) {
             setError('שגיאה בטעינת הנתונים');
             console.error(err);
@@ -77,6 +91,35 @@ const SOCAdminPage: React.FC = () => {
     useEffect(() => {
         fetchData();
     }, []);
+
+    // --------------------------------------------------------------------------
+    // Publish statistics to the public results page
+    // --------------------------------------------------------------------------
+
+    /** Always from ALL responses — the date filter below is only for exports */
+    const handlePublishStats = async () => {
+        if (!window.confirm(`לעדכן את עמוד התוצאות הציבורי לפי ${totalCount} התשובות הנוכחיות?`)) return;
+        try {
+            setPublishing(true);
+            setError(null);
+            await publishSurveyStats(SOC_SURVEY_ID, buildSOCStats(responses, totalCount, familyCount));
+            setPublished(await getPublishedSurveyStats<SOCPublicStats>(SOC_SURVEY_ID));
+            setSuccess('עמוד התוצאות הציבורי עודכן');
+            setTimeout(() => setSuccess(null), 3000);
+        } catch (err) {
+            setError('שגיאה בעדכון עמוד התוצאות');
+            console.error(err);
+        } finally {
+            setPublishing(false);
+        }
+    };
+
+    const publishedLabel = published?.publishedAt
+        ? `עודכן לאחרונה ב־${published.publishedAt.toDate().toLocaleString('he-IL', {
+            day: 'numeric', month: 'long', year: 'numeric', hour: '2-digit', minute: '2-digit',
+        })}, לפי ${published.totalCount} תשובות`
+        : 'עמוד התוצאות הציבורי עוד לא עודכן';
+    const publishedIsStale = !published || published.totalCount !== totalCount;
 
     // --------------------------------------------------------------------------
     // Filter Responses
@@ -236,6 +279,27 @@ const SOCAdminPage: React.FC = () => {
                         {success}
                     </Alert>
                 )}
+
+                {/* Public results page */}
+                <Box className="soc-admin__publish">
+                    <Box>
+                        <Typography className="soc-admin__section-title">
+                            <FiUploadCloud /> עמוד התוצאות הציבורי
+                        </Typography>
+                        <Typography className="soc-admin__publish-status">
+                            {publishedLabel}
+                            {publishedIsStale && totalCount > 0 && ` · יש ${totalCount} תשובות כעת`}
+                        </Typography>
+                    </Box>
+                    <Button
+                        variant="contained"
+                        onClick={handlePublishStats}
+                        disabled={loading || publishing || totalCount === 0}
+                        startIcon={publishing ? <CircularProgress size={16} /> : <FiUploadCloud />}
+                    >
+                        עדכון עמוד התוצאות
+                    </Button>
+                </Box>
 
                 {/* Filters & Export */}
                 <Box className="soc-admin__controls">

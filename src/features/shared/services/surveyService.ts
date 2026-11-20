@@ -14,6 +14,7 @@ import {
     updateDoc,
     runTransaction,
     writeBatch,
+    serverTimestamp,
 } from 'firebase/firestore';
 import { db } from '@/config/firebase';
 import type {
@@ -30,6 +31,8 @@ import type {
 const SERIALS_COLLECTION = 'survey_serials';
 const SURVEYS_COLLECTION = 'surveys';
 const RESPONSES_COLLECTION = 'survey_responses';
+/** Published aggregate statistics: public read, admin write (individual responses stay admin-only) */
+const STATS_COLLECTION = 'survey_stats';
 
 // --------------------------------------------------------------------------
 // Hash function for email (simple, not cryptographic)
@@ -418,4 +421,21 @@ export const getEmailSubmissionInfo = async (
         hasSubmitted: false,
         submissionCount: 0,
     };
+};
+
+// --------------------------------------------------------------------------
+// Published statistics (what the public results page shows)
+// --------------------------------------------------------------------------
+
+/** The statistics last published for a survey, or null if none have been published yet */
+export const getPublishedSurveyStats = async <T extends object>(surveyId: string): Promise<T | null> => {
+    const snap = await getDoc(doc(db, STATS_COLLECTION, surveyId));
+    return snap.exists() ? (snap.data() as T) : null;
+};
+
+/** Admin only: replace the published statistics for a survey */
+export const publishSurveyStats = async <T extends object>(surveyId: string, stats: T): Promise<void> => {
+    // JSON round-trip drops undefined values, which Firestore rejects
+    const clean = JSON.parse(JSON.stringify(stats)) as T;
+    await setDoc(doc(db, STATS_COLLECTION, surveyId), { ...clean, publishedAt: serverTimestamp() });
 };

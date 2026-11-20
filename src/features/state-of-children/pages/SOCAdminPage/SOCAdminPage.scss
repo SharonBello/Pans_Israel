@@ -115,6 +115,30 @@ $success: #4caf50;
         box-shadow: 0 2px 12px rgba($color-primary, 0.08);
     }
 
+    // ── Publish to the public results page ──
+    &__publish {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 24px;
+        padding: 20px 24px;
+        background: #ffffff;
+        border-radius: 12px;
+        border-inline-start: 4px solid $color-medium;
+        box-shadow: 0 2px 12px rgba($color-primary, 0.08);
+
+        .soc-admin__section-title {
+            margin-bottom: 4px !important;
+        }
+    }
+
+    &__publish-status {
+        font-size: 0.875rem !important;
+        color: #5b6b7b;
+    }
+
     &__section-title {
         font-family: "Heebo", sans-serif !important;
         font-size: 1rem !important;
