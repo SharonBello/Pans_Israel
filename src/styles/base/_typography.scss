@@ -2,13 +2,10 @@
 // Typography Styles
 // ==========================================================================
 
-@use '../abstracts' as *;
+@use "../abstracts" as *;
 
-// --------------------------------------------------------------------------
-// Google Fonts Import (Rubik & Heebo for Hebrew support)
-// --------------------------------------------------------------------------
-
-@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500&display=swap');
+// Fonts (Heebo & Rubik) are loaded by a <link> in index.html, so they start
+// downloading with the page instead of after this stylesheet.
 
 // --------------------------------------------------------------------------
 // Base Typography
@@ -16,11 +13,11 @@
 
 html {
   font-size: 16px;
-  
+
   @include max-sm {
     font-size: 14px;
   }
-  
+
   @include xxxl {
     font-size: 18px;
   }
@@ -89,7 +86,7 @@ h6,
 p {
   @include body-text;
   margin-bottom: $spacing-4;
-  
+
   &:last-child {
     margin-bottom: 0;
   }
@@ -113,12 +110,12 @@ a {
   color: $color-primary;
   text-decoration: none;
   transition: color $transition-fast;
-  
+
   &:hover {
     color: $color-medium;
     text-decoration: underline;
   }
-  
+
   &:focus-visible {
     outline: 2px solid $color-primary;
     outline-offset: 2px;
@@ -134,7 +131,7 @@ ul,
 ol {
   padding-inline-start: $spacing-6;
   margin-bottom: $spacing-4;
-  
+
   li {
     margin-bottom: $spacing-2;
   }
@@ -142,7 +139,7 @@ ol {
 
 ul {
   list-style-type: disc;
-  
+
   ul {
     list-style-type: circle;
   }
@@ -162,7 +159,7 @@ blockquote {
   margin: $spacing-6 0;
   font-style: italic;
   color: $text-secondary;
-  
+
   cite {
     display: block;
     margin-top: $spacing-3;
@@ -198,7 +195,7 @@ pre {
   overflow-x: auto;
   margin: $spacing-4 0;
   border: 1px solid $border-light;
-  
+
   code {
     background: transparent;
     padding: 0;

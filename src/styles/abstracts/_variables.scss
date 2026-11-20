@@ -7,61 +7,61 @@
 // --------------------------------------------------------------------------
 
 // Core Medical Colors
-$color-darkest:           #0E0D26; // Deep navy - Primary text, darkest elements
-$color-primary:           #023373; // Medical blue - Primary actions, headers  
-$color-medium:            #6CA6D9; // Professional blue - Secondary elements
-$color-light:             #A7D5F2; // Light blue - Highlights, hover states
-$color-background:        #F2F2F2; // Clean background - Main background
-$color-accent:            #E67E22; // Warm orange - Accent, alerts, current states
+$color-darkest: #0e0d26; // Deep navy - Primary text, darkest elements
+$color-primary: #023373; // Medical blue - Primary actions, headers
+$color-medium: #6ca6d9; // Professional blue - Secondary elements
+$color-light: #a7d5f2; // Light blue - Highlights, hover states
+$color-background: #f2f2f2; // Clean background - Main background
+$color-accent: #e67e22; // Warm orange - Accent, alerts, current states
 
 // Severity Color Scale (for symptoms tracking)
-$severity-0: #4CAF50;  // Green - No symptoms
-$severity-1: #8BC34A;  // Light green - Minimal
-$severity-2: #FFC107;  // Yellow - Mild
-$severity-3: #FF9800;  // Orange - Moderate
-$severity-4: #FF5722;  // Deep orange - Severe
-$severity-5: #F44336;  // Red - Extreme
+$severity-0: #4caf50; // Green - No symptoms
+$severity-1: #8bc34a; // Light green - Minimal
+$severity-2: #ffc107; // Yellow - Mild
+$severity-3: #ff9800; // Orange - Moderate
+$severity-4: #ff5722; // Deep orange - Severe
+$severity-5: #f44336; // Red - Extreme
 
 // Blue Scale
-$color-blue-primary:      #023373;
-$color-blue-primary-dark: #0E0D26;
-$color-blue-primary-light:#6CA6D9;
-$color-blue-accent:       #A7D5F2;
+$color-blue-primary: #023373;
+$color-blue-primary-dark: #0e0d26;
+$color-blue-primary-light: #6ca6d9;
+$color-blue-accent: #a7d5f2;
 
 // Gray Scale
-$color-gray-light:        #F2F2F2;
-$color-gray-medium:       #A7D5F2;
-$color-gray:              #6CA6D9;
-$color-dark-gray:         #0E0D26;
+$color-gray-light: #f2f2f2;
+$color-gray-medium: #a7d5f2;
+$color-gray: #6ca6d9;
+$color-dark-gray: #0e0d26;
 
 // Background Colors
-$color-bg-cream:          #F2F2F2;
-$color-bg-light:          #F2F2F2;
-$color-bg-white:          #FFFFFF;
-$color-bg-card:           #FFFFFF;
+$color-bg-cream: #f2f2f2;
+$color-bg-light: #f2f2f2;
+$color-bg-white: #ffffff;
+$color-bg-card: #ffffff;
 
 // Text Colors
-$text-primary:            #0E0D26;
-$text-secondary:          #023373;
-$text-muted:              #6CA6D9;
-$text-light:              #A7D5F2;
-$text-on-dark:            #FFFFFF;
+$text-primary: #0e0d26;
+$text-secondary: #023373;
+$text-muted: #6ca6d9;
+$text-light: #a7d5f2;
+$text-on-dark: #ffffff;
 
 // Border Colors
-$border-color:            #A7D5F2;
-$border-light:            #E8E8E8;
-$divider:                 rgba(2, 51, 115, 0.1);
+$border-color: #a7d5f2;
+$border-light: #e8e8e8;
+$divider: rgba(2, 51, 115, 0.1);
 
 // State Colors
-$success:                 #4CAF50;
-$warning:                 #FFC107;
-$error:                   #F44336;
-$info:                    #6CA6D9;
+$success: #4caf50;
+$warning: #ffc107;
+$error: #f44336;
+$info: #6ca6d9;
 
 // Gradients
 $gradient-primary: linear-gradient(135deg, $color-primary 0%, $color-medium 100%);
 $gradient-light: linear-gradient(180deg, $color-bg-white 0%, $color-bg-light 100%);
-$gradient-accent: linear-gradient(135deg, $color-accent 0%, #F39C12 100%);
+$gradient-accent: linear-gradient(135deg, $color-accent 0%, #f39c12 100%);
 $gradient-neural: linear-gradient(90deg, $color-primary 0%, $color-medium 50%, $color-light 100%);
 
 // --------------------------------------------------------------------------
@@ -69,9 +69,9 @@ $gradient-neural: linear-gradient(90deg, $color-primary 0%, $color-medium 50%, $
 // --------------------------------------------------------------------------
 
 // Font Families
-$font-primary: 'Rubik', 'Segoe UI', sans-serif;
-$font-heading: 'Heebo', 'Arial Hebrew', sans-serif;
-$font-mono: 'Fira Code', 'Courier New', monospace;
+$font-primary: "Rubik", "Segoe UI", sans-serif;
+$font-heading: "Heebo", "Arial Hebrew", sans-serif;
+$font-mono: "Fira Code", "Courier New", monospace;
 
 // Font Sizes (using clamp for fluid typography)
 $font-size-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
@@ -110,19 +110,19 @@ $letter-spacing-wider: 0.05em;
 // --------------------------------------------------------------------------
 
 $spacing-0: 0;
-$spacing-1: 0.25rem;   // 4px
-$spacing-2: 0.5rem;    // 8px
-$spacing-3: 0.75rem;   // 12px
-$spacing-4: 1rem;      // 16px
-$spacing-5: 1.25rem;   // 20px
-$spacing-6: 1.5rem;    // 24px
-$spacing-8: 2rem;      // 32px
-$spacing-10: 2.5rem;   // 40px
-$spacing-12: 3rem;     // 48px
-$spacing-16: 4rem;     // 64px
-$spacing-20: 5rem;     // 80px
-$spacing-24: 6rem;     // 96px
-$spacing-32: 8rem;     // 128px
+$spacing-1: 0.25rem; // 4px
+$spacing-2: 0.5rem; // 8px
+$spacing-3: 0.75rem; // 12px
+$spacing-4: 1rem; // 16px
+$spacing-5: 1.25rem; // 20px
+$spacing-6: 1.5rem; // 24px
+$spacing-8: 2rem; // 32px
+$spacing-10: 2.5rem; // 40px
+$spacing-12: 3rem; // 48px
+$spacing-16: 4rem; // 64px
+$spacing-20: 5rem; // 80px
+$spacing-24: 6rem; // 96px
+$spacing-32: 8rem; // 128px
 
 // --------------------------------------------------------------------------
 // Breakpoints (350px - 1800px)
@@ -218,40 +218,37 @@ $z-tooltip: 800;
 $z-notification: 900;
 $z-top: 1000;
 
-
-@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300&display=swap');
-
-$main-font: 'Heebo', sans-serif;
+$main-font: "Heebo", sans-serif;
 
 // Medical Theme Color Palette - Light and Airy
-$color-darkest:           #0E0D26; // Deep navy - Primary text, darkest elements
-$primary-color:           #023373; // Medical blue - Primary actions, headers  
-$color-medium:            #6CA6D9; // Professional blue - Secondary elements
-$color-light:             #A7D5F2; // Light blue - Highlights, hover states
-$color-background:        #F2F2F2; // Clean background - Main background
-$color-accent:            #E67E22; // Warm orange - Accent, alerts, current states
+$color-darkest: #0e0d26; // Deep navy - Primary text, darkest elements
+$primary-color: #023373; // Medical blue - Primary actions, headers
+$color-medium: #6ca6d9; // Professional blue - Secondary elements
+$color-light: #a7d5f2; // Light blue - Highlights, hover states
+$color-background: #f2f2f2; // Clean background - Main background
+$color-accent: #e67e22; // Warm orange - Accent, alerts, current states
 
 // Severity Color Scale
-$severity-0: #4CAF50;  // Green - No symptoms
-$severity-1: #8BC34A;  // Light green - Minimal
-$severity-2: #FFC107;  // Yellow - Mild
-$severity-3: #FF9800;  // Orange - Moderate
-$severity-4: #FF5722;  // Deep orange - Severe
-$severity-5: #F44336;  // Red - Extreme
+$severity-0: #4caf50; // Green - No symptoms
+$severity-1: #8bc34a; // Light green - Minimal
+$severity-2: #ffc107; // Yellow - Mild
+$severity-3: #ff9800; // Orange - Moderate
+$severity-4: #ff5722; // Deep orange - Severe
+$severity-5: #f44336; // Red - Extreme
 
 // Main Color Variables
-$color-blue-primary:      #023373;
-$color-blue-primary-dark: #0E0D26;
-$color-blue-primary-light:#6CA6D9;
-$color-blue-accent:       #A7D5F2;
+$color-blue-primary: #023373;
+$color-blue-primary-dark: #0e0d26;
+$color-blue-primary-light: #6ca6d9;
+$color-blue-accent: #a7d5f2;
 
-$color-gray-light:        #F2F2F2;
-$color-gray-medium:       #A7D5F2;
-$color-gray:              #6CA6D9;
-$color-dark-gray:         #0E0D26;
+$color-gray-light: #f2f2f2;
+$color-gray-medium: #a7d5f2;
+$color-gray: #6ca6d9;
+$color-dark-gray: #0e0d26;
 
-$color-bg-cream:          #F2F2F2;
-$color-bg-light:          #F2F2F2;
+$color-bg-cream: #f2f2f2;
+$color-bg-light: #f2f2f2;
 
 // // PANDAS Scale Colors
 // $color-primary: #023373;
