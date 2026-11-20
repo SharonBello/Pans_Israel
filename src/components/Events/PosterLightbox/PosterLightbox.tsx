@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Dialog } from '@mui/material';
 import { FiExternalLink, FiX } from 'react-icons/fi';
 import type { EventItem } from '@/types/event';
+import { cloudinaryImage } from '@/utils/cloudinary';
 import './PosterLightbox.scss';
 
 interface PosterLightboxProps {
@@ -88,7 +89,7 @@ const PosterLightbox: React.FC<PosterLightboxProps> = ({ event, open, onClose })
 
             <PosterImage
                 key={event.id}
-                src={event.imageUrl}
+                src={cloudinaryImage(event.imageUrl)} // full size, best format + compression
                 alt={event.imageAlt || `הזמנה: ${event.title}`}
                 onBackgroundClick={onClose}
             />

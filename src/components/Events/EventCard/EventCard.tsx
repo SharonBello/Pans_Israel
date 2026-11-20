@@ -5,7 +5,14 @@ import { FORMAT_LABELS, eventAnchorId } from '@/types/event';
 import { getEventDateParts, getEventTimeLabel } from '@/utils/eventDisplay';
 import EventProgram from '@/components/Events/EventProgram/EventProgram';
 import AddToCalendar from '@/components/Events/AddToCalendar/AddToCalendar';
+import { cloudinaryImage, cloudinarySrcSet } from '@/utils/cloudinary';
 import './EventCard.scss';
+
+/** Poster widths offered to the browser (it picks one for the screen size and pixel density) */
+const POSTER_WIDTHS = [400, 800, 1200];
+/** How wide the poster is shown — must match the grid columns in EventCard.scss */
+const POSTER_SIZES = '(min-width: 1200px) 340px, (min-width: 768px) 260px, calc(100vw - 56px)';
+const THUMB_SIZES = '(min-width: 768px) 168px, 96px';
 
 interface EventCardProps {
   event: EventItem;
@@ -32,6 +39,14 @@ const EventCard: React.FC<EventCardProps> = ({
   const accentStyle = { '--card-accent': event.accent || '#4a90d9' } as React.CSSProperties;
   // Upcoming posters load right away so the page doesn't jump when scrolling to a linked card
   const imgLoading = past ? 'lazy' : 'eager';
+  // Resized, compressed poster (Cloudinary); non-Cloudinary URLs are used as they are
+  const posterImg = event.imageUrl
+    ? {
+      src: cloudinaryImage(event.imageUrl, 800),
+      srcSet: cloudinarySrcSet(event.imageUrl, POSTER_WIDTHS),
+      sizes: past ? THUMB_SIZES : POSTER_SIZES,
+    }
+    : null;
 
   return (
     <article
@@ -42,7 +57,7 @@ const EventCard: React.FC<EventCardProps> = ({
     >
       <div className="event-card__main">
         {/* ── Poster (opens the full invite), or a date tile when there is none ── */}
-        {event.imageUrl ? (
+        {posterImg ? (
           onViewPoster ? (
             <button
               type="button"
@@ -50,7 +65,7 @@ const EventCard: React.FC<EventCardProps> = ({
               onClick={() => onViewPoster(event)}
               aria-label={`הגדלת ההזמנה: ${event.title}`}
             >
-              <img src={event.imageUrl} alt="" loading={imgLoading} decoding="async" />
+              <img {...posterImg} alt="" loading={imgLoading} decoding="async" />
               <span className="event-card__zoom" aria-hidden="true">
                 <FiZoomIn />
                 <span className="event-card__zoom-text">הגדלת ההזמנה</span>
@@ -59,7 +74,7 @@ const EventCard: React.FC<EventCardProps> = ({
           ) : (
             <div className="event-card__media">
               <img
-                src={event.imageUrl}
+                {...posterImg}
                 alt={event.imageAlt || `הזמנה: ${event.title}`}
                 loading={imgLoading}
                 decoding="async"
