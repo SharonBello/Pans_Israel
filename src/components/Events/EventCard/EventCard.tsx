@@ -13,14 +13,24 @@ interface EventCardProps {
   onRegister?: (event: EventItem) => void;
   /** When set, the poster becomes a button that opens the full invite */
   onViewPoster?: (event: EventItem) => void;
+  /** Open the program section on first render (the card was linked to from the home page) */
+  programOpen?: boolean;
 }
 
-const EventCard: React.FC<EventCardProps> = ({ event, past = false, onRegister, onViewPoster }) => {
+const EventCard: React.FC<EventCardProps> = ({
+  event,
+  past = false,
+  onRegister,
+  onViewPoster,
+  programOpen = false,
+}) => {
   const anchorId = eventAnchorId(event.id);
   const titleId = `${anchorId}-title`;
   const date = getEventDateParts(event.date);
   const timeLabel = getEventTimeLabel(event);
   const accentStyle = { '--card-accent': event.accent || '#4a90d9' } as React.CSSProperties;
+  // Upcoming posters load right away so the page doesn't jump when scrolling to a linked card
+  const imgLoading = past ? 'lazy' : 'eager';
 
   return (
     <article
@@ -39,7 +49,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, past = false, onRegister, 
               onClick={() => onViewPoster(event)}
               aria-label={`הגדלת ההזמנה: ${event.title}`}
             >
-              <img src={event.imageUrl} alt="" loading="lazy" decoding="async" />
+              <img src={event.imageUrl} alt="" loading={imgLoading} decoding="async" />
               <span className="event-card__zoom" aria-hidden="true">
                 <FiZoomIn />
                 <span className="event-card__zoom-text">הגדלת ההזמנה</span>
@@ -50,7 +60,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, past = false, onRegister, 
               <img
                 src={event.imageUrl}
                 alt={event.imageAlt || `הזמנה: ${event.title}`}
-                loading="lazy"
+                loading={imgLoading}
                 decoding="async"
               />
             </div>
@@ -125,7 +135,7 @@ const EventCard: React.FC<EventCardProps> = ({ event, past = false, onRegister, 
 
       {/* ── Program & speaker bios (only when the event has one) ── */}
       {event.program && event.program.length > 0 && (
-        <EventProgram program={event.program} idPrefix={anchorId} />
+        <EventProgram program={event.program} idPrefix={anchorId} defaultOpen={programOpen} />
       )}
     </article>
   );

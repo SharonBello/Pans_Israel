@@ -1,6 +1,9 @@
 import React from 'react';
-import { FiArrowLeft, FiMapPin, FiClock } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+import { FiArrowLeft, FiMapPin, FiClock, FiChevronLeft } from 'react-icons/fi';
 import type { EventItem } from '@/types/event';
+import { eventAnchorId } from '@/types/event';
+import { getEventTimeLabel } from '@/utils/eventDisplay';
 import './EventRow.scss';
 
 interface EventRowProps {
@@ -14,6 +17,8 @@ const EventRow: React.FC<EventRowProps> = ({ event, onRegister }) => {
     const month = d.toLocaleDateString('he-IL', { month: 'long' });
     const year = d.getFullYear();
     const titleId = `${event.id}-row-title`;
+    const timeLabel = getEventTimeLabel(event);
+    const detailsLabel = event.program?.length ? 'לפרטים ולתוכנית' : 'לפרטים נוספים';
 
     return (
         <article
@@ -30,10 +35,10 @@ const EventRow: React.FC<EventRowProps> = ({ event, onRegister }) => {
             <div className="event-row__text">
                 <div className="event-row__meta">
                     {event.badge && <span className="event-row__tag">{event.badge}</span>}
-                    {event.time && (
+                    {timeLabel && (
                         <span className="event-row__meta-item">
                             <FiClock aria-hidden="true" />
-                            {event.time}
+                            <span dir="ltr">{timeLabel}</span>
                         </span>
                     )}
                     <span className="event-row__meta-item">
@@ -41,7 +46,15 @@ const EventRow: React.FC<EventRowProps> = ({ event, onRegister }) => {
                         {event.location}
                     </span>
                 </div>
-                <h3 id={titleId} className="event-row__title">{event.title}</h3>
+                <h3 id={titleId} className="event-row__title">
+                    {/* Stretched link: the whole row opens this event on the activities page */}
+                    <Link
+                        to={{ pathname: '/activities', hash: eventAnchorId(event.id) }}
+                        className="event-row__link"
+                    >
+                        {event.title}
+                    </Link>
+                </h3>
                 <p className="event-row__desc">{event.description}</p>
             </div>
 
@@ -56,6 +69,11 @@ const EventRow: React.FC<EventRowProps> = ({ event, onRegister }) => {
                         ההרשמה תיפתח בקרוב
                     </span>
                 )}
+                {/* Visible cue that the row opens the event (taps pass through to the title link) */}
+                <span className="event-row__details" aria-hidden="true">
+                    {detailsLabel}
+                    <FiChevronLeft />
+                </span>
             </div>
         </article>
     );

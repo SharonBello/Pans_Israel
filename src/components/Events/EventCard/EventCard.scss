@@ -20,6 +20,7 @@ $card-muted: #5b6b7b;
   box-shadow: 0 18px 40px -28px rgba(2, 51, 115, 0.35);
   overflow: hidden;
   text-align: start;
+  scroll-margin-top: 140px; // fixed header + sticky SupportTabs when linked via #event-<id>
 
   // ── Layout ──────────────────────────────────────────────
   &__main {

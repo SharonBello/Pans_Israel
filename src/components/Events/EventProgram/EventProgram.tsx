@@ -5,8 +5,8 @@ import './EventProgram.scss';
 
 interface EventProgramProps {
     program: EventSession[];
-    /** Prefix for element ids, e.g. 'event-abc123' — keeps ids unique per card */
     idPrefix: string;
+    defaultOpen?: boolean;
 }
 
 // ── helpers (file-private) ───────────────────────────────────────────────────
@@ -92,8 +92,8 @@ const SpeakerItem: React.FC<SpeakerItemProps> = ({ speaker, bioId }) => {
 // ── program ──────────────────────────────────────────────────────────────────
 
 /** Collapsible program (agenda) with expandable speaker bios, shown under an event card */
-const EventProgram: React.FC<EventProgramProps> = ({ program, idPrefix }) => {
-    const [open, setOpen] = useState(false);
+const EventProgram: React.FC<EventProgramProps> = ({ program, idPrefix, defaultOpen = false }) => {
+    const [open, setOpen] = useState(defaultOpen);
     const panelId = `${idPrefix}-program`;
 
     const speakerNames = new Set(program.flatMap((s) => s.speakers.map((sp) => sp.name)));
