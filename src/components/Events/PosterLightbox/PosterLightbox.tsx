@@ -14,6 +14,9 @@ interface PosterLightboxProps {
 /** Posters taller than this (height ÷ width) scroll; shorter ones fit the screen */
 const TALL_POSTER_RATIO = 1.5;
 
+/** Widest poster the lightbox needs: 720px shown × 2 for high-density screens, plus a margin */
+const LIGHTBOX_MAX_WIDTH = 1600;
+
 interface PosterImageProps {
     src: string;
     alt: string;
@@ -89,7 +92,8 @@ const PosterLightbox: React.FC<PosterLightboxProps> = ({ event, open, onClose })
 
             <PosterImage
                 key={event.id}
-                src={cloudinaryImage(event.imageUrl)} // full size, best format + compression
+                // Big enough to stay sharp full-screen on high-density screens, best format + compression
+                src={cloudinaryImage(event.imageUrl, LIGHTBOX_MAX_WIDTH)}
                 alt={event.imageAlt || `הזמנה: ${event.title}`}
                 onBackgroundClick={onClose}
             />
