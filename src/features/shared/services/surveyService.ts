@@ -6,20 +6,14 @@ import {
     setDoc,
     addDoc,
     query,
-    where,
     orderBy,
     limit,
     Timestamp,
-    increment,
-    updateDoc,
-    runTransaction,
-    writeBatch,
     serverTimestamp,
 } from 'firebase/firestore';
 import { db } from '@/config/firebase';
 import type {
     BaseSurveyResponse,
-    SurveySerial,
     SurveyStatistics,
     ExportOptions,
 } from '../types/baseSurveyTypes';
@@ -28,16 +22,33 @@ import type {
 // Collection References
 // --------------------------------------------------------------------------
 
+/** email + serial, one record per family per device — create-only, nobody can read it from the site */
 const SERIALS_COLLECTION = 'survey_serials';
-const SURVEYS_COLLECTION = 'surveys';
 const RESPONSES_COLLECTION = 'survey_responses';
 /** Published aggregate statistics: public read, admin write (individual responses stay admin-only) */
 const STATS_COLLECTION = 'survey_stats';
 
 // --------------------------------------------------------------------------
-// Hash function for email (simple, not cryptographic)
+// Family serials
 // --------------------------------------------------------------------------
+//
+// Saving only ever CREATES documents. Reading the email records or updating shared
+// counters is blocked by the security rules (and must stay blocked: those records hold
+// parents' emails), so:
+//   - each family gets a random serial instead of a running counter;
+//   - the serial is remembered in this browser, per email, so siblings filled in on
+//     the same device share it ("כבר מילאתם N סקרים" works on that device);
+//   - the email + serial record is written once per family per device, so admins can
+//     still match families across devices in the Firebase Console.
 
+const FAMILY_STORAGE_KEY = 'soc-survey-families:v1';
+
+interface LocalFamily {
+    serial: string;
+    count: number;   // surveys sent from this browser with this email
+}
+
+/** Local lookup key only (never sent anywhere) */
 const hashEmail = (email: string): string => {
     const normalized = email.toLowerCase().trim();
     let hash = 0;
@@ -49,113 +60,57 @@ const hashEmail = (email: string): string => {
     return Math.abs(hash).toString(36);
 };
 
-// --------------------------------------------------------------------------
-// Generate Serial Number
-// --------------------------------------------------------------------------
-
-const generateSerial = async (): Promise<string> => {
-    const year = new Date().getFullYear();
-    const counterRef = doc(db, 'counters', 'survey_serial');
-
+const readFamilies = (): Record<string, LocalFamily> => {
     try {
-        const newSerial = await runTransaction(db, async (transaction) => {
-            const counterDoc = await transaction.get(counterRef);
-
-            let currentCount = 1;
-            if (counterDoc.exists()) {
-                currentCount = (counterDoc.data().count || 0) + 1;
-            }
-
-            transaction.set(counterRef, { count: currentCount }, { merge: true });
-
-            // Format: IL-2025-00001
-            const paddedCount = currentCount.toString().padStart(5, '0');
-            return `IL-${year}-${paddedCount}`;
-        });
-
-        return newSerial;
-    } catch (error) {
-        // Fallback if transaction fails
-        console.error('Error generating serial:', error);
-        const fallbackId = Date.now().toString(36);
-        return `IL-${year}-${fallbackId}`;
+        return JSON.parse(localStorage.getItem(FAMILY_STORAGE_KEY) || '{}') as Record<string, LocalFamily>;
+    } catch {
+        return {};
     }
 };
 
-// --------------------------------------------------------------------------
-// Get or Create Serial for Email
-// --------------------------------------------------------------------------
-
-export const getOrCreateSerial = async (email: string): Promise<SurveySerial> => {
-    const emailHash = hashEmail(email);
-    const serialRef = doc(db, SERIALS_COLLECTION, emailHash);
-
-    const existingDoc = await getDoc(serialRef);
-
-    if (existingDoc.exists()) {
-        const data = existingDoc.data() as SurveySerial;
-        // Update response count
-        await updateDoc(serialRef, {
-            responseCount: increment(1),
-        });
-        return {
-            ...data,
-            responseCount: data.responseCount + 1,
-        };
+const writeFamilies = (families: Record<string, LocalFamily>): void => {
+    try {
+        localStorage.setItem(FAMILY_STORAGE_KEY, JSON.stringify(families));
+    } catch {
+        /* storage blocked — the survey still saves, siblings just won't be grouped */
     }
+};
 
-    // Create new serial
-    const newSerial = await generateSerial();
-    const serialData: SurveySerial = {
-        email,
-        serial: newSerial,
-        createdAt: Timestamp.now(),
-        responseCount: 1,
-    };
-
-    await setDoc(serialRef, serialData);
-
-    return serialData;
+/** 'IL-2026-K7Q2M9XD' — random, so no shared counter is needed */
+const generateSerial = (): string => {
+    const alphabet = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // no 0/O/1/I
+    const bytes = crypto.getRandomValues(new Uint8Array(8));
+    const code = Array.from(bytes, (b) => alphabet[b % alphabet.length]).join('');
+    return `IL-${new Date().getFullYear()}-${code}`;
 };
 
 // --------------------------------------------------------------------------
 // Submit Survey Response
 // --------------------------------------------------------------------------
 
-export const submitSurveyResponse = async <T extends BaseSurveyResponse>(
+export const submitSurveyResponse = async (
     surveyId: string,
     email: string,
     answers: Record<string, unknown>,
     childIndex: number = 1
 ): Promise<{ success: boolean; responseId?: string; error?: string }> => {
-    try {
-        // Get or create serial
-        const serialData = await getOrCreateSerial(email);
+    const key = hashEmail(email);
+    const families = readFamilies();
+    const known = families[key];
+    const serial = known?.serial ?? generateSerial();
 
-        // Prepare response document
+    let responseId: string;
+    try {
+        // 1. The answers — the part that matters most
         const responseData: BaseSurveyResponse = {
             surveyId,
-            serial: serialData.serial,
+            serial,
             childIndex,
             submittedAt: Timestamp.now(),
             answers: answers as Record<string, string | number | boolean | string[]>,
         };
-
-        // Save to survey-specific collection
-        const responsesRef = collection(db, RESPONSES_COLLECTION, surveyId, 'responses');
-        const docRef = await addDoc(responsesRef, responseData);
-
-        // Update survey metadata (total responses)
-        const surveyMetaRef = doc(db, SURVEYS_COLLECTION, surveyId);
-        await setDoc(surveyMetaRef, {
-            totalResponses: increment(1),
-            lastResponseAt: Timestamp.now(),
-        }, { merge: true });
-
-        return {
-            success: true,
-            responseId: docRef.id,
-        };
+        const docRef = await addDoc(collection(db, RESPONSES_COLLECTION, surveyId, 'responses'), responseData);
+        responseId = docRef.id;
     } catch (error) {
         console.error('Error submitting survey:', error);
         return {
@@ -163,6 +118,25 @@ export const submitSurveyResponse = async <T extends BaseSurveyResponse>(
             error: error instanceof Error ? error.message : 'Unknown error occurred',
         };
     }
+
+    // The answers are saved. Remember the family on this device…
+    writeFamilies({ ...families, [key]: { serial, count: (known?.count ?? 0) + 1 } });
+
+    // 2. …and, for a new family, store email + serial (separately from the answers).
+    // Best effort: if this fails, the answers are still saved, so don't report an error.
+    if (!known) {
+        try {
+            await addDoc(collection(db, SERIALS_COLLECTION), {
+                email: email.trim().toLowerCase(),
+                serial,
+                createdAt: Timestamp.now(),
+            });
+        } catch (error) {
+            console.error('Error saving family record (answers were saved):', error);
+        }
+    }
+
+    return { success: true, responseId };
 };
 
 // --------------------------------------------------------------------------
@@ -398,28 +372,16 @@ export const exportSurveyData = async (
 };
 
 // --------------------------------------------------------------------------
-// Check if Email Has Submitted (for info purposes)
+// Check if Email Has Submitted (for info purposes) — on this device
 // --------------------------------------------------------------------------
 
 export const getEmailSubmissionInfo = async (
     email: string
 ): Promise<{ hasSubmitted: boolean; submissionCount: number }> => {
-    const emailHash = hashEmail(email);
-    const serialRef = doc(db, SERIALS_COLLECTION, emailHash);
-
-    const existingDoc = await getDoc(serialRef);
-
-    if (existingDoc.exists()) {
-        const data = existingDoc.data() as SurveySerial;
-        return {
-            hasSubmitted: true,
-            submissionCount: data.responseCount,
-        };
-    }
-
+    const family = readFamilies()[hashEmail(email)];
     return {
-        hasSubmitted: false,
-        submissionCount: 0,
+        hasSubmitted: Boolean(family),
+        submissionCount: family?.count ?? 0,
     };
 };
 

@@ -139,7 +139,7 @@ const SOCSurveyPage: React.FC = () => {
     // --------------------------------------------------------------------------
 
     const handleEmailChange = (email: string) => {
-        setState(prev => ({ ...prev, email }));
+        setState(prev => ({ ...prev, email, childIndex: 1 }));
         setEmailInfo(null);
     };
 
@@ -321,7 +321,7 @@ const SOCSurveyPage: React.FC = () => {
                                 להתחלת הסקר, הזינו את כתובת האימייל שלכם
                             </Typography>
                             <Typography className="soc-survey__email-note">
-                                <FiInfo /> האימייל משמש לזיהוי פנימי בלבד ולא יקושר לתשובות
+                                <FiInfo /> האימייל נשמר בנפרד מהתשובות, ומשמש רק כדי לזהות סקרים של אותה משפחה
                             </Typography>
 
                             <TextField
@@ -339,7 +339,7 @@ const SOCSurveyPage: React.FC = () => {
 
                             {emailInfo?.hasSubmitted && (
                                 <Alert severity="info" className="soc-survey__email-alert">
-                                    כתובת האימייל הזו כבר מילאה {emailInfo.count} סקר/ים.
+                                    מהמכשיר הזה כבר נשלחו {emailInfo.count} סקר/ים עם כתובת האימייל הזו.
                                     אם יש לכם ילד נוסף עם פאנס/פאנדס, אתם מוזמנים למלא סקר נוסף.
                                     זה יהיה הסקר מספר {emailInfo.count + 1} עבור משפחתכם.
                                 </Alert>
