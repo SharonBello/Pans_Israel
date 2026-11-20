@@ -5,6 +5,7 @@ import HomeSections from '../../components/sections/HomeSections/HomeSections';
 import LatestArticleWidget from '../../components/blog/LatestArticleWidget/LatestArticleWidget';
 import FeaturedMediaWidget from '@/components/FeaturedMediaWidget/FeaturedMediaWidget';
 import ActivitiesSection from '@/components/Events/ActivitiesSection/ActivitiesSection';
+import LatestVideos from '@/components/LatestVideos/LatestVideos';
 
 const HomePage: React.FC = (): React.JSX.Element => {
   return (
@@ -14,6 +15,7 @@ const HomePage: React.FC = (): React.JSX.Element => {
       <ActivitiesSection />
       <LatestArticleWidget />
       <FeaturedMediaWidget />
+      <LatestVideos />
       <HomeSections />
     </>
   );

@@ -3,6 +3,7 @@ import { Box, Container, Typography, Tabs, Tab } from '@mui/material';
 import { PlayCircle as PlayIcon, OpenInNew as ExternalIcon, VideoLibrary as VideoIcon, YouTube as YouTubeIcon } from '@mui/icons-material';
 import SupportTabs from '../../components/Support/SupportTabs/SupportTabs';
 import SupportPageHero from '../../components/Support/SupportPageHero/SupportPageHero';
+import LatestVideos from '../../components/LatestVideos/LatestVideos';
 import './VideosPage.scss';
 
 const YOUTUBE_CHANNEL_URL = 'https://www.youtube.com/@PansPandasIsrael';
@@ -305,6 +306,9 @@ const VideosPage: React.FC = () => {
             />
 
             <SupportTabs />
+
+            {/* Newest uploads from our channel, above the curated library */}
+            <LatestVideos />
 
             <Box className="videos-page__filter-bar">
                 <Container maxWidth="lg" className="videos-page__filter-inner">
