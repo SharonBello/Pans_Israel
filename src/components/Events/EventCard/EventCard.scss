@@ -65,6 +65,51 @@ $card-muted: #5b6b7b;
     }
   }
 
+  // Poster as a button: opens the full invite in the lightbox
+  &__media--zoomable {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    font: inherit;
+    cursor: zoom-in;
+
+    &:focus-visible {
+      outline: 3px solid var(--card-accent-strong);
+      outline-offset: 3px;
+    }
+
+    &:hover .event-card__zoom {
+      background: #fff;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+    }
+  }
+
+  &__zoom {
+    position: absolute;
+    bottom: 12px;
+    inset-inline-start: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 0 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.94);
+    color: $color-primary;
+    font-size: 0.875rem;
+    font-weight: 700;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    transition:
+      background-color 0.2s ease,
+      box-shadow 0.2s ease;
+
+    svg {
+      flex-shrink: 0;
+      font-size: 1.1rem;
+    }
+  }
+
   // ── Date tile (events without a poster) ────────────────
   &__date-tile {
     display: flex;
@@ -312,6 +357,20 @@ $card-muted: #5b6b7b;
       inset: 0;
       height: 100%;
       max-height: none;
+    }
+
+    // Small thumbnail: round zoom icon only
+    .event-card__zoom {
+      bottom: 6px;
+      inset-inline-start: 6px;
+      justify-content: center;
+      width: 32px;
+      min-height: 32px;
+      padding: 0;
+    }
+
+    .event-card__zoom-text {
+      display: none;
     }
 
     .event-card__date-tile {

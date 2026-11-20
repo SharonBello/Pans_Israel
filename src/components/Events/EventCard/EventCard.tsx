@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiCalendar, FiClock, FiMapPin, FiArrowLeft } from 'react-icons/fi';
+import { FiCalendar, FiClock, FiMapPin, FiArrowLeft, FiZoomIn } from 'react-icons/fi';
 import type { EventItem } from '@/types/event';
 import { FORMAT_LABELS, eventAnchorId } from '@/types/event';
 import { getEventDateParts, getEventTimeLabel } from '@/utils/eventDisplay';
@@ -10,9 +10,11 @@ interface EventCardProps {
   /** Past events render as a compact archive card, without description or registration */
   past?: boolean;
   onRegister?: (event: EventItem) => void;
+  /** When set, the poster becomes a button that opens the full invite */
+  onViewPoster?: (event: EventItem) => void;
 }
 
-const EventCard: React.FC<EventCardProps> = ({ event, past = false, onRegister }) => {
+const EventCard: React.FC<EventCardProps> = ({ event, past = false, onRegister, onViewPoster }) => {
   const anchorId = eventAnchorId(event.id);
   const titleId = `${anchorId}-title`;
   const date = getEventDateParts(event.date);
@@ -27,16 +29,31 @@ const EventCard: React.FC<EventCardProps> = ({ event, past = false, onRegister }
       style={accentStyle}
     >
       <div className="event-card__main">
-        {/* ── Poster, or a date tile when there is none ── */}
+        {/* ── Poster (opens the full invite), or a date tile when there is none ── */}
         {event.imageUrl ? (
-          <div className="event-card__media">
-            <img
-              src={event.imageUrl}
-              alt={event.imageAlt || `הזמנה: ${event.title}`}
-              loading="lazy"
-              decoding="async"
-            />
-          </div>
+          onViewPoster ? (
+            <button
+              type="button"
+              className="event-card__media event-card__media--zoomable"
+              onClick={() => onViewPoster(event)}
+              aria-label={`הגדלת ההזמנה: ${event.title}`}
+            >
+              <img src={event.imageUrl} alt="" loading="lazy" decoding="async" />
+              <span className="event-card__zoom" aria-hidden="true">
+                <FiZoomIn />
+                <span className="event-card__zoom-text">הגדלת ההזמנה</span>
+              </span>
+            </button>
+          ) : (
+            <div className="event-card__media">
+              <img
+                src={event.imageUrl}
+                alt={event.imageAlt || `הזמנה: ${event.title}`}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+          )
         ) : (
           <div className="event-card__date-tile" aria-hidden="true">
             <span className="event-card__weekday">{date.weekday}</span>

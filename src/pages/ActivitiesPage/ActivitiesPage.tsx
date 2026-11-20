@@ -4,6 +4,7 @@ import SupportPageHero from '@/components/Support/SupportPageHero/SupportPageHer
 import SupportTabs from '@/components/Support/SupportTabs/SupportTabs';
 import EventCard from '@/components/Events/EventCard/EventCard';
 import EventRegistrationModal from '@/components/Events/EventRegistrationModal/EventRegistrationModal';
+import PosterLightbox from '@/components/Events/PosterLightbox/PosterLightbox';
 import { getPublishedEvents } from '@/services/eventService';
 import { splitEventsByDate } from '@/utils/eventDisplay';
 import type { EventItem } from '@/types/event';
@@ -23,6 +24,7 @@ const ActivitiesPage: React.FC = (): React.JSX.Element => {
     const [reloadKey, setReloadKey] = useState(0);
     const [pastVisible, setPastVisible] = useState(PAST_PAGE_SIZE);
     const [registering, setRegistering] = useState<EventItem | null>(null);
+    const [viewingPoster, setViewingPoster] = useState<EventItem | null>(null);
 
     useEffect(() => {
         let cancelled = false;
@@ -85,7 +87,12 @@ const ActivitiesPage: React.FC = (): React.JSX.Element => {
                             {upcoming.length > 0 ? (
                                 <div className="activities-page__list">
                                     {upcoming.map((event) => (
-                                        <EventCard key={event.id} event={event} onRegister={setRegistering} />
+                                        <EventCard
+                                            key={event.id}
+                                            event={event}
+                                            onRegister={setRegistering}
+                                            onViewPoster={setViewingPoster}
+                                        />
                                     ))}
                                 </div>
                             ) : (
@@ -111,7 +118,7 @@ const ActivitiesPage: React.FC = (): React.JSX.Element => {
 
                                 <div className="activities-page__list">
                                     {past.slice(0, pastVisible).map((event) => (
-                                        <EventCard key={event.id} event={event} past />
+                                        <EventCard key={event.id} event={event} past onViewPoster={setViewingPoster} />
                                     ))}
                                 </div>
 
@@ -134,6 +141,12 @@ const ActivitiesPage: React.FC = (): React.JSX.Element => {
                 event={registering}
                 open={Boolean(registering)}
                 onClose={() => setRegistering(null)}
+            />
+
+            <PosterLightbox
+                event={viewingPoster}
+                open={Boolean(viewingPoster)}
+                onClose={() => setViewingPoster(null)}
             />
         </div>
     );

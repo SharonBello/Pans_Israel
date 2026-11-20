@@ -1,0 +1,145 @@
+// ==========================================================================
+// PosterLightbox — full-screen view of an event's invite / poster
+// ==========================================================================
+
+$lightbox-header-height: 64px;
+$lightbox-gutter: clamp(12px, 3vw, 32px);
+
+.poster-lightbox {
+    .MuiDialog-paper {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+        background: rgba(10, 13, 30, 0.94);
+        box-shadow: none;
+    }
+
+    // ── Header ──────────────────────────────────────────────
+    &__header {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        min-height: $lightbox-header-height;
+        padding: 10px $lightbox-gutter;
+        box-sizing: border-box;
+    }
+
+    &__heading {
+        min-width: 0;
+    }
+
+    &__label {
+        display: block;
+        font-size: 0.8125rem;
+        color: #b8c3d1;
+    }
+
+    &__title {
+        margin: 0;
+        font-family: $font-heading;
+        font-size: clamp(0.9375rem, 0.85rem + 0.4vw, 1.125rem);
+        font-weight: 700;
+        color: #fff;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    &__actions {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    &__action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-width: 44px;
+        min-height: 44px;
+        padding: 0 12px;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        border-radius: 999px;
+        background: transparent;
+        color: #fff;
+        font-family: inherit;
+        font-size: 0.875rem;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+        }
+
+        &:focus-visible {
+            outline: 2px solid #fff;
+            outline-offset: 2px;
+        }
+
+        svg {
+            flex-shrink: 0;
+            font-size: 1.15rem;
+        }
+
+        &--close {
+            padding: 0;
+            border-color: transparent;
+            background: rgba(255, 255, 255, 0.14);
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.24);
+            }
+
+            svg {
+                font-size: 1.4rem;
+            }
+        }
+    }
+
+    // Icon only on phones; the link keeps its aria-label
+    &__action-text {
+        display: none;
+
+        @include md {
+            display: inline;
+        }
+    }
+
+    // ── Image area ──────────────────────────────────────────
+    &__stage {
+        flex: 1;
+        min-height: 0;
+        display: flex;
+        justify-content: center;
+        padding: 0 $lightbox-gutter $lightbox-gutter;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+    }
+
+    // Tall posters: full width up to 720px, scroll down to read
+    &__image {
+        display: block;
+        width: 100%;
+        max-width: 720px;
+        height: auto;
+        margin-block: auto; // centres vertically when shorter than the screen
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+
+        // Square / landscape posters: whole poster visible without scrolling
+        &--fit {
+            width: auto;
+            max-width: 100%;
+            max-height: calc(100vh - #{$lightbox-header-height} - 32px);
+            max-height: calc(100dvh - #{$lightbox-header-height} - 32px);
+        }
+    }
+}
