@@ -1,0 +1,156 @@
+// ==========================================================================
+// CommunityCta — purple community call-to-action (matches /join and SupportPageHero)
+// ==========================================================================
+
+.community-cta {
+    &--inset {
+        box-sizing: border-box;
+        width: 100%; // the page's main area is a flex column — without this the band shrinks to its text
+        max-width: 1248px; // 1200 content + side padding
+        margin: 0 auto;
+        padding: clamp(24px, 4vw, 40px) clamp(16px, 3vw, 24px) 0;
+    }
+
+    &__card {
+        position: relative;
+        overflow: hidden;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        grid-template-areas:
+            "icon body"
+            "actions actions";
+        align-items: center;
+        gap: 16px 18px;
+        padding: clamp(20px, 4vw, 32px) clamp(18px, 4vw, 36px);
+        border-radius: $radius-xl;
+        background: linear-gradient(135deg, #4a148c 0%, #6a1b9a 55%, #7b1fa2 100%);
+        color: #fff;
+        box-shadow: 0 12px 30px rgba(74, 20, 140, 0.18);
+
+        // soft light in the corner, like the hero
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.12) 0%, transparent 45%);
+            pointer-events: none;
+        }
+
+        @include lg {
+            grid-template-columns: auto minmax(0, 1fr) auto;
+            grid-template-areas: "icon body actions";
+            gap: 24px;
+        }
+    }
+
+    &__icon {
+        grid-area: icon;
+        align-self: start;
+        display: grid;
+        place-items: center;
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.16);
+
+        svg {
+            font-size: 1.75rem;
+        }
+
+        @include lg {
+            align-self: center;
+            width: 60px;
+            height: 60px;
+        }
+    }
+
+    &__body {
+        grid-area: body;
+        position: relative;
+        min-width: 0;
+    }
+
+    &__title {
+        margin: 0;
+        font-family: $font-heading;
+        font-size: clamp(1.25rem, 1.05rem + 0.8vw, 1.625rem);
+        font-weight: 800;
+        line-height: 1.25;
+        color: #fff;
+    }
+
+    &__text {
+        margin: 6px 0 0;
+        font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem);
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.9);
+        max-width: 60ch;
+    }
+
+    &__actions {
+        grid-area: actions;
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+
+        @include lg {
+            flex-direction: column;
+            align-items: stretch;
+            min-width: 210px;
+        }
+    }
+
+    &__btn {
+        flex: 1 1 200px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 0 24px;
+        border-radius: $radius-full;
+        font-family: $font-heading;
+        font-size: 1rem;
+        font-weight: 700;
+        text-decoration: none;
+        text-align: center;
+        transition:
+            background 0.18s ease,
+            color 0.18s ease,
+            border-color 0.18s ease;
+
+        @include sm {
+            flex: 0 0 auto;
+        }
+
+        &--primary {
+            background: #fff;
+            color: #4a148c;
+
+            &:hover {
+                background: #f3e8f8;
+                color: #4a148c;
+            }
+        }
+
+        &--secondary {
+            border: 1.5px solid rgba(255, 255, 255, 0.7);
+            color: #fff;
+
+            &:hover {
+                background: rgba(255, 255, 255, 0.12);
+                border-color: #fff;
+                color: #fff;
+            }
+        }
+
+        &:focus-visible {
+            outline: 3px solid #fff;
+            outline-offset: 3px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            transition: none;
+        }
+    }
+}

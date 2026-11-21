@@ -38,6 +38,7 @@ import {
   Add as AddIcon,
   Close as CloseIcon,
   Groups as GroupsIcon,
+  Facebook as FacebookIcon,
 } from '@mui/icons-material';
 import {
   getApprovedVolunteers,
@@ -59,6 +60,7 @@ import {
 } from '../../types/support.types';
 import SupportTabs from '@/components/Support/SupportTabs/SupportTabs';
 import SupportPageHero from '@/components/Support/SupportPageHero/SupportPageHero';
+import CommunityCta from '@/components/Community/CommunityCta/CommunityCta';
 import './SupportPage.scss';
 
 const SupportPage: React.FC = () => {
@@ -222,6 +224,19 @@ const SupportPage: React.FC = () => {
           </Box>
         </Container>
       </section>
+
+      {/* Parents' Facebook group */}
+      <Box sx={{ bgcolor: '#fff', pt: { xs: 4, md: 5 } }}>
+        <Container maxWidth="lg">
+          <CommunityCta
+            icon={<FacebookIcon />}
+            title="קבוצת ההורים בפייסבוק"
+            text="מקום לשאול, לשתף ולקבל עצה מהורים שמכירים את ההתמודדות מבפנים."
+            primary={{ label: 'לקבוצת ההורים', href: 'https://www.facebook.com/groups/PandasIsrael' }}
+            secondary={{ label: 'הצטרפות לקהילה', to: '/join' }}
+          />
+        </Container>
+      </Box>
 
       {/* Volunteers Grid */}
       <section className="support-page__volunteers">

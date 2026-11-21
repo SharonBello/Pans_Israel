@@ -1,11 +1,12 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Event as EventIcon } from '@mui/icons-material';
+import { Event as EventIcon, NotificationsActive as NotifyIcon } from '@mui/icons-material';
 import SupportPageHero from '@/components/Support/SupportPageHero/SupportPageHero';
 import SupportTabs from '@/components/Support/SupportTabs/SupportTabs';
 import EventCard from '@/components/Events/EventCard/EventCard';
 import EventRegistrationModal from '@/components/Events/EventRegistrationModal/EventRegistrationModal';
 import PosterLightbox from '@/components/Events/PosterLightbox/PosterLightbox';
+import CommunityCta from '@/components/Community/CommunityCta/CommunityCta';
 import { getPublishedEvents } from '@/services/eventService';
 import { splitEventsByDate } from '@/utils/eventDisplay';
 import type { EventItem } from '@/types/event';
@@ -138,6 +139,15 @@ const ActivitiesPage: React.FC = (): React.JSX.Element => {
                                 </p>
                             )}
                         </section>
+
+                        {/* ── Updates about the next events ── */}
+                        <CommunityCta
+                            className="activities-page__section"
+                            icon={<NotifyIcon />}
+                            title="רוצים לשמוע על המפגשים הבאים?"
+                            text="הצטרפו לקהילה וסמנו שאתם רוצים עדכונים במייל. נודיע לכם כשנפתחת הרשמה למפגש, להרצאה או לכנס."
+                            primary={{ label: 'הצטרפות לקהילה', to: '/join' }}
+                        />
 
                         {/* ── Past ── */}
                         {past.length > 0 && (
