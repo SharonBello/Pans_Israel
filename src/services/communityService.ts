@@ -54,6 +54,44 @@ export const joinCommunity = async (
 };
 
 // --------------------------------------------------------------------------
+// Welcome email (Cloudflare function /api/join → Resend)
+// --------------------------------------------------------------------------
+
+/**
+ * Asks the site's server function to add the member to Resend and send the welcome email.
+ * Only for people who asked for updates. Never throws: if the function isn't available
+ * (e.g. `npm run dev`, which doesn't run Cloudflare functions) it just returns false.
+ */
+export const requestWelcomeEmail = async (
+    input: CommunityJoinInput,
+    captchaToken: string,
+): Promise<boolean> => {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 10000);
+    try {
+        const res = await fetch('/api/join', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                fullName: normalizeName(input.fullName),
+                email: normalizeEmail(input.email),
+                emailUpdates: input.emailUpdates,
+                captchaToken,
+            }),
+            signal: controller.signal,
+        });
+        if (!res.ok) return false;
+        const data = (await res.json()) as { welcomeSent?: boolean };
+        return data.welcomeSent === true;
+    } catch (error) {
+        console.warn('Welcome email not sent:', error);
+        return false;
+    } finally {
+        clearTimeout(timer);
+    }
+};
+
+// --------------------------------------------------------------------------
 // Admin
 // --------------------------------------------------------------------------
 

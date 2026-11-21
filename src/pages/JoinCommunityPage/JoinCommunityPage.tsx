@@ -25,6 +25,7 @@ import {
     NAME_MAX,
     NAME_MIN,
     joinCommunity,
+    requestWelcomeEmail,
     normalizeEmail,
     normalizeName,
 } from '@/services/communityService';
@@ -90,7 +91,7 @@ const JoinCommunityPage: React.FC = () => {
     const [noticeOpen, setNoticeOpen] = useState(false);
     const [status, setStatus] = useState<'idle' | 'submitting' | 'done'>('idle');
     const [submitError, setSubmitError] = useState<string | null>(null);
-    const [joined, setJoined] = useState<{ firstName: string; email: string; emailUpdates: boolean } | null>(null);
+    const [joined, setJoined] = useState<{ firstName: string; email: string; emailUpdates: boolean; welcomeSent: boolean } | null>(null);
 
     const recaptchaRef = useRef<ReCAPTCHA>(null);
     const nameRef = useRef<HTMLInputElement>(null);
@@ -121,17 +122,19 @@ const JoinCommunityPage: React.FC = () => {
         if (found.captcha) return;
 
         setStatus('submitting');
-        const result = await joinCommunity({
-            fullName: form.fullName,
-            email: form.email,
-            emailUpdates: form.emailUpdates,
-        });
+        const input = { fullName: form.fullName, email: form.email, emailUpdates: form.emailUpdates };
+        const result = await joinCommunity(input);
 
         if (result.success) {
+            // Welcome email only for people who asked for updates; joining succeeds either way
+            const welcomeSent = form.emailUpdates && captchaToken
+                ? await requestWelcomeEmail(input, captchaToken)
+                : false;
             setJoined({
                 firstName: normalizeName(form.fullName).split(' ')[0],
                 email: normalizeEmail(form.email),
                 emailUpdates: form.emailUpdates,
+                welcomeSent,
             });
             setForm(EMPTY_FORM);
             setStatus('done');
@@ -160,7 +163,9 @@ const JoinCommunityPage: React.FC = () => {
                                 תודה, {joined.firstName}! הצטרפתם לקהילה.
                             </h2>
                             <p className="join-page__text">
-                                {joined.emailUpdates ? (
+                                {joined.welcomeSent ? (
+                                    <>שלחנו מייל ברכה לכתובת <bdi dir="ltr">{joined.email}</bdi>. אם הוא לא מגיע בעוד כמה דקות, כדאי להציץ בתיקיית הספאם.</>
+                                ) : joined.emailUpdates ? (
                                     <>כשיהיו מפגשים או מידע חדש, נשלח עדכון לכתובת <bdi dir="ltr">{joined.email}</bdi>.</>
                                 ) : (
                                     'בחרתם לא לקבל עדכונים במייל. את כל המפגשים הקרובים אפשר לראות בעמוד הפעילויות.'
