@@ -1,0 +1,346 @@
+// ==========================================================================
+// JoinCommunityPage — /join  (community purple, matches SupportPageHero)
+// ==========================================================================
+
+$join-purple: #6a1b9a;
+$join-purple-dark: #4a148c;
+$join-purple-soft: #f3e8f8;
+$join-muted: #5b6b7b;
+
+.join-page {
+    min-height: 100vh;
+    background: #f4f6f9;
+
+    // Same width and side padding as the hero, so the edges line up
+    &__container {
+        box-sizing: border-box;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: clamp(24px, 5vw, 56px) clamp(16px, 3vw, 32px) clamp(60px, 8vw, 96px);
+        display: grid;
+        gap: clamp(20px, 3vw, 32px);
+        align-items: start;
+
+        @include lg {
+            grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+        }
+    }
+
+    // ── Form card ──────────────────────────────────────────
+    &__card {
+        background: #fff;
+        border-radius: $radius-xl;
+        box-shadow: 0 10px 30px rgba(14, 13, 38, 0.08);
+        padding: clamp(20px, 4vw, 40px);
+        min-width: 0;
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
+    }
+
+    &__title {
+        margin: 0;
+        font-family: $font-heading;
+        font-size: clamp(1.5rem, 1.25rem + 0.9vw, 1.875rem);
+        line-height: 1.2;
+        font-weight: 800;
+        color: $color-darkest;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    &__text {
+        margin: -8px 0 4px;
+        font-size: clamp(0.9375rem, 0.9rem + 0.2vw, 1.0625rem);
+        line-height: 1.6;
+        color: $join-muted;
+    }
+
+    // ── Checkboxes (label wraps on small screens, box stays at the top) ──
+    &__check {
+        align-items: flex-start !important;
+        margin-inline: -9px 0 !important;
+
+        .MuiCheckbox-root {
+            padding-top: 6px;
+        }
+
+        .MuiFormControlLabel-label {
+            padding-top: 8px;
+            font-size: 0.9375rem;
+            line-height: 1.55;
+            color: $color-darkest;
+        }
+
+        .Mui-checked {
+            color: $join-purple !important;
+        }
+    }
+
+    &__check-wrap .MuiFormHelperText-root {
+        margin: 2px 0 0;
+        padding-inline-start: 33px;
+    }
+
+    // ── Privacy notice ─────────────────────────────────────
+    &__notice {
+        border-radius: $radius-lg;
+        background: $join-purple-soft;
+        padding: 14px 16px;
+    }
+
+    &__notice-short {
+        margin: 0;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        color: $color-darkest;
+    }
+
+    &__notice-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
+        min-height: 44px;
+        margin-top: 2px;
+        padding: 0;
+        border: 0;
+        background: none;
+        font: inherit;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: $join-purple;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        cursor: pointer;
+
+        &:hover {
+            color: $join-purple-dark;
+        }
+
+        &:focus-visible {
+            outline: 2px solid $join-purple;
+            outline-offset: 2px;
+            border-radius: 4px;
+        }
+    }
+
+    &__notice-chevron {
+        font-size: 1.25rem !important;
+        transition: transform 0.2s ease;
+
+        &--open {
+            transform: rotate(180deg);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            transition: none;
+        }
+    }
+
+    &__notice-full {
+        margin: 6px 0 2px;
+        font-size: 0.875rem;
+        line-height: 1.6;
+        color: $color-darkest;
+
+        dt {
+            font-weight: 700;
+            margin-top: 10px;
+
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+
+        dd {
+            margin: 2px 0 0;
+            color: #3d4a57;
+        }
+
+        a {
+            color: $join-purple;
+            font-weight: 600;
+        }
+    }
+
+    // ── reCAPTCHA (fixed 304px widget — scale down on very narrow phones) ──
+    &__captcha {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        min-height: 78px;
+
+        @media (max-width: 370px) {
+            > div:first-child {
+                transform: scale(0.9);
+                transform-origin: right top;
+            }
+        }
+    }
+
+    &__alert {
+        border-radius: $radius-md !important;
+    }
+
+    // ── Buttons ────────────────────────────────────────────
+    &__btn {
+        min-height: 48px;
+        border-radius: $radius-full !important;
+        padding-inline: 28px !important;
+        font-family: $font-heading !important;
+        font-weight: 700 !important;
+        font-size: 1rem !important;
+        box-shadow: none !important;
+
+        &.MuiButton-contained {
+            background: $join-purple;
+
+            &:hover {
+                background: $join-purple-dark;
+            }
+        }
+
+        &--outline.MuiButton-outlined {
+            color: $join-purple;
+            border-color: rgba(106, 27, 154, 0.5);
+
+            &:hover {
+                border-color: $join-purple;
+                background: rgba(106, 27, 154, 0.06);
+            }
+        }
+    }
+
+    &__submit {
+        align-self: stretch;
+
+        @include sm {
+            align-self: flex-start;
+            min-width: 220px;
+        }
+    }
+
+    // ── Thank-you state ────────────────────────────────────
+    &__done {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding-block: 8px;
+
+        .join-page__text {
+            margin: 0;
+        }
+    }
+
+    &__done-icon {
+        font-size: 3rem !important;
+        color: #2e7d32;
+    }
+
+    &__done-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 6px;
+        width: 100%;
+
+        .join-page__btn {
+            flex: 1 1 200px;
+
+            @include sm {
+                flex: 0 0 auto;
+            }
+        }
+    }
+
+    // ── Benefits aside ─────────────────────────────────────
+    &__aside {
+        padding: clamp(4px, 1vw, 8px) clamp(4px, 1vw, 8px) 0;
+
+        @include lg {
+            position: sticky;
+            top: calc(var(--header-height, 80px) + 24px);
+        }
+    }
+
+    &__aside-title {
+        margin: 0 0 16px;
+        font-family: $font-heading;
+        font-size: clamp(1.125rem, 1rem + 0.4vw, 1.3125rem);
+        font-weight: 800;
+        color: $color-darkest;
+    }
+
+    &__benefits {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 14px;
+
+        @include md {
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        @include lg {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    &__benefit {
+        display: flex;
+        gap: 14px;
+        align-items: flex-start;
+        background: #fff;
+        border-radius: $radius-lg;
+        padding: 16px;
+        box-shadow: 0 2px 10px rgba(14, 13, 38, 0.05);
+
+        // three narrow cards side by side (tablet): icon above the text
+        @include md {
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        @include lg {
+            flex-direction: row;
+            gap: 14px;
+        }
+    }
+
+    &__benefit-icon {
+        flex: 0 0 auto;
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: $join-purple-soft;
+        color: $join-purple;
+
+        svg {
+            font-size: 1.4rem;
+        }
+    }
+
+    &__benefit-title {
+        display: block;
+        font-size: 1rem;
+        font-weight: 700;
+        color: $color-darkest;
+    }
+
+    &__benefit-text {
+        display: block;
+        margin-top: 2px;
+        font-size: 0.9rem;
+        line-height: 1.55;
+        color: $join-muted;
+    }
+}

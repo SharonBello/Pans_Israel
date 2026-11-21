@@ -35,6 +35,7 @@ import ArticlesPage from './pages/ProfessionalPages/ArticlesPage/ArticlesPage.ts
 import InternationalPage from './pages/ProfessionalPages/InternationalPage/InternationalPage.tsx';
 import ResearchPage from './pages/ProfessionalPages/ResearchPage/ResearchPage.tsx';
 import ActivitiesPage from './pages/ActivitiesPage/ActivitiesPage.tsx';
+import JoinCommunityPage from './pages/JoinCommunityPage/JoinCommunityPage.tsx';
 import BlogListPage from './pages/CommunityBlog/BlogListPage/BlogListPage.tsx';
 import BlogArticlePage from './pages/CommunityBlog/BlogArticlePage/BlogArticlePage.tsx';
 import MediaCoveragePage from './pages/MediaCoveragePage/MediaCoveragePage.tsx';
@@ -172,6 +173,16 @@ const AppRoutes: AppRoute[] = [
       description:
         'וובינרים, מפגשים, הרצאות וכנסים של קהילת פאנס/פאנדס ישראל להורים, משפחות ואנשי מקצוע — כולל הכנס הרפואי הראשון בישראל לנוירואימונולוגיה ו-PANS/PANDAS.',
       canonicalPath: '/activities',
+    },
+  },
+  {
+    path: '/join',
+    component: <JoinCommunityPage />,
+    seo: {
+      title: 'הצטרפות לקהילה | פאנס/פאנדס ישראל',
+      description:
+        'הצטרפו לקהילת המשפחות של פאנס/פאנדס ישראל — מפגשים, הרצאות, הורים שמבינים ומידע עדכני בעברית.',
+      canonicalPath: '/join',
     },
   },
   {
