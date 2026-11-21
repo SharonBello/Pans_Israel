@@ -51,14 +51,20 @@ const cell = (value: string, guard = true): string =>
 const toCsv = (rows: string[][]): string => rows.map((r) => r.join(',')).join('\r\n') + '\r\n';
 
 /**
- * For the mailing service (Brevo / Mailchimp): only people who asked for updates.
- * Column names match Brevo's built-in fields; Mailchimp asks you to match columns on import.
- * The email is left exactly as stored so the import isn't affected.
+ * Who goes into the mailing-service file: people whose latest choice is "send me updates".
+ * `since` ('YYYY-MM-DD', Israel time, inclusive) keeps only people who signed up on or after that day,
+ * so each import adds the new members only — and nobody who unsubscribed in the mailing service is added back.
  */
-export const buildMailingCsv = (groups: MemberGroup[]): string => {
-    const rows = [['EMAIL', 'FIRSTNAME', 'LASTNAME'].map((h) => cell(h))];
-    for (const g of groups) {
-        if (!g.latest.emailUpdates) continue;
+export const mailingRecipients = (groups: MemberGroup[], since?: string | null): MemberGroup[] =>
+    groups.filter((g) => g.latest.emailUpdates && (!since || isoDay(toDate(g.latest.createdAt)) >= since));
+
+/**
+ * For the mailing service (Resend). Column names match Resend's contact fields,
+ * so the import maps them automatically. The email is left exactly as stored.
+ */
+export const buildMailingCsv = (groups: MemberGroup[], since?: string | null): string => {
+    const rows = [['email', 'first_name', 'last_name'].map((h) => cell(h))];
+    for (const g of mailingRecipients(groups, since)) {
         const { first, last } = splitName(g.latest.fullName);
         rows.push([cell(g.email, false), cell(first), cell(last)]);
     }

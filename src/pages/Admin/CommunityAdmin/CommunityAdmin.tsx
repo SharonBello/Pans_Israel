@@ -1,6 +1,18 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { FiUserPlus, FiTrash2, FiSearch, FiDownload, FiMail } from 'react-icons/fi';
-import { Box, Button, InputAdornment, TextField } from '@mui/material';
+import {
+    Box,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogTitle,
+    FormControlLabel,
+    InputAdornment,
+    Radio,
+    RadioGroup,
+    TextField,
+} from '@mui/material';
 import { getCommunityMembers, deleteCommunityMember } from '@/services/communityService';
 import {
     buildFullCsv,
@@ -8,6 +20,7 @@ import {
     downloadCsv,
     groupMembers,
     isoDay,
+    mailingRecipients,
     type MemberGroup,
 } from '@/utils/communityMembers';
 import '../admin-shared.scss';
@@ -22,6 +35,19 @@ const FILTERS: { id: Filter; label: string }[] = [
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
+/** Day of the last mailing export from this browser — only used to pre-fill the "since" date */
+const LAST_EXPORT_KEY = 'community-last-mailing-export';
+
+const readLastExport = (): string | null => {
+    try { return localStorage.getItem(LAST_EXPORT_KEY); } catch { return null; }
+};
+
+const saveLastExport = (day: string): void => {
+    try { localStorage.setItem(LAST_EXPORT_KEY, day); } catch { /* storage blocked — nothing to remember */ }
+};
+
+const formatDay = (day: string): string => formatDate(new Date(`${day}T12:00:00`));
+
 const formatDate = (d: Date | null): string =>
     d ? d.toLocaleDateString('he-IL', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
 
@@ -32,6 +58,10 @@ const CommunityAdmin: React.FC = () => {
     const [filter, setFilter] = useState<Filter>('all');
     const [search, setSearch] = useState('');
     const [toast, setToast] = useState<{ msg: string; type: 'success' | 'error' } | null>(null);
+    const [exportOpen, setExportOpen] = useState(false);
+    const [exportMode, setExportMode] = useState<'all' | 'since'>('all');
+    const [sinceDay, setSinceDay] = useState('');
+    const [lastExport, setLastExport] = useState<string | null>(null);
 
     const showToast = (msg: string, type: 'success' | 'error' = 'success') => {
         setToast({ msg, type });
@@ -73,10 +103,25 @@ const CommunityAdmin: React.FC = () => {
         });
     }, [groups, filter, search]);
 
-    const exportMailing = () => {
+    const exportSince = exportMode === 'since' && sinceDay ? sinceDay : null;
+    const exportCount = useMemo(() => mailingRecipients(groups, exportSince).length, [groups, exportSince]);
+
+    const openExport = () => {
         if (stats.updates === 0) { showToast('אין עדיין מי שביקש/ה עדכונים', 'error'); return; }
-        downloadCsv(buildMailingCsv(groups), `community-mailing-${isoDay(new Date())}.csv`, false);
-        showToast(`יוצאו ${stats.updates} כתובות לשירות הדיוור`);
+        const last = readLastExport();
+        setLastExport(last);
+        setExportMode(last ? 'since' : 'all');
+        setSinceDay(last ?? isoDay(new Date()));
+        setExportOpen(true);
+    };
+
+    const exportMailing = () => {
+        const today = isoDay(new Date());
+        const name = exportSince ? `community-mailing-since-${exportSince}.csv` : `community-mailing-all-${today}.csv`;
+        downloadCsv(buildMailingCsv(groups, exportSince), name, false);
+        saveLastExport(today);
+        setExportOpen(false);
+        showToast(`יוצאו ${exportCount} כתובות לשירות הדיוור`);
     };
 
     const exportFull = () => {
@@ -112,7 +157,7 @@ const CommunityAdmin: React.FC = () => {
                     </div>
                 </div>
                 <Box sx={{ display: 'flex', gap: 1, flexWrap: 'wrap' }}>
-                    <button type="button" className="adm-btn adm-btn--primary" onClick={exportMailing} disabled={loading}>
+                    <button type="button" className="adm-btn adm-btn--primary" onClick={openExport} disabled={loading}>
                         <FiMail /> ייצוא לשירות הדיוור
                     </button>
                     <Button variant="outlined" onClick={exportFull} disabled={loading || groups.length === 0}
@@ -208,6 +253,61 @@ const CommunityAdmin: React.FC = () => {
                     </table>
                 )}
             </div>
+
+            {/* ── Mailing export ── */}
+            <Dialog open={exportOpen} onClose={() => setExportOpen(false)} maxWidth="xs" fullWidth dir="rtl">
+                <DialogTitle sx={{ fontWeight: 800 }}>ייצוא לשירות הדיוור</DialogTitle>
+                <DialogContent dividers>
+                    <RadioGroup
+                        value={exportMode}
+                        onChange={(e) => setExportMode(e.target.value as 'all' | 'since')}
+                        aria-label="מי ייכלל בקובץ"
+                    >
+                        <FormControlLabel
+                            value="all"
+                            control={<Radio />}
+                            label={`כל מי שביקשו עדכונים (${stats.updates})`}
+                        />
+                        <FormControlLabel
+                            value="since"
+                            control={<Radio />}
+                            label={`רק מי שנרשמו מתאריך מסוים${exportMode === 'since' ? ` (${exportCount})` : ''}`}
+                        />
+                    </RadioGroup>
+
+                    {exportMode === 'since' && (
+                        <TextField
+                            type="date"
+                            size="small"
+                            label="מתאריך (כולל)"
+                            value={sinceDay}
+                            onChange={(e) => setSinceDay(e.target.value)}
+                            sx={{ mt: 1, marginInlineStart: '32px', width: 200 }}
+                            slotProps={{ inputLabel: { shrink: true }, htmlInput: { max: isoDay(new Date()) } }}
+                        />
+                    )}
+
+                    <Box sx={{ mt: 2, fontSize: '0.85rem', color: '#5b6b7b', lineHeight: 1.7 }}>
+                        {lastExport
+                            ? <>הייצוא הקודם מהדפדפן הזה: {formatDay(lastExport)}. כדי לא להחזיר לרשימה מי שהסיר/ה את עצמו/ה, ייבאו בכל פעם רק את מי שנרשמו מאז.</>
+                            : <>אחרי הייצוא הראשון, כדאי לייצא בכל פעם רק את מי שנרשמו מאז הייצוא הקודם.</>}
+                        <br />
+                        ייבוא ב־Resend: <bdi dir="ltr">Audience → Add contacts → Import CSV</bdi>. לא לפתוח ולשמור את הקובץ ב־Excel לפני הייבוא.
+                    </Box>
+                </DialogContent>
+                <DialogActions sx={{ gap: 1, px: 3, py: 2 }}>
+                    <Button onClick={() => setExportOpen(false)}>ביטול</Button>
+                    <Button
+                        variant="contained"
+                        onClick={exportMailing}
+                        disabled={exportCount === 0 || (exportMode === 'since' && !sinceDay)}
+                        startIcon={<FiDownload />}
+                        sx={{ fontWeight: 700 }}
+                    >
+                        {exportCount === 0 ? 'אין מי לייצא' : `הורדת הקובץ (${exportCount})`}
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 };
