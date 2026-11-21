@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FaHeart, FaUsers, FaHandHoldingHeart, FaLightbulb, FaWhatsapp, FaEnvelope } from 'react-icons/fa';
 import { FiTarget, FiEye } from 'react-icons/fi';
 import './AboutPage.scss';
@@ -282,14 +283,12 @@ const AboutPage: React.FC = () => {
                         </p>
 
                         <div className="about-cta__buttons">
-                            <a
+                            <Link
                                 className="info-page__cta-button info-page__cta-button--primary"
-                                href="https://www.facebook.com/groups/PandasIsrael/?ref=share&mibextid=NSMWBT"
-                                target="_blank"
-                                rel="noopener noreferrer"
+                                to="/join"
                             >
                                 הצטרפו לקהילה
-                            </a>
+                            </Link>
                             <a
                                 href="https://wa.me/972544222683"
                                 className="about-cta__btn about-cta__btn--primary"

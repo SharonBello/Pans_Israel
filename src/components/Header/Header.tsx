@@ -46,6 +46,7 @@ const NAV_ITEMS: NavItem[] = [
       { label: 'מאמרים מהקהילה ומטפלים', path: '/community/articles' },
       { label: 'פורסם בתקשורת', path: '/resources/media-coverage' },
       { label: 'תמיכה וקהילה', path: '/support' },
+      { label: 'הצטרפות לקהילה', path: '/join' },
       { label: 'עדויות הורים', path: '/testimonials' },
       { label: 'פעילויות ואירועים', path: '/activities' },
       { label: 'סרטונים ווובינרים', path: '/resources/videos' },

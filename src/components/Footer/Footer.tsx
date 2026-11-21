@@ -22,6 +22,7 @@ const Footer: React.FC = () => {
     { title: 'מאמרים מהקהילה ומטפלים', path: '/community/articles' },
     { title: 'פורסם בתקשורת', path: '/resources/media-coverage' },
     { title: 'תמיכה וקהילה', path: '/support' },
+    { title: 'הצטרפות לקהילה', path: '/join' },
     { title: 'עדויות הורים', path: '/testimonials' },
     { title: 'סרטונים ווובינרים', path: '/resources/videos' },
     { title: 'פעילויות ואירועים', path: '/activities' },
@@ -58,6 +59,8 @@ const Footer: React.FC = () => {
   //   );
 
   const YOUTUBE_URL = 'https://www.youtube.com/@PansPandasIsrael';
+  const FACEBOOK_PAGE_URL =
+    'https://www.facebook.com/p/%D7%A4%D7%90%D7%A0%D7%A1-%D7%A4%D7%90%D7%A0%D7%93%D7%A1-%D7%99%D7%A9%D7%A8%D7%90%D7%9C-Pans-Pandas-Israel-61589380803440/';
 
   return (
     <footer className="footer" dir="rtl">
@@ -91,11 +94,11 @@ const Footer: React.FC = () => {
                 <FaWhatsapp />
               </a>
               <a
-                href="https://www.facebook.com/share/g/1DCWNUxKhN/"
+                href={FACEBOOK_PAGE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer__social-link footer__social-link--facebook"
-                aria-label="הצטרפו לקבוצת הפייסבוק"
+                aria-label="עמוד הפייסבוק של העמותה"
               >
                 <FaFacebook />
               </a>

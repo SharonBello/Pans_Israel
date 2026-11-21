@@ -113,13 +113,13 @@ const ResourcesPage: React.FC = () => {
                 חפשו במאגר שלנו כדי למצוא מטפל עם ניסיון בסיוע למטופלים עם תסמינים הקשורים ל-פאנס/פאנדס.
               </Typography>
             </div>
-              <Button
-                className="resources-page__link-btn"
-                onClick={() => navigate('/professionals-help')}
-              >
-                {/* מצא עזרה &gt; */}
-                <img src={doctors} alt="מצא רופא" />
-              </Button>
+            <Button
+              className="resources-page__link-btn"
+              onClick={() => navigate('/professionals-help')}
+            >
+              {/* מצא עזרה &gt; */}
+              <img src={doctors} alt="מצא רופא" />
+            </Button>
           </div>
         </Container>
       </section>
@@ -276,7 +276,7 @@ const ResourcesPage: React.FC = () => {
               <p className="resources-page__cta-text">עזרו לנו להפיץ מודעות על פאנס/פאנדס.</p>
               <Button
                 className="resources-page__cta-btn"
-                onClick={() => navigate('/community')}
+                onClick={() => navigate('/join')}
               >
                 להצטרפות
               </Button>

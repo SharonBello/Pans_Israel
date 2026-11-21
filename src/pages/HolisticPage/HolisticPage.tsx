@@ -214,7 +214,7 @@ const HolisticPage: React.FC = () => {
                         שתפו את הקהילה — אנחנו אוספים חוויות ומידע מהורים על גישות שעזרו לילדיהם
                     </Typography>
                     <a
-                        href="https://www.facebook.com/groups/PandasIsrael"
+                        href="https://www.facebook.com/p/%D7%A4%D7%90%D7%A0%D7%A1-%D7%A4%D7%90%D7%A0%D7%93%D7%A1-%D7%99%D7%A9%D7%A8%D7%90%D7%9C-Pans-Pandas-Israel-61589380803440/"
                         target="_blank"
                         rel="noopener noreferrer"
                         style={{
@@ -229,7 +229,7 @@ const HolisticPage: React.FC = () => {
                             fontWeight: 600,
                         }}
                     >
-                        שתפו בקבוצת הפייסבוק
+                        שתפו אותנו בפייסבוק
                     </a>
                 </Box>
 

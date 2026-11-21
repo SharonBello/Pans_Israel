@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { Link, useParams, useNavigate, useLocation } from 'react-router-dom';
 import {
   Box,
   Container,
@@ -357,14 +357,12 @@ const InfoPage: React.FC = () => {
                 הצטרפו לקהילה שלנו לתמיכה ומידע נוסף
               </Typography>
               <Box className="info-page__cta-buttons">
-                <a
+                <Link
                   className="info-page__cta-button info-page__cta-button--primary"
-                  href="https://www.facebook.com/groups/PandasIsrael/?ref=share&mibextid=NSMWBT"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  to="/join"
                 >
                   הצטרפו לקהילה
-                </a>
+                </Link>
                 <button
                   className="info-page__cta-button info-page__cta-button--secondary"
                   onClick={() => navigate('/resources')}
