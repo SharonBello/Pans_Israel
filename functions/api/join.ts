@@ -2,22 +2,29 @@
 // Cloudflare Pages Function — POST /api/join
 // ==========================================================================
 //
-// Called by the /join form AFTER the member was saved in Firestore, only when
-// they asked for email updates. It:
-//   1. checks the reCAPTCHA token with Google (server side — bots can't use
-//      this endpoint to send emails),
-//   2. adds the person to Resend contacts (best effort: if the email is
-//      already there, nothing changes — someone who unsubscribed stays so),
-//   3. sends the welcome email.
+// The /join form sends every sign-up here. The function:
+//   1. checks the reCAPTCHA token with Google (server side — bots can't add
+//      people or send emails),
+//   2. saves the member in Firestore — one document per email: signing up
+//      again with the same address updates it instead of adding a new one,
+//   3. keeps Resend in step: asked for updates → contact added (or
+//      re-subscribed); didn't → marked unsubscribed if they were there,
+//   4. sends the welcome email to people who asked for updates.
+// The reply is the same whether the email was new or already listed, so the
+// form can't be used to check if someone is a member.
 //
-// Secrets (Cloudflare → Pages project → Settings → Variables and Secrets):
-//   RESEND_API_KEY        Resend API key (full access, so it can add contacts)
-//   RESEND_FROM           e.g. פאנס/פאנדס ישראל <community@panspandasil.org>
-//   RECAPTCHA_SECRET_KEY  reCAPTCHA secret key (same site as VITE_RECAPTCHA_SITE_KEY)
-//   RESEND_SEGMENT_ID     optional — Resend segment to put new contacts in
-//   RESEND_REPLY_TO       optional — address that receives replies
+// Cloudflare → Pages project → Settings → Variables and Secrets (Production):
+//   RECAPTCHA_SECRET_KEY   reCAPTCHA secret key                         (required)
+//   FIREBASE_CLIENT_EMAIL  service account email   — from the JSON key  (required)
+//   FIREBASE_PRIVATE_KEY   service account private key — from the JSON  (required)
+//   RESEND_API_KEY         Resend API key, full access   (needed for Resend + email)
+//   RESEND_FROM            e.g. פאנס/פאנדס ישראל <noreply@mail.panspandasil.org>
+//   RESEND_SEGMENT_ID      optional — Resend segment for new contacts
+//   RESEND_REPLY_TO        optional — address that receives replies
 
-interface Env {
+import { missingFirebaseVars, upsertMember, type FirebaseEnv } from '../_lib/firestoreAdmin';
+
+interface Env extends FirebaseEnv {
     RESEND_API_KEY?: string;
     RESEND_FROM?: string;
     RECAPTCHA_SECRET_KEY?: string;
@@ -34,6 +41,8 @@ interface JoinBody {
     fullName?: unknown;
     email?: unknown;
     emailUpdates?: unknown;
+    privacyAccepted?: unknown;
+    noticeVersion?: unknown;
     captchaToken?: unknown;
 }
 
@@ -65,9 +74,15 @@ const verifyCaptcha = async (secret: string, token: string, ip: string | null): 
 
 // ── Resend ───────────────────────────────────────────────────────────────────
 
-const resend = (env: Env, path: string, body: unknown, idempotencyKey?: string): Promise<Response> =>
+const resend = (
+    env: Env,
+    method: 'POST' | 'PATCH',
+    path: string,
+    body: unknown,
+    idempotencyKey?: string,
+): Promise<Response> =>
     fetch(`https://api.resend.com${path}`, {
-        method: 'POST',
+        method,
         headers: {
             Authorization: `Bearer ${env.RESEND_API_KEY}`,
             'Content-Type': 'application/json',
@@ -75,6 +90,29 @@ const resend = (env: Env, path: string, body: unknown, idempotencyKey?: string):
         },
         body: JSON.stringify(body),
     });
+
+/** Keep the Resend contact in step with the member's choice. Best effort — returns whether it worked. */
+const syncContact = async (env: Env, email: string, first: string, last: string, wantsUpdates: boolean): Promise<boolean> => {
+    const path = `/contacts/${encodeURIComponent(email)}`;
+    if (!wantsUpdates) {
+        // Didn't ask for updates (this time) — if they were a contact, mark them unsubscribed
+        const res = await resend(env, 'PATCH', path, { unsubscribed: true });
+        if (!res.ok && res.status !== 404) console.warn('join: unsubscribe contact failed', res.status, await res.text());
+        return res.ok || res.status === 404;
+    }
+    const created = await resend(env, 'POST', '/contacts', {
+        email,
+        first_name: first,
+        last_name: last,
+        unsubscribed: false,
+        ...(env.RESEND_SEGMENT_ID ? { segments: [{ id: env.RESEND_SEGMENT_ID }] } : {}),
+    });
+    if (created.ok) return true;
+    // Already a contact — they asked for updates again, so subscribe them again and refresh the name
+    const updated = await resend(env, 'PATCH', path, { unsubscribed: false, first_name: first, last_name: last });
+    if (!updated.ok) console.warn('join: contact not added', created.status, updated.status, await updated.text());
+    return updated.ok;
+};
 
 const splitName = (fullName: string): { first: string; last: string } => {
     const [first = '', ...rest] = fullName.split(' ');
@@ -183,9 +221,11 @@ const welcomeText = (firstName: string): string =>
 // ── Handler ──────────────────────────────────────────────────────────────────
 
 export const onRequestPost = async ({ request, env }: JoinContext): Promise<Response> => {
-    if (!env.RESEND_API_KEY || !env.RESEND_FROM || !env.RECAPTCHA_SECRET_KEY) {
-        console.error('join: missing RESEND_API_KEY / RESEND_FROM / RECAPTCHA_SECRET_KEY');
-        return json(503, { ok: false, error: 'not-configured' });
+    // Names only (never values), so a missing or misspelled variable is easy to spot
+    const missing = [...(!env.RECAPTCHA_SECRET_KEY?.trim() ? ['RECAPTCHA_SECRET_KEY'] : []), ...missingFirebaseVars(env)];
+    if (missing.length > 0) {
+        console.error(`join: missing ${missing.join(', ')}`);
+        return json(503, { ok: false, error: 'not-configured', missing });
     }
 
     let body: JoinBody;
@@ -198,14 +238,17 @@ export const onRequestPost = async ({ request, env }: JoinContext): Promise<Resp
     const fullName = typeof body.fullName === 'string' ? body.fullName.trim().replace(/\s+/g, ' ') : '';
     const email = typeof body.email === 'string' ? body.email.trim().toLowerCase() : '';
     const token = typeof body.captchaToken === 'string' ? body.captchaToken : '';
+    const noticeVersion = typeof body.noticeVersion === 'string' ? body.noticeVersion.trim() : '';
+    const emailUpdates = body.emailUpdates === true;
 
     if (fullName.length < NAME_MIN || fullName.length > NAME_MAX) return json(400, { ok: false, error: 'bad-name' });
     if (!email || email.length > EMAIL_MAX || !EMAIL_PATTERN.test(email)) return json(400, { ok: false, error: 'bad-email' });
-    if (body.emailUpdates !== true) return json(400, { ok: false, error: 'no-consent' });
+    if (body.privacyAccepted !== true) return json(400, { ok: false, error: 'no-consent' });
+    if (!noticeVersion || noticeVersion.length > 20) return json(400, { ok: false, error: 'bad-notice-version' });
     if (!token) return json(400, { ok: false, error: 'no-captcha' });
 
     try {
-        if (!(await verifyCaptcha(env.RECAPTCHA_SECRET_KEY, token, request.headers.get('CF-Connecting-IP')))) {
+        if (!(await verifyCaptcha(env.RECAPTCHA_SECRET_KEY ?? '', token, request.headers.get('CF-Connecting-IP')))) {
             return json(403, { ok: false, error: 'captcha-failed' });
         }
     } catch (error) {
@@ -213,28 +256,34 @@ export const onRequestPost = async ({ request, env }: JoinContext): Promise<Resp
         return json(502, { ok: false, error: 'captcha-unavailable' });
     }
 
-    const { first, last } = splitName(fullName);
-
-    // 1. Contact — best effort. If it already exists, Resend keeps it as it is.
-    let contactAdded = false;
+    // 1. Save — the one step that must succeed
     try {
-        const res = await resend(env, '/contacts', {
-            email,
-            first_name: first,
-            last_name: last,
-            unsubscribed: false,
-            ...(env.RESEND_SEGMENT_ID ? { segments: [{ id: env.RESEND_SEGMENT_ID }] } : {}),
-        });
-        contactAdded = res.ok;
-        if (!res.ok) console.warn('join: contact not added', res.status, await res.text());
+        await upsertMember(env, { fullName, email, emailUpdates, noticeVersion });
     } catch (error) {
-        console.error('join: contact request failed', error);
+        console.error('join: save failed', error);
+        return json(502, { ok: false, error: 'save-failed' });
     }
 
-    // 2. Welcome email. The idempotency key stops a double-click from sending it twice.
+    // 2. Resend — best effort; the member is already saved
+    if (!env.RESEND_API_KEY?.trim() || !env.RESEND_FROM?.trim()) {
+        console.warn('join: saved, but RESEND_API_KEY / RESEND_FROM missing — no contact sync or welcome email');
+        return json(200, { ok: true, welcomeSent: false });
+    }
+
+    const { first, last } = splitName(fullName);
+    try {
+        await syncContact(env, email, first, last, emailUpdates);
+    } catch (error) {
+        console.error('join: contact sync failed', error);
+    }
+
+    if (!emailUpdates) return json(200, { ok: true, welcomeSent: false });
+
+    // 3. Welcome email. The idempotency key stops a double-click from sending it twice.
     try {
         const res = await resend(
             env,
+            'POST',
             '/emails',
             {
                 from: env.RESEND_FROM,
@@ -249,12 +298,12 @@ export const onRequestPost = async ({ request, env }: JoinContext): Promise<Resp
         );
         if (!res.ok) {
             console.error('join: welcome email failed', res.status, await res.text());
-            return json(502, { ok: false, contactAdded, welcomeSent: false });
+            return json(200, { ok: true, welcomeSent: false });
         }
     } catch (error) {
         console.error('join: welcome email request failed', error);
-        return json(502, { ok: false, contactAdded, welcomeSent: false });
+        return json(200, { ok: true, welcomeSent: false });
     }
 
-    return json(200, { ok: true, contactAdded, welcomeSent: true });
+    return json(200, { ok: true, welcomeSent: true });
 };

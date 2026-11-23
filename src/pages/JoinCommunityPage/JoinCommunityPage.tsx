@@ -25,7 +25,6 @@ import {
     NAME_MAX,
     NAME_MIN,
     joinCommunity,
-    requestWelcomeEmail,
     normalizeEmail,
     normalizeName,
 } from '@/services/communityService';
@@ -123,18 +122,14 @@ const JoinCommunityPage: React.FC = () => {
 
         setStatus('submitting');
         const input = { fullName: form.fullName, email: form.email, emailUpdates: form.emailUpdates };
-        const result = await joinCommunity(input);
+        const result = await joinCommunity(input, captchaToken ?? '');
 
         if (result.success) {
-            // Welcome email only for people who asked for updates; joining succeeds either way
-            const welcomeSent = form.emailUpdates && captchaToken
-                ? await requestWelcomeEmail(input, captchaToken)
-                : false;
             setJoined({
                 firstName: normalizeName(form.fullName).split(' ')[0],
                 email: normalizeEmail(form.email),
                 emailUpdates: form.emailUpdates,
-                welcomeSent,
+                welcomeSent: result.welcomeSent,
             });
             setForm(EMPTY_FORM);
             setStatus('done');
