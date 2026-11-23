@@ -151,3 +151,23 @@ export const upsertMember = async (env: FirebaseEnv, member: MemberInput): Promi
     if (!res.ok) throw new Error(`Firestore update ${res.status}: ${await res.text()}`);
     return 'updated';
 };
+/**
+ * Marks the member as unsubscribed (emailUpdates: false + unsubscribedAt).
+ * Returns false if there's no record for this email — nothing to update.
+ */
+export const markMemberUnsubscribed = async (env: FirebaseEnv, email: string): Promise<boolean> => {
+    const url = docUrl(env, await memberDocId(email));
+    const now = new Date().toISOString();
+    const fields = {
+        emailUpdates: { booleanValue: false },
+        unsubscribedAt: { timestampValue: now },
+        updatedAt: { timestampValue: now },
+    };
+    const res = await firestore(env, `${url}?${maskQuery(Object.keys(fields), true)}`, {
+        method: 'PATCH',
+        body: JSON.stringify({ fields }),
+    });
+    if (res.ok) return true;
+    if (res.status === 404) return false;
+    throw new Error(`Firestore unsubscribe ${res.status}: ${await res.text()}`);
+};

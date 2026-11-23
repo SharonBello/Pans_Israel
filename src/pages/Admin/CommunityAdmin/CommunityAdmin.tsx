@@ -236,9 +236,15 @@ const CommunityAdmin: React.FC = () => {
                                     </td>
                                     <td><span dir="ltr">{g.email}</span></td>
                                     <td>
-                                        <span className={`adm-badge adm-badge--${g.latest.emailUpdates ? 'approved' : 'pending'}`}>
-                                            {g.latest.emailUpdates ? 'כן' : 'לא'}
-                                        </span>
+                                        {g.latest.emailUpdates ? (
+                                            <span className="adm-badge adm-badge--approved">כן</span>
+                                        ) : g.latest.unsubscribedAt ? (
+                                            <span className="adm-badge adm-badge--rejected" title={`הוסר/ה דרך הקישור במייל, ${formatDate(g.latest.unsubscribedAt.toDate())}`}>
+                                                הוסר/ה
+                                            </span>
+                                        ) : (
+                                            <span className="adm-badge adm-badge--pending">לא</span>
+                                        )}
                                     </td>
                                     <td>{formatDate(g.firstJoined)}</td>
                                     <td className="adm-table__actions">

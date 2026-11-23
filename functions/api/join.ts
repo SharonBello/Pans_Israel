@@ -21,8 +21,10 @@
 //   RESEND_FROM            e.g. פאנס/פאנדס ישראל <noreply@mail.panspandasil.org>
 //   RESEND_SEGMENT_ID      optional — Resend segment for new contacts
 //   RESEND_REPLY_TO        optional — address that receives replies
+//   UNSUBSCRIBE_SECRET     signs the unsubscribe link in the welcome email
 
 import { missingFirebaseVars, upsertMember, type FirebaseEnv } from '../_lib/firestoreAdmin';
+import { unsubscribeUrl } from '../_lib/unsubscribeLink';
 
 interface Env extends FirebaseEnv {
     RESEND_API_KEY?: string;
@@ -30,6 +32,7 @@ interface Env extends FirebaseEnv {
     RECAPTCHA_SECRET_KEY?: string;
     RESEND_SEGMENT_ID?: string;
     RESEND_REPLY_TO?: string;
+    UNSUBSCRIBE_SECRET?: string;
 }
 
 interface JoinContext {
@@ -133,8 +136,11 @@ const benefit = (title: string, text: string): string => `
           <strong>${title}</strong><br>${text}
         </td></tr>`;
 
-const welcomeHtml = (firstName: string): string => {
+const welcomeHtml = (firstName: string, unsubscribeHref: string | null): string => {
     const greeting = firstName ? escapeHtml(firstName) : 'לך';
+    const unsubscribe = unsubscribeHref
+        ? ` <a href="${escapeHtml(unsubscribeHref)}" target="_blank" style="color:#ffffff;">להסרה מרשימת התפוצה</a>`
+        : ' בכל עדכון שנשלח יהיה קישור להסרה מרשימת התפוצה.';
     return `<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
@@ -194,7 +200,7 @@ const welcomeHtml = (firstName: string): string => {
       &nbsp;·&nbsp; <a href="${YOUTUBE_URL}" target="_blank" style="color:#ffffff; text-decoration:none;">יוטיוב</a>
       &nbsp;·&nbsp; <a href="${WHATSAPP_URL}" target="_blank" style="color:#ffffff; text-decoration:none;">וואטסאפ</a>
       <br>העמותה הישראלית לאנצפליטיס אוטואימוני (פאנס/פאנדס ישראל)
-      <br>קיבלת את המייל הזה כי נרשמת לקהילה באתר וביקשת עדכונים. בכל עדכון שנשלח יהיה קישור להסרה מרשימת התפוצה.
+      <br>קיבלת את המייל הזה כי נרשמת לקהילה באתר וביקשת עדכונים.${unsubscribe}
     </td></tr>
   </table>
 </td></tr>
@@ -203,7 +209,7 @@ const welcomeHtml = (firstName: string): string => {
 </html>`;
 };
 
-const welcomeText = (firstName: string): string =>
+const welcomeText = (firstName: string, unsubscribeHref: string | null): string =>
     [
         `שלום ${firstName || 'לך'},`,
         '',
@@ -216,6 +222,7 @@ const welcomeText = (firstName: string): string =>
         '',
         'באהבה,',
         'צוות פאנס/פאנדס ישראל',
+        ...(unsubscribeHref ? ['', `להסרה מרשימת התפוצה: ${unsubscribeHref}`] : []),
     ].join('\n');
 
 // ── Handler ──────────────────────────────────────────────────────────────────
@@ -279,7 +286,12 @@ export const onRequestPost = async ({ request, env }: JoinContext): Promise<Resp
 
     if (!emailUpdates) return json(200, { ok: true, welcomeSent: false });
 
-    // 3. Welcome email. The idempotency key stops a double-click from sending it twice.
+    // 3. Welcome email, with an unsubscribe link + the headers mail apps use for their own
+    //    "Unsubscribe" button. The idempotency key stops a double-click from sending it twice.
+    let unsubscribeHref: string | null = null;
+    if (env.UNSUBSCRIBE_SECRET?.trim()) unsubscribeHref = await unsubscribeUrl(env.UNSUBSCRIBE_SECRET, email);
+    else console.warn('join: UNSUBSCRIBE_SECRET missing — welcome email sent without an unsubscribe link');
+
     try {
         const res = await resend(
             env,
@@ -289,8 +301,16 @@ export const onRequestPost = async ({ request, env }: JoinContext): Promise<Resp
                 from: env.RESEND_FROM,
                 to: [email],
                 subject: 'ברוכים הבאים לקהילת פאנס/פאנדס ישראל',
-                html: welcomeHtml(first),
-                text: welcomeText(first),
+                html: welcomeHtml(first, unsubscribeHref),
+                text: welcomeText(first, unsubscribeHref),
+                ...(unsubscribeHref
+                    ? {
+                        headers: {
+                            'List-Unsubscribe': `<${unsubscribeHref}>`,
+                            'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click',
+                        },
+                    }
+                    : {}),
                 ...(env.RESEND_REPLY_TO ? { reply_to: env.RESEND_REPLY_TO } : {}),
                 tags: [{ name: 'type', value: 'welcome' }],
             },

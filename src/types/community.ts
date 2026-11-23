@@ -19,4 +19,6 @@ export interface CommunityMember extends CommunityJoinInput {
     privacyAccepted: true;
     noticeVersion: string;
     createdAt: Timestamp | null;
+    updatedAt?: Timestamp | null;       // last sign-up with this email
+    unsubscribedAt?: Timestamp | null;  // set when they used the unsubscribe link
 }
